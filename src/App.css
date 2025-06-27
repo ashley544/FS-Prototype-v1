@@ -1,0 +1,116 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+  background: #f7f7f7;
+  overflow: visible;
+  transition: background 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.app-layout.expanded {
+  background: #fff;
+}
+
+.sidebar {
+  width: 320px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 0 24px 24px;
+  /* border-right: 1px solid #e0e0e0; */
+  overflow: visible;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-section {
+  background: none;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 4px;
+  box-shadow: none;
+  min-height: 80px;
+  font-weight: 500;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section-title {
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-section-cards {
+  flex: 1;
+  max-height: calc(50vh - 80px);
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 20px;
+  margin: -20px;
+  /* Apple-inspired scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Webkit scrollbar styling for Apple-inspired design */
+.sidebar-section-cards::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-section-cards::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.sidebar-section-cards::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-section-cards::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-section-cards::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #fff;
+  transition: padding 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.main-content.expanded {
+  padding: 0;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100px;
+    padding: 8px 0 8px 8px;
+  }
+  .sidebar-section {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  .main-content {
+    padding: 8px;
+  }
+} 

@@ -1,0 +1,116 @@
+.user-details-card {
+  background: none;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.user-details-logo {
+  width: 102px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.user-details-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.user-details-user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.user-details-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: -6px;
+}
+.user-details-title {
+  font-size: 14px;
+  color: #808b8f;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+.user-details-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+  justify-content: flex-start;
+}
+.user-details-action {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  text-align: left;
+  position: relative;
+}
+.user-details-action:hover {
+  color: #111;
+}
+.user-details-action::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 0;
+  background: #111;
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.user-details-action:hover::after {
+  width: 100%;
+}
+.user-details-action-icon svg {
+  display: block;
+}
+.user-details-action-icon img {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+.user-details-action-text {
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .user-details-card {
+    padding: 16px 8px 12px 8px;
+    max-width: 100%;
+  }
+  .user-details-logo {
+    width: 80px;
+    height: 32px;
+  }
+  .user-details-name {
+    font-size: 16px;
+  }
+  .user-details-title {
+    font-size: 12px;
+  }
+  .user-details-actions {
+    gap: 12px;
+  }
+} 
