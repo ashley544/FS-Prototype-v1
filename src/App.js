@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PDFViewer from "./PDFViewer";
 import AssetCard from "./AssetCard";
 import UserDetails from "./UserDetails";
@@ -77,7 +77,7 @@ const aiResponseMap = {
     answer: "The 'Fixed Service Fee' is 0.15%. I've highlighted this information in the document for you. Do you want me to show you the fees last year?"
   },
   '/pdfs/Doorway - Overview.pdf': {
-    trigger: 'security',
+    trigger: 'show me the security procedure',
     answer: "Information security procedures take <strong>2-4 weeks</strong>. Would you like to read Data Protection Procedures next?",
     recommendedAsset: {
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256",
@@ -95,7 +95,100 @@ export default function App() {
   const [searchInput, setSearchInput] = useState("");
   const [showAIResponse, setShowAIResponse] = useState(false);
   const [enterPressed, setEnterPressed] = useState(false);
-  const [lastTrigger, setLastTrigger] = useState(""); // Store the last trigger that was activated
+  const [lastTrigger, setLastTrigger] = useState("");
+  const [pdfHovered, setPdfHovered] = useState(false);
+  const [pdfRect, setPdfRect] = useState(null);
+  const pdfRef = useRef();
+  const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
+
+  // Update bounding box when hovered or window resizes
+  useEffect(() => {
+    function updateRect() {
+      if (pdfRef.current) {
+        setPdfRect(pdfRef.current.getBoundingClientRect());
+      }
+    }
+    if (pdfHovered) {
+      updateRect();
+      window.addEventListener("resize", updateRect);
+    }
+    return () => window.removeEventListener("resize", updateRect);
+  }, [pdfHovered]);
+
+  useEffect(() => {
+    function handleResize() {
+      setViewport({ width: window.innerWidth, height: window.innerHeight });
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // PDF border radius (should match .pdf-page in CSS)
+  const pdfBorderRadius = 8;
+
+  // SVG overlay with rounded cut-out
+  const OverlayWithCutout = () => {
+    // Always render overlays for smooth animation
+    const overlayBg = 'rgba(0,0,0,0.25)'; // 25% black
+    const overlayClass = pdfHovered ? 'page-overlay-with-cutout page-overlay-active' : 'page-overlay-with-cutout page-overlay-inactive';
+    const inset = 1;
+    let left = 0, top = 0, width = 0, height = 0, vw = window.innerWidth, vh = window.innerHeight;
+    if (pdfRect) {
+      ({ left, top, width, height } = pdfRect);
+      vw = viewport.width;
+      vh = viewport.height;
+    }
+    return (
+      <>
+        {/* Top overlay */}
+        <div className={overlayClass} style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: pdfRect ? Math.max(top - inset, 0) : '100vh',
+          background: overlayBg,
+          pointerEvents: 'none',
+          zIndex: 1000
+        }} />
+        {/* Bottom overlay */}
+        <div className={overlayClass} style={{
+          position: 'fixed',
+          top: pdfRect ? top + height + inset : 0,
+          left: 0,
+          width: '100vw',
+          height: pdfRect ? Math.max(vh - (top + height + inset), 0) : '0',
+          background: overlayBg,
+          pointerEvents: 'none',
+          zIndex: 1000
+        }} />
+        {/* Left overlay */}
+        <div className={overlayClass} style={{
+          position: 'fixed',
+          top: pdfRect ? top - inset : 0,
+          left: 0,
+          width: pdfRect ? Math.max(left - inset, 0) : '100vw',
+          height: pdfRect ? Math.max(height + 2 * inset, 0) : '100vh',
+          background: overlayBg,
+          pointerEvents: 'none',
+          zIndex: 1000,
+          overflow: 'hidden'
+        }} />
+        {/* Right overlay */}
+        <div className={overlayClass} style={{
+          position: 'fixed',
+          top: pdfRect ? top - inset : 0,
+          left: pdfRect ? left + width + inset : 0,
+          width: pdfRect ? Math.max(vw - (left + width + inset), 0) : '0',
+          height: pdfRect ? Math.max(height + 2 * inset, 0) : '100vh',
+          background: overlayBg,
+          pointerEvents: 'none',
+          zIndex: 1000,
+          overflow: 'hidden'
+        }} />
+      </>
+    );
+  };
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -110,7 +203,7 @@ export default function App() {
   const aiConfig = aiResponseMap[selectedPdf];
   const shouldShowAIResponse = aiConfig && lastTrigger === aiConfig.trigger && enterPressed && showAIResponse;
   const highlightPage =
-    selectedPdf === '/pdfs/Doorway - Overview.pdf' && lastTrigger === 'security' && enterPressed ? 12 : null;
+    selectedPdf === '/pdfs/Doorway - Overview.pdf' && lastTrigger === 'show me the security procedure' && enterPressed ? 12 : null;
 
   // Handle main search input changes (from PDF viewer header)
   const handleMainSearchInputChange = (value) => {
@@ -147,10 +240,22 @@ export default function App() {
     setLastTrigger(""); // Clear the stored trigger
   };
 
+  // Overlay should be hidden when AI response is shown for the security procedure trigger
+  const overlayShouldBeVisible = !(
+    selectedPdf === '/pdfs/Doorway - Overview.pdf' &&
+    lastTrigger === 'show me the security procedure' &&
+    enterPressed &&
+    showAIResponse
+  );
+
   return (
     <div className={`app-layout ${isExpanded ? 'expanded' : ''}`}>
-      <aside className={`sidebar ${isExpanded ? 'hidden' : ''}`}>
-        {/* AI Response appears at the top of the sidebar if triggered */}
+      {overlayShouldBeVisible && <OverlayWithCutout />}
+      <aside
+        className={`sidebar ${isExpanded ? 'hidden' : ''}`}
+        onMouseEnter={() => setPdfHovered(false)}
+        style={{ position: 'relative' }}
+      >
         {shouldShowAIResponse && (
           <AIResponse 
             userInput={lastTrigger} 
@@ -193,7 +298,11 @@ export default function App() {
         </div>
         <UserDetails />
       </aside>
-      <main className={`main-content ${isExpanded ? 'expanded' : ''}`}>
+      <main
+        className={`main-content ${isExpanded ? 'expanded' : ''}`}
+        onMouseEnter={() => setPdfHovered(true)}
+        onMouseLeave={() => setPdfHovered(false)}
+      >
         <PDFViewer 
           file={selectedPdf} 
           isExpanded={isExpanded}
@@ -201,6 +310,7 @@ export default function App() {
           onSearchInputChange={handleMainSearchInputChange}
           onSearchEnterPress={handleSearchEnterPress}
           highlightPage={highlightPage}
+          pdfRef={pdfRef}
         />
       </main>
     </div>

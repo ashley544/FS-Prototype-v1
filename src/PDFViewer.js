@@ -70,20 +70,13 @@ function ExpandIcon() {
 
 function MinimizeIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="3" y="3" width="4" height="2" rx="1" fill="#222" />
-      <rect x="3" y="3" width="2" height="4" rx="1" fill="#222" />
-      <rect x="13" y="3" width="4" height="2" rx="1" fill="#222" />
-      <rect x="15" y="3" width="2" height="4" rx="1" fill="#222" />
-      <rect x="3" y="15" width="4" height="2" rx="1" fill="#222" />
-      <rect x="3" y="13" width="2" height="4" rx="1" fill="#222" />
-      <rect x="13" y="15" width="4" height="2" rx="1" fill="#222" />
-      <rect x="15" y="13" width="2" height="4" rx="1" fill="#222" />
+    <svg width="20" height="20" viewBox="2 2 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 14H6v4h4v-2H8v-2zm0-4V8h2V6H6v4h2zm8 4v2h-2v2h4v-4h-2zm0-4h2V6h-4v2h2v2z" fill="#222"/>
     </svg>
   );
 }
 
-export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchInputChange, onSearchEnterPress, highlightPage }) {
+export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchInputChange, onSearchEnterPress, highlightPage, pdfRef }) {
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [inputPage, setInputPage] = useState('1');
@@ -649,14 +642,13 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
             }}
             onKeyDown={e => {
               if (e.key === 'Enter') {
-                // Check for security trigger directly
-                if (searchQuery.trim() === 'security') {
+                // Check for the new trigger phrase
+                if (searchQuery.trim() === 'show me the security procedure') {
                   e.preventDefault();
                   // Scroll to page 12 with the same smooth behavior as search results
                   if (pageRefs.current[11] && scrollRef.current) { // page 12 is at index 11
                     const targetElement = pageRefs.current[11];
                     const targetScrollTop = targetElement.offsetTop;
-                    
                     scrollRef.current.scrollTo({
                       top: targetScrollTop,
                       behavior: 'smooth'
@@ -799,50 +791,52 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
         </div>
       )}
 
-      <div
-        className="pdf-document-area pdf-scroll-vertical"
-        ref={scrollRef}
-      >
+      <div ref={pdfRef} style={{width: '100%', height: '100%'}}>
         <div
-          className="pdf-scale-wrapper pdf-fade"
-          style={{
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-            transition: 'transform 0.2s, opacity 0.6s cubic-bezier(0.4,0,0.2,1)',
-            display: 'inline-block',
-            opacity: visible ? 1 : 0,
-            pointerEvents: visible ? 'auto' : 'none',
-          }}
+          className="pdf-document-area pdf-scroll-vertical"
+          ref={scrollRef}
         >
-          <Document
-            file={currentFile}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={<div>Loading PDF…</div>}
-            className="pdf-document"
+          <div
+            className="pdf-scale-wrapper pdf-fade"
+            style={{
+              transform: `scale(${scale})`,
+              transformOrigin: 'top left',
+              transition: 'transform 0.2s, opacity 0.6s cubic-bezier(0.4,0,0.2,1)',
+              display: 'inline-block',
+              opacity: visible ? 1 : 0,
+              pointerEvents: visible ? 'auto' : 'none',
+            }}
           >
-            {numPages &&
-              Array.from({ length: numPages }, (_, idx) => (
-                <div
-                  key={`${idx + 1}-${isSearchActive ? 'search' : 'normal'}`}
-                  className="pdf-page-wrapper"
-                  ref={el => pageRefs.current[idx] = el}
-                  style={{ position: 'relative' }}
-                >
-                  <Page
-                    pageNumber={idx + 1}
-                    width={800}
-                    renderTextLayer={true}
-                    renderAnnotationLayer={false}
-                    className="pdf-page"
-                    customTextRenderer={textRenderer}
-                    onLoadSuccess={() => onPageLoadSuccess(idx + 1)}
-                  />
-                  {highlightPage === idx + 1 && (
-                    <div className="pdf-page-overlay-highlight" />
-                  )}
-                </div>
-              ))}
-          </Document>
+            <Document
+              file={currentFile}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={<div>Loading PDF…</div>}
+              className="pdf-document"
+            >
+              {numPages &&
+                Array.from({ length: numPages }, (_, idx) => (
+                  <div
+                    key={`${idx + 1}-${isSearchActive ? 'search' : 'normal'}`}
+                    className="pdf-page-wrapper"
+                    ref={el => pageRefs.current[idx] = el}
+                    style={{ position: 'relative' }}
+                  >
+                    <Page
+                      pageNumber={idx + 1}
+                      width={800}
+                      renderTextLayer={true}
+                      renderAnnotationLayer={false}
+                      className="pdf-page"
+                      customTextRenderer={textRenderer}
+                      onLoadSuccess={() => onPageLoadSuccess(idx + 1)}
+                    />
+                    {highlightPage === idx + 1 && (
+                      <div className="pdf-page-overlay-highlight" />
+                    )}
+                  </div>
+                ))}
+            </Document>
+          </div>
         </div>
       </div>
     </div>

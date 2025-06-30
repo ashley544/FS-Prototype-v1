@@ -779,4 +779,19 @@
 
 .pdf-page-wrapper:last-child {
   margin-bottom: 0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f2f1f6;
+  transition: padding 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.main-content.expanded {
+  padding: 0;
+  background: #f2f1f6;
 } 
