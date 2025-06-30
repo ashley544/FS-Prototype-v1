@@ -3,6 +3,7 @@ import PDFViewer from "./PDFViewer";
 import AssetCard from "./AssetCard";
 import UserDetails from "./UserDetails";
 import AIResponse from "./AIResponse";
+import LockedProfile from "./LandingPage";
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -32,6 +33,72 @@ const newsroomAssets = [
     title: "Consider the viewer",
     file: "/pdfs/Consider the viewer.pdf",
   },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Why Your Personal Relationships Matter Now More Than Ever",
+    file: "/pdfs/Why Your Personal Relationships Matter Now More Than Ever.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Prove Your Marketing Team's Performance",
+    file: "/pdfs/Prove Your Marketing Team's Performance.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "The Key to Passive Relationship Management",
+    file: "/pdfs/The Key to Passive Relationship Management.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Creating Competitive Deal Processes in Real Estate",
+    file: "/pdfs/Creating Competitive Deal Processes in Real Estate.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Shared Service Teams - The Backbone of Continuity and Scale",
+    file: "/pdfs/Shared Service Teams- The Backbone of Continuity and Scale.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Salesforce vs Hubspot",
+    file: "/pdfs/Salesforce vs Hubspot.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Intralinks vs Datasite",
+    file: "/pdfs/Intralinks vs Datasite.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "DocSend vs Firmex",
+    file: "/pdfs/DocSend vs Firmex.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Highspot vs Seismic",
+    file: "/pdfs/Highspot vs Seismic.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Liferay vs Diligent",
+    file: "/pdfs/Liferay vs Diligent.pdf",
+  },
+  {
+    image: placeholderImg,
+    type: "PDF",
+    title: "Blackstone - Presentation",
+    file: "/pdfs/Blackstone - Presentation (1).pdf",
+  },
 ];
 
 const exchangeAssets = [
@@ -57,17 +124,8 @@ const exchangeAssets = [
 
 // Mapping: which newsroom asset cards to show for each open PDF
 const assetDisplayMap = {
-  '/pdfs/The Rules of Attraction.pdf': [
-    'The Rules of Attraction',
-    'The Scrolling Mind - White Paper',
-    'The Goldman Standard'
-  ],
-  '/pdfs/The Goldman Standard.pdf': [
-    'The Scrolling Mind - White Paper',
-    'The Goldman Standard'
-    // 'The Rules of Attraction' and 'Consider the viewer' are omitted to hide them
-  ],
-  // Add more mappings as needed
+  // Empty by default - will show all newsroom assets
+  // Add specific mappings here if you want to filter assets for certain PDFs
 };
 
 // Per-PDF AI response mapping
@@ -100,6 +158,7 @@ export default function App() {
   const [pdfRect, setPdfRect] = useState(null);
   const pdfRef = useRef();
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [currentPage, setCurrentPage] = useState('landing'); // 'landing' or 'asset-viewer'
 
   // Update bounding box when hovered or window resizes
   useEffect(() => {
@@ -248,6 +307,15 @@ export default function App() {
     showAIResponse
   );
 
+  // Handler to go to asset viewer
+  const handleEnterAssetViewer = () => setCurrentPage('asset-viewer');
+  // Handler to go to landing page
+  const handleGoToLanding = () => setCurrentPage('landing');
+
+  if (currentPage === 'landing') {
+    return <LockedProfile onEnter={handleEnterAssetViewer} />;
+  }
+
   return (
     <div className={`app-layout ${isExpanded ? 'expanded' : ''}`}>
       {overlayShouldBeVisible && <OverlayWithCutout />}
@@ -296,7 +364,7 @@ export default function App() {
             ))}
           </div>
         </div>
-        <UserDetails />
+        <UserDetails onUserNameClick={handleGoToLanding} />
       </aside>
       <main
         className={`main-content ${isExpanded ? 'expanded' : ''}`}

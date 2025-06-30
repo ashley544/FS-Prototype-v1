@@ -95,6 +95,11 @@
   text-align: left;
 }
 
+.user-details-name.clickable:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
 @media (max-width: 600px) {
   .user-details-card {
     padding: 16px 8px 12px 8px;
