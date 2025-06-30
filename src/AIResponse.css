@@ -1,0 +1,268 @@
+.ai-response-card {
+  /* background: #fff; */
+  border-radius: 16px;
+  /* box-shadow: 0 2px 12px rgba(51,51,51,0.08); */
+  /* padding: 24px 20px 16px 20px; */
+  margin-top: 32px;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  /* Animation properties */
+  animation: aiResponseAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: top center;
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}
+
+@keyframes aiResponseAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Staggered animation for child elements */
+.ai-response-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: aiResponseContentAppear 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+@keyframes aiResponseContentAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-response-user-input {
+  background: #f2f1f6;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 12px;
+  color: #111;
+  font-weight: 400;
+  margin-left: 56px;
+  margin-right: 0;
+  margin-bottom: 0;
+  width: calc(100% - 56px);
+  animation: aiResponseInputAppear 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+@keyframes aiResponseInputAppear {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ai-response-ai-block {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 14px;
+  animation: aiResponseBlockAppear 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+@keyframes aiResponseBlockAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-response-gradient-line {
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #0290ff 0%, #924fae 50%, #d4539d 75%, #ee454a 87.5%, #f05e24 100%);
+  flex-shrink: 0;
+  animation: aiResponseLineAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+@keyframes aiResponseLineAppear {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.ai-response-ai-content {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  animation: aiResponseContentSlide 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+  opacity: 0;
+  transform: translateX(4px);
+}
+
+@keyframes aiResponseContentSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ai-response-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  background: linear-gradient(90deg, #f05e24 0%, #ee454a 29%, #d4539d 42%, #924fae 65%, #0290ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-bottom: 2px;
+}
+
+.ai-response-answer {
+  font-size: 12px;
+  color: #292529;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ai-response-answer strong {
+  font-weight: 600;
+}
+
+.ai-response-ctas {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+  animation: aiResponseCtasAppear 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+@keyframes aiResponseCtasAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-response-cta {
+  border: 1px solid #ecedf1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 6px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4F5451;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-response-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.ai-response-cta:hover::before {
+  left: 100%;
+}
+
+.ai-response-cta-yes {
+  /* Remove blue border/background for inactive state */
+  border: 1px solid #ecedf1;
+  background: #fff;
+  color: #292529;
+}
+
+.ai-response-cta-yes:hover,
+.ai-response-cta-no:hover {
+  background: #f5f5f7;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ai-response-recommendation {
+  margin-top: 12px;
+  animation: aiResponseRecommendationAppear 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+@keyframes aiResponseRecommendationAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .ai-response-card,
+  .ai-response-text,
+  .ai-response-user-input,
+  .ai-response-ai-block,
+  .ai-response-gradient-line,
+  .ai-response-ai-content,
+  .ai-response-ctas,
+  .ai-response-recommendation {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .ai-response-cta:hover {
+    transform: none;
+  }
+} 

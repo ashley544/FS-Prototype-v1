@@ -1,5 +1,5 @@
 .pdf-viewer-container {
-  background: #f0f0f0;
+  background: #f2f1f6;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(51,51,51,0.15), inset 0 0 0 1px #E8E8E8;
   overflow: hidden;
@@ -14,7 +14,7 @@
 }
 
 .pdf-viewer-container.expanded {
-  background: #f0f0f0;
+  background: #f2f1f6;
   border-radius: 0;
   box-shadow: none;
   border: none;
@@ -58,11 +58,24 @@
   border: 1px solid #eee;
   font-size: 12px;
   box-shadow: 0 2px 12px rgba(51,51,51,0.12);
-  transition: border 0.2s;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin-right: 16px;
   align-self: flex-start;
   font-family: 'Inter Variable', 'Inter', Arial, sans-serif;
   font-weight: 500;
+}
+
+.pdf-search:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(245, 158, 66, 0.2),
+    0 0 10px rgba(245, 158, 66, 0.25),
+    0 0 20px rgba(233, 75, 75, 0.2),
+    0 0 30px rgba(169, 83, 199, 0.15),
+    0 0 40px rgba(14, 135, 255, 0.1);
+  border-color: #e0e0e0;
 }
 
 .pdf-search-container {
@@ -79,6 +92,14 @@
   left: 12px;
   z-index: 1;
   pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0.7;
+}
+
+.pdf-search:hover + .pdf-search-icon,
+.pdf-search-container:hover .pdf-search-icon {
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 .pdf-search-container .pdf-search {
@@ -95,6 +116,8 @@
   background-clip: text;
   text-fill-color: transparent;
   font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 .pdf-search-container .pdf-search:focus {
   border: 1.5px solid #111;
@@ -735,4 +758,25 @@
   .pdf-search-submit.searching {
     animation: none;
   }
+}
+
+.pdf-page-overlay-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 230, 80, 0.18); /* soft yellow, subtle */
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 8px;
+  mix-blend-mode: multiply;
+}
+
+.pdf-page-wrapper {
+  margin: 0 auto 32px auto;
+}
+
+.pdf-page-wrapper:last-child {
+  margin-bottom: 0;
 } 

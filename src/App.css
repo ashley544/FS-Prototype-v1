@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px 0 24px 24px;
+  padding: 0 0 24px 24px;
   /* border-right: 1px solid #e0e0e0; */
   overflow: visible;
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -41,6 +41,10 @@
   color: #222;
   display: flex;
   flex-direction: column;
+}
+
+.sidebar-section.with-top-padding {
+  padding-top: 32px;
 }
 
 .sidebar-section-title {

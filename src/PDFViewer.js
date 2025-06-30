@@ -83,7 +83,7 @@ function MinimizeIcon() {
   );
 }
 
-export default function PDFViewer({ file, isExpanded, onToggleExpand }) {
+export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchInputChange, onSearchEnterPress, highlightPage }) {
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [inputPage, setInputPage] = useState('1');
@@ -548,6 +548,7 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand }) {
   // Search handlers
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
+    if (onSearchInputChange) onSearchInputChange(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
@@ -637,8 +638,37 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand }) {
             placeholder={isSearchFocused || searchQuery ? '' : 'What are you looking for?'}
             value={searchQuery}
             onFocus={() => setIsSearchFocused(true)}
-            onBlur={() => setIsSearchFocused(false)}
-            onChange={handleSearchInputChange}
+            onBlur={() => {
+              setIsSearchFocused(false);
+              // Clear the search input visually but keep the AI response active
+              setSearchQuery('');
+            }}
+            onChange={e => {
+              setSearchQuery(e.target.value);
+              if (onSearchInputChange) onSearchInputChange(e.target.value);
+            }}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                // Check for security trigger directly
+                if (searchQuery.trim() === 'security') {
+                  e.preventDefault();
+                  // Scroll to page 12 with the same smooth behavior as search results
+                  if (pageRefs.current[11] && scrollRef.current) { // page 12 is at index 11
+                    const targetElement = pageRefs.current[11];
+                    const targetScrollTop = targetElement.offsetTop;
+                    
+                    scrollRef.current.scrollTo({
+                      top: targetScrollTop,
+                      behavior: 'smooth'
+                    });
+                  }
+                }
+                // Call the Enter press handler for AI response
+                if (onSearchEnterPress) {
+                  onSearchEnterPress(searchQuery);
+                }
+              }
+            }}
           />
         </div>
         <div className="pdf-controls">
@@ -698,7 +728,10 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand }) {
               <input
                 type="text"
                 value={searchQuery}
-                onChange={handleSearchInputChange}
+                onChange={e => {
+                  setSearchQuery(e.target.value);
+                  if (onSearchInputChange) onSearchInputChange(e.target.value);
+                }}
                 placeholder="Search in PDF..."
                 className="pdf-search-input"
                 autoFocus
@@ -789,17 +822,25 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand }) {
           >
             {numPages &&
               Array.from({ length: numPages }, (_, idx) => (
-                <Page
+                <div
                   key={`${idx + 1}-${isSearchActive ? 'search' : 'normal'}`}
-                  pageNumber={idx + 1}
-                  width={800}
-                  renderTextLayer={true}
-                  renderAnnotationLayer={false}
-                  className="pdf-page"
+                  className="pdf-page-wrapper"
                   ref={el => pageRefs.current[idx] = el}
-                  customTextRenderer={textRenderer}
-                  onLoadSuccess={() => onPageLoadSuccess(idx + 1)}
-                />
+                  style={{ position: 'relative' }}
+                >
+                  <Page
+                    pageNumber={idx + 1}
+                    width={800}
+                    renderTextLayer={true}
+                    renderAnnotationLayer={false}
+                    className="pdf-page"
+                    customTextRenderer={textRenderer}
+                    onLoadSuccess={() => onPageLoadSuccess(idx + 1)}
+                  />
+                  {highlightPage === idx + 1 && (
+                    <div className="pdf-page-overlay-highlight" />
+                  )}
+                </div>
               ))}
           </Document>
         </div>
