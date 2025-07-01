@@ -13,7 +13,7 @@ const newsroomAssets = [
     image: "/Assets/The Rules of Attraction.png",
     type: "PDF",
     title: "The Rules of Attraction",
-    file: "/pdfs/The Rules of Attraction.pdf",
+    file: "/pdfs/Rules of Attraction.pdf",
   },
   {
     image: "/Assets/The Scrolling Mind - White Paper.png",
@@ -130,7 +130,7 @@ const assetDisplayMap = {
     'The Rules of Attraction',
     'The Key to Passive Relationship Management'
   ],
-  '/pdfs/The Rules of Attraction.pdf': [
+  '/pdfs/Rules of Attraction.pdf': [
     'The Rules of Attraction',
     'The Key to Passive Relationship Management',
     'The Scrolling Mind - White Paper',
@@ -214,7 +214,7 @@ const assetDisplayMap = {
 
 // Per-PDF AI response mapping
 const aiResponseMap = {
-  '/pdfs/The Rules of Attraction.pdf': {
+  '/pdfs/Rules of Attraction.pdf': {
     trigger: 'test',
     answer: "The 'Fixed Service Fee' is 0.15%. I've highlighted this information in the document for you. Do you want me to show you the fees last year?"
   },
