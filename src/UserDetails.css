@@ -18,11 +18,16 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  transition: opacity 0.2s;
 }
 .user-details-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.user-details-logo.clickable:hover {
+  opacity: 0.8;
 }
 
 .user-details-user {

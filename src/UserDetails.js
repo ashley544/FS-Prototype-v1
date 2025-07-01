@@ -4,18 +4,14 @@ import "./UserDetails.css";
 export default function UserDetails({ onUserNameClick }) {
   return (
     <div className="user-details-card">
-      <div className="user-details-logo">
+      <div 
+        className={onUserNameClick ? "user-details-logo clickable" : "user-details-logo"}
+        onClick={onUserNameClick}
+        style={onUserNameClick ? { cursor: 'pointer' } : {}}
+      >
         <img src="/doorway logo.svg" alt="Logo" />
       </div>
       <div className="user-details-user">
-        <div
-          className={onUserNameClick ? "user-details-name clickable" : "user-details-name"}
-          onClick={onUserNameClick}
-          style={onUserNameClick ? { cursor: 'pointer' } : {}}
-        >
-          Georgina Matthews
-        </div>
-        <div className="user-details-title">Vice President · North America</div>
         <div className="user-details-actions">
           <button className="user-details-action">
             <span className="user-details-action-text">Save contact</span>
