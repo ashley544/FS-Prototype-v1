@@ -800,9 +800,8 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
             className="pdf-scale-wrapper pdf-fade"
             style={{
               transform: `scale(${scale})`,
-              transformOrigin: 'top left',
+              transformOrigin: 'center top',
               transition: 'transform 0.2s, opacity 0.6s cubic-bezier(0.4,0,0.2,1)',
-              display: 'inline-block',
               opacity: visible ? 1 : 0,
               pointerEvents: visible ? 'auto' : 'none',
             }}

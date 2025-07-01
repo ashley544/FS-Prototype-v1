@@ -283,7 +283,9 @@
 }
 
 .pdf-scale-wrapper {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   min-width: 0;
   min-height: 0;
 }
@@ -306,14 +308,15 @@
   transition: padding 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.pdf-document-area.pdf-scroll-vertical {
+  flex-direction: column;
+  scroll-behavior: smooth;
+  align-items: center;
+}
+
 .pdf-viewer-container.expanded .pdf-document-area {
   background: #f0f0f0;
   padding: 88px 48px 64px 48px;
-}
-
-.pdf-scroll-vertical {
-  flex-direction: column;
-  scroll-behavior: smooth;
 }
 
 .pdf-document {
@@ -774,7 +777,11 @@
 }
 
 .pdf-page-wrapper:last-child {
-  margin-bottom: 0;
+  margin-bottom: 32px;
+}
+
+.pdf-page-wrapper:last-child .pdf-page {
+  margin-bottom: 32px;
 }
 
 .main-content {
