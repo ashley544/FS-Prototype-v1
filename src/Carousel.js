@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import './Carousel.css';
 
-export default function Carousel({ assets }) {
+const Carousel = ({ assets }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === assets.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prev) => (prev + 1) % assets.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? assets.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prev) => (prev - 1 + assets.length) % assets.length);
   };
-
-  // Calculate transform distance: card width (170px) + gap (12px) = 182px per card
-  const transformDistance = currentIndex * 182;
 
   return (
     <div className="carousel-container">
+      {/* Header */}
       <div className="carousel-header">
         <h3 className="carousel-title">Newsroom</h3>
         <div className="carousel-navigation">
@@ -36,14 +30,23 @@ export default function Carousel({ assets }) {
           </button>
         </div>
       </div>
-      
+
+      {/* Carousel Container */}
       <div className="carousel-track">
+        {/* Cards Container */}
         <div 
-          className="carousel-slides" 
-          style={{ transform: `translateX(-${transformDistance}px)` }}
+          className="carousel-slides"
+          style={{
+            transform: `translateX(-${currentIndex * 315}px)`,
+            width: `${assets.length * 315}px`
+          }}
         >
           {assets.map((asset, index) => (
-            <div key={index} className="carousel-slide">
+            <div
+              key={index}
+              className="carousel-slide"
+              style={{ width: '303px', height: '275px' }}
+            >
               <div className="carousel-card">
                 <div className="carousel-card-header">
                   <div className="carousel-card-type">{asset.type}</div>
@@ -51,27 +54,25 @@ export default function Carousel({ assets }) {
                 </div>
                 <div className="carousel-card-image">
                   <img src={asset.image} alt={asset.title} />
-                  <div className="carousel-play-button">
-                    <div className="play-button-circle">
-                      <div className="play-button-triangle"></div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      
+
+      {/* Dots Indicator */}
       <div className="carousel-indicators">
-        {assets.map((_, index) => (
+        {Array.from({ length: Math.max(1, assets.length - 1) }).map((_, index) => (
           <button
             key={index}
-            className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
             onClick={() => setCurrentIndex(index)}
+            className={`carousel-indicator ${currentIndex === index ? 'active' : ''}`}
           />
         ))}
       </div>
     </div>
   );
-} 
+};
+
+export default Carousel; 

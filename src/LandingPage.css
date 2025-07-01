@@ -6,9 +6,8 @@
 }
 
 .locked-profile-side-panel {
-  width: 50vw;
+  flex: 0 0 50%;
   min-width: 320px;
-  max-width: 50vw;
   background: #292829;
   display: flex;
   flex-direction: column;
@@ -82,10 +81,12 @@
 }
 
 .locked-profile-main {
-  flex: 1;
+  flex: 0 0 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: #ffffff;
 }
 
 .locked-profile-content {
@@ -93,9 +94,8 @@
   flex-direction: column;
   align-items: center;
   gap: 48px;
-  max-width: 711px;
   width: 100%;
-  padding: 0 32px;
+  padding: 0 64px;
 }
 
 .locked-profile-enter-btn {

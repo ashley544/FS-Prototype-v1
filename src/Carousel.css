@@ -1,8 +1,18 @@
 .carousel-container {
   width: 100%;
-  max-width: 711px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  width: 100%;
+  padding: 24px;
+  margin: -24px;
 }
 
 .carousel-header {
@@ -15,7 +25,7 @@
 .carousel-title {
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #000000;
   margin: 0;
 }
 
@@ -25,8 +35,8 @@
 }
 
 .carousel-nav-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   width: 36px;
   height: 36px;
@@ -34,43 +44,51 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #ffffff;
+  color: #000000;
   transition: all 0.2s ease;
 }
 
 .carousel-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .carousel-track {
+  position: relative;
   overflow: hidden;
   border-radius: 12px;
-  height: 170px;
+  width: 100%;
+  padding: 24px;
+  margin: -24px;
 }
 
 .carousel-slides {
   display: flex;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
   gap: 12px;
-  height: 100%;
 }
 
 .carousel-slide {
-  min-width: 170px;
   flex-shrink: 0;
-  height: 100%;
+  height: auto;
 }
 
 .carousel-card {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(51, 51, 51, 0.12);
+  box-shadow: 0 2px 12px rgba(51, 51, 51, 0.12);
   overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.carousel-card:hover {
+  box-shadow: 0 6px 24px rgba(51, 51, 51, 0.18);
+  transform: translateY(-2px) scale(1.01);
 }
 
 .carousel-card-header {
@@ -78,6 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex-shrink: 0;
 }
 
 .carousel-card-type {
@@ -100,6 +119,7 @@
   flex: 1;
   position: relative;
   padding: 0 12px 12px 12px;
+  min-height: 0;
 }
 
 .carousel-card-image img {
@@ -108,7 +128,6 @@
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid #f0f0f0;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-play-button {
@@ -147,21 +166,46 @@
 }
 
 .carousel-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
   cursor: pointer;
   transition: background 0.2s ease;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .carousel-indicator.active {
-  background: #ffffff;
+  background: #000000 !important;
 }
 
 .carousel-indicator:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 768px) {
@@ -173,15 +217,7 @@
     font-size: 20px;
   }
   
-  .carousel-track {
-    height: 150px;
-  }
-  
   .carousel-card {
     height: 100%;
-  }
-  
-  .carousel-slide {
-    min-width: 150px;
   }
 } 
