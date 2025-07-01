@@ -34,7 +34,7 @@
   background: none;
   border-radius: 8px;
   margin-bottom: 24px;
-  padding: 4px;
+  padding: 4px 12px;
   box-shadow: none;
   min-height: 80px;
   font-weight: 500;
@@ -50,7 +50,7 @@
 .sidebar-section-title {
   font-weight: 500;
   color: #222;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   flex-shrink: 0;
 }
 
@@ -58,9 +58,8 @@
   flex: 1;
   max-height: calc(50vh - 80px);
   overflow-y: auto;
-  overflow-x: visible;
-  padding: 20px;
-  margin: -20px;
+  padding: 8px 20px;
+  margin: 0 -20px;
   /* Apple-inspired scrollbar styling */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
