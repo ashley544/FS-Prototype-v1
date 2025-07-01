@@ -148,6 +148,66 @@ const assetDisplayMap = {
     'Salesforce vs Hubspot',
     'Highspot vs Seismic'
   ],
+  '/pdfs/The Key to Passive Relationship Management.pdf': [
+    'The Key to Passive Relationship Management',
+    'The Rules of Attraction',
+    'Why Your Personal Relationships Matter Now More Than Ever',
+    'The Goldman Standard'
+  ],
+  '/pdfs/Creating Competitive Deal Processes in Real Estate.pdf': [
+    'Creating Competitive Deal Processes in Real Estate',
+    'The Rules of Attraction',
+    'Consider the viewer',
+    'The Goldman Standard'
+  ],
+  '/pdfs/Shared Service Teams- The Backbone of Continuity and Scale.pdf': [
+    'Shared Service Teams - The Backbone of Continuity and Scale',
+    'The Goldman Standard',
+    'Salesforce vs Hubspot',
+    'Prove Your Marketing Team\'s Performance'
+  ],
+  '/pdfs/Consider the viewer.pdf': [
+    'Consider the viewer',
+    'The Scrolling Mind - White Paper',
+    'Intralinks vs Datasite',
+    'Liferay vs Diligent'
+  ],
+  '/pdfs/The Goldman Standard.pdf': [
+    'The Goldman Standard',
+    'Shared Service Teams - The Backbone of Continuity and Scale',
+    'Prove Your Marketing Team\'s Performance',
+    'Creating Competitive Deal Processes in Real Estate'
+  ],
+  '/pdfs/Salesforce vs Hubspot.pdf': [
+    'Salesforce vs Hubspot',
+    'Intralinks vs Datasite',
+    'Highspot vs Seismic',
+    'Liferay vs Diligent'
+  ],
+  '/pdfs/Intralinks vs Datasite.pdf': [
+    'Intralinks vs Datasite',
+    'DocSend vs Firmex',
+    'Salesforce vs Hubspot',
+    'Highspot vs Seismic'
+  ],
+  '/pdfs/DocSend vs Firmex.pdf': [
+    'DocSend vs Firmex',
+    'Intralinks vs Datasite',
+    'Salesforce vs Hubspot',
+    'Liferay vs Diligent'
+  ],
+  '/pdfs/Highspot vs Seismic.pdf': [
+    'Highspot vs Seismic',
+    'Liferay vs Diligent',
+    'Salesforce vs Hubspot',
+    'Intralinks vs Datasite'
+  ],
+  '/pdfs/Liferay vs Diligent.pdf': [
+    'Liferay vs Diligent',
+    'Salesforce vs Hubspot',
+    'Highspot vs Seismic',
+    'Intralinks vs Datasite'
+  ],
   // Empty by default - will show all newsroom assets
   // Add specific mappings here if you want to filter assets for certain PDFs
 };
