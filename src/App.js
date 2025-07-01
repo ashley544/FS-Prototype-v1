@@ -124,6 +124,30 @@ const exchangeAssets = [
 
 // Mapping: which newsroom asset cards to show for each open PDF
 const assetDisplayMap = {
+  '/pdfs/The Scrolling Mind - White Paper.pdf': [
+    'The Scrolling Mind - White Paper',
+    'Consider the viewer',
+    'The Rules of Attraction',
+    'The Key to Passive Relationship Management'
+  ],
+  '/pdfs/The Rules of Attraction.pdf': [
+    'The Rules of Attraction',
+    'The Key to Passive Relationship Management',
+    'The Scrolling Mind - White Paper',
+    'Prove Your Marketing Team\'s Performance'
+  ],
+  '/pdfs/Why Your Personal Relationships Matter Now More Than Ever.pdf': [
+    'Why Your Personal Relationships Matter Now More Than Ever',
+    'The Key to Passive Relationship Management',
+    'The Rules of Attraction',
+    'Creating Competitive Deal Processes in Real Estate'
+  ],
+  '/pdfs/Prove Your Marketing Team\'s Performance.pdf': [
+    'Prove Your Marketing Team\'s Performance',
+    'Shared Service Teams - The Backbone of Continuity and Scale',
+    'Salesforce vs Hubspot',
+    'Highspot vs Seismic'
+  ],
   // Empty by default - will show all newsroom assets
   // Add specific mappings here if you want to filter assets for certain PDFs
 };
