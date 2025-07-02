@@ -232,7 +232,7 @@ const aiResponseMap = {
 };
 
 export default function App() {
-  const [selectedPdf, setSelectedPdf] = useState(newsroomAssets[0].file);
+  const [selectedPdf, setSelectedPdf] = useState("/pdfs/Doorway - Overview.pdf");
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [showAIResponse, setShowAIResponse] = useState(false);
@@ -419,17 +419,18 @@ export default function App() {
         <div className={`sidebar-section ${!shouldShowAIResponse ? 'with-top-padding' : ''}`}>
           <div className="sidebar-section-title">Newsroom</div>
           <div className="sidebar-section-cards">
-            {filteredNewsroomAssets.map(asset => (
-              <AssetCard
-                key={asset.title}
-                image={asset.image}
-                type={asset.type}
-                title={asset.title}
-                selected={selectedPdf === asset.file}
-                onSummarise={() => alert("Summarise Newsroom Asset")}
-                onClick={() => handlePdfSelection(asset.file)}
-              />
-            ))}
+            {filteredNewsroomAssets
+              .filter(asset => asset.file !== selectedPdf)
+              .map(asset => (
+                <AssetCard
+                  key={asset.title}
+                  image={asset.image}
+                  type={asset.type}
+                  title={asset.title}
+                  onSummarise={() => alert("Summarise Newsroom Asset")}
+                  onClick={() => handlePdfSelection(asset.file)}
+                />
+              ))}
           </div>
         </div>
         <div className="sidebar-section">
