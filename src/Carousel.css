@@ -20,6 +20,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
+  min-height: 40px;
 }
 
 .carousel-title {
@@ -27,11 +28,13 @@
   font-weight: 500;
   color: #000000;
   margin: 0;
+  flex-shrink: 0;
 }
 
 .carousel-navigation {
   display: flex;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .carousel-nav-btn {
@@ -208,6 +211,22 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .carousel-container {
+    padding: 0 24px 0 24px;
+  }
+  
+  .carousel-track {
+    padding: 20px;
+    margin: -20px;
+  }
+  
+  .carousel-header {
+    margin-bottom: 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .carousel-container {
     padding: 0 16px 0 16px;
@@ -218,7 +237,50 @@
     font-size: 20px;
   }
   
+  .carousel-track {
+    padding: 16px;
+    margin: -16px;
+  }
+  
+  .carousel-header {
+    margin-bottom: 20px;
+  }
+  
   .carousel-card {
     height: 100%;
+  }
+  
+  .carousel-nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    padding: 0 12px 0 12px;
+  }
+  
+  .carousel-title {
+    font-size: 18px;
+  }
+  
+  .carousel-track {
+    padding: 12px;
+    margin: -12px;
+  }
+  
+  .carousel-header {
+    margin-bottom: 16px;
+  }
+  
+  .carousel-nav-btn {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .carousel-nav-btn svg {
+    width: 14px;
+    height: 14px;
   }
 } 

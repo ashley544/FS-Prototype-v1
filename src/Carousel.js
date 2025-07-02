@@ -1,8 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Carousel.css';
 
 const Carousel = ({ assets }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(303);
+  const [gap, setGap] = useState(12);
+
+  // Calculate responsive card width and gap
+  useEffect(() => {
+    const updateCardSize = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        setCardWidth(280);
+        setGap(8);
+      } else if (width <= 768) {
+        setCardWidth(300);
+        setGap(10);
+      } else if (width <= 1200) {
+        setCardWidth(310);
+        setGap(12);
+      } else {
+        setCardWidth(303);
+        setGap(12);
+      }
+    };
+
+    updateCardSize();
+    window.addEventListener('resize', updateCardSize);
+    return () => window.removeEventListener('resize', updateCardSize);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % assets.length);
@@ -37,15 +63,16 @@ const Carousel = ({ assets }) => {
         <div 
           className="carousel-slides"
           style={{
-            transform: `translateX(-${currentIndex * 315}px)`,
-            width: `${assets.length * 315}px`
+            transform: `translateX(-${currentIndex * (cardWidth + gap)}px)`,
+            width: `${assets.length * (cardWidth + gap)}px`,
+            gap: `${gap}px`
           }}
         >
           {assets.map((asset, index) => (
             <div
               key={index}
               className="carousel-slide"
-              style={{ width: '303px', height: '275px' }}
+              style={{ width: `${cardWidth}px`, height: '275px' }}
             >
               <div className="carousel-card">
                 <div className="carousel-card-header">
