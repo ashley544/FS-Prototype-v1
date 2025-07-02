@@ -31,8 +31,6 @@ export default function LockedProfile({ onEnter }) {
     <div className="locked-profile-layout">
       <aside className="locked-profile-side-panel">
         <div className="locked-profile-user-card">
-          <div className="locked-profile-user-name">Georgina Matthews</div>
-          <div className="locked-profile-user-title">Vice President · North America</div>
           <div className="user-details-actions">
             <button className="user-details-action">
               <span className="user-details-action-text">Schedule a meeting</span>
@@ -55,9 +53,9 @@ export default function LockedProfile({ onEnter }) {
       <main className="locked-profile-main">
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
-          <button className="locked-profile-enter-btn" onClick={onEnter}>
-            Go to Asset Viewer
-          </button>
+        <button className="locked-profile-enter-btn" onClick={onEnter}>
+          Go to Asset Viewer
+        </button>
         </div>
       </main>
     </div>

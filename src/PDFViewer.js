@@ -838,6 +838,21 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
           </div>
         </div>
       </div>
+      {/* Floating Forward/Share Button */}
+      <div className="pdf-floating-forward-btn">
+        <button
+          className="pdf-forward-btn"
+          title="Share asset"
+          aria-label="Share asset"
+          type="button"
+        >
+                  {/* Material UI Forward Icon */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z" fill="#222"/>
+        </svg>
+          <span className="pdf-forward-label">Share asset</span>
+        </button>
+      </div>
     </div>
   );
 } 

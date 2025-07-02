@@ -95,7 +95,7 @@
   align-items: center;
   gap: 48px;
   width: 100%;
-  padding: 0 64px;
+  padding: 0 0 0 64px;
 }
 
 .locked-profile-enter-btn {
