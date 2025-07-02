@@ -85,10 +85,10 @@ export default function LockedProfile({ onEnter }) {
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 1 0-12 0v3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm-8-3a4 4 0 1 1 8 0v3H6V7zm10 12H6v-7h12v7z" fill="#111"/>
                 </svg>
-                <div style={{ fontSize: 40, fontWeight: 600, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
+                <div style={{ fontSize: 28, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
                   Doorway Exchange
                 </div>
-                <div style={{ fontSize: 20, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 8, lineHeight: 1.4 }}>
+                <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
                   Permission required to access.<br />
                   Enter your email to view Exchange assets
                 </div>
@@ -106,7 +106,7 @@ export default function LockedProfile({ onEnter }) {
                     padding: '20px 24px',
                     borderRadius: '12px',
                     border: '1.5px solid #ececec',
-                    fontSize: '18px',
+                    fontSize: '14px',
                     fontFamily: 'Inter Variable, Inter, Arial, sans-serif',
                     marginBottom: error ? 4 : 0,
                     background: '#fff',
@@ -114,7 +114,7 @@ export default function LockedProfile({ onEnter }) {
                   }}
                   autoFocus
                 />
-                {error && <div style={{ color: '#e94b4b', fontSize: 14, marginTop: 0 }}>{error}</div>}
+                {error && <div style={{ color: '#e94b4b', fontSize: 6, marginTop: 0 }}>{error}</div>}
               </div>
             </div>
           </DottedRectangle>
