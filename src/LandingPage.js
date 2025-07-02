@@ -3,27 +3,21 @@ import './LandingPage.css';
 import Carousel from './Carousel';
 import DottedRectangle from './DottedRectangle';
 
-// Sample carousel assets
 const carouselAssets = [
   {
-    image: "/Assets/The Rules of Attraction.png",
+    image: "/Assets/The Scrolling Mind - White Paper.png",
     type: "PDF",
-    title: "The Rules of Attraction"
+    title: "The Scrolling Mind - White Paper"
   },
   {
-    image: "/Assets/The Scrolling Mind - White Paper.png",
-    type: "PDF", 
-    title: "The Scrolling Mind - White Paper"
+    image: "/Assets/Prove Your Marketing Team's Performance.png",
+    type: "PDF",
+    title: "Prove Your Marketing Team's Performance"
   },
   {
     image: "/Assets/The Goldman Standard.png",
     type: "PDF",
     title: "The Goldman Standard"
-  },
-  {
-    image: "/Assets/Consider the viewer.png",
-    type: "PDF",
-    title: "Consider the viewer"
   }
 ];
 
