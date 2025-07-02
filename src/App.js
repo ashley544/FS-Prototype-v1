@@ -208,6 +208,22 @@ const assetDisplayMap = {
     'Highspot vs Seismic',
     'Intralinks vs Datasite'
   ],
+  // Show these three assets when either exchange asset is open
+  '/pdfs/Doorway - Overview.pdf': [
+    'The Scrolling Mind - White Paper',
+    'Consider the viewer',
+    'The Key to Passive Relationship Management'
+  ],
+  '/pdfs/Doorway - FAQ .pdf': [
+    'The Scrolling Mind - White Paper',
+    'Consider the viewer',
+    'The Key to Passive Relationship Management'
+  ],
+  '/pdfs/Data Protection Procedures.pdf': [
+    'The Scrolling Mind - White Paper',
+    'Consider the viewer',
+    'The Key to Passive Relationship Management'
+  ],
   // Empty by default - will show all newsroom assets
   // Add specific mappings here if you want to filter assets for certain PDFs
 };
