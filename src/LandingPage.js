@@ -80,12 +80,15 @@ export default function LockedProfile({ onEnter }) {
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
           <DottedRectangle>
-            <div style={{ width: '100%', maxWidth: 480, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
+            <div style={{ position: 'relative', width: '100%', maxWidth: 480, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0' }}>
+              <div className="animated-gradient-blob" />
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18, zIndex: 1, position: 'relative' }}>
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 1 0-12 0v3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm-8-3a4 4 0 1 1 8 0v3H6V7zm10 12H6v-7h12v7z" fill="#111"/>
+                  <rect x="5" y="9" width="14" height="11" rx="3" fill="#111"/>
+                  <circle cx="12" cy="15" r="2" fill="#fff"/>
+                  <path d="M8 9V7a4 4 0 1 1 8 0" stroke="#111" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
                 </svg>
-                <div style={{ fontSize: 28, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
+                <div style={{ fontSize: 24, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
                   Doorway Exchange
                 </div>
                 <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
@@ -93,7 +96,7 @@ export default function LockedProfile({ onEnter }) {
                   Enter your email to view Exchange assets
                 </div>
               </div>
-              <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, zIndex: 1, position: 'relative' }}>
                 <input
                   type="email"
                   placeholder="Enter work email"

@@ -92,6 +92,7 @@
 }
 
 .locked-profile-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,4 +126,38 @@
 
 .locked-profile-user-card .user-details-action::after {
   background: #ffffff;
+}
+
+.animated-gradient-blob {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 50% 50%, #b3c6ff 0%, #f8bbd0 60%, transparent 100%);
+  filter: blur(32px);
+  opacity: 0.45;
+  z-index: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  animation: blobMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes blobMove {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    filter: blur(80px);
+  }
+  30% {
+    transform: translate(-48%, -52%) scale(1.08) rotate(8deg);
+    filter: blur(90px);
+  }
+  60% {
+    transform: translate(-52%, -48%) scale(0.95) rotate(-6deg);
+    filter: blur(70px);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.04) rotate(0deg);
+    filter: blur(80px);
+  }
 } 

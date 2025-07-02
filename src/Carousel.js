@@ -72,7 +72,7 @@ const Carousel = ({ assets }) => {
             <div
               key={index}
               className="carousel-slide"
-              style={{ width: `${cardWidth}px`, height: '275px' }}
+              style={{ width: `${cardWidth}px`, height: '200px' }}
             >
               <div className="carousel-card">
                 <div className="carousel-card-header">

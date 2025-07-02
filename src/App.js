@@ -408,6 +408,32 @@ export default function App() {
         onMouseEnter={() => setPdfHovered(false)}
         style={{ position: 'relative' }}
       >
+        {currentPage === 'asset-viewer' && (
+          <button
+            className="sidebar-home-btn"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: 16,
+              fontWeight: 500,
+              color: '#222',
+              margin: '24px 0 8px 8px',
+              padding: 0
+            }}
+            onClick={handleGoToLanding}
+          >
+            <div className="sidebar-home-btn-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L4 10.5V19a1.5 1.5 0 0 0 1.5 1.5H9V15a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.5h3.5A1.5 1.5 0 0 0 20 19v-8.5L12 4Z" fill="#18171A"/>
+                <rect x="10" y="15" width="4" height="5" rx="1" fill="#fff"/>
+              </svg>
+            </div>
+          </button>
+        )}
         {shouldShowAIResponse && (
           <AIResponse 
             userInput={lastTrigger} 
@@ -437,8 +463,10 @@ export default function App() {
           <div className="sidebar-section-title">
             <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: 6 }}>
               {/* Material Design lock open filled icon */}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 6 }}>
-                <path d="M18 8h-1V6c0-2.21-1.79-4-4-4s-4 1.79-4 4v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6-2c0-1.1.9-2 2-2s2 .9 2 2v2h-4V6zm6 14H6V10h12v10zm-6-3c-1.1 0-2-.9-2-2h2v-2h2v2h2c0 1.1-.9 2-2 2z"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 6 }}>
+                <rect x="4" y="9" width="16" height="11" rx="3" fill="#000"/>
+                <circle cx="12" cy="15" r="2" fill="#fff"/>
+                <path d="M8 9V7a4 4 0 1 1 8 0" stroke="#000" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
               </svg>
               Exchange
             </span>
