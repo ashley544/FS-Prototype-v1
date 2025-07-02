@@ -93,7 +93,7 @@ export default function LockedProfile({ onEnter }) {
                   Enter your email to view Exchange assets
                 </div>
               </div>
-              <div style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
                 <input
                   type="email"
                   placeholder="Enter work email"
