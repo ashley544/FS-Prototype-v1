@@ -433,7 +433,15 @@ export default function App() {
           </div>
         </div>
         <div className="sidebar-section">
-          <div className="sidebar-section-title">Exchange</div>
+          <div className="sidebar-section-title">
+            <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: 6 }}>
+              {/* Material Design lock open filled icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 6 }}>
+                <path d="M18 8h-1V6c0-2.21-1.79-4-4-4s-4 1.79-4 4v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6-2c0-1.1.9-2 2-2s2 .9 2 2v2h-4V6zm6 14H6V10h12v10zm-6-3c-1.1 0-2-.9-2-2h2v-2h2v2h2c0 1.1-.9 2-2 2z"/>
+              </svg>
+              Exchange
+            </span>
+          </div>
           <div className="sidebar-section-cards">
             {exchangeAssets.filter(asset => asset.title !== "Doorway FAQs").map(asset => (
               <AssetCard
