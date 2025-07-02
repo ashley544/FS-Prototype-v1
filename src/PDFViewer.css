@@ -801,15 +801,15 @@
 
 .pdf-floating-forward-btn {
   position: fixed;
-  bottom: 36px;
-  right: 36px;
+  bottom: 56px;
+  right: 56px;
   z-index: 1200;
   pointer-events: none;
 }
 
 .pdf-viewer-container.expanded .pdf-floating-forward-btn {
-  bottom: 48px;
-  right: 48px;
+  bottom: 68px;
+  right: 68px;
 }
 
 .pdf-forward-btn {
