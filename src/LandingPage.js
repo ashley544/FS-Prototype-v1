@@ -92,7 +92,7 @@ export default function LockedProfile({ onEnter }) {
                 </div>
                 <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
                   Permission required to access<br />
-                  Enter your email to view Exchange assets.
+                  Enter your email to view Exchange assets
                 </div>
               </div>
               <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, zIndex: 1, position: 'relative' }}>
