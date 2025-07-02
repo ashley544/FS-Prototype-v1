@@ -1,0 +1,29 @@
+.dotted-rectangle {
+  width: 100%;
+  min-height: 300px;
+  background-color: #f7f7f7;
+  border-radius: 22px;
+  border: 1px solid #ececec;
+  box-shadow: none;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dotted-rectangle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.07) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dotted-rectangle > * {
+  position: relative;
+  z-index: 1;
+} 

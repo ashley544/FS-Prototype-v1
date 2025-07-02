@@ -1,6 +1,7 @@
 import React from 'react';
 import './LandingPage.css';
 import Carousel from './Carousel';
+import DottedRectangle from './DottedRectangle';
 
 // Sample carousel assets
 const carouselAssets = [
@@ -32,6 +33,7 @@ export default function LockedProfile({ onEnter }) {
       <aside className="locked-profile-side-panel">
         <div className="locked-profile-user-card">
           <div className="user-details-actions">
+            {/*
             <button className="user-details-action">
               <span className="user-details-action-text">Schedule a meeting</span>
               <span className="user-details-action-icon">
@@ -44,6 +46,7 @@ export default function LockedProfile({ onEnter }) {
                 <img src="/download.svg" alt="Download" width={16} height={16} style={{ filter: 'brightness(0) invert(1)' }} />
               </span>
             </button>
+            */}
           </div>
         </div>
         <div className="locked-profile-logo">
@@ -53,9 +56,11 @@ export default function LockedProfile({ onEnter }) {
       <main className="locked-profile-main">
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
-        <button className="locked-profile-enter-btn" onClick={onEnter}>
-          Go to Asset Viewer
-        </button>
+          <DottedRectangle>
+            <button className="locked-profile-enter-btn" onClick={onEnter}>
+              Go to Asset Viewer
+            </button>
+          </DottedRectangle>
         </div>
       </main>
     </div>
