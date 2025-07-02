@@ -18,6 +18,11 @@ const carouselAssets = [
     image: "/Assets/The Goldman Standard.png",
     type: "PDF",
     title: "The Goldman Standard"
+  },
+  {
+    image: "/Assets/Consider the viewer.png",
+    type: "PDF",
+    title: "Consider the Viewer"
   }
 ];
 
@@ -86,8 +91,7 @@ export default function LockedProfile({ onEnter }) {
                   Doorway Exchange
                 </div>
                 <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
-                  Permission required to access.<br />
-                  Enter your email to view Exchange assets
+                  Permission required to access, enter your email to view Exchange assets.
                 </div>
               </div>
               <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, zIndex: 1, position: 'relative' }}>

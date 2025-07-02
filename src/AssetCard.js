@@ -15,11 +15,8 @@ export default function AssetCard({ image, type, title, onSummarise, selected, o
       </div>
       <div className="asset-card-details">
         <div className="asset-card-type">{type}</div>
-        <div className="asset-card-title">{title}</div>
-        <div className="asset-card-summarise">
-          <img src="/flare.svg" alt="Flare" className="asset-card-summarise-icon" width={16} height={16} />
-          <span className="asset-card-summarise-text" onClick={e => { e.stopPropagation(); onSummarise(); }} role="button" tabIndex={0} style={{ cursor: 'pointer' }}>Summarise</span>
-        </div>
+        <div className="asset-card-title">{title === 'Consider the viewer' ? 'Consider the Viewer' : title}</div>
+        {/* Summarise CTA hidden as requested */}
       </div>
       {selected && (
         <span className="asset-card-arrow" aria-hidden="true">
