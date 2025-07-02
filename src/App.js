@@ -471,6 +471,7 @@ export default function App() {
                   title={asset.title}
                   onSummarise={() => alert("Summarise Newsroom Asset")}
                   onClick={() => handlePdfSelection(asset.file)}
+                  showSummarise={true}
                 />
               ))}
           </div>
@@ -497,6 +498,7 @@ export default function App() {
                 selected={selectedPdf === asset.file}
                 onSummarise={() => alert("Summarise Exchange Asset")}
                 onClick={() => handlePdfSelection(asset.file)}
+                showSummarise={false}
               />
             ))}
           </div>
