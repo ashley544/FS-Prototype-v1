@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LandingPage.css';
 import Carousel from './Carousel';
 import DottedRectangle from './DottedRectangle';
@@ -28,6 +28,29 @@ const carouselAssets = [
 ];
 
 export default function LockedProfile({ onEnter }) {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+    setError("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      // Basic email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.trim()) {
+        setError("Please enter your email address.");
+      } else if (!emailPattern.test(email)) {
+        setError("Please enter a valid email address.");
+      } else {
+        setError("");
+        onEnter();
+      }
+    }
+  };
+
   return (
     <div className="locked-profile-layout">
       <aside className="locked-profile-side-panel">
@@ -57,9 +80,43 @@ export default function LockedProfile({ onEnter }) {
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
           <DottedRectangle>
-            <button className="locked-profile-enter-btn" onClick={onEnter}>
-              Go to Asset Viewer
-            </button>
+            <div style={{ width: '100%', maxWidth: 480, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7V7a6 6 0 1 0-12 0v3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm-8-3a4 4 0 1 1 8 0v3H6V7zm10 12H6v-7h12v7z" fill="#111"/>
+                </svg>
+                <div style={{ fontSize: 40, fontWeight: 600, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
+                  Doorway Exchange
+                </div>
+                <div style={{ fontSize: 20, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 8, lineHeight: 1.4 }}>
+                  Permission required to access.<br />
+                  Enter your email to view Exchange assets
+                </div>
+              </div>
+              <div style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+                <input
+                  type="email"
+                  placeholder="Enter work email"
+                  value={email}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  className="locked-profile-email-input"
+                  style={{
+                    width: '100%',
+                    padding: '20px 24px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #ececec',
+                    fontSize: '18px',
+                    fontFamily: 'Inter Variable, Inter, Arial, sans-serif',
+                    marginBottom: error ? 4 : 0,
+                    background: '#fff',
+                    boxShadow: '0 2px 12px rgba(51,51,51,0.06)'
+                  }}
+                  autoFocus
+                />
+                {error && <div style={{ color: '#e94b4b', fontSize: 14, marginTop: 0 }}>{error}</div>}
+              </div>
+            </div>
           </DottedRectangle>
         </div>
       </main>
