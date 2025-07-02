@@ -13,6 +13,7 @@ export default function UserDetails({ onUserNameClick }) {
       </div>
       <div className="user-details-user">
         <div className="user-details-actions">
+          {/*
           <button className="user-details-action">
             <span className="user-details-action-text">Save contact</span>
             <span className="user-details-action-icon">
@@ -25,6 +26,7 @@ export default function UserDetails({ onUserNameClick }) {
               <img src="/arrow_forward.svg" alt="Forward" width={16} height={16} />
             </span>
           </button>
+          */}
         </div>
       </div>
     </div>

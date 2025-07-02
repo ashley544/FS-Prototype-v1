@@ -435,7 +435,7 @@ export default function App() {
         <div className="sidebar-section">
           <div className="sidebar-section-title">Exchange</div>
           <div className="sidebar-section-cards">
-            {exchangeAssets.map(asset => (
+            {exchangeAssets.filter(asset => asset.title !== "Doorway FAQs").map(asset => (
               <AssetCard
                 key={asset.title}
                 image={asset.image}
