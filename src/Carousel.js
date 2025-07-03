@@ -94,7 +94,7 @@ const Carousel = ({ assets }) => {
           className="carousel-slides"
           style={{
             transform: `translateX(-${currentIndex * (cardWidth + gap)}px)`,
-            width: `${assets.length * (cardWidth + gap)}px`,
+            width: '100%',
             gap: `${gap}px`
           }}
         >
@@ -102,7 +102,7 @@ const Carousel = ({ assets }) => {
             <div
               key={index}
               className="carousel-slide"
-              style={{ width: `${cardWidth}px`, height: '200px' }}
+              style={{ width: `${cardWidth}px`, height: '200px', flex: '0 0 auto' }}
             >
               <div className="carousel-card">
                 <div className="carousel-card-header">
