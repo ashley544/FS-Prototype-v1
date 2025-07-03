@@ -254,7 +254,9 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
   // Example placeholder values for FeedCard fields
   const getOrg = () => 'Doorway';
   const getDate = () => '12th Jun';
-  const getDescription = () => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
+  const getDescription = (asset) => asset.title === 'The Rules of Attraction'
+    ? "We're living in the golden age of sales enablement. Today's client-facing professionals are equipped with a dizzying array of tools designed to turn outreach into a science..."
+    : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
   const getAuthor = () => 'Author/sharer name';
   const getReadTime = () => 5;
 
@@ -263,44 +265,51 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
   return (
     <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', padding: '48px 0 32px 0' }}>
       <div style={{ width: '100%', maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
-        <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 16, textAlign: 'left' }}>Feed</h1>
-        <div style={{ display: 'flex', gap: 0, marginBottom: 32, background: '#f5f5f5', borderRadius: 10, overflow: 'hidden', boxShadow: '0 1px 4px rgba(51,51,51,0.04)', alignItems: 'center', width: 'fit-content' }}>
-          <button
-            onClick={() => setTab('newsroom')}
-            style={{
-              padding: '12px 32px',
-              fontSize: 16,
-              fontWeight: 600,
-              background: tab === 'newsroom' ? '#fff' : 'transparent',
-              color: tab === 'newsroom' ? '#18171A' : '#888',
-              border: 'none',
-              borderBottom: tab === 'newsroom' ? '2.5px solid #0290ff' : '2.5px solid transparent',
-              cursor: 'pointer',
-              outline: 'none',
-              transition: 'background 0.18s, color 0.18s, border-bottom 0.18s',
-              borderRadius: 0,
-            }}
-          >
-            Newsroom
-          </button>
-          <button
-            onClick={() => setTab('exchange')}
-            style={{
-              padding: '12px 32px',
-              fontSize: 16,
-              fontWeight: 600,
-              background: tab === 'exchange' ? '#fff' : 'transparent',
-              color: tab === 'exchange' ? '#18171A' : '#888',
-              border: 'none',
-              borderBottom: tab === 'exchange' ? '2.5px solid #0290ff' : '2.5px solid transparent',
-              cursor: 'pointer',
-              outline: 'none',
-              transition: 'background 0.18s, color 0.18s, border-bottom 0.18s',
-              borderRadius: 0,
-            }}
-          >
-            Exchange
-          </button>
+        <h1 style={{ fontSize: 32, fontWeight: 600, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Feed</h1>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
+          <div style={{ display: 'flex', gap: 32, height: 38, alignItems: 'flex-end' }}>
+            <button
+              onClick={() => setTab('newsroom')}
+              style={{
+                background: 'none',
+                border: 'none',
+                outline: 'none',
+                fontFamily: 'Inter, Arial, sans-serif',
+                fontSize: 20,
+                fontWeight: tab === 'newsroom' ? 600 : 400,
+                color: tab === 'newsroom' ? '#18171A' : '#b0b0b0',
+                cursor: 'pointer',
+                padding: 0,
+                borderBottom: tab === 'newsroom' ? '3px solid #18171A' : '3px solid transparent',
+                transition: 'color 0.18s, border-bottom 0.18s',
+                height: 36,
+                marginBottom: 0,
+              }}
+            >
+              Newsroom
+            </button>
+            <button
+              onClick={() => setTab('exchange')}
+              style={{
+                background: 'none',
+                border: 'none',
+                outline: 'none',
+                fontFamily: 'Inter, Arial, sans-serif',
+                fontSize: 20,
+                fontWeight: tab === 'exchange' ? 600 : 400,
+                color: tab === 'exchange' ? '#18171A' : '#b0b0b0',
+                cursor: 'pointer',
+                padding: 0,
+                borderBottom: tab === 'exchange' ? '3px solid #18171A' : '3px solid transparent',
+                transition: 'color 0.18s, border-bottom 0.18s',
+                height: 36,
+                marginBottom: 0,
+              }}
+            >
+              Exchange
+            </button>
+          </div>
+          <div style={{ width: '100%', height: 1, background: '#ededed', marginTop: '-1px', marginBottom: 24 }} />
         </div>
       </div>
       <div style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}>
@@ -310,7 +319,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
             org={getOrg()}
             date={getDate()}
             title={asset.title}
-            description={getDescription()}
+            description={getDescription(asset)}
             author={getAuthor()}
             readTime={getReadTime()}
             image={asset.image}
@@ -605,4 +614,4 @@ export default function App() {
       </main>
     </div>
   );
-} 
+}
