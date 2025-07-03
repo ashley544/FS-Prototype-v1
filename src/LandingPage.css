@@ -98,7 +98,8 @@
   align-items: center;
   gap: 48px;
   width: 100%;
-  padding: 0 0 0 64px;
+  padding-left: 64px;
+  padding-right: 64px;
   padding-bottom: 40px;
 }
 

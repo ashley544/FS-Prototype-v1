@@ -58,7 +58,37 @@ const Carousel = ({ assets }) => {
       </div>
 
       {/* Carousel Container */}
-      <div className="carousel-track">
+      <div className="carousel-track" style={{position: 'relative'}}>
+        {/* Left Gradient Overlay (conditionally rendered) */}
+        {currentIndex > 0 && (
+          <div
+            className="carousel-gradient-left"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: 48,
+              height: '100%',
+              zIndex: 2,
+              pointerEvents: 'none',
+              background: 'linear-gradient(to right, #fff 50%, transparent 100%)'
+            }}
+          />
+        )}
+        {/* Right Gradient Overlay (always rendered) */}
+        <div
+          className="carousel-gradient-right"
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: 48,
+            height: '100%',
+            zIndex: 2,
+            pointerEvents: 'none',
+            background: 'linear-gradient(to left, #fff 50%, transparent 100%)'
+          }}
+        />
         {/* Cards Container */}
         <div 
           className="carousel-slides"
