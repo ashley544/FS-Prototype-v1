@@ -262,6 +262,20 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
 
   const assetList = tab === 'newsroom' ? newsroomAssets : exchangeAssets;
 
+  // Helper to get a random date between Aug 1 of last year and today
+  function getRandomDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const start = new Date(year - 1, 7, 1); // Aug is month 7 (0-indexed)
+    const end = now;
+    const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+    const d = new Date(randomTime);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const shortYear = String(d.getFullYear()).slice(-2);
+    return `${day}/${month}/${shortYear}`;
+  }
+
   return (
     <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', padding: '48px 0 32px 0' }}>
       <div style={{ width: '100%', maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
@@ -275,7 +289,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                 border: 'none',
                 outline: 'none',
                 fontFamily: 'Inter, Arial, sans-serif',
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: tab === 'newsroom' ? 600 : 400,
                 color: tab === 'newsroom' ? '#18171A' : '#b0b0b0',
                 cursor: 'pointer',
@@ -295,7 +309,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                 border: 'none',
                 outline: 'none',
                 fontFamily: 'Inter, Arial, sans-serif',
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: tab === 'exchange' ? 600 : 400,
                 color: tab === 'exchange' ? '#18171A' : '#b0b0b0',
                 cursor: 'pointer',
@@ -317,11 +331,11 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           <FeedCard
             key={asset.title + idx}
             org={getOrg()}
-            date={getDate()}
+            date={getRandomDate()}
             title={asset.title}
             description={getDescription(asset)}
             author={getAuthor()}
-            readTime={getReadTime()}
+            readTime={Math.floor(Math.random() * 20) + 1}
             image={asset.image}
             onClick={() => onOpenAsset(asset.file)}
             onShare={() => {}}
