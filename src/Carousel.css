@@ -38,22 +38,28 @@
 }
 
 .carousel-nav-btn {
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  width: 36px;
-  height: 36px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #000000;
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 4px 16px rgba(51,51,51,0.12), 0 1.5px 4px rgba(0,0,0,0.08);
+  margin: 0 2px;
 }
 
 .carousel-nav-btn:hover {
-  background: rgba(0, 0, 0, 0.2);
-  border-color: rgba(0, 0, 0, 0.3);
+  background: #f7f7fa;
+  box-shadow: 0 8px 24px rgba(51,51,51,0.22), 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.carousel-nav-btn svg {
+  display: block;
 }
 
 .carousel-track {
