@@ -253,11 +253,11 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
   const [tab, setTab] = React.useState('newsroom'); // 'newsroom' or 'exchange'
   // Example placeholder values for FeedCard fields
   const getOrg = () => 'Doorway';
-  const getDate = () => '12th Jun';
+  const getDate = () => '12/06/24';
   const getDescription = (asset) => asset.title === 'The Rules of Attraction'
     ? "We're living in the golden age of sales enablement. Today's client-facing professionals are equipped with a dizzying array of tools designed to turn outreach into a science..."
     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
-  const getAuthor = () => 'Author/sharer name';
+  const getAuthor = () => 'Author name';
   const getReadTime = () => 5;
 
   const assetList = tab === 'newsroom' ? newsroomAssets : exchangeAssets;
