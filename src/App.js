@@ -4,6 +4,7 @@ import AssetCard from "./AssetCard";
 import UserDetails from "./UserDetails";
 import AIResponse from "./AIResponse";
 import LockedProfile from "./LandingPage";
+import FeedCard from './FeedCard';
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -247,6 +248,80 @@ const aiResponseMap = {
   // Add more PDFs and their triggers/answers here
 };
 
+// New Feed page component
+function Feed({ onGoToAssetViewer, onOpenAsset }) {
+  const [tab, setTab] = React.useState('newsroom'); // 'newsroom' or 'exchange'
+  // Example placeholder values for FeedCard fields
+  const getOrg = () => 'Doorway';
+  const getDate = () => '12th Jun';
+  const getDescription = () => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
+  const getAuthor = () => 'Author/sharer name';
+  const getReadTime = () => 5;
+
+  const assetList = tab === 'newsroom' ? newsroomAssets : exchangeAssets;
+
+  return (
+    <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', padding: '48px 0 32px 0' }}>
+      <div style={{ width: '100%', maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
+        <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 16, textAlign: 'left' }}>Feed</h1>
+        <div style={{ display: 'flex', gap: 0, marginBottom: 32, background: '#f5f5f5', borderRadius: 10, overflow: 'hidden', boxShadow: '0 1px 4px rgba(51,51,51,0.04)', alignItems: 'center', width: 'fit-content' }}>
+          <button
+            onClick={() => setTab('newsroom')}
+            style={{
+              padding: '12px 32px',
+              fontSize: 16,
+              fontWeight: 600,
+              background: tab === 'newsroom' ? '#fff' : 'transparent',
+              color: tab === 'newsroom' ? '#18171A' : '#888',
+              border: 'none',
+              borderBottom: tab === 'newsroom' ? '2.5px solid #0290ff' : '2.5px solid transparent',
+              cursor: 'pointer',
+              outline: 'none',
+              transition: 'background 0.18s, color 0.18s, border-bottom 0.18s',
+              borderRadius: 0,
+            }}
+          >
+            Newsroom
+          </button>
+          <button
+            onClick={() => setTab('exchange')}
+            style={{
+              padding: '12px 32px',
+              fontSize: 16,
+              fontWeight: 600,
+              background: tab === 'exchange' ? '#fff' : 'transparent',
+              color: tab === 'exchange' ? '#18171A' : '#888',
+              border: 'none',
+              borderBottom: tab === 'exchange' ? '2.5px solid #0290ff' : '2.5px solid transparent',
+              cursor: 'pointer',
+              outline: 'none',
+              transition: 'background 0.18s, color 0.18s, border-bottom 0.18s',
+              borderRadius: 0,
+            }}
+          >
+            Exchange
+          </button>
+        </div>
+      </div>
+      <div style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}>
+        {assetList.map((asset, idx) => (
+          <FeedCard
+            key={asset.title + idx}
+            org={getOrg()}
+            date={getDate()}
+            title={asset.title}
+            description={getDescription()}
+            author={getAuthor()}
+            readTime={getReadTime()}
+            image={asset.image}
+            onClick={() => onOpenAsset(asset.file)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [selectedPdf, setSelectedPdf] = useState("/pdfs/Doorway - Overview.pdf");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -258,7 +333,7 @@ export default function App() {
   const [pdfRect, setPdfRect] = useState(null);
   const pdfRef = useRef();
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
-  const [currentPage, setCurrentPage] = useState('landing'); // 'landing' or 'asset-viewer'
+  const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', or 'feed'
 
   // Update bounding box when hovered or window resizes
   useEffect(() => {
@@ -409,9 +484,17 @@ export default function App() {
 
   // Handler to go to asset viewer
   const handleEnterAssetViewer = () => setCurrentPage('asset-viewer');
+  // Handler to go to feed page
+  const handleGoToFeed = () => setCurrentPage('feed');
   // Handler to go to landing page
   const handleGoToLanding = () => setCurrentPage('landing');
 
+  if (currentPage === 'feed') {
+    return <Feed 
+      onGoToAssetViewer={handleEnterAssetViewer} 
+      onOpenAsset={(file) => { setSelectedPdf(file); setCurrentPage('asset-viewer'); }}
+    />;
+  }
   if (currentPage === 'landing') {
     return <LockedProfile onEnter={handleEnterAssetViewer} />;
   }
@@ -440,7 +523,7 @@ export default function App() {
               margin: '24px 0 8px 8px',
               padding: 0
             }}
-            onClick={handleGoToLanding}
+            onClick={handleGoToFeed}
           >
             <div className="sidebar-home-btn-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
