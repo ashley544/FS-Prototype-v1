@@ -17,8 +17,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(0,0,0,0.07) 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 12px 12px;
   pointer-events: none;
   z-index: 0;
 }

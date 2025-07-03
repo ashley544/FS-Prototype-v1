@@ -160,4 +160,50 @@
     transform: translate(-50%, -50%) scale(1.04) rotate(0deg);
     filter: blur(80px);
   }
+}
+
+.animated-gradient-blob-summarise {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at 50% 50%, #F05524 0%, #EE454A 25%, #D5529D 50%, #926AAE 75%, #0e87ff 100%);
+  filter: blur(64px);
+  opacity: 0.65;
+  z-index: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  animation: blobSummariseMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes blobSummariseMove {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    filter: blur(64px);
+  }
+  20% {
+    transform: translate(10%, -90%) scale(1.12) rotate(18deg);
+    filter: blur(80px);
+  }
+  40% {
+    transform: translate(-90%, 10%) scale(0.92) rotate(-12deg);
+    filter: blur(48px);
+  }
+  60% {
+    transform: translate(-110%, -110%) scale(1.08) rotate(24deg);
+    filter: blur(72px);
+  }
+  80% {
+    transform: translate(30%, 30%) scale(1.04) rotate(-18deg);
+    filter: blur(60px);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    filter: blur(64px);
+  }
+}
+
+.locked-profile-content > .dotted-rectangle, .dotted-rectangle {
+  background: #ffffff;
 } 
