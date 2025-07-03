@@ -324,6 +324,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
             readTime={getReadTime()}
             image={asset.image}
             onClick={() => onOpenAsset(asset.file)}
+            onShare={() => {}}
           />
         ))}
       </div>

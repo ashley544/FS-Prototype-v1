@@ -104,6 +104,70 @@
   color: #18171A;
 }
 
+.feed-card-share-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  margin-left: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.feed-card-share-btn::after {
+  content: '';
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.feed-card-share-btn:hover::after, .feed-card-share-btn:focus::after {
+  animation: shine 0.7s;
+  opacity: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -60%;
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+.feed-card-share-btn svg {
+  display: block;
+}
+
+.feed-card-share-label {
+  font-size: 13px;
+  color: #888;
+  margin-left: 4px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
 @media (max-width: 700px) {
   .feed-card {
     flex-direction: column;
