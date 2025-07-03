@@ -79,9 +79,9 @@ export default function LockedProfile({ onEnter }) {
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
           <DottedRectangle>
-            <div style={{ position: 'relative', width: '100%', maxWidth: 480, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0' }}>
-              <div className="animated-gradient-blob-summarise" />
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18, zIndex: 1, position: 'relative' }}>
+            <div className="animated-gradient-blob-summarise" />
+            <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0', zIndex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="5" y="9" width="14" height="11" rx="3" fill="#111"/>
                   <circle cx="12" cy="15" r="2" fill="#fff"/>
@@ -95,7 +95,7 @@ export default function LockedProfile({ onEnter }) {
                   Enter your email to view Exchange assets
                 </div>
               </div>
-              <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, zIndex: 1, position: 'relative' }}>
+              <div style={{ width: '100%', maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
                 <input
                   type="email"
                   placeholder="Enter work email"
