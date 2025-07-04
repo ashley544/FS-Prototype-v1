@@ -326,7 +326,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
             Recommended topics
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            {['Money', 'Business', 'Psychology', 'Mindfulness', 'Art', 'Science', 'Books'].map(tag => (
+            {['Tech', 'Business', 'Research'].map(tag => (
               <span
                 key={tag}
                 style={{
