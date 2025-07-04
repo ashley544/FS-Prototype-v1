@@ -280,75 +280,57 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
     <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', padding: '48px 0 32px 0' }}>
       <div style={{ width: '100%', maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
         <h1 style={{ fontSize: 32, fontWeight: 600, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Feed</h1>
-        <div style={{ position: 'relative', width: '100%', maxWidth: 400, marginBottom: 32 }}>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{
-              position: 'absolute',
-              left: 12,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none',
-              color: '#b0b0b0',
-              zIndex: 2
-            }}
-          >
-            <circle cx="11" cy="11" r="7" stroke="#b0b0b0" strokeWidth="2" />
-            <path d="M16.5 16.5L21 21" stroke="#b0b0b0" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search assets, companies, or tags..."
-            style={{
-              width: '100%',
-              padding: '12px 16px 12px 40px',
-              borderRadius: 8,
-              border: '1px solid #e0e0e0',
-              fontSize: 15,
-              fontFamily: 'Inter, Arial, sans-serif',
-              outline: 'none',
-              boxShadow: '0 1px 4px rgba(51,51,51,0.04)',
-              background: '#fafbfc',
-              color: '#18171A',
-              transition: 'border 0.18s, box-shadow 0.18s',
-              marginTop: 0,
-              display: 'block',
-            }}
-          />
-        </div>
-        {/* Thematic tags below search bar */}
-        <div style={{ marginBottom: 32 }}>
-          <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 12, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif' }}>
-            Recommended topics
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32, gap: 32 }}>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 12, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif' }}>
+              Recommended topics
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+              {['Tech', 'Business', 'Research'].map(tag => (
+                <span
+                  key={tag}
+                  style={{
+                    display: 'inline-block',
+                    background: '#f3f3f3',
+                    color: '#222',
+                    fontSize: 15,
+                    fontWeight: 500,
+                    borderRadius: 20,
+                    padding: '7px 20px',
+                    fontFamily: 'Inter, Arial, sans-serif',
+                    marginBottom: 4,
+                    cursor: 'pointer',
+                    transition: 'background 0.18s, color 0.18s',
+                    userSelect: 'none',
+                  }}
+                  onMouseOver={e => { e.currentTarget.style.background = '#e0e0e0'; e.currentTarget.style.color = '#18171A'; }}
+                  onMouseOut={e => { e.currentTarget.style.background = '#f3f3f3'; e.currentTarget.style.color = '#222'; }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            {['Tech', 'Business', 'Research'].map(tag => (
-              <span
-                key={tag}
-                style={{
-                  display: 'inline-block',
-                  background: '#f3f3f3',
-                  color: '#222',
-                  fontSize: 15,
-                  fontWeight: 500,
-                  borderRadius: 20,
-                  padding: '7px 20px',
-                  fontFamily: 'Inter, Arial, sans-serif',
-                  marginBottom: 4,
-                  cursor: 'pointer',
-                  transition: 'background 0.18s, color 0.18s',
-                  userSelect: 'none',
-                }}
-                onMouseOver={e => { e.currentTarget.style.background = '#e0e0e0'; e.currentTarget.style.color = '#18171A'; }}
-                onMouseOut={e => { e.currentTarget.style.background = '#f3f3f3'; e.currentTarget.style.color = '#222'; }}
-              >
-                {tag}
-              </span>
-            ))}
+          <div style={{ position: 'relative', width: '100%', maxWidth: 400 }}>
+            <input
+              type="text"
+              placeholder="Search assets, companies, or tags..."
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                borderRadius: 8,
+                border: '1px solid #e0e0e0',
+                fontSize: 15,
+                fontFamily: 'Inter, Arial, sans-serif',
+                outline: 'none',
+                boxShadow: '0 1px 4px rgba(51,51,51,0.04)',
+                background: '#fafbfc',
+                color: '#18171A',
+                transition: 'border 0.18s, box-shadow 0.18s',
+                marginTop: 0,
+                display: 'block',
+              }}
+            />
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
