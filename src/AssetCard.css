@@ -12,7 +12,7 @@
   width: 100%;
   max-width: 400px;
   cursor: pointer;
-  font-family: 'Inter Variable', 'Inter', Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
 }
@@ -56,12 +56,12 @@
 }
 .asset-card-title {
   color: #222;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
   margin-bottom: 8px;
   line-height: 1.4;
   word-break: break-word;
-  font-family: 'Inter, Arial, sans-serif';
+  font-family: 'Inter', Arial, sans-serif;
   letter-spacing: -0.01em;
 }
 .asset-card-summarise {
@@ -76,7 +76,7 @@
   cursor: pointer;
   transition: background 0.2s;
   margin-top: 0;
-  font-family: 'Inter Variable', 'Inter', Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   text-align: left;
 }
 .asset-card-summarise:hover {
@@ -103,7 +103,7 @@
   text-fill-color: transparent;
   font-weight: 500;
   font-size: 12px;
-  font-family: 'Inter Variable', 'Inter', Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .asset-card.selected {
