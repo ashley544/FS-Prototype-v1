@@ -1,7 +1,24 @@
 import React from "react";
 import "./AssetCard.css";
 
-export default function AssetCard({ image, type, title, onSummarise, selected, onClick, showSummarise = true }) {
+export default function AssetCard({ image, type, title, onSummarise, selected, onClick, showSummarise = true, variant }) {
+  if (variant === "feed-newsroom") {
+    return (
+      <div
+        className={`asset-card feed-newsroom-card${selected ? " selected" : ""}`}
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+        style={{ cursor: 'pointer', position: 'relative' }}
+      >
+        <div className="feed-newsroom-type">{type}</div>
+        <div className="feed-newsroom-title">{title}</div>
+        <div className="feed-newsroom-image">
+          <img src={image} alt={title} />
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       className={`asset-card${selected ? " selected" : ""}`}
@@ -15,7 +32,9 @@ export default function AssetCard({ image, type, title, onSummarise, selected, o
       </div>
       <div className="asset-card-details">
         <div className="asset-card-type">{type}</div>
-        <div className="asset-card-title">{title === 'Consider the viewer' ? 'Consider the Viewer' : title}</div>
+        <div className="asset-card-title">
+          {title === 'Consider the viewer' ? 'Consider the Viewer' : title}
+        </div>
         {showSummarise && (
           <div className="asset-card-summarise">
             <img src="/flare.svg" alt="Flare" className="asset-card-summarise-icon" width={16} height={16} />

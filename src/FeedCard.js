@@ -1,7 +1,51 @@
 import React from 'react';
 import './FeedCard.css';
 
-export default function FeedCard({ org, date, title, description, author, readTime, image, onClick, onShare }) {
+export default function FeedCard({ org, date, title, description, author, readTime, image, onClick, onShare, variant, hideHeader }) {
+  if (variant === 'exchange') {
+    // Custom Exchange card design (screenshot reference)
+    return (
+      <div
+        className="feed-card exchange-card"
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+        style={{ cursor: 'pointer' }}
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { onClick && onClick(); } }}
+      >
+        {!hideHeader && (
+          <div className="exchange-card-header">
+            <img src="/Assets/Blackstone logo.png" alt="Org logo" className="exchange-card-org-logo" />
+            <div className="exchange-card-contacts">
+              <span className="exchange-card-contacts-count">5 contacts</span>
+              <span className="exchange-card-contacts-avatars">
+                <span className="exchange-card-avatar" />
+                <span className="exchange-card-avatar" />
+                <span className="exchange-card-avatar" />
+              </span>
+            </div>
+          </div>
+        )}
+        <div className="exchange-card-content">
+          <div className="exchange-card-title">{title || 'Asset title'}</div>
+          <div className="exchange-card-description">{description}</div>
+          <div className="exchange-card-meta">
+            <span className="exchange-card-author">Author/sharer name</span>
+            <span className="exchange-card-dot">·</span>
+            <span className="exchange-card-readtime">{readTime} min read</span>
+          </div>
+        </div>
+        <div className="exchange-card-image">
+          {image ? (
+            <img src={image} alt={title} />
+          ) : (
+            <div className="exchange-card-image-placeholder" />
+          )}
+        </div>
+      </div>
+    );
+  }
+  // Default card design
   return (
     <div
       className="feed-card"

@@ -186,4 +186,82 @@
   .main-content {
     padding: 8px;
   }
+}
+
+.feed-grid-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 80px repeat(12, 1fr) 40px;
+  grid-template-rows: auto;
+  justify-content: center;
+  align-items: start;
+  padding: 48px 0 32px 0;
+}
+.feed-grid-container > h1,
+.feed-grid-container > div {
+  grid-column: 2 / span 10;
+}
+@media (max-width: 1200px) {
+  .feed-grid-container {
+    grid-template-columns: 40px repeat(12, 1fr) 24px;
+  }
+}
+@media (max-width: 900px) {
+  .feed-grid-container {
+    grid-template-columns: 12px repeat(12, 1fr) 12px;
+  }
+}
+@media (max-width: 700px) {
+  .feed-grid-container {
+    grid-template-columns: 0 1fr 0;
+    padding: 24px 0 16px 0;
+  }
+  .feed-grid-container > h1,
+  .feed-grid-container > div {
+    grid-column: 2 / span 1;
+  }
+}
+
+.feed-ask-stevens {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(51,51,51,0.12);
+  padding: 12px 16px;
+  gap: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 0;
+  margin-top: 0;
+  border: 1px solid #eee;
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), border 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+}
+.feed-ask-stevens span {
+  background: linear-gradient(90deg, #f59e42 0%, #e94b4b 40%, #a953c7 70%, #0e87ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  display: inline-block;
+}
+.feed-ask-stevens:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(245, 158, 66, 0.2),
+    0 0 10px rgba(245, 158, 66, 0.25),
+    0 0 20px rgba(233, 75, 75, 0.2),
+    0 0 30px rgba(169, 83, 199, 0.15),
+    0 0 40px rgba(14, 135, 255, 0.1);
+  border-color: #e0e0e0;
 } 

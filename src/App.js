@@ -250,7 +250,6 @@ const aiResponseMap = {
 
 // New Feed page component
 function Feed({ onGoToAssetViewer, onOpenAsset }) {
-  const [tab, setTab] = React.useState('newsroom'); // 'newsroom' or 'exchange'
   // Example placeholder values for FeedCard fields
   const getOrg = () => 'Doorway';
   const getDate = () => '12/06/24';
@@ -259,8 +258,6 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
   const getAuthor = () => 'Author name';
   const getReadTime = () => 5;
-
-  const assetList = tab === 'newsroom' ? newsroomAssets : exchangeAssets;
 
   // Helper to get a random date between Aug 1 of last year and today
   function getRandomDate() {
@@ -277,142 +274,123 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
   }
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', padding: '48px 0 32px 0' }}>
-      <div style={{ width: '100%', maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
-        <h1 style={{ fontSize: 32, fontWeight: 600, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Feed</h1>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32, gap: 32 }}>
-          <div>
-            <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 12, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif' }}>
-              Recommended topics
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-              {['Tech', 'Business', 'Research'].map(tag => (
-                <span
-                  key={tag}
-                  style={{
-                    display: 'inline-block',
-                    background: '#f3f3f3',
-                    color: '#222',
-                    fontSize: 15,
-                    fontWeight: 500,
-                    borderRadius: 20,
-                    padding: '7px 20px',
-                    fontFamily: 'Inter, Arial, sans-serif',
-                    marginBottom: 4,
-                    cursor: 'pointer',
-                    transition: 'background 0.18s, color 0.18s',
-                    userSelect: 'none',
-                  }}
-                  onMouseOver={e => { e.currentTarget.style.background = '#e0e0e0'; e.currentTarget.style.color = '#18171A'; }}
-                  onMouseOut={e => { e.currentTarget.style.background = '#f3f3f3'; e.currentTarget.style.color = '#222'; }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div style={{ position: 'relative', width: '100%', maxWidth: 400 }}>
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{
-                position: 'absolute',
-                left: 12,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                pointerEvents: 'none',
-                color: '#b0b0b0',
-                zIndex: 2
-              }}
-            >
-              <circle cx="11" cy="11" r="7" stroke="#b0b0b0" strokeWidth="2" />
-              <path d="M16.5 16.5L21 21" stroke="#b0b0b0" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search assets, companies, or tags..."
-              style={{
-                width: '100%',
-                padding: '12px 16px 12px 40px',
-                borderRadius: 8,
-                border: '1px solid #e0e0e0',
-                fontSize: 15,
-                fontFamily: 'Inter, Arial, sans-serif',
-                outline: 'none',
-                boxShadow: '0 1px 4px rgba(51,51,51,0.04)',
-                background: '#fafbfc',
-                color: '#18171A',
-                transition: 'border 0.18s, box-shadow 0.18s',
-                marginTop: 0,
-                display: 'block',
-              }}
-            />
-          </div>
+    <div className="feed-grid-container">
+      <h1 style={{ fontSize: 32, fontWeight: 600, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Feed</h1>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32 }}>
+        <div className="feed-ask-stevens">
+          <img src="/flare.svg" alt="Flare" style={{ width: 22, height: 22, marginRight: 6, flexShrink: 0 }} />
+          <span style={{
+            background: 'linear-gradient(90deg, #f59e42 0%, #e94b4b 40%, #a953c7 70%, #0e87ff 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textFillColor: 'transparent',
+            fontWeight: 500,
+            fontSize: 12,
+            letterSpacing: '-0.01em',
+            lineHeight: 1.2,
+            display: 'inline-block',
+          }}>
+            What are you looking for?
+          </span>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
-          <div style={{ display: 'flex', gap: 32, height: 38, alignItems: 'flex-end' }}>
-            <button
-              onClick={() => setTab('newsroom')}
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-                fontFamily: 'Inter, Arial, sans-serif',
-                fontSize: 14,
-                fontWeight: tab === 'newsroom' ? 600 : 400,
-                color: tab === 'newsroom' ? '#18171A' : '#b0b0b0',
-                cursor: 'pointer',
-                padding: 0,
-                borderBottom: tab === 'newsroom' ? '3px solid #18171A' : '3px solid transparent',
-                transition: 'color 0.18s, border-bottom 0.18s',
-                height: 36,
-                marginBottom: 0,
-              }}
-            >
-              Newsroom
-            </button>
-            <button
-              onClick={() => setTab('exchange')}
-              style={{
-                background: 'none',
-                border: 'none',
-                outline: 'none',
-                fontFamily: 'Inter, Arial, sans-serif',
-                fontSize: 14,
-                fontWeight: tab === 'exchange' ? 600 : 400,
-                color: tab === 'exchange' ? '#18171A' : '#b0b0b0',
-                cursor: 'pointer',
-                padding: 0,
-                borderBottom: tab === 'exchange' ? '3px solid #18171A' : '3px solid transparent',
-                transition: 'color 0.18s, border-bottom 0.18s',
-                height: 36,
-                marginBottom: 0,
-              }}
-            >
-              Exchange
-            </button>
-          </div>
-          <div style={{ width: '100%', height: 1, background: '#ededed', marginTop: '-1px', marginBottom: 12 }} />
+        <div style={{ position: 'relative', width: '100%', maxWidth: 400 }}>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{
+              position: 'absolute',
+              left: 12,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              pointerEvents: 'none',
+              color: '#b0b0b0',
+              zIndex: 2
+            }}
+          >
+            <circle cx="11" cy="11" r="7" stroke="#b0b0b0" strokeWidth="2" />
+            <path d="M16.5 16.5L21 21" stroke="#b0b0b0" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search assets, companies, or tags..."
+            style={{
+              width: '100%',
+              padding: '12px 16px 12px 40px',
+              borderRadius: 8,
+              border: '1px solid #e0e0e0',
+              fontSize: 15,
+              fontFamily: 'Inter, Arial, sans-serif',
+              outline: 'none',
+              boxShadow: '0 1px 4px rgba(51,51,51,0.04)',
+              background: '#fafbfc',
+              color: '#18171A',
+              transition: 'border 0.18s, box-shadow 0.18s',
+              marginTop: 0,
+              display: 'block',
+            }}
+          />
         </div>
       </div>
-      <div style={{ width: '100%', maxWidth: 900, margin: '0 auto' }}>
-        {assetList.map((asset, idx) => (
-          <FeedCard
-            key={asset.title + idx}
-            org={getOrg()}
-            date={getRandomDate()}
-            title={asset.title}
-            description={getDescription(asset)}
-            author={getAuthor()}
-            readTime={Math.floor(Math.random() * 20) + 1}
-            image={asset.image}
-            onClick={() => onOpenAsset(asset.file)}
-            onShare={() => {}}
-          />
-        ))}
+      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '40px', alignItems: 'start' }}>
+        <div>
+          <div style={{ marginBottom: 24 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 16, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
+          </div>
+          {newsroomAssets.map((asset, idx) => (
+            <AssetCard
+              key={asset.title + idx}
+              image={asset.image}
+              type={asset.type}
+              title={asset.title}
+              onSummarise={() => {}}
+              onClick={() => onOpenAsset(asset.file)}
+              showSummarise={false}
+              variant="feed-newsroom"
+            />
+          ))}
+        </div>
+        <div>
+          <div style={{ marginBottom: 24 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 16, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
+          </div>
+          <div className="exchange-card-list-container">
+            <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
+              <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
+              <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span className="exchange-card-contacts-count" style={{ fontSize: 15, color: '#222', fontWeight: 500, marginRight: 8 }}>5 contacts</span>
+                <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
+                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: 0, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
+                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: -8, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
+                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: -8, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
+                </span>
+              </div>
+            </div>
+            {exchangeAssets.map((asset, idx) => (
+              <React.Fragment key={asset.title + idx}>
+                <FeedCard
+                  org={getOrg()}
+                  date={getRandomDate()}
+                  title={asset.title}
+                  description={getDescription(asset)}
+                  author={getAuthor()}
+                  readTime={Math.floor(Math.random() * 20) + 1}
+                  image={asset.image}
+                  onClick={() => onOpenAsset(asset.file)}
+                  onShare={() => {}}
+                  variant="exchange"
+                  hideHeader
+                />
+                {idx < exchangeAssets.length - 1 && (
+                  <div className="exchange-card-divider" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
