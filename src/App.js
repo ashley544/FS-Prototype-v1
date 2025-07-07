@@ -275,7 +275,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
 
   return (
     <div className="feed-grid-container">
-      <h1 style={{ fontSize: 32, fontWeight: 600, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Feed</h1>
+              <h1 style={{ fontSize: 28, fontWeight: 500, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>My Feed</h1>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32 }}>
         <div className="feed-ask-stevens">
           <img src="/flare.svg" alt="Flare" style={{ width: 22, height: 22, marginRight: 6, flexShrink: 0 }} />
@@ -363,9 +363,48 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
               <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span className="exchange-card-contacts-count" style={{ fontSize: 15, color: '#222', fontWeight: 500, marginRight: 8 }}>5 contacts</span>
                 <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
-                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: 0, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
-                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: -8, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
-                  <span className="exchange-card-avatar" style={{ width: 28, height: 28, borderRadius: '50%', background: '#e0e0e0', border: '2px solid #fff', marginLeft: -8, boxShadow: '0 1px 4px rgba(51,51,51,0.08)', display: 'inline-block' }} />
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=56&h=56&fit=crop&crop=face" 
+                    alt="Contact 1" 
+                    style={{ 
+                      width: 28, 
+                      height: 28, 
+                      borderRadius: '50%', 
+                      border: '2px solid #fff', 
+                      marginLeft: 0, 
+                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                      display: 'inline-block',
+                      objectFit: 'cover'
+                    }} 
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=56&h=56&fit=crop&crop=face" 
+                    alt="Contact 2" 
+                    style={{ 
+                      width: 28, 
+                      height: 28, 
+                      borderRadius: '50%', 
+                      border: '2px solid #fff', 
+                      marginLeft: -8, 
+                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                      display: 'inline-block',
+                      objectFit: 'cover'
+                    }} 
+                  />
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=56&h=56&fit=crop&crop=face" 
+                    alt="Contact 3" 
+                    style={{ 
+                      width: 28, 
+                      height: 28, 
+                      borderRadius: '50%', 
+                      border: '2px solid #fff', 
+                      marginLeft: -8, 
+                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                      display: 'inline-block',
+                      objectFit: 'cover'
+                    }} 
+                  />
                 </span>
               </div>
             </div>
