@@ -255,6 +255,10 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
   const getDate = () => '12/06/24';
   const getDescription = (asset) => asset.title === 'The Rules of Attraction'
     ? "We're living in the golden age of sales enablement. Today's client-facing professionals are equipped with a dizzying array of tools designed to turn outreach into a science..."
+    : asset.title === 'Doorway Overview'
+      ? "Designed to create interest journeys,\nDoorway curates multi-asset engagement to\nstreamline your clients' understanding of\nmaterial."
+      : asset.title === 'Data Protection Procedures'
+      ? '"Adequate Country" means a country or territory recognised as providing an adequate level of protection for personal data transfers under an...'
     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
   const getAuthor = () => 'Author name';
   const getReadTime = () => 5;
@@ -275,7 +279,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
 
   return (
     <div className="feed-grid-container">
-              <h1 style={{ fontSize: 28, fontWeight: 500, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>My Feed</h1>
+              <h1 style={{ fontSize: 28, fontWeight: 500, marginTop: 12, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>My Feed</h1>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32 }}>
         <div className="feed-ask-stevens">
           <img src="/flare.svg" alt="Flare" style={{ width: 22, height: 22, marginRight: 6, flexShrink: 0 }} />
@@ -335,99 +339,107 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           />
         </div>
       </div>
-      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '40px', alignItems: 'start' }}>
-        <div>
-          <div style={{ marginBottom: 24 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 16, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
+      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '0.7fr 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 200px)', minHeight: 0, overflow: 'visible' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+          <div style={{ marginBottom: 8 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
           </div>
-          {newsroomAssets.map((asset, idx) => (
-            <AssetCard
-              key={asset.title + idx}
-              image={asset.image}
-              type={asset.type}
-              title={asset.title}
-              onSummarise={() => {}}
-              onClick={() => onOpenAsset(asset.file)}
-              showSummarise={false}
-              variant="feed-newsroom"
-            />
-          ))}
+          <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
+              {newsroomAssets.map((asset, idx) => (
+                <AssetCard
+                  key={asset.title + idx}
+                  image={asset.image}
+                  type={asset.type}
+                  title={asset.title}
+                  onSummarise={() => {}}
+                  onClick={() => onOpenAsset(asset.file)}
+                  showSummarise={false}
+                  variant="feed-newsroom"
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        <div>
-          <div style={{ marginBottom: 24 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 16, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+          <div style={{ marginBottom: 8 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
           </div>
-          <div className="exchange-card-list-container">
-            <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
-              <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
-              <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span className="exchange-card-contacts-count" style={{ fontSize: 15, color: '#222', fontWeight: 500, marginRight: 8 }}>5 contacts</span>
-                <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
-                  <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=56&h=56&fit=crop&crop=face" 
-                    alt="Contact 1" 
-                    style={{ 
-                      width: 28, 
-                      height: 28, 
-                      borderRadius: '50%', 
-                      border: '2px solid #fff', 
-                      marginLeft: 0, 
-                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
-                      display: 'inline-block',
-                      objectFit: 'cover'
-                    }} 
-                  />
-                  <img 
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=56&h=56&fit=crop&crop=face" 
-                    alt="Contact 2" 
-                    style={{ 
-                      width: 28, 
-                      height: 28, 
-                      borderRadius: '50%', 
-                      border: '2px solid #fff', 
-                      marginLeft: -8, 
-                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
-                      display: 'inline-block',
-                      objectFit: 'cover'
-                    }} 
-                  />
-                  <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=56&h=56&fit=crop&crop=face" 
-                    alt="Contact 3" 
-                    style={{ 
-                      width: 28, 
-                      height: 28, 
-                      borderRadius: '50%', 
-                      border: '2px solid #fff', 
-                      marginLeft: -8, 
-                      boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
-                      display: 'inline-block',
-                      objectFit: 'cover'
-                    }} 
-                  />
-                </span>
+          <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
+              <div className="exchange-card-list-container">
+                <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
+                  <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
+                  <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <span className="exchange-card-contacts-count" style={{ fontSize: 15, color: '#222', fontWeight: 500, marginRight: 8 }}>5 contacts</span>
+                    <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
+                      <img 
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=56&h=56&fit=crop&crop=face" 
+                        alt="Contact 1" 
+                        style={{ 
+                          width: 28, 
+                          height: 28, 
+                          borderRadius: '50%', 
+                          border: '2px solid #fff', 
+                          marginLeft: 0, 
+                          boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                          display: 'inline-block',
+                          objectFit: 'cover'
+                        }} 
+                      />
+                      <img 
+                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=56&h=56&fit=crop&crop=face" 
+                        alt="Contact 2" 
+                        style={{ 
+                          width: 28, 
+                          height: 28, 
+                          borderRadius: '50%', 
+                          border: '2px solid #fff', 
+                          marginLeft: -8, 
+                          boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                          display: 'inline-block',
+                          objectFit: 'cover'
+                        }} 
+                      />
+                      <img 
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=56&h=56&fit=crop&crop=face" 
+                        alt="Contact 3" 
+                        style={{ 
+                          width: 28, 
+                          height: 28, 
+                          borderRadius: '50%', 
+                          border: '2px solid #fff', 
+                          marginLeft: -8, 
+                          boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                          display: 'inline-block',
+                          objectFit: 'cover'
+                        }} 
+                      />
+                    </span>
+                  </div>
+                </div>
+                {exchangeAssets.map((asset, idx) => (
+                  <React.Fragment key={asset.title + idx}>
+                    <FeedCard
+                      org={getOrg()}
+                      date={getRandomDate()}
+                      title={asset.title}
+                      description={getDescription(asset)}
+                      author={getAuthor()}
+                      readTime={Math.floor(Math.random() * 20) + 1}
+                      image={asset.image}
+                      onClick={() => onOpenAsset(asset.file)}
+                      onShare={() => {}}
+                      variant="exchange"
+                      hideHeader
+                    />
+                    {idx < exchangeAssets.length - 1 && (
+                      <div className="exchange-card-divider" />
+                    )}
+                  </React.Fragment>
+                ))}
               </div>
             </div>
-            {exchangeAssets.map((asset, idx) => (
-              <React.Fragment key={asset.title + idx}>
-                <FeedCard
-                  org={getOrg()}
-                  date={getRandomDate()}
-                  title={asset.title}
-                  description={getDescription(asset)}
-                  author={getAuthor()}
-                  readTime={Math.floor(Math.random() * 20) + 1}
-                  image={asset.image}
-                  onClick={() => onOpenAsset(asset.file)}
-                  onShare={() => {}}
-                  variant="exchange"
-                  hideHeader
-                />
-                {idx < exchangeAssets.length - 1 && (
-                  <div className="exchange-card-divider" />
-                )}
-              </React.Fragment>
-            ))}
           </div>
         </div>
       </div>

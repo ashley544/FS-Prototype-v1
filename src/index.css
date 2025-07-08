@@ -19,6 +19,12 @@ html, body, #root {
   padding: 0;
   font-family: 'Inter', Arial, sans-serif;
   background: #fff;
+  overflow: hidden;
+}
+
+.feed-grid-container {
+  height: 100%;
+  overflow: hidden;
 }
 
 *, *:before, *:after {
