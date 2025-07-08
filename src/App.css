@@ -197,7 +197,7 @@
   grid-template-rows: auto;
   justify-content: center;
   align-items: start;
-  padding: 48px 0 8px 0;
+  padding: 32px 0 8px 0;
 }
 .feed-grid-container > h1,
 .feed-grid-container > div {

@@ -15,6 +15,13 @@ export default function AssetCard({ image, type, title, onSummarise, selected, o
         <div className="feed-newsroom-title">{title}</div>
         <div className="feed-newsroom-image">
           <img src={image} alt={title} />
+          <div style={{ position: 'absolute', bottom: 6, right: 6, background: '#fff', borderRadius: '3px', padding: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none' }}>
+            <img
+              src="/Doorway logo.svg"
+              alt="Doorway Logo"
+              style={{ height: 18, width: 'auto', display: 'block' }}
+            />
+          </div>
         </div>
       </div>
     );
@@ -27,8 +34,15 @@ export default function AssetCard({ image, type, title, onSummarise, selected, o
       tabIndex={0}
       style={{ cursor: 'pointer', position: 'relative' }}
     >
-      <div className="asset-card-image">
+      <div className={variant === 'feed-newsroom' ? 'feed-newsroom-image' : 'asset-card-image'}>
         <img src={image} alt={title} />
+        {variant === 'feed-newsroom' && (
+          <img 
+            src="/Doorway logo.svg" 
+            alt="Doorway Logo" 
+            style={{ position: 'absolute', bottom: 6, right: 6, width: 28, height: 28, borderRadius: '6px', background: '#fff', boxShadow: '0 2px 8px rgba(51,51,51,0.10)', padding: 2 }}
+          />
+        )}
       </div>
       <div className="asset-card-details">
         <div className="asset-card-type">{type}</div>

@@ -303,9 +303,9 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           </span>
         </div>
       </div>
-      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '260px 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 200px)', minHeight: 0, overflow: 'visible' }}>
+      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '260px 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 100px)', minHeight: 0, overflow: 'visible' }}>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-          <div style={{ marginTop: 0, marginBottom: 2 }}>
+          <div style={{ marginTop: 32, marginBottom: 2 }}>
             <h2 style={{ fontSize: 18, fontWeight: 500, marginTop: 0, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
           </div>
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
@@ -327,7 +327,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-          <div style={{ marginTop: 0, marginBottom: 2 }}>
+          <div style={{ marginTop: 32, marginBottom: 2 }}>
             <h2 style={{ fontSize: 18, fontWeight: 500, marginTop: 0, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
           </div>
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
