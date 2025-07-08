@@ -193,15 +193,15 @@
   min-height: 100vh;
   background: #fff;
   display: grid;
-  grid-template-columns: 80px repeat(12, 1fr) 40px;
+  grid-template-columns: 80px repeat(12, 1fr) 80px;
   grid-template-rows: auto;
   justify-content: center;
   align-items: start;
-  padding: 48px 0 32px 0;
+  padding: 48px 0 8px 0;
 }
 .feed-grid-container > h1,
 .feed-grid-container > div {
-  grid-column: 2 / span 10;
+  grid-column: 2 / span 12;
 }
 @media (max-width: 1200px) {
   .feed-grid-container {

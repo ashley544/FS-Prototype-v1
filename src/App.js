@@ -279,8 +279,12 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
 
   return (
     <div className="feed-grid-container">
-              <h1 style={{ fontSize: 28, fontWeight: 500, marginTop: 12, marginBottom: 28, textAlign: 'left', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>My Feed</h1>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 32 }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 0 }}>
+        <button className="sidebar-home-btn" style={{ marginTop: 0, marginBottom: 0, width: 40, height: 40, borderRadius: '50%', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(51,51,51,0.12), 0 1.5px 4px rgba(0,0,0,0.08)', border: 'none', padding: 0, cursor: 'default' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#222" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+        </button>
         <div className="feed-ask-stevens">
           <img src="/flare.svg" alt="Flare" style={{ width: 22, height: 22, marginRight: 6, flexShrink: 0 }} />
           <span style={{
@@ -298,51 +302,11 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
             What are you looking for?
           </span>
         </div>
-        <div style={{ position: 'relative', width: '100%', maxWidth: 400 }}>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{
-              position: 'absolute',
-              left: 12,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none',
-              color: '#b0b0b0',
-              zIndex: 2
-            }}
-          >
-            <circle cx="11" cy="11" r="7" stroke="#b0b0b0" strokeWidth="2" />
-            <path d="M16.5 16.5L21 21" stroke="#b0b0b0" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search assets, companies, or tags..."
-            style={{
-              width: '100%',
-              padding: '12px 16px 12px 40px',
-              borderRadius: 8,
-              border: '1px solid #e0e0e0',
-              fontSize: 15,
-              fontFamily: 'Inter, Arial, sans-serif',
-              outline: 'none',
-              boxShadow: '0 1px 4px rgba(51,51,51,0.04)',
-              background: '#fafbfc',
-              color: '#18171A',
-              transition: 'border 0.18s, box-shadow 0.18s',
-              marginTop: 0,
-              display: 'block',
-            }}
-          />
-        </div>
       </div>
-      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '0.7fr 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 200px)', minHeight: 0, overflow: 'visible' }}>
+      <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '260px 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 200px)', minHeight: 0, overflow: 'visible' }}>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-          <div style={{ marginBottom: 8 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
+          <div style={{ marginTop: 0, marginBottom: 2 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginTop: 0, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Newsroom</h2>
           </div>
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
@@ -363,8 +327,8 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-          <div style={{ marginBottom: 8 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 500, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
+          <div style={{ marginTop: 0, marginBottom: 2 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 500, marginTop: 0, marginBottom: 8, color: '#18171A', fontFamily: 'Inter, Arial, sans-serif', letterSpacing: '-0.01em' }}>Exchange</h2>
           </div>
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
@@ -681,7 +645,7 @@ export default function App() {
             onClick={handleGoToFeed}
           >
             <div className="sidebar-home-btn-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#222" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 4L4 10.5V19a1.5 1.5 0 0 0 1.5 1.5H9V15a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5.5h3.5A1.5 1.5 0 0 0 20 19v-8.5L12 4Z" fill="#18171A"/>
                 <rect x="10" y="15" width="4" height="5" rx="1" fill="#fff"/>
               </svg>
