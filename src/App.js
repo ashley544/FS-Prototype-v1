@@ -356,6 +356,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                   onClick={() => onOpenAsset(asset.file)}
                   showSummarise={false}
                   variant="feed-newsroom"
+                  idx={idx}
                 />
               ))}
             </div>
@@ -371,7 +372,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                 <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
                   <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
                   <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span className="exchange-card-contacts-count" style={{ fontSize: 15, color: '#222', fontWeight: 500, marginRight: 8 }}>5 contacts</span>
+                    <span className="exchange-card-contacts-count" style={{ fontSize: 12, color: '#222', fontWeight: 500, marginRight: 2 }}>5 relationships</span>
                     <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
                       <img 
                         src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=56&h=56&fit=crop&crop=face" 
@@ -415,6 +416,34 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                           objectFit: 'cover'
                         }} 
                       />
+                      <img 
+                        src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=56&h=56&fit=crop&crop=face" 
+                        alt="Contact 4" 
+                        style={{ 
+                          width: 28, 
+                          height: 28, 
+                          borderRadius: '50%', 
+                          border: '2px solid #fff', 
+                          marginLeft: -8, 
+                          boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                          display: 'inline-block',
+                          objectFit: 'cover'
+                        }} 
+                      />
+                      <img 
+                        src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=56&h=56&fit=crop&crop=face" 
+                        alt="Contact 5" 
+                        style={{ 
+                          width: 28, 
+                          height: 28, 
+                          borderRadius: '50%', 
+                          border: '2px solid #fff', 
+                          marginLeft: -8, 
+                          boxShadow: '0 1px 4px rgba(51,51,51,0.08)', 
+                          display: 'inline-block',
+                          objectFit: 'cover'
+                        }} 
+                      />
                     </span>
                   </div>
                 </div>
@@ -432,6 +461,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                       onShare={() => {}}
                       variant="exchange"
                       hideHeader
+                      idx={idx}
                     />
                     {idx < exchangeAssets.length - 1 && (
                       <div className="exchange-card-divider" />

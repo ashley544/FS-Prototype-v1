@@ -167,6 +167,16 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+.exchange-card-author,
+.feed-card-author,
+.exchange-card-contacts-count {
+  color: #808b8f !important;
+}
+.exchange-card-author,
+.feed-card-author {
+  color: #808b8f !important;
+  font-size: 13px !important;
+}
 .feed-newsroom-title {
   color: #222;
   font-size: 12px;

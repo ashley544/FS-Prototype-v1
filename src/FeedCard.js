@@ -1,7 +1,29 @@
 import React from 'react';
 import './FeedCard.css';
 
-export default function FeedCard({ org, date, title, description, author, readTime, image, onClick, onShare, variant, hideHeader }) {
+// Avatar images used in the 5 relationships component
+const avatarImages = [
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=28&h=28&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=28&h=28&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=28&h=28&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=28&h=28&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=28&h=28&fit=crop&crop=face"
+];
+
+const authorNames = [
+  "Alex Morgan",
+  "Jordan Lee",
+  "Taylor Kim",
+  "Morgan Patel",
+  "Casey Chen",
+  "Riley Singh",
+  "Jamie Park",
+  "Avery Shah",
+  "Drew Nguyen",
+  "Skyler Brooks"
+];
+
+export default function FeedCard({ org, date, title, description, author, readTime, image, onClick, onShare, variant, hideHeader, idx }) {
   if (variant === 'exchange') {
     // Custom Exchange card design (screenshot reference)
     return (
@@ -30,9 +52,12 @@ export default function FeedCard({ org, date, title, description, author, readTi
           <div className="exchange-card-title">{title || 'Asset title'}</div>
           <div className="exchange-card-description">{description}</div>
           <div className="exchange-card-meta">
-            <span className="exchange-card-author">Author/sharer name</span>
-            <span className="exchange-card-dot">·</span>
-            <span className="exchange-card-readtime">{readTime} min read</span>
+            <img 
+              src={avatarImages[idx % avatarImages.length]} 
+              alt="Author avatar" 
+              style={{ width: 20, height: 20, borderRadius: '50%', border: '1.5px solid #fff', marginRight: 6, objectFit: 'cover', boxShadow: '0 1px 4px rgba(51,51,51,0.08)' }} 
+            />
+            <span className="exchange-card-author">{authorNames[idx % authorNames.length]}</span>
           </div>
         </div>
         <div className="exchange-card-image">
@@ -63,9 +88,12 @@ export default function FeedCard({ org, date, title, description, author, readTi
         <div className="feed-card-title">{title}</div>
         <div className="feed-card-description">{description}</div>
         <div className="feed-card-meta">
-          <span className="feed-card-author">{author}</span>
-          <span className="feed-card-dot">·</span>
-          <span className="feed-card-readtime">{readTime} min read</span>
+          <img 
+            src={avatarImages[idx % avatarImages.length]} 
+            alt="Author avatar" 
+            style={{ width: 20, height: 20, borderRadius: '50%', border: '1.5px solid #fff', marginRight: 6, objectFit: 'cover', boxShadow: '0 1px 4px rgba(51,51,51,0.08)' }} 
+          />
+          <span className="feed-card-author">{authorNames[idx % authorNames.length]}</span>
           <button
             className="feed-card-share-btn"
             title="Share"
