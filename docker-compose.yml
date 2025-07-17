@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  doorway-prototype:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: doorway-pdf-viewer
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for development (hot reloading)
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Enable hot reloading in Docker
+      - WATCHPACK_POLLING=true # Additional polling for file changes
+    stdin_open: true # Keep container running for interactive development
+    tty: true
+    networks:
+      - doorway-network
+  # Production service (uncomment and use with production Dockerfile)
+  # doorway-prototype-prod:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.prod
+  #   container_name: doorway-pdf-viewer-prod
+  #   ports:
+  #     - "80:3000"
+  #   environment:
+  #     - NODE_ENV=production
+  #   networks:
+  #     - doorway-network
+
+networks:
+  doorway-network:
+    driver: bridge
