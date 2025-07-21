@@ -333,7 +333,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
               <div className="exchange-card-list-container">
-                <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
+                <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 24px 36px' }}>
                   <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
                   <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <span className="exchange-card-contacts-count" style={{ fontSize: 12, color: '#222', fontWeight: 500, marginRight: 2 }}>5 relationships</span>
