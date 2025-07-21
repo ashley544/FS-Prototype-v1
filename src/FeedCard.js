@@ -49,13 +49,15 @@ export default function FeedCard({ org, date, title, description, author, readTi
           </div>
         )}
         <div className="exchange-card-content">
+          <div className="exchange-card-type">PDF</div>
           <div className="exchange-card-title">{title || 'Asset title'}</div>
-          <div className="exchange-card-description">{description}</div>
+          {/* <div className="exchange-card-description">{description}</div> */}
           <div className="exchange-card-meta">
+            <span className="exchange-card-shared-by">Shared by</span>
             <img 
               src={avatarImages[idx % avatarImages.length]} 
               alt="Author avatar" 
-              style={{ width: 20, height: 20, borderRadius: '50%', border: '1.5px solid #fff', marginRight: 6, objectFit: 'cover', boxShadow: '0 1px 4px rgba(51,51,51,0.08)' }} 
+              style={{ width: 20, height: 20, borderRadius: '50%', border: '1.5px solid #fff', marginRight: 2, objectFit: 'cover', boxShadow: '0 1px 4px rgba(51,51,51,0.08)' }} 
             />
             <span className="exchange-card-author">{authorNames[idx % authorNames.length]}</span>
           </div>

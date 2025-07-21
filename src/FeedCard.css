@@ -263,9 +263,19 @@
   margin-left: 0;
 }
 
+.exchange-card-type {
+  font-size: 12px;
+  font-weight: 500;
+  color: #808b8f;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
 .exchange-card-title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   color: #18171A;
   margin-bottom: 10px;
   font-family: 'Inter', Arial, sans-serif;
@@ -294,10 +304,19 @@
   color: #b0b0b0;
 }
 
-.exchange-card-author {
-  font-size: 15px;
+.exchange-card-shared-by {
+  font-size: 14px;
   font-weight: 400;
-  color: #b0b0b0;
+  color: #808588;
+  margin-right: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.exchange-card-author {
+  font-size: 14px;
+  font-weight: 400;
+  color: #808588;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .exchange-card-readtime {
@@ -307,9 +326,9 @@
 }
 
 .exchange-card-image {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 150px;
+  flex: 0 0 220px;
+  width: 220px;
+  height: 165px;
   margin-left: 40px;
   display: flex;
   align-items: center;
@@ -363,6 +382,17 @@
   height: 1px;
   background: #ededed;
   margin: 0 36px;
+  transition: opacity 0.2s ease;
+}
+
+/* Hide divider when hovering over exchange card */
+.exchange-card:hover + .exchange-card-divider {
+  opacity: 0;
+}
+
+/* Hide divider above the hovered card */
+.exchange-card:hover ~ .exchange-card-divider {
+  opacity: 0;
 }
 
 /* Adjust first and last card for border radius */
