@@ -11,6 +11,24 @@ const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834
 
 const newsroomAssets = [
   {
+    image: "/Assets/When Relevance wins.png",
+    type: "PDF",
+    title: "When Relevance Wins",
+    file: "/pdfs/When Relevance wins.pdf",
+  },
+  {
+    image: "/Assets/Pricing Structure.png",
+    type: "PDF",
+    title: "Pricing Structure",
+    file: "/pdfs/Pricing Structure.pdf",
+  },
+  {
+    image: "/Assets/Doorway - Who We Are.png",
+    type: "PDF",
+    title: "Doorway - Who We Are",
+    file: "/pdfs/Doorway - Who We Are.pdf",
+  },
+  {
     image: "/Assets/The Rules of Attraction.png",
     type: "PDF",
     title: "The Rules of Attraction",
@@ -114,12 +132,6 @@ const exchangeAssets = [
     type: "PDF",
     title: "Doorway FAQs",
     file: "/pdfs/Doorway - FAQ .pdf",
-  },
-  {
-    image: placeholderImg,
-    type: "PDF",
-    title: "Data Protection Procedures",
-    file: "/pdfs/Data Protection Procedures.pdf",
   },
 ];
 
@@ -691,7 +703,7 @@ export default function App() {
             </span>
           </div>
           <div className="sidebar-section-cards">
-            {exchangeAssets.filter(asset => asset.title !== "Doorway FAQs").map(asset => (
+            {exchangeAssets.map(asset => (
               <AssetCard
                 key={asset.title}
                 image={asset.image}
