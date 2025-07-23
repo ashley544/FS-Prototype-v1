@@ -3,7 +3,7 @@ import PDFViewer from "./PDFViewer";
 import AssetCard from "./AssetCard";
 import UserDetails from "./UserDetails";
 import AIResponse from "./AIResponse";
-import LockedProfile from "./LandingPage";
+import LandingPage from "./LandingPage";
 import FeedCard from './FeedCard';
 import "./App.css";
 
@@ -615,7 +615,7 @@ export default function App() {
     />;
   }
   if (currentPage === 'landing') {
-    return <LockedProfile onEnter={handleEnterAssetViewer} />;
+    return <LandingPage onEnter={handleEnterAssetViewer} />;
   }
 
   return (

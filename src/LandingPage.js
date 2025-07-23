@@ -26,7 +26,7 @@ const carouselAssets = [
   }
 ];
 
-export default function LockedProfile({ onEnter }) {
+export default function LandingPage({ onEnter }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 

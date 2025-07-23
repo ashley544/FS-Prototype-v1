@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body.get-started {
+            background: #f7f7f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .get-started-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 48px 32px 40px 32px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .get-started-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #222;
+        }
+        .get-started-pricing {
+            font-size: 1.1rem;
+            color: #6366f1;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .get-started-desc {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 32px;
+        }
+        .dropdown-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            font-size: 1.08rem;
+            font-weight: 500;
+            color: #222;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .dropdown-option.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="get-started">
+    <!-- Top Navigation Bar -->
+    <nav class="topnav">
+        <button class="topnav-btn" onclick="window.location.href='feed.html'">Newsfeed</button>
+        <button class="topnav-btn" onclick="window.location.href='get-started.html'">Get Started</button>
+        <button class="topnav-btn" onclick="window.location.href='pricing.html'">Pricing</button>
+        <button class="topnav-btn" onclick="window.location.href='create-account.html'">Create Account</button>
+    </nav>
+    <div class="get-started-container">
+        <div class="get-started-title">Only Pay for the Insights You Use</div>
+        <div class="get-started-pricing">from $0.50 to $5 per minute</div>
+        <div class="get-started-desc">No subscriptions. No add-ons. Actionable intelligence — by the minute.</div>
+        <div class="dropdown-option" id="option1">Basic Tracking <i class="fas fa-chevron-down"></i></div>
+        <div class="dropdown-option" id="option2">Asset-Level Insights <i class="fas fa-chevron-down"></i></div>
+        <div class="dropdown-option" id="option3">Contact Level Insights <i class="fas fa-chevron-down"></i></div>
+    </div>
+    <script>
+        // Animate dropdowns one by one
+        setTimeout(() => {
+            document.getElementById('option1').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('option2').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('option3').classList.add('show');
+                }, 400);
+            }, 400);
+        }, 600);
+    </script>
+</body>
+</html> 
