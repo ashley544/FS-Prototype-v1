@@ -11,6 +11,24 @@ const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834
 
 const newsroomAssets = [
   {
+    image: "/Assets/When Relevance wins.png",
+    type: "PDF",
+    title: "When Relevance Wins",
+    file: "/pdfs/When Relevance wins.pdf",
+  },
+  {
+    image: "/Assets/Pricing Structure.png",
+    type: "PDF",
+    title: "Pricing Structure",
+    file: "/pdfs/Pricing Structure.pdf",
+  },
+  {
+    image: "/Assets/Doorway - Who We Are.png",
+    type: "PDF",
+    title: "Doorway - Who We Are",
+    file: "/pdfs/Doorway - Who We Are.pdf",
+  },
+  {
     image: "/Assets/The Rules of Attraction.png",
     type: "PDF",
     title: "The Rules of Attraction",
@@ -114,12 +132,6 @@ const exchangeAssets = [
     type: "PDF",
     title: "Doorway FAQs",
     file: "/pdfs/Doorway - FAQ .pdf",
-  },
-  {
-    image: placeholderImg,
-    type: "PDF",
-    title: "Data Protection Procedures",
-    file: "/pdfs/Data Protection Procedures.pdf",
   },
 ];
 
@@ -333,8 +345,8 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
           <div style={{ margin: '0 -16px -0px', flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
               <div className="exchange-card-list-container">
-                <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 0 36px' }}>
-                  <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 36, width: 'auto', objectFit: 'contain' }} />
+                <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 24px 36px' }}>
+                  <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 42, width: 'auto', objectFit: 'contain' }} />
                   <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <span className="exchange-card-contacts-count" style={{ fontSize: 12, color: '#222', fontWeight: 500, marginRight: 2 }}>5 relationships</span>
                     <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>
@@ -691,7 +703,7 @@ export default function App() {
             </span>
           </div>
           <div className="sidebar-section-cards">
-            {exchangeAssets.filter(asset => asset.title !== "Doorway FAQs").map(asset => (
+            {exchangeAssets.map(asset => (
               <AssetCard
                 key={asset.title}
                 image={asset.image}

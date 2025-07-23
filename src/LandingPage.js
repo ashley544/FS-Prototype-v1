@@ -82,8 +82,10 @@ export default function LandingPage({ onEnter }) {
             <div className="animated-gradient-blob-summarise" />
             <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0', zIndex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#222" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="9" width="16" height="11" rx="3" fill="#222"/>
+                  <circle cx="12" cy="15" r="2" fill="#fff"/>
+                  <path d="M8 9V7a4 4 0 1 1 8 0" stroke="#222" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
                 </svg>
                 <div style={{ fontSize: 24, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
                   Doorway Exchange

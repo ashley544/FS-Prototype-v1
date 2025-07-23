@@ -205,6 +205,14 @@
   min-height: 220px;
   transition: box-shadow 0.18s, transform 0.18s;
   cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.exchange-card:hover,
+.exchange-card:focus {
+  border: none;
+  outline: none;
 }
 
 .exchange-card-content {
@@ -263,9 +271,19 @@
   margin-left: 0;
 }
 
+.exchange-card-type {
+  font-size: 12px;
+  font-weight: 500;
+  color: #808b8f;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
 .exchange-card-title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   color: #18171A;
   margin-bottom: 10px;
   font-family: 'Inter', Arial, sans-serif;
@@ -294,10 +312,19 @@
   color: #b0b0b0;
 }
 
-.exchange-card-author {
-  font-size: 15px;
+.exchange-card-shared-by {
+  font-size: 14px;
   font-weight: 400;
-  color: #b0b0b0;
+  color: #808588;
+  margin-right: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.exchange-card-author {
+  font-size: 14px;
+  font-weight: 400;
+  color: #808588;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .exchange-card-readtime {
@@ -307,9 +334,9 @@
 }
 
 .exchange-card-image {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 150px;
+  flex: 0 0 240px;
+  width: 240px;
+  height: 180px;
   margin-left: 40px;
   display: flex;
   align-items: center;
@@ -322,6 +349,7 @@
   object-fit: cover;
   border-radius: 6px;
   background: #e0e0e0;
+  border: 1px solid #d9d9d9;
 }
 
 .exchange-card-image-placeholder {
@@ -363,6 +391,18 @@
   height: 1px;
   background: #ededed;
   margin: 0 36px;
+  transition: opacity 0.2s ease;
+}
+
+/* Ensure dividers are visible by default */
+.exchange-card-divider {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Hide all dividers when hovering over the container */
+.exchange-card-list-container:hover .exchange-card-divider {
+  opacity: 0;
 }
 
 /* Adjust first and last card for border radius */
