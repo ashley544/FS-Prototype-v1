@@ -19,6 +19,10 @@ app.get('/feed', (req, res) => {
     res.sendFile(path.join(__dirname, 'feed.html'));
 });
 
+app.get('/get-started', (req, res) => {
+    res.sendFile(path.join(__dirname, 'get-started.html'));
+});
+
 // Handle 404 errors
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'index.html'));
