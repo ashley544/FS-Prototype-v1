@@ -2,7 +2,7 @@ import React from "react";
 import "./AIResponse.css";
 import AssetCard from "./AssetCard";
 
-export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDismiss }) {
+export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDismiss, onOpenAsset, onReturnToOriginal }) {
   return (
     <div className="ai-response-card">
       <div className="ai-response-text">
@@ -16,11 +16,11 @@ export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDi
             <div className="ai-response-answer" dangerouslySetInnerHTML={{ __html: aiAnswer }}></div>
             {recommendedAsset && (
               <div className="ai-response-recommendation">
-                <AssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => {}} />
+                <AssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => onOpenAsset(recommendedAsset.file)} />
               </div>
             )}
             <div className="ai-response-return-link">
-              <a href="#" onClick={(e) => { e.preventDefault(); onDismiss(); }}>Return to section</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); onReturnToOriginal ? onReturnToOriginal() : onDismiss(); }}>Return to section</a>
             </div>
           </div>
         </div>

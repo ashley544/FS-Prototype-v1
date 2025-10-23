@@ -20,131 +20,29 @@ const newsroomAssets = [
   {
     image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "Long Term Case for Data Centers",
-    file: "/pdfs/BX Digital Infrastructure Strategy.pdf",
+    title: "Artificial Intelligence through Private Markets",
+    file: "/pdfs/Artificial Intelligence through Private Markets.pdf",
   },
   {
-    image: "/Assets/When Relevance wins.png",
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "When Relevance Wins",
-    file: "/pdfs/When Relevance wins.pdf",
-  },
-  {
-    image: "/Assets/Pricing Structure.png",
-    type: "PDF",
-    title: "Pricing Structure",
-    file: "/pdfs/Pricing Structure.pdf",
-  },
-  {
-    image: "/Assets/Doorway - Who We Are.png",
-    type: "PDF",
-    title: "Doorway - Who We Are",
-    file: "/pdfs/Doorway - Who We Are.pdf",
-  },
-  {
-    image: "/Assets/The Rules of Attraction.png",
-    type: "PDF",
-    title: "The Rules of Attraction",
-    file: "/pdfs/Rules of Attraction.pdf",
-  },
-  {
-    image: "/Assets/The Scrolling Mind - White Paper.png",
-    type: "PDF",
-    title: "The Scrolling Mind - White Paper",
-    file: "/pdfs/The Scrolling Mind - White Paper.pdf",
-  },
-  {
-    image: "/Assets/The Goldman Standard.png",
-    type: "PDF",
-    title: "The Goldman Standard",
-    file: "/pdfs/The Goldman Standard.pdf",
-  },
-  {
-    image: "/Assets/Consider the viewer.png",
-    type: "PDF",
-    title: "Consider the viewer",
-    file: "/pdfs/Consider the viewer.pdf",
-  },
-  {
-    image: "/Assets/Why Your Personal Relationships Matter Now More Than Ever.png",
-    type: "PDF",
-    title: "Why Your Personal Relationships Matter Now More Than Ever",
-    file: "/pdfs/Why Your Personal Relationships Matter Now More Than Ever.pdf",
-  },
-  {
-    image: "/Assets/Prove Your Marketing Team's Performance.png",
-    type: "PDF",
-    title: "Prove Your Marketing Team's Performance",
-    file: "/pdfs/Prove Your Marketing Team's Performance.pdf",
-  },
-  {
-    image: "/Assets/The Key to Passive Relationship Management.png",
-    type: "PDF",
-    title: "The Key to Passive Relationship Management",
-    file: "/pdfs/The Key to Passive Relationship Management.pdf",
-  },
-  {
-    image: "/Assets/Creating Competitive Deal Processes in Real Estate.png",
-    type: "PDF",
-    title: "Creating Competitive Deal Processes in Real Estate",
-    file: "/pdfs/Creating Competitive Deal Processes in Real Estate.pdf",
-  },
-  {
-    image: "/Assets/Shared Service Teams- The Backbone of Continuity and Scale.png",
-    type: "PDF",
-    title: "Shared Service Teams - The Backbone of Continuity and Scale",
-    file: "/pdfs/Shared Service Teams- The Backbone of Continuity and Scale.pdf",
-  },
-  {
-    image: "/Assets/Salesforce vs Hubspot.png",
-    type: "PDF",
-    title: "Salesforce vs Hubspot",
-    file: "/pdfs/Salesforce vs Hubspot.pdf",
-  },
-  {
-    image: "/Assets/Intralinks vs Datasite.png",
-    type: "PDF",
-    title: "Intralinks vs Datasite",
-    file: "/pdfs/Intralinks vs Datasite.pdf",
-  },
-  {
-    image: "/Assets/DocSend vs Firmex.png",
-    type: "PDF",
-    title: "DocSend vs Firmex",
-    file: "/pdfs/DocSend vs Firmex.pdf",
-  },
-  {
-    image: "/Assets/Highspot vs Seismic.png",
-    type: "PDF",
-    title: "Highspot vs Seismic",
-    file: "/pdfs/Highspot vs Seismic.pdf",
-  },
-  {
-    image: "/Assets/Liferay vs Diligent.png",
-    type: "PDF",
-    title: "Liferay vs Diligent",
-    file: "/pdfs/Liferay vs Diligent.pdf",
-  },
-  {
-    image: placeholderImg,
-    type: "PDF",
-    title: "Blackstone - Presentation",
-    file: "/pdfs/Blackstone - Presentation (1).pdf",
+    title: "$25bn in Pennsylvania Data Centers",
+    file: "/pdfs/$25bn in Pennsylvania Data Centers.pdf",
   },
 ];
 
 const exchangeAssets = [
   {
-    image: "/Assets/Doorway - Overview.png",
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "Doorway Overview",
-    file: "/pdfs/Doorway - Overview.pdf",
+    title: "Blackstone 2Q25 Earnings Press Release",
+    file: "/pdfs/Blackstone 2Q25 Earnings Press Release.pdf",
   },
   {
-    image: "/Assets/Doorway - FAQ .png",
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "Doorway FAQs",
-    file: "/pdfs/Doorway - FAQ .pdf",
+    title: "BREIF II Fact Card",
+    file: "/pdfs/BREIF II Fact Card.pdf",
   },
 ];
 
@@ -155,7 +53,11 @@ const modalConfig = {
     3: '/Assets/Graphs/p3.png', // Page 3 shows p3.png
     4: '/Assets/Graphs/p4.png', // Page 4 shows p4.png
     6: '/Assets/Graphs/p6.png', // Page 6 shows p6.png
-    8: ['/Assets/Graphs/p8 (1).png', '/Assets/Graphs/p8 (2).png'], // Page 8 shows multiple images
+    7: '/Assets/Graphs/p7.png', // Page 7 shows p7.png
+    8: '/Assets/Graphs/p8.png', // Page 8 shows p8.png
+    9: '/Assets/Graphs/p9.png', // Page 9 shows p9.png
+    10: '/Assets/Graphs/p10.png', // Page 10 shows p10.png
+    11: '/Assets/Graphs/p11.png', // Page 11 shows p11.png
   }
 };
 
@@ -294,12 +196,12 @@ const aiResponseMap = {
   },
   '/pdfs/BX Digital Infrastructure Strategy.pdf': {
     trigger: 'data center markets',
-    answer: "Data center markets are experiencing significant growth driven by cloud computing, AI workloads, and digital transformation. The BX Digital Infrastructure Strategy covers key market trends, investment opportunities, and strategic positioning in this sector.",
+    answer: "Supply constraints are driving Blackstone's competitive advantage with data center investments. Blackstone also recently made an investment in the Pennsylvania Data Center Market, discussed in the article below",
     recommendedAsset: {
       image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
       type: "PDF",
-      title: "Long Term Case for Data Centers",
-      file: "/pdfs/BX Digital Infrastructure Strategy.pdf"
+      title: "$25bn in Pennsylvania Data Centers",
+      file: "/pdfs/$25bn in Pennsylvania Data Centers.pdf"
     }
   },
   // Add more PDFs and their triggers/answers here
@@ -505,6 +407,9 @@ export default function App() {
   const [showAIResponse, setShowAIResponse] = useState(false);
   const [enterPressed, setEnterPressed] = useState(false);
   const [lastTrigger, setLastTrigger] = useState("");
+  const [keepAIResponseOpen, setKeepAIResponseOpen] = useState(false);
+  const [preservedAIResponse, setPreservedAIResponse] = useState(null);
+  const [originalPdf, setOriginalPdf] = useState(null);
   const [modalImages, setModalImages] = useState([]);
   const [currentModalImageIndex, setCurrentModalImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -615,7 +520,8 @@ export default function App() {
 
   // AI Response logic (per PDF) - triggered by main search input + Enter key
   const aiConfig = aiResponseMap[selectedPdf];
-  const shouldShowAIResponse = aiConfig && lastTrigger === aiConfig.trigger && enterPressed && showAIResponse;
+  const shouldShowAIResponse = (aiConfig && lastTrigger === aiConfig.trigger && enterPressed && showAIResponse) || keepAIResponseOpen;
+  const displayAIResponse = keepAIResponseOpen && preservedAIResponse ? preservedAIResponse : aiConfig;
   const highlightPage =
     selectedPdf === '/pdfs/BX Digital Infrastructure Strategy.pdf' && lastTrigger === 'show me the security procedure' && enterPressed ? 12 : null;
 
@@ -643,6 +549,18 @@ export default function App() {
     setSearchInput("");
     setEnterPressed(false);
     setLastTrigger(""); // Clear the stored trigger
+    setKeepAIResponseOpen(false); // Reset the keep open state
+    setPreservedAIResponse(null); // Clear the preserved AI response
+    setOriginalPdf(null); // Clear the original PDF
+  };
+
+  // Handle returning to original PDF
+  const handleReturnToOriginal = () => {
+    if (originalPdf) {
+      setSelectedPdf(originalPdf);
+      setCurrentPage('asset-viewer');
+    }
+    // Keep the AI response open and don't clear the preserved data
   };
 
   // Modal handlers
@@ -746,9 +664,17 @@ export default function App() {
         {shouldShowAIResponse && (
           <AIResponse 
             userInput={lastTrigger} 
-            aiAnswer={aiConfig.answer} 
-            recommendedAsset={aiConfig.recommendedAsset}
+            aiAnswer={displayAIResponse?.answer || aiConfig?.answer} 
+            recommendedAsset={displayAIResponse?.recommendedAsset || aiConfig?.recommendedAsset}
             onDismiss={handleDismissAIResponse}
+            onOpenAsset={(file) => { 
+              setPreservedAIResponse(aiConfig); // Preserve the current AI response data
+              setOriginalPdf(selectedPdf); // Store the current PDF as the original
+              setSelectedPdf(file); 
+              setCurrentPage('asset-viewer'); 
+              setKeepAIResponseOpen(true); 
+            }}
+            onReturnToOriginal={handleReturnToOriginal}
           />
         )}
         <div className={`sidebar-section ${!shouldShowAIResponse ? 'with-top-padding' : ''}`}>
