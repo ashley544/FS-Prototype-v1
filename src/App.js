@@ -11,6 +11,12 @@ const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834
 
 const newsroomAssets = [
   {
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
+    type: "PDF",
+    title: "BX Digital Infrastructure Strategy",
+    file: "/pdfs/BX Digital Infrastructure Strategy.pdf",
+  },
+  {
     image: "/Assets/When Relevance wins.png",
     type: "PDF",
     title: "When Relevance Wins",
@@ -454,7 +460,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
 }
 
 export default function App() {
-  const [selectedPdf, setSelectedPdf] = useState("/pdfs/Doorway - Overview.pdf");
+  const [selectedPdf, setSelectedPdf] = useState("/pdfs/BX Digital Infrastructure Strategy.pdf");
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [showAIResponse, setShowAIResponse] = useState(false);
@@ -568,7 +574,7 @@ export default function App() {
   const aiConfig = aiResponseMap[selectedPdf];
   const shouldShowAIResponse = aiConfig && lastTrigger === aiConfig.trigger && enterPressed && showAIResponse;
   const highlightPage =
-    selectedPdf === '/pdfs/Doorway - Overview.pdf' && lastTrigger === 'show me the security procedure' && enterPressed ? 12 : null;
+    selectedPdf === '/pdfs/BX Digital Infrastructure Strategy.pdf' && lastTrigger === 'show me the security procedure' && enterPressed ? 12 : null;
 
   // Handle main search input changes (from PDF viewer header)
   const handleMainSearchInputChange = (value) => {
@@ -607,7 +613,7 @@ export default function App() {
 
   // Overlay should be hidden when AI response is shown for the security procedure trigger
   const overlayShouldBeVisible = !(
-    selectedPdf === '/pdfs/Doorway - Overview.pdf' &&
+    selectedPdf === '/pdfs/BX Digital Infrastructure Strategy.pdf' &&
     lastTrigger === 'show me the security procedure' &&
     enterPressed &&
     showAIResponse
