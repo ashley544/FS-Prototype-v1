@@ -12,13 +12,16 @@ export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDi
         <div className="ai-response-ai-block">
           <div className="ai-response-gradient-line" />
           <div className="ai-response-ai-content">
-            <div className="ai-response-eyebrow">Doorway · Insight</div>
+            <div className="ai-response-eyebrow">Flagships · Insight</div>
             <div className="ai-response-answer" dangerouslySetInnerHTML={{ __html: aiAnswer }}></div>
             {recommendedAsset && (
               <div className="ai-response-recommendation">
                 <AssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => {}} />
               </div>
             )}
+            <div className="ai-response-return-link">
+              <a href="#" onClick={(e) => { e.preventDefault(); onDismiss(); }}>Return to section</a>
+            </div>
           </div>
         </div>
       </div>

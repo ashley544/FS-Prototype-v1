@@ -18,6 +18,12 @@ const newsroomAssets = [
     file: "/pdfs/BX Digital Infrastructure Strategy.pdf",
   },
   {
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
+    type: "PDF",
+    title: "Long Term Case for Data Centers",
+    file: "/pdfs/BX Digital Infrastructure Strategy.pdf",
+  },
+  {
     image: "/Assets/When Relevance wins.png",
     type: "PDF",
     title: "When Relevance Wins",
@@ -286,6 +292,16 @@ const aiResponseMap = {
       file: "/pdfs/Data Protection Procedures.pdf"
     }
   },
+  '/pdfs/BX Digital Infrastructure Strategy.pdf': {
+    trigger: 'data center markets',
+    answer: "Data center markets are experiencing significant growth driven by cloud computing, AI workloads, and digital transformation. The BX Digital Infrastructure Strategy covers key market trends, investment opportunities, and strategic positioning in this sector.",
+    recommendedAsset: {
+      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
+      type: "PDF",
+      title: "Long Term Case for Data Centers",
+      file: "/pdfs/BX Digital Infrastructure Strategy.pdf"
+    }
+  },
   // Add more PDFs and their triggers/answers here
 };
 
@@ -520,6 +536,7 @@ export default function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+
   // PDF border radius (should match .pdf-page in CSS)
   const pdfBorderRadius = 8;
 
@@ -656,6 +673,7 @@ export default function App() {
     }
   };
 
+
   // Handle PDF selection - clear AI response when navigating away
   const handlePdfSelection = (pdfFile) => {
     setSelectedPdf(pdfFile);
@@ -692,7 +710,8 @@ export default function App() {
 
   return (
     <div className={`app-layout ${isExpanded ? 'expanded' : ''}`}>
-      {overlayShouldBeVisible && <OverlayWithCutout />}
+      {/* Overlay temporarily hidden - uncomment to restore */}
+      {/* {overlayShouldBeVisible && <OverlayWithCutout />} */}
       <aside
         className={`sidebar ${isExpanded ? 'hidden' : ''}`}
         onMouseEnter={() => setPdfHovered(false)}
