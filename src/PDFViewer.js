@@ -76,7 +76,7 @@ function MinimizeIcon() {
   );
 }
 
-export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchInputChange, onSearchEnterPress, highlightPage, pdfRef }) {
+export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchInputChange, onSearchEnterPress, highlightPage, pdfRef, onPageClick }) {
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [inputPage, setInputPage] = useState('1');
@@ -828,6 +828,7 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
                       className="pdf-page"
                       customTextRenderer={textRenderer}
                       onLoadSuccess={() => onPageLoadSuccess(idx + 1)}
+                      onClick={() => onPageClick && onPageClick(idx + 1)}
                     />
                     {highlightPage === idx + 1 && (
                       <div className="pdf-page-overlay-highlight" />

@@ -5,6 +5,7 @@ import UserDetails from "./UserDetails";
 import AIResponse from "./AIResponse";
 import LandingPage from "./LandingPage";
 import FeedCard from './FeedCard';
+import Modal from './Modal';
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -140,6 +141,28 @@ const exchangeAssets = [
     file: "/pdfs/Doorway - FAQ .pdf",
   },
 ];
+
+// Modal configuration for specific PDF pages
+const modalConfig = {
+  '/pdfs/BX Digital Infrastructure Strategy.pdf': {
+    2: '/Assets/Graphs/p2.png', // Page 2 shows p2.png
+    3: '/Assets/Graphs/p3.png', // Page 3 shows p3.png
+    4: '/Assets/Graphs/p4.png', // Page 4 shows p4.png
+    6: '/Assets/Graphs/p6.png', // Page 6 shows p6.png
+    8: ['/Assets/Graphs/p8 (1).png', '/Assets/Graphs/p8 (2).png'], // Page 8 shows multiple images
+  }
+};
+
+// Helper function to get modal images for a page
+const getModalImagesForPage = (pdfFile, pageNumber) => {
+  const pdfConfig = modalConfig[pdfFile];
+  if (pdfConfig && pdfConfig[pageNumber]) {
+    const images = pdfConfig[pageNumber];
+    // If it's a single image, wrap it in an array
+    return Array.isArray(images) ? images : [images];
+  }
+  return null;
+};
 
 // Mapping: which newsroom asset cards to show for each open PDF
 const assetDisplayMap = {
@@ -466,6 +489,9 @@ export default function App() {
   const [showAIResponse, setShowAIResponse] = useState(false);
   const [enterPressed, setEnterPressed] = useState(false);
   const [lastTrigger, setLastTrigger] = useState("");
+  const [modalImages, setModalImages] = useState([]);
+  const [currentModalImageIndex, setCurrentModalImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [pdfHovered, setPdfHovered] = useState(false);
   const [pdfRect, setPdfRect] = useState(null);
   const pdfRef = useRef();
@@ -600,6 +626,34 @@ export default function App() {
     setSearchInput("");
     setEnterPressed(false);
     setLastTrigger(""); // Clear the stored trigger
+  };
+
+  // Modal handlers
+  const handlePageClick = (pageNumber) => {
+    const modalImagePaths = getModalImagesForPage(selectedPdf, pageNumber);
+    if (modalImagePaths && modalImagePaths.length > 0) {
+      setModalImages(modalImagePaths);
+      setCurrentModalImageIndex(0);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setModalImages([]);
+    setCurrentModalImageIndex(0);
+  };
+
+  const handleNextImage = () => {
+    if (currentModalImageIndex < modalImages.length - 1) {
+      setCurrentModalImageIndex(currentModalImageIndex + 1);
+    }
+  };
+
+  const handlePrevImage = () => {
+    if (currentModalImageIndex > 0) {
+      setCurrentModalImageIndex(currentModalImageIndex - 1);
+    }
   };
 
   // Handle PDF selection - clear AI response when navigating away
@@ -738,8 +792,18 @@ export default function App() {
           onSearchEnterPress={handleSearchEnterPress}
           highlightPage={highlightPage}
           pdfRef={pdfRef}
+          onPageClick={handlePageClick}
         />
       </main>
+      <Modal 
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        images={modalImages}
+        currentImageIndex={currentModalImageIndex}
+        onNextImage={handleNextImage}
+        onPrevImage={handlePrevImage}
+        imageAlt="PDF Page Modal"
+      />
     </div>
   );
 }
