@@ -1,13 +1,13 @@
 import React from "react";
 import "./UserDetails.css";
 
-export default function UserDetails({ onUserNameClick }) {
+export default function UserDetails({ onUserNameClick, onLogoClick }) {
   return (
     <div className="user-details-card">
       <div 
-        className={onUserNameClick ? "user-details-logo clickable" : "user-details-logo"}
-        onClick={onUserNameClick}
-        style={onUserNameClick ? { cursor: 'pointer' } : {}}
+        className={onLogoClick ? "user-details-logo clickable" : "user-details-logo"}
+        onClick={onLogoClick}
+        style={onLogoClick ? { cursor: 'pointer' } : {}}
       >
         <img src="/Blackstone logo.png" alt="Blackstone Logo" />
       </div>

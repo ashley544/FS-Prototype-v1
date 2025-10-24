@@ -19,7 +19,7 @@ html, body, #root {
   padding: 0;
   font-family: 'Inter', Arial, sans-serif;
   background: #fff;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .feed-grid-container {

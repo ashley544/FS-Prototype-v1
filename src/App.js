@@ -6,6 +6,8 @@ import AIResponse from "./AIResponse";
 import LandingPage from "./LandingPage";
 import FeedCard from './FeedCard';
 import Modal from './Modal';
+import PrototypeTitle from './PrototypeTitle';
+import AssetLibrary from './AssetLibrary';
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -247,20 +249,29 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
         </button>
         <div className="feed-ask-stevens">
           <img src="/flare.svg" alt="Flare" style={{ width: 22, height: 22, marginRight: 6, flexShrink: 0 }} />
-          <span style={{
-            background: 'linear-gradient(90deg, #f59e42 0%, #e94b4b 40%, #a953c7 70%, #0e87ff 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textFillColor: 'transparent',
-            fontWeight: 500,
-            fontSize: 12,
-            letterSpacing: '-0.01em',
-            lineHeight: 1.2,
-            display: 'inline-block',
-          }}>
+          <button 
+            onClick={() => {
+              // This button is now just decorative - search is triggered by Enter key
+            }}
+            style={{
+              background: 'linear-gradient(90deg, #f59e42 0%, #e94b4b 40%, #a953c7 70%, #0e87ff 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textFillColor: 'transparent',
+              fontWeight: 500,
+              fontSize: 12,
+              letterSpacing: '-0.01em',
+              lineHeight: 1.2,
+              display: 'inline-block',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 0,
+              fontFamily: 'inherit',
+            }}
+          >
             What are you looking for?
-          </span>
+          </button>
         </div>
       </div>
       <div className="feed-grid-inner" style={{ display: 'grid', gridTemplateColumns: '260px 2fr', gap: '40px', alignItems: 'start', height: 'calc(100vh - 100px)', minHeight: 0, overflow: 'visible' }}>
@@ -419,6 +430,7 @@ export default function App() {
   const pdfRef = useRef();
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', or 'feed'
+  const [currentFlow, setCurrentFlow] = useState(null); // null, 1, 2, or 3
 
   // Update bounding box when hovered or window resizes
   useEffect(() => {
@@ -537,10 +549,19 @@ export default function App() {
 
   // Handle Enter key press in search input
   const handleSearchEnterPress = (value) => {
+    console.log('handleSearchEnterPress called with:', value);
+    console.log('aiConfig:', aiConfig);
+    console.log('aiConfig.trigger:', aiConfig?.trigger);
+    console.log('value.trim():', value.trim());
+    console.log('Match check:', aiConfig && value.trim() === aiConfig.trigger);
+    
     if (aiConfig && value.trim() === aiConfig.trigger) {
+      console.log('Match found! Setting AI response to show');
       setEnterPressed(true);
       setShowAIResponse(true);
       setLastTrigger(value.trim()); // Store the trigger that was activated
+    } else {
+      console.log('No match found');
     }
   };
 
@@ -616,7 +637,31 @@ export default function App() {
   const handleGoToFeed = () => setCurrentPage('feed');
   // Handler to go to landing page
   const handleGoToLanding = () => setCurrentPage('landing');
+  
+  // Handler for flow selection
+  const handleFlowSelection = (flowNumber) => {
+    setCurrentFlow(flowNumber);
+    if (flowNumber === 2) {
+      setCurrentPage('landing'); // Start with landing page for flow 2
+    }
+  };
+  
+  // Handler to return to prototype title
+  const handleReturnToTitle = () => {
+    setCurrentFlow(null);
+    setCurrentPage('landing');
+  };
 
+  // Show prototype title page if no flow is selected
+  if (currentFlow === null) {
+    return <PrototypeTitle onSelectFlow={handleFlowSelection} />;
+  }
+  
+  // Show Flow 1: Asset Library
+  if (currentFlow === 1) {
+    return <AssetLibrary onReturnToTitle={handleReturnToTitle} />;
+  }
+  
   if (currentPage === 'feed') {
     return <Feed 
       onGoToAssetViewer={handleEnterAssetViewer} 
@@ -723,7 +768,7 @@ export default function App() {
             ))}
           </div>
         </div>
-        <UserDetails onUserNameClick={handleGoToLanding} />
+        <UserDetails onUserNameClick={handleGoToLanding} onLogoClick={handleReturnToTitle} />
       </aside>
       <main
         className={`main-content ${isExpanded ? 'expanded' : ''}`}

@@ -4,14 +4,6 @@ import "./PDFViewer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-function SearchIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="9" cy="9" r="7" stroke="#222" strokeWidth="2" />
-      <line x1="14.4142" y1="14" x2="18" y2="17.5858" stroke="#222" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function SearchCloseIcon() {
   return (
@@ -633,41 +625,44 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => {
               setIsSearchFocused(false);
-              // Clear the search input visually but keep the AI response active
-              setSearchQuery('');
+              // Don't clear the search input on blur to preserve the value for the button
             }}
             onChange={e => {
               setSearchQuery(e.target.value);
               if (onSearchInputChange) onSearchInputChange(e.target.value);
             }}
             onKeyDown={e => {
+              console.log('Key pressed:', e.key);
+              console.log('Current searchQuery:', searchQuery);
               if (e.key === 'Enter') {
-                // Check for the new trigger phrase
+                console.log('Enter key pressed, calling onSearchEnterPress with:', searchQuery);
+                // Check for the trigger phrase and handle highlighting
                 if (searchQuery.trim() === 'show me the security procedure') {
-                  e.preventDefault();
-                  // Scroll to page 12 with the same smooth behavior as search results
-                  if (pageRefs.current[11] && scrollRef.current) { // page 12 is at index 11
-                    const targetElement = pageRefs.current[11];
-                    const targetScrollTop = targetElement.offsetTop;
-                    scrollRef.current.scrollTo({
-                      top: targetScrollTop,
-                      behavior: 'smooth'
-                    });
-                  }
+                  // Scroll to page 12 and highlight
+                  setTimeout(() => {
+                    const pageElement = document.querySelector(`[data-page-number="12"]`);
+                    if (pageElement) {
+                      pageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      // Add highlight effect
+                      pageElement.style.boxShadow = '0 0 0 3px rgba(255, 193, 7, 0.5)';
+                      setTimeout(() => {
+                        pageElement.style.boxShadow = '';
+                      }, 3000);
+                    }
+                  }, 100);
                 }
                 // Call the Enter press handler for AI response
                 if (onSearchEnterPress) {
+                  console.log('onSearchEnterPress exists, calling it');
                   onSearchEnterPress(searchQuery);
+                } else {
+                  console.log('onSearchEnterPress is not defined');
                 }
               }
             }}
           />
         </div>
         <div className="pdf-controls">
-          <button className="pdf-btn" title="Search" onClick={() => setIsSearchActive(!isSearchActive)}>
-            <SearchIcon />
-          </button>
-          <div className="pdf-divider" />
           <div className="pdf-zoom-group">
             <button className="pdf-btn" title="Zoom out" onClick={handleMinus} disabled={scale <= 0.25}>
               <MinusIcon />
@@ -730,7 +725,7 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
                 minLength="1"
               />
               <button type="submit" className={`pdf-search-submit ${isSearching ? 'searching' : ''}`} disabled={isSearching || !searchQuery.trim()}>
-                <SearchIcon />
+                Search
               </button>
             </div>
             
