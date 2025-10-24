@@ -72,7 +72,7 @@ export default function LandingPage({ onEnter }) {
           </div>
         </div>
         <div className="locked-profile-logo">
-          <img src="/doorway light logo.svg" alt="Doorway Light Logo" style={{ maxWidth: 191, maxHeight: 80 }} />
+          <img src="/Logomark - White - New.svg" alt="Flagships Logo" style={{ maxWidth: 191, maxHeight: 80 }} />
         </div>
       </aside>
       <main className="locked-profile-main">
@@ -88,7 +88,7 @@ export default function LandingPage({ onEnter }) {
                   <path d="M8 9V7a4 4 0 1 1 8 0" stroke="#222" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
                 </svg>
                 <div style={{ fontSize: 24, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
-                  Doorway Exchange
+                  Flagships Exchange
                 </div>
                 <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
                   Permission required to access<br />

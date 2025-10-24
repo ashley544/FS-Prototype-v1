@@ -52,6 +52,7 @@ const modalConfig = {
     2: '/Assets/Graphs/p2.png', // Page 2 shows p2.png
     3: '/Assets/Graphs/p3.png', // Page 3 shows p3.png
     4: '/Assets/Graphs/p4.png', // Page 4 shows p4.png
+    5: '/Assets/Graphs/p5.png', // Page 5 shows p5.png
     6: '/Assets/Graphs/p6.png', // Page 6 shows p6.png
     7: '/Assets/Graphs/p7.png', // Page 7 shows p7.png
     8: '/Assets/Graphs/p8.png', // Page 8 shows p8.png
@@ -210,12 +211,12 @@ const aiResponseMap = {
 // New Feed page component
 function Feed({ onGoToAssetViewer, onOpenAsset }) {
   // Example placeholder values for FeedCard fields
-  const getOrg = () => 'Doorway';
+  const getOrg = () => 'Flagships';
   const getDate = () => '12/06/24';
   const getDescription = (asset) => asset.title === 'The Rules of Attraction'
     ? "We're living in the golden age of sales enablement. Today's client-facing professionals are equipped with a dizzying array of tools designed to turn outreach into a science..."
-    : asset.title === 'Doorway Overview'
-      ? "Designed to create interest journeys,\nDoorway curates multi-asset engagement to\nstreamline your clients' understanding of\nmaterial."
+    : asset.title === 'Flagships Overview'
+      ? "Designed to create interest journeys,\nFlagships curates multi-asset engagement to\nstreamline your clients' understanding of\nmaterial."
       : asset.title === 'Data Protection Procedures'
       ? '"Adequate Country" means a country or territory recognised as providing an adequate level of protection for personal data transfers under an...'
     : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non nulla et est dictum bibendum. Proin a sem nec justo....';
@@ -293,7 +294,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 16px 16px' }}>
               <div className="exchange-card-list-container">
                 <div className="exchange-list-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 36px 24px 36px' }}>
-                  <img src="/Doorway logo.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 42, width: 'auto', objectFit: 'contain' }} />
+                  <img src="/Logomark - White - New.svg" alt="Org logo" className="exchange-card-org-logo" style={{ height: 42, width: 'auto', objectFit: 'contain' }} />
                   <div className="exchange-card-contacts" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <span className="exchange-card-contacts-count" style={{ fontSize: 12, color: '#222', fontWeight: 500, marginRight: 2 }}>5 relationships</span>
                     <span className="exchange-card-contacts-avatars" style={{ display: 'flex', alignItems: 'center' }}>

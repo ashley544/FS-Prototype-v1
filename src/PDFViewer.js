@@ -147,10 +147,10 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
         pageHeight = firstPageHeight;
       } else {
         // Fallback to estimation based on file name or typical ratios
-        const isDoorwayOverview = currentFile && currentFile.includes('Doorway - Overview');
+        const isFlagshipsOverview = currentFile && currentFile.includes('Doorway - Overview');
         
-        if (isDoorwayOverview) {
-          // Doorway Overview is 16:9 ratio
+        if (isFlagshipsOverview) {
+          // Flagships Overview is 16:9 ratio
           pageHeight = 800 * scale * (9/16); // 16:9 ratio = 450px height at 800px width
         } else {
           // All other PDFs are A4 portrait
@@ -297,8 +297,8 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
         const firstPage = pageRefs.current[0];
         pageHeight = firstPage.offsetHeight * scale;
       } else {
-        const isDoorwayOverview = currentFile && currentFile.includes('Doorway - Overview');
-        if (isDoorwayOverview) {
+        const isFlagshipsOverview = currentFile && currentFile.includes('Doorway - Overview');
+        if (isFlagshipsOverview) {
           pageHeight = 800 * scale * (9/16);
         } else {
           pageHeight = 800 * scale * (800 / 595);
@@ -340,8 +340,8 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
             const firstPage = pageRefs.current[0];
             pageHeight = firstPage.offsetHeight * scale;
           } else {
-            const isDoorwayOverview = currentFile && currentFile.includes('Doorway - Overview');
-            if (isDoorwayOverview) {
+            const isFlagshipsOverview = currentFile && currentFile.includes('Doorway - Overview');
+            if (isFlagshipsOverview) {
               pageHeight = 800 * scale * (9/16);
             } else {
               pageHeight = 800 * scale * (800 / 595);
@@ -381,8 +381,8 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
             const firstPage = pageRefs.current[0];
             pageHeight = firstPage.offsetHeight * scale;
           } else {
-            const isDoorwayOverview = currentFile && currentFile.includes('Doorway - Overview');
-            if (isDoorwayOverview) {
+            const isFlagshipsOverview = currentFile && currentFile.includes('Doorway - Overview');
+            if (isFlagshipsOverview) {
               pageHeight = 800 * scale * (9/16);
             } else {
               pageHeight = 800 * scale * (800 / 595);
@@ -449,10 +449,10 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
           pageHeight = firstPage.offsetHeight * scale;
         } else {
           // Fallback to estimation based on file name
-          const isDoorwayOverview = currentFile && currentFile.includes('Doorway - Overview');
+          const isFlagshipsOverview = currentFile && currentFile.includes('Doorway - Overview');
           
-          if (isDoorwayOverview) {
-            // Doorway Overview is 16:9 ratio
+          if (isFlagshipsOverview) {
+            // Flagships Overview is 16:9 ratio
             pageHeight = 800 * scale * (9/16);
           } else {
             // All other PDFs are A4 portrait
