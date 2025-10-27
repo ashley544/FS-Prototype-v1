@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import SideNav from './SideNav';
 import AssetCardLibrary from './AssetCardLibrary';
+import AssetDrawer from './AssetDrawer';
 import './AssetLibrary.css';
 
 const AssetLibrary = ({ onReturnToTitle }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   // Sample asset data organized by sections
   const exchangeAssets = [
@@ -75,7 +78,13 @@ const AssetLibrary = ({ onReturnToTitle }) => {
   };
 
   const handleAssetClick = (asset) => {
-    console.log('Asset clicked:', asset.title);
+    setSelectedAsset(asset);
+    setIsDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+    setSelectedAsset(null);
   };
 
   const handlePinAsset = (asset) => {
@@ -91,6 +100,7 @@ const AssetLibrary = ({ onReturnToTitle }) => {
       <SideNav 
         onNavItemClick={handleNavItemClick}
         activeItem={activeNavItem}
+        onLogoClick={onReturnToTitle}
       />
       
       <div className="asset-library-main">
@@ -123,12 +133,6 @@ const AssetLibrary = ({ onReturnToTitle }) => {
               <span>Manage folders</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z" fill="currentColor"/>
-              </svg>
-            </button>
-            <button className="filter-btn">
-              <span>Filter</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 17H21V19H3V17ZM3 5V7H21V5H3ZM3 11H21V13H3V11Z" fill="currentColor"/>
               </svg>
             </button>
           </div>
@@ -208,6 +212,12 @@ const AssetLibrary = ({ onReturnToTitle }) => {
           </div>
         </div>
       </div>
+      
+      <AssetDrawer 
+        isOpen={isDrawerOpen}
+        onClose={handleCloseDrawer}
+        asset={selectedAsset}
+      />
     </div>
   );
 };

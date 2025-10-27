@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PDFViewer from "./PDFViewer";
 import AssetCard from "./AssetCard";
+import PDFViewerAssetCard from "./PDFViewerAssetCard";
 import UserDetails from "./UserDetails";
 import AIResponse from "./AIResponse";
 import LandingPage from "./LandingPage";
@@ -8,6 +9,7 @@ import FeedCard from './FeedCard';
 import Modal from './Modal';
 import PrototypeTitle from './PrototypeTitle';
 import AssetLibrary from './AssetLibrary';
+import AssetDrawer from './AssetDrawer';
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -211,7 +213,7 @@ const aiResponseMap = {
 };
 
 // New Feed page component
-function Feed({ onGoToAssetViewer, onOpenAsset }) {
+function Feed({ onGoToAssetViewer, onOpenAsset, onOpenDrawer }) {
   // Example placeholder values for FeedCard fields
   const getOrg = () => 'Flagships';
   const getDate = () => '12/06/24';
@@ -289,6 +291,7 @@ function Feed({ onGoToAssetViewer, onOpenAsset }) {
                   title={asset.title}
                   onSummarise={() => {}}
                   onClick={() => onOpenAsset(asset.file)}
+                  onOpenDrawer={() => onOpenDrawer(asset)}
                   showSummarise={false}
                   variant="feed-newsroom"
                   idx={idx}
@@ -431,6 +434,8 @@ export default function App() {
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', or 'feed'
   const [currentFlow, setCurrentFlow] = useState(null); // null, 1, 2, or 3
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   // Update bounding box when hovered or window resizes
   useEffect(() => {
@@ -652,6 +657,17 @@ export default function App() {
     setCurrentPage('landing');
   };
 
+  // Drawer handlers
+  const handleOpenDrawer = (asset) => {
+    setSelectedAsset(asset);
+    setIsDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+    setSelectedAsset(null);
+  };
+
   // Show prototype title page if no flow is selected
   if (currentFlow === null) {
     return <PrototypeTitle onSelectFlow={handleFlowSelection} />;
@@ -663,10 +679,20 @@ export default function App() {
   }
   
   if (currentPage === 'feed') {
-    return <Feed 
-      onGoToAssetViewer={handleEnterAssetViewer} 
-      onOpenAsset={(file) => { setSelectedPdf(file); setCurrentPage('asset-viewer'); }}
-    />;
+    return (
+      <>
+        <Feed 
+          onGoToAssetViewer={handleEnterAssetViewer} 
+          onOpenAsset={(file) => { setSelectedPdf(file); setCurrentPage('asset-viewer'); }}
+          onOpenDrawer={handleOpenDrawer}
+        />
+        <AssetDrawer 
+          isOpen={isDrawerOpen} 
+          onClose={handleCloseDrawer} 
+          asset={selectedAsset} 
+        />
+      </>
+    );
   }
   if (currentPage === 'landing') {
     return <LandingPage onEnter={handleEnterAssetViewer} />;
@@ -729,7 +755,7 @@ export default function App() {
             {filteredNewsroomAssets
               .filter(asset => asset.file !== selectedPdf)
               .map(asset => (
-                <AssetCard
+                <PDFViewerAssetCard
                   key={asset.title}
                   image={asset.image}
                   type={asset.type}
@@ -755,7 +781,7 @@ export default function App() {
           </div>
           <div className="sidebar-section-cards">
             {exchangeAssets.map(asset => (
-              <AssetCard
+              <PDFViewerAssetCard
                 key={asset.title}
                 image={asset.image}
                 type={asset.type}

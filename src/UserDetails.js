@@ -21,7 +21,7 @@ export default function UserDetails({ onUserNameClick, onLogoClick }) {
             </span>
           </button>
           <button className="user-details-action">
-            <span className="user-details-action-text">Schedule a meeting</span>
+            <span className="user-details-action-text">Share</span>
             <span className="user-details-action-icon">
               <img src="/arrow_forward.svg" alt="Forward" width={16} height={16} />
             </span>

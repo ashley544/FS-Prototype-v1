@@ -1,7 +1,7 @@
 import React from 'react';
 import './SideNav.css';
 
-const SideNav = ({ onNavItemClick, activeItem }) => {
+const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
   const navItems = [
     { id: 'assets', label: 'Assets', active: true },
     { id: 'contacts', label: 'Contacts' },
@@ -18,7 +18,11 @@ const SideNav = ({ onNavItemClick, activeItem }) => {
     <div className="side-nav">
       <div className="side-nav-content">
         {/* Logo Section */}
-        <div className="side-nav-logo">
+        <div 
+          className="side-nav-logo"
+          onClick={() => onLogoClick && onLogoClick()}
+          style={{ cursor: 'pointer' }}
+        >
           <img 
             src="/Blackstone logo.png" 
             alt="Blackstone Logo" 

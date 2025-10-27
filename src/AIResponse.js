@@ -1,6 +1,6 @@
 import React from "react";
 import "./AIResponse.css";
-import AssetCard from "./AssetCard";
+import PDFViewerAssetCard from "./PDFViewerAssetCard";
 
 export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDismiss, onOpenAsset, onReturnToOriginal }) {
   return (
@@ -16,7 +16,7 @@ export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDi
             <div className="ai-response-answer" dangerouslySetInnerHTML={{ __html: aiAnswer }}></div>
             {recommendedAsset && (
               <div className="ai-response-recommendation">
-                <AssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => onOpenAsset(recommendedAsset.file)} />
+                <PDFViewerAssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => onOpenAsset(recommendedAsset.file)} />
               </div>
             )}
             <div className="ai-response-return-link">

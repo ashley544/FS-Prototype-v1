@@ -57,7 +57,7 @@ export default function LandingPage({ onEnter }) {
           <div className="user-details-actions">
             {/*
             <button className="user-details-action">
-              <span className="user-details-action-text">Schedule a meeting</span>
+              <span className="user-details-action-text">Share</span>
               <span className="user-details-action-icon">
                 <img src="/arrow_forward.svg" alt="Forward" width={16} height={16} style={{ filter: 'brightness(0) invert(1)' }} />
               </span>
