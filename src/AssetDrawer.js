@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './AssetDrawer.css';
+import AssetCardLibrary from './AssetCardLibrary';
 
 export default function AssetDrawer({ isOpen, onClose, asset }) {
   const [isClosing, setIsClosing] = useState(false);
+  const [drawerMode, setDrawerMode] = useState('analytics'); // 'analytics' or 'share'
 
   useEffect(() => {
     if (isOpen) {
       setIsClosing(false);
+      setDrawerMode('analytics'); // Reset to analytics mode when opening
       // Prevent body scroll when drawer is open
       document.body.classList.add('drawer-open');
     } else {
@@ -29,6 +32,14 @@ export default function AssetDrawer({ isOpen, onClose, asset }) {
     }, 300); // Match the animation duration
   };
 
+  const handleShareAsset = () => {
+    setDrawerMode('share');
+  };
+
+  const handleBackToAnalytics = () => {
+    setDrawerMode('analytics');
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -38,155 +49,233 @@ export default function AssetDrawer({ isOpen, onClose, asset }) {
       
       {/* Drawer */}
       <div className={`asset-drawer ${isClosing ? 'closing' : ''}`}>
-        {/* Header */}
-        <div className="asset-drawer-header">
-          <button className="asset-drawer-close" onClick={handleClose}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <div className="asset-drawer-header-content">
-            <button className="asset-drawer-email-btn">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M3.333 3.518L13.333 12.963" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Email James
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M3.333 3.518L13.333 12.963" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
         {/* Content */}
         <div className="asset-drawer-content">
-          {/* Asset Preview Section */}
-          <div className="asset-drawer-section">
-            <div className="asset-drawer-section-header">
-              <h3 className="asset-drawer-section-title">Asset-level analytics</h3>
-            </div>
-
-            {/* Asset Preview Card */}
-            <div className="asset-drawer-preview">
-              <div className="asset-drawer-preview-card">
-                <div className="asset-drawer-preview-image">
-                  <img src={asset?.image || "/Assets/Consider the viewer.png"} alt={asset?.title || "Asset"} />
-                </div>
-                <div className="asset-drawer-preview-info">
-                  <div className="asset-drawer-preview-type">PDF</div>
-                  <div className="asset-drawer-preview-title">{asset?.title || "Asset Title"}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Analytics Content */}
-            <div className="asset-drawer-analytics">
-              <div className="asset-drawer-analytics-badge">
-                <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
-              </div>
-              
-              <div className="asset-drawer-analytics-content">
-                <div className="asset-drawer-analytics-text">
-                  Q2 Logistics performance (p2, p5) Increase in debt facility (p14) Spanish hotel acquisition (p16)
-                </div>
-                <div className="asset-drawer-analytics-meta">
-                  <div className="asset-drawer-visibility">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M0.667 6.667C0.667 6.667 3.333 2.667 8 2.667C12.667 2.667 15.333 6.667 15.333 6.667C15.333 6.667 12.667 10.667 8 10.667C3.333 10.667 0.667 6.667 0.667 6.667Z" stroke="currentColor" strokeWidth="0.025"/>
-                      <circle cx="8" cy="6.667" r="2" stroke="currentColor" strokeWidth="0.025"/>
+          {drawerMode === 'analytics' ? (
+            <>
+              {/* Asset Preview Section */}
+              <div className="asset-drawer-section">
+                <div className="asset-drawer-section-header">
+                  <button className="asset-drawer-back-btn" onClick={handleClose}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                    <span>Level</span>
-                  </div>
-                  <div className="asset-drawer-progress">
-                    <div className="asset-drawer-progress-bar"></div>
-                  </div>
+                  </button>
+                  <h3 className="asset-drawer-section-title">Asset-level analytics</h3>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Shared With Section */}
-          <div className="asset-drawer-section">
-            <h3 className="asset-drawer-section-title">Shared with</h3>
-            
-            <div className="asset-drawer-shared-table">
-              <div className="asset-drawer-table-header">
-                <div className="asset-drawer-table-cell">Shared with</div>
-                <div className="asset-drawer-table-cell">Last visit</div>
-                <div className="asset-drawer-table-cell">Intent</div>
-              </div>
-              
-              <div className="asset-drawer-table-rows">
-                <div className="asset-drawer-table-row">
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-contact">
-                      <div className="asset-drawer-contact-avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face" alt="Contact" />
-                      </div>
-                      <span>James Wilson</span>
-                    </div>
-                  </div>
-                  <div className="asset-drawer-table-cell">2 days ago</div>
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-intent-badge high">High</div>
-                  </div>
+                {/* Asset Preview Card */}
+                <div className="asset-drawer-preview">
+                  <AssetCardLibrary
+                    image={asset?.image || "/Assets/Consider the viewer.png"}
+                    title={asset?.title || "Asset Title"}
+                    duration={asset?.duration || "5 mins"}
+                    patterns={asset?.patterns || "patterns"}
+                    isPinned={asset?.isPinned || false}
+                    highlighted={asset?.highlighted || false}
+                    hideMetadata={true} // Hide mins/patterns labels and share button
+                    onClick={() => {}} // Non-clickable - empty function
+                    onPin={() => {}} // Non-clickable - empty function
+                    onShare={() => {}} // Non-clickable - empty function
+                  />
                 </div>
-                
-                <div className="asset-drawer-table-row">
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-contact">
-                      <div className="asset-drawer-contact-avatar">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face" alt="Contact" />
-                      </div>
-                      <span>Sarah Chen</span>
+
+                {/* Analytics Content */}
+                <div className="asset-drawer-analytics">
+                  <div className="asset-drawer-analytics-badge">
+                    <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
+                  </div>
+                  
+                  <div className="asset-drawer-analytics-content">
+                    <div className="asset-drawer-analytics-text">
+                      Q2 Logistics performance (p2, p5)<br />
+                      Increase in debt facility (p14)<br />
+                      Spanish hotel acquisition (p16)
                     </div>
-                  </div>
-                  <div className="asset-drawer-table-cell">1 week ago</div>
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-intent-badge medium">Medium</div>
-                  </div>
-                </div>
-                
-                <div className="asset-drawer-table-row">
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-contact">
-                      <div className="asset-drawer-contact-avatar">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="Contact" />
-                      </div>
-                      <span>Michael Rodriguez</span>
-                    </div>
-                  </div>
-                  <div className="asset-drawer-table-cell">2 weeks ago</div>
-                  <div className="asset-drawer-table-cell">
-                    <div className="asset-drawer-intent-badge low">Low</div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+
+              {/* Shared With Section */}
+              <div className="asset-drawer-section">
+                <h3 className="asset-drawer-section-title">Shared with</h3>
+                
+                <div className="asset-drawer-shared-table">
+                  <div className="asset-drawer-table-header">
+                    <div className="asset-drawer-table-cell">Shared with</div>
+                    <div className="asset-drawer-table-cell">Last visit</div>
+                    <div className="asset-drawer-table-cell">Intent</div>
+                  </div>
+                  
+                  <div className="asset-drawer-table-rows">
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
+                          <span>James Wilson</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">2 days ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge high">High</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
+                          <span>Sarah Chen</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">1 week ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge medium">Medium</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
+                          <span>Michael Rodriguez</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">2 weeks ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge low">Low</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Share Asset Section */}
+              <div className="asset-drawer-section">
+                <div className="asset-drawer-section-header">
+                  <button className="asset-drawer-back-btn" onClick={handleBackToAnalytics}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                  <h3 className="asset-drawer-section-title">Share Asset</h3>
+                </div>
+
+                {/* Share to contacts section */}
+                <div className="asset-drawer-share-section">
+                  <h4 className="asset-drawer-share-title">Share to contacts</h4>
+                  
+                  {/* Search/Filter Input */}
+                  <div className="asset-drawer-search-container">
+                    <div className="asset-drawer-search-input">
+                      <label className="asset-drawer-search-label">
+                        Name *
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" fill="currentColor"/>
+                          <path d="M8 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="currentColor"/>
+                        </svg>
+                      </label>
+                      <input 
+                        type="text" 
+                        placeholder="Search contacts..." 
+                        className="asset-drawer-search-field"
+                      />
+                    </div>
+                    <button className="asset-drawer-search-btn">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16z" stroke="currentColor" strokeWidth="2"/>
+                        <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Contact List */}
+                  <div className="asset-drawer-contact-list">
+                    <div className="asset-drawer-contact-item">
+                      <div className="asset-drawer-contact-checkbox">
+                        <input type="checkbox" id="contact1" />
+                        <label htmlFor="contact1"></label>
+                      </div>
+                      <div className="asset-drawer-contact-info">
+                        <div className="asset-drawer-contact-details">
+                          <span className="asset-drawer-contact-name">James Wilson</span>
+                          <span className="asset-drawer-contact-email">james.wilson@company.com</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="asset-drawer-contact-item">
+                      <div className="asset-drawer-contact-checkbox">
+                        <input type="checkbox" id="contact2" />
+                        <label htmlFor="contact2"></label>
+                      </div>
+                      <div className="asset-drawer-contact-info">
+                        <div className="asset-drawer-contact-details">
+                          <span className="asset-drawer-contact-name">Sarah Chen</span>
+                          <span className="asset-drawer-contact-email">sarah.chen@company.com</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="asset-drawer-contact-item">
+                      <div className="asset-drawer-contact-checkbox">
+                        <input type="checkbox" id="contact3" />
+                        <label htmlFor="contact3"></label>
+                      </div>
+                      <div className="asset-drawer-contact-info">
+                        <div className="asset-drawer-contact-details">
+                          <span className="asset-drawer-contact-name">Michael Rodriguez</span>
+                          <span className="asset-drawer-contact-email">michael.rodriguez@company.com</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="asset-drawer-contact-item">
+                      <div className="asset-drawer-contact-checkbox">
+                        <input type="checkbox" id="contact4" />
+                        <label htmlFor="contact4"></label>
+                      </div>
+                      <div className="asset-drawer-contact-info">
+                        <div className="asset-drawer-contact-details">
+                          <span className="asset-drawer-contact-name">John Doe</span>
+                          <span className="asset-drawer-contact-email">john.doe@company.com</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="asset-drawer-contact-item">
+                      <div className="asset-drawer-contact-checkbox">
+                        <input type="checkbox" id="contact5" />
+                        <label htmlFor="contact5"></label>
+                      </div>
+                      <div className="asset-drawer-contact-info">
+                        <div className="asset-drawer-contact-details">
+                          <span className="asset-drawer-contact-name">Jane Smith</span>
+                          <span className="asset-drawer-contact-email">jane.smith@company.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
       {/* Sticky Bottom Bar */}
       <div className="asset-drawer-bottom-bar">
         <button className="asset-drawer-cancel-btn" onClick={handleClose}>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M2.5 2.5L17.5 17.5M17.5 2.5L2.5 17.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
           Cancel
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3.333 3.518L13.333 12.963" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
         </button>
-        <button className="asset-drawer-share-btn">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3.333 3.518L13.333 12.963" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Share assets
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3.333 3.518L13.333 12.963" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        {drawerMode === 'analytics' ? (
+          <button className="asset-drawer-share-btn" onClick={handleShareAsset}>
+            Share asset
+          </button>
+        ) : (
+          <button className="asset-drawer-share-btn">
+            Email James
+          </button>
+        )}
       </div>
     </>
   );

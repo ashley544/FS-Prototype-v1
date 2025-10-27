@@ -34,7 +34,7 @@ body.drawer-open {
   display: flex;
   flex-direction: column;
   animation: slideInRight 0.3s ease-out;
-  overflow: hidden;
+  overflow: visible;
   pointer-events: auto;
 }
 
@@ -42,64 +42,22 @@ body.drawer-open {
   animation: slideOutRight 0.3s ease-out;
 }
 
-.asset-drawer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 16px;
-  border-bottom: 1px solid #f0f0f0;
-  background: #fff;
-  flex-shrink: 0;
-}
 
-.asset-drawer-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 4px;
-  color: #000;
-  transition: background-color 0.2s;
-}
-
-.asset-drawer-close:hover {
-  background: #f5f5f5;
-}
-
-.asset-drawer-header-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.asset-drawer-email-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  color: #000;
-  transition: background-color 0.2s;
-}
-
-.asset-drawer-email-btn:hover {
-  background: #f5f5f5;
-}
 
 .asset-drawer-content {
   flex: 1;
   overflow-y: auto;
-  padding: 24px;
-  padding-bottom: 0;
+  padding: 0;
+  padding-bottom: 88px; /* Add space for bottom bar */
 }
 
 .asset-drawer-section {
   margin-bottom: 32px;
+  padding: 0 24px;
+}
+
+.asset-drawer-section:first-child {
+  padding-top: 24px;
 }
 
 .asset-drawer-section:last-child {
@@ -107,7 +65,27 @@ body.drawer-open {
 }
 
 .asset-drawer-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 24px;
+}
+
+.asset-drawer-back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  color: #000;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.asset-drawer-back-btn:hover {
+  background: #f5f5f5;
 }
 
 .asset-drawer-section-title {
@@ -118,54 +96,41 @@ body.drawer-open {
   font-family: 'Inter', Arial, sans-serif;
 }
 
+/* Asset Preview Container - Grey background for AssetCardLibrary */
 .asset-drawer-preview {
-  margin-bottom: 24px;
-}
-
-.asset-drawer-preview-card {
   background: #f2f1f6;
   border-radius: 6px;
   padding: 24px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.asset-drawer-preview-image {
-  width: 245px;
-  height: 163px;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #efefef;
-  background: #fff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+/* Override AssetCardLibrary styles for drawer context */
+.asset-drawer-preview .asset-card-library {
+  cursor: default; /* Remove pointer cursor */
+  transform: none; /* Remove hover transform */
+  box-shadow: 0 4px 20px rgba(51, 51, 51, 0.12); /* Keep original shadow */
+  height: auto; /* Make height auto to hug content */
+  min-height: auto; /* Remove minimum height constraint */
 }
 
-.asset-drawer-preview-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.asset-drawer-preview .asset-card-library:hover {
+  transform: none; /* Remove hover transform */
+  box-shadow: 0 4px 20px rgba(51, 51, 51, 0.12); /* Keep original shadow */
 }
 
-.asset-drawer-preview-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+/* Reduce spacing for drawer card to hug content */
+.asset-drawer-preview .asset-card-content {
+  padding: 8px 12px 12px 12px; /* Equal padding: 8px top, 12px sides, 12px bottom */
+  gap: 6px; /* Reduce gap from 12px to 6px */
+  flex: none; /* Remove flex: 1 to prevent stretching */
 }
 
-.asset-drawer-preview-type {
-  font-size: 12px;
-  color: #808b8f;
-  font-weight: 400;
-}
-
-.asset-drawer-preview-title {
-  font-size: 12px;
-  color: #222;
-  font-weight: 400;
-  line-height: 1.4;
+/* Reduce image container margin for tighter layout */
+.asset-drawer-preview .asset-card-image-container {
+  margin: 8px 12px 0 12px; /* Reduce top margin from 12px to 8px */
 }
 
 .asset-drawer-analytics {
@@ -271,7 +236,6 @@ body.drawer-open {
 .asset-drawer-contact {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
 .asset-drawer-contact-avatar {
@@ -319,13 +283,160 @@ body.drawer-open {
   color: #0e87ff;
 }
 
+/* Share Asset Drawer Styles */
+.asset-drawer-share-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.asset-drawer-share-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #292929;
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.asset-drawer-search-container {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.asset-drawer-search-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.asset-drawer-search-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #292929;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.asset-drawer-search-label svg {
+  color: #e94b4b;
+}
+
+.asset-drawer-search-field {
+  width: 100%;
+  height: 36px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.asset-drawer-search-field:focus {
+  outline: none;
+  border-color: #0e87ff;
+  box-shadow: 0 0 0 3px rgba(14, 135, 255, 0.1);
+}
+
+.asset-drawer-search-field::placeholder {
+  color: #9ca3af;
+}
+
+.asset-drawer-search-btn {
+  width: 36px;
+  height: 36px;
+  background: #222;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #fff;
+}
+
+.asset-drawer-search-btn:hover {
+  background: #333;
+}
+
+.asset-drawer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.asset-drawer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.asset-drawer-contact-item:last-child {
+  border-bottom: none;
+}
+
+.asset-drawer-contact-checkbox {
+  position: relative;
+}
+
+.asset-drawer-contact-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #0e87ff;
+}
+
+.asset-drawer-contact-checkbox label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.asset-drawer-contact-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.asset-drawer-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.asset-drawer-contact-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.asset-drawer-contact-email {
+  font-size: 12px;
+  color: #6b7280;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
 /* Sticky Bottom Bar */
 .asset-drawer-bottom-bar {
-  position: relative;
+  position: absolute;
   bottom: 0;
-  left: 0;
   right: 0;
-  width: 100%;
+  width: 473px;
   height: 68px;
   background: #fff;
   border-top: 1px solid #ececef;
@@ -335,8 +446,8 @@ body.drawer-open {
   gap: 16px;
   padding: 16px 24px;
   flex-shrink: 0;
-  z-index: 10;
-  margin-top: auto;
+  z-index: 1002;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .asset-drawer-cancel-btn {

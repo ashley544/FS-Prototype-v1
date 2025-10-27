@@ -26,18 +26,19 @@ const AssetLibrary = ({ onReturnToTitle }) => {
       duration: "5 mins",
       patterns: "0 Patterns",
       isPinned: false
-    }
-  ];
-
-  const newsroomAssets = [
+    },
     {
       id: 3,
       image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
       title: "BX Digital Infrastructure Strategy",
       duration: "17 mins",
       patterns: "0 Patterns",
-      isPinned: true
-    },
+      isPinned: true,
+      highlighted: true
+    }
+  ];
+
+  const newsroomAssets = [
     {
       id: 4,
       image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
@@ -181,6 +182,7 @@ const AssetLibrary = ({ onReturnToTitle }) => {
                   duration={asset.duration}
                   patterns={asset.patterns}
                   isPinned={asset.isPinned}
+                  highlighted={asset.highlighted}
                   onPin={() => handlePinAsset(asset)}
                   onShare={() => handleShareAsset(asset)}
                   onClick={() => handleAssetClick(asset)}
@@ -203,6 +205,7 @@ const AssetLibrary = ({ onReturnToTitle }) => {
                   duration={asset.duration}
                   patterns={asset.patterns}
                   isPinned={asset.isPinned}
+                  highlighted={asset.highlighted}
                   onPin={() => handlePinAsset(asset)}
                   onShare={() => handleShareAsset(asset)}
                   onClick={() => handleAssetClick(asset)}
