@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   gap: 32px;
 }
 
@@ -104,7 +104,7 @@
 .asset-library-cta {
   height: 40px;
   padding: 0 20px;
-  background: #007aff;
+  background: #000000;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -114,10 +114,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .asset-library-cta:hover {
-  background: #0056b3;
+  background: #333333;
   transform: translateY(-1px);
 }
 

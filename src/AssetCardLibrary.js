@@ -32,9 +32,9 @@ const AssetCardLibrary = ({
               onPin && onPin();
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path 
-                d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" 
+                d="M16 4V2H8V4H6V6H8V14L10 16V18H14V16L16 14V6H18V4H16ZM10 6H14V12H10V6Z" 
                 fill="rgba(0, 0, 0, 0.38)"
               />
             </svg>
