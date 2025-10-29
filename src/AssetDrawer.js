@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AssetDrawer.css';
 import AssetCardLibrary from './AssetCardLibrary';
 
-export default function AssetDrawer({ isOpen, onClose, asset }) {
+export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'analytics' }) {
   const [isClosing, setIsClosing] = useState(false);
   const [drawerMode, setDrawerMode] = useState('analytics'); // 'analytics', 'share', or 'shared'
   const [selectedContacts, setSelectedContacts] = useState(new Set()); // Track selected contact IDs
@@ -33,7 +33,7 @@ export default function AssetDrawer({ isOpen, onClose, asset }) {
   useEffect(() => {
     if (isOpen) {
       setIsClosing(false);
-      setDrawerMode('analytics'); // Reset to analytics mode when opening
+      setDrawerMode(initialMode); // Use initialMode prop
       setSelectedContacts(new Set()); // Reset selected contacts when opening
       setSearchTerm(''); // Reset search term when opening
       // Prevent body scroll when drawer is open
@@ -47,7 +47,7 @@ export default function AssetDrawer({ isOpen, onClose, asset }) {
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen]);
+  }, [isOpen, initialMode]);
 
   const handleClose = () => {
     setIsClosing(true);

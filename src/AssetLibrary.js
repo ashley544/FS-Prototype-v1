@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import SideNav from './SideNav';
 import AssetCardLibrary from './AssetCardLibrary';
 import AssetDrawer from './AssetDrawer';
+import CreateAssetDrawer from './CreateAssetDrawer';
 import './AssetLibrary.css';
 
 const AssetLibrary = ({ onReturnToTitle }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [isCreateDrawerOpen, setIsCreateDrawerOpen] = useState(false);
+  const [drawerInitialMode, setDrawerInitialMode] = useState('analytics');
 
   // Sample asset data organized by sections
   const exchangeAssets = [
@@ -80,12 +83,14 @@ const AssetLibrary = ({ onReturnToTitle }) => {
 
   const handleAssetClick = (asset) => {
     setSelectedAsset(asset);
+    setDrawerInitialMode('analytics');
     setIsDrawerOpen(true);
   };
 
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
     setSelectedAsset(null);
+    setDrawerInitialMode('analytics'); // Reset to analytics mode for next time
   };
 
   const handlePinAsset = (asset) => {
@@ -94,6 +99,20 @@ const AssetLibrary = ({ onReturnToTitle }) => {
 
   const handleShareAsset = (asset) => {
     console.log('Share asset:', asset.title);
+  };
+
+  const handleOpenCreateDrawer = () => {
+    setIsCreateDrawerOpen(true);
+  };
+
+  const handleCloseCreateDrawer = () => {
+    setIsCreateDrawerOpen(false);
+  };
+
+  const handleOpenShareDrawer = (asset) => {
+    setSelectedAsset(asset);
+    setDrawerInitialMode('share');
+    setIsDrawerOpen(true);
   };
 
   return (
@@ -122,7 +141,7 @@ const AssetLibrary = ({ onReturnToTitle }) => {
                 </svg>
               </button>
             </div>
-            <button className="asset-library-cta">
+            <button className="asset-library-cta" onClick={handleOpenCreateDrawer}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -223,6 +242,13 @@ const AssetLibrary = ({ onReturnToTitle }) => {
         isOpen={isDrawerOpen}
         onClose={handleCloseDrawer}
         asset={selectedAsset}
+        initialMode={drawerInitialMode}
+      />
+      
+      <CreateAssetDrawer 
+        isOpen={isCreateDrawerOpen}
+        onClose={handleCloseCreateDrawer}
+        onOpenShareDrawer={handleOpenShareDrawer}
       />
     </div>
   );

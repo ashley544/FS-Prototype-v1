@@ -369,18 +369,18 @@
 
 /* PDF Search Highlighting */
 .pdf-search-highlight {
-  background: #ffeb3b !important;
+  background: #ffd700 !important;
   color: #000 !important;
   border-radius: 2px;
   font-weight: inherit !important;
   font-size: inherit !important;
   line-height: inherit !important;
   vertical-align: baseline !important;
-  box-shadow: 0 1px 0 0 #ffeb3b;
+  box-shadow: 0 1px 0 0 #ffd700;
   position: relative !important;
   z-index: 3 !important;
   display: inline;
-  padding: 0 !important;
+  padding: 2px 0 !important;
   margin: 0 !important;
 }
 
@@ -390,7 +390,7 @@
     transform: scale(1.05);
   }
   100% {
-    background-color: #ffeb3b;
+    background-color: #ffd700;
     transform: scale(1);
   }
 }
@@ -413,7 +413,7 @@
 
 .react-pdf__Page__textContent.search-active .pdf-search-highlight {
   color: #000 !important;
-  background-color: #ffeb3b !important;
+  background-color: #ffd700 !important;
 }
 
 @media (max-width: 900px) {

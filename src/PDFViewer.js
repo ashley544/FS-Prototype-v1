@@ -638,16 +638,39 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
                 console.log('Enter key pressed, calling onSearchEnterPress with:', searchQuery);
                 // Check for the trigger phrase and handle highlighting
                 if (searchQuery.trim() === 'show me the security procedure') {
-                  // Scroll to page 12 and highlight
+                  // Scroll to page 12 and highlight the text
                   setTimeout(() => {
-                    const pageElement = document.querySelector(`[data-page-number="12"]`);
+                    // Target the page wrapper for page 12 (index 11)
+                    const pageElement = pageRefs.current[11];
                     if (pageElement) {
                       pageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      // Add highlight effect
-                      pageElement.style.boxShadow = '0 0 0 3px rgba(255, 193, 7, 0.5)';
+                      // Activate search highlighting for the specific text
+                      setIsSearchActive(true);
+                      setSearchQuery('security procedure');
+                      setCaseSensitive(false);
+                      // Clear highlighting after 5 seconds
                       setTimeout(() => {
-                        pageElement.style.boxShadow = '';
-                      }, 3000);
+                        setIsSearchActive(false);
+                        setSearchQuery('');
+                      }, 5000);
+                    }
+                  }, 100);
+                } else if (searchQuery.trim() === 'data center markets') {
+                  // Scroll to page 11 and highlight the text
+                  setTimeout(() => {
+                    // Target the page wrapper for page 11 (index 10)
+                    const pageElement = pageRefs.current[10];
+                    if (pageElement) {
+                      pageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      // Activate search highlighting for the specific text
+                      setIsSearchActive(true);
+                      setSearchQuery('data center markets');
+                      setCaseSensitive(false);
+                      // Clear highlighting after 5 seconds
+                      setTimeout(() => {
+                        setIsSearchActive(false);
+                        setSearchQuery('');
+                      }, 5000);
                     }
                   }, 100);
                 }
