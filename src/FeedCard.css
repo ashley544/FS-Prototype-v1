@@ -41,7 +41,7 @@
 }
 
 .feed-card-date {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   color: #b0b0b0;
 }
@@ -62,7 +62,7 @@
 
 .feed-card-meta {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #18171A;
   display: flex;
   align-items: center;

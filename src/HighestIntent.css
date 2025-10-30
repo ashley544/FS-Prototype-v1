@@ -1,0 +1,162 @@
+.highest-intent {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(51, 51, 51, 0.08);
+  width: 100%;
+  max-width: 307px;
+  min-width: 250px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.intent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.intent-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.intent-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #18171A;
+  margin: 0;
+  line-height: 1;
+}
+
+.intent-subtitle {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  margin: 0;
+  line-height: 1;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.expand-button:hover {
+  background-color: #f5f5f5;
+}
+
+.intent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.intent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  min-height: 18px;
+}
+
+.intent-name {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8c8c8c;
+  flex: 1;
+  line-height: 1.2;
+  word-wrap: break-word;
+  margin-right: 18px;
+}
+
+.intent-value {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #18171A;
+  min-width: 18px;
+  text-align: right;
+  line-height: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .highest-intent {
+    max-width: 280px;
+    min-width: 220px;
+  }
+  
+  .intent-name {
+    font-size: 13px;
+  }
+  
+  .intent-value {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .highest-intent {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 280px;
+  }
+  
+  .intent-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .intent-value {
+    text-align: left;
+  }
+  
+  .intent-name {
+    font-size: 12px;
+  }
+  
+  .intent-value {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .highest-intent {
+    padding: 16px;
+  }
+  
+  .intent-title {
+    font-size: 16px;
+  }
+  
+  .intent-subtitle {
+    font-size: 12px;
+  }
+  
+  .intent-name {
+    font-size: 11px;
+  }
+  
+  .intent-value {
+    font-size: 13px;
+  }
+}

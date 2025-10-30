@@ -9,6 +9,7 @@ import FeedCard from './FeedCard';
 import Modal from './Modal';
 import PrototypeTitle from './PrototypeTitle';
 import AssetLibrary from './AssetLibrary';
+import Insights from './Insights';
 import AssetDrawer from './AssetDrawer';
 import "./App.css";
 
@@ -434,6 +435,7 @@ export default function App() {
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', or 'feed'
   const [currentFlow, setCurrentFlow] = useState(null); // null, 1, 2, or 3
+  const [flow1Page, setFlow1Page] = useState('assets'); // 'assets', 'insights', 'contacts', 'settings'
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
 
@@ -673,9 +675,18 @@ export default function App() {
     return <PrototypeTitle onSelectFlow={handleFlowSelection} />;
   }
   
-  // Show Flow 1: Asset Library
+  // Handler for navigating between pages in Flow 1
+  const handleNavigateToPage = (page) => {
+    setFlow1Page(page);
+  };
+  
+  // Show Flow 1: Asset Library or Insights
   if (currentFlow === 1) {
-    return <AssetLibrary onReturnToTitle={handleReturnToTitle} />;
+    if (flow1Page === 'insights') {
+      return <Insights onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+    } else {
+      return <AssetLibrary onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+    }
   }
   
   if (currentPage === 'feed') {

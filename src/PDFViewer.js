@@ -648,11 +648,7 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
                       setIsSearchActive(true);
                       setSearchQuery('security procedure');
                       setCaseSensitive(false);
-                      // Clear highlighting after 5 seconds
-                      setTimeout(() => {
-                        setIsSearchActive(false);
-                        setSearchQuery('');
-                      }, 5000);
+                      // Keep highlighting until manually dismissed
                     }
                   }, 100);
                 } else if (searchQuery.trim() === 'data center markets') {
@@ -666,11 +662,7 @@ export default function PDFViewer({ file, isExpanded, onToggleExpand, onSearchIn
                       setIsSearchActive(true);
                       setSearchQuery('data center markets');
                       setCaseSensitive(false);
-                      // Clear highlighting after 5 seconds
-                      setTimeout(() => {
-                        setIsSearchActive(false);
-                        setSearchQuery('');
-                      }, 5000);
+                      // Keep highlighting until manually dismissed
                     }
                   }, 100);
                 }

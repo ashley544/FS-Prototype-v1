@@ -5,7 +5,7 @@ import AssetDrawer from './AssetDrawer';
 import CreateAssetDrawer from './CreateAssetDrawer';
 import './AssetLibrary.css';
 
-const AssetLibrary = ({ onReturnToTitle }) => {
+const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
@@ -70,6 +70,15 @@ const AssetLibrary = ({ onReturnToTitle }) => {
 
   const handleNavItemClick = (itemId) => {
     setActiveNavItem(itemId);
+    
+    // Handle navigation between pages
+    if (itemId === 'insights') {
+      onNavigateToPage && onNavigateToPage('insights');
+    } else if (itemId === 'contacts') {
+      onNavigateToPage && onNavigateToPage('contacts');
+    } else if (itemId === 'settings') {
+      onNavigateToPage && onNavigateToPage('settings');
+    }
     
     // Handle special navigation items
     if (itemId === 'logout') {

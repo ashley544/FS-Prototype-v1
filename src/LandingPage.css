@@ -36,7 +36,7 @@
 
 .locked-profile-user-name {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
 }
 
@@ -107,7 +107,7 @@
   background: #7197C5;
   color: #fff;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   border-radius: 10px;
   padding: 18px 48px;
