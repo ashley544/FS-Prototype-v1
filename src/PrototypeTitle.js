@@ -18,34 +18,21 @@ const PrototypeTitle = ({ onSelectFlow }) => {
             <div className="flow-button-content">
               <div className="flow-button-number">01</div>
               <div className="flow-button-text">
-                <h3>Flow 1</h3>
+                <h3>Admin flow</h3>
                 <p>Asset Library & Navigation</p>
               </div>
             </div>
           </button>
 
           <button 
-            className="prototype-flow-button prototype-flow-button-active"
+            className="prototype-flow-button"
             onClick={() => onSelectFlow(2)}
           >
             <div className="flow-button-content">
               <div className="flow-button-number">02</div>
               <div className="flow-button-text">
-                <h3>Flow 2</h3>
+                <h3>User flow</h3>
                 <p>PDF Viewer & AI Search</p>
-              </div>
-            </div>
-          </button>
-
-          <button 
-            className="prototype-flow-button"
-            onClick={() => onSelectFlow(3)}
-          >
-            <div className="flow-button-content">
-              <div className="flow-button-number">03</div>
-              <div className="flow-button-text">
-                <h3>Flow 3</h3>
-                <p>Coming Soon</p>
               </div>
             </div>
           </button>

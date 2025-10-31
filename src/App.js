@@ -430,7 +430,7 @@ export default function App() {
   const pdfRef = useRef();
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', 'code-input', or 'feed'
-  const [currentFlow, setCurrentFlow] = useState(null); // null, 1, 2, or 3
+  const [currentFlow, setCurrentFlow] = useState(null); // null, 1, or 2
   const [flow1Page, setFlow1Page] = useState('assets'); // 'assets', 'insights', 'contacts', 'settings'
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
