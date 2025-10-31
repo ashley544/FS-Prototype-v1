@@ -62,15 +62,21 @@
   min-width: 0;
 }
 
-/* Right Side Container */
+.left-stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 50%;
+  min-width: 0;
+}
+
+/* Right side takes 50% width */
 .right-side-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100%;
-  max-width: 307px;
-  min-width: 250px;
-  flex-shrink: 0;
+  width: 50%;
+  min-width: 0;
 }
 
 /* Section Titles */
@@ -187,9 +193,9 @@
     gap: 1.5vw;
   }
   
+  .left-stack-container,
   .right-side-container {
-    max-width: 280px;
-    min-width: 220px;
+    width: 50%;
   }
   
   .insights-main {
@@ -214,9 +220,8 @@
     gap: 20px;
   }
   
+  .left-stack-container,
   .right-side-container {
-    max-width: none;
-    min-width: 0;
     width: 100%;
   }
 }
@@ -230,6 +235,7 @@
     gap: 16px;
   }
   
+  .left-stack-container,
   .right-side-container {
     gap: 16px;
   }

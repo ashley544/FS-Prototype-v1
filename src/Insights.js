@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import SideNav from './SideNav';
-import EngagementChart from './EngagementChart';
-import IntelligentInteractions from './IntelligentInteractions';
-import HighestIntent from './HighestIntent';
 import WhatWouldYouLikeToLearn from './WhatWouldYouLikeToLearn';
+import Relationships from './Relationships';
+import Interests from './Interests';
+import Fund from './Fund';
 import './Insights.css';
 
 const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
@@ -29,8 +29,6 @@ const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
     }
   };
 
-
-
   return (
     <div className="insights">
       <SideNav 
@@ -48,12 +46,14 @@ const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
 
         {/* Main Content */}
         <div className="insights-content">
-          {/* Chart and Right Side Section */}
+          {/* Left and Right Column */}
           <div className="chart-intent-container">
-            <EngagementChart />
+            <div className="left-stack-container">
+              <Relationships />
+              <Interests />
+            </div>
             <div className="right-side-container">
-              <IntelligentInteractions />
-              <HighestIntent />
+              <Fund />
             </div>
           </div>
 

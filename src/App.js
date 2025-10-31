@@ -11,6 +11,7 @@ import PrototypeTitle from './PrototypeTitle';
 import AssetLibrary from './AssetLibrary';
 import Insights from './Insights';
 import AssetDrawer from './AssetDrawer';
+import CodeInput from './CodeInput';
 import "./App.css";
 
 const placeholderImg = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=256&h=256";
@@ -23,13 +24,11 @@ const newsroomAssets = [
     file: "/pdfs/BX Digital Infrastructure Strategy.pdf",
   },
   {
-    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
     title: "Artificial Intelligence through Private Markets",
     file: "/pdfs/Artificial Intelligence through Private Markets.pdf",
   },
   {
-    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
     title: "$25bn in Pennsylvania Data Centers",
     file: "/pdfs/$25bn in Pennsylvania Data Centers.pdf",
@@ -38,16 +37,14 @@ const newsroomAssets = [
 
 const exchangeAssets = [
   {
-    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "Blackstone 2Q25 Earnings Press Release",
-    file: "/pdfs/Blackstone 2Q25 Earnings Press Release.pdf",
+    title: "KKR Infrastructure - Presentation",
+    file: "/pdfs/KKR Infrastructure - Presentation.pdf",
   },
   {
-    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "BREIF II Fact Card",
-    file: "/pdfs/BREIF II Fact Card.pdf",
+    title: "Coatue Innovative Strategies (CTEK)",
+    file: "/pdfs/Coatue Innovative Strategies (CTEK).pdf",
   },
 ];
 
@@ -290,10 +287,8 @@ function Feed({ onGoToAssetViewer, onOpenAsset, onOpenDrawer }) {
                   image={asset.image}
                   type={asset.type}
                   title={asset.title}
-                  onSummarise={() => {}}
                   onClick={() => onOpenAsset(asset.file)}
                   onOpenDrawer={() => onOpenDrawer(asset)}
-                  showSummarise={false}
                   variant="feed-newsroom"
                   idx={idx}
                 />
@@ -433,11 +428,13 @@ export default function App() {
   const [pdfRect, setPdfRect] = useState(null);
   const pdfRef = useRef();
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
-  const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', or 'feed'
+  const [currentPage, setCurrentPage] = useState('landing'); // 'landing', 'asset-viewer', 'code-input', or 'feed'
   const [currentFlow, setCurrentFlow] = useState(null); // null, 1, 2, or 3
   const [flow1Page, setFlow1Page] = useState('assets'); // 'assets', 'insights', 'contacts', 'settings'
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [userEmail, setUserEmail] = useState('ellie@flagships.io'); // Store user email for code input
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Update bounding box when hovered or window resizes
   useEffect(() => {
@@ -587,7 +584,11 @@ export default function App() {
   const handleReturnToOriginal = () => {
     if (originalPdf) {
       setSelectedPdf(originalPdf);
-      setCurrentPage('asset-viewer');
+      if (isAuthenticated) {
+        setCurrentPage('asset-viewer');
+      } else {
+        setCurrentPage('code-input');
+      }
     }
     // Keep the AI response open and don't clear the preserved data
   };
@@ -639,11 +640,31 @@ export default function App() {
   );
 
   // Handler to go to asset viewer
-  const handleEnterAssetViewer = () => setCurrentPage('asset-viewer');
+  const handleEnterAssetViewer = () => {
+    if (isAuthenticated) {
+      setCurrentPage('asset-viewer');
+    } else {
+      setCurrentPage('code-input');
+    }
+  };
   // Handler to go to feed page
   const handleGoToFeed = () => setCurrentPage('feed');
   // Handler to go to landing page
   const handleGoToLanding = () => setCurrentPage('landing');
+  
+  // Handler for code input submission
+  const handleCodeSubmit = (code) => {
+    // Accept any 6-digit code for demo purposes
+    if (code.length === 6) {
+      setIsAuthenticated(true);
+      setCurrentPage('asset-viewer');
+    }
+  };
+  
+  // Handler for going back from code input
+  const handleCodeInputBack = () => {
+    setCurrentPage('landing');
+  };
   
   // Handler for flow selection
   const handleFlowSelection = (flowNumber) => {
@@ -670,6 +691,12 @@ export default function App() {
     setSelectedAsset(null);
   };
 
+  // Handler for opening assets (PDFs)
+  const handleOpenAsset = (asset) => {
+    setSelectedPdf(asset.file);
+    setCurrentPage('asset-viewer');
+  };
+
   // Show prototype title page if no flow is selected
   if (currentFlow === null) {
     return <PrototypeTitle onSelectFlow={handleFlowSelection} />;
@@ -685,7 +712,7 @@ export default function App() {
     if (flow1Page === 'insights') {
       return <Insights onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
     } else {
-      return <AssetLibrary onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+      return <AssetLibrary onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} exchangeAssets={exchangeAssets} newsroomAssets={newsroomAssets} onOpenAsset={handleOpenAsset} />;
     }
   }
   
@@ -694,7 +721,14 @@ export default function App() {
       <>
         <Feed 
           onGoToAssetViewer={handleEnterAssetViewer} 
-          onOpenAsset={(file) => { setSelectedPdf(file); setCurrentPage('asset-viewer'); }}
+          onOpenAsset={(file) => { 
+            setSelectedPdf(file); 
+            if (isAuthenticated) {
+              setCurrentPage('asset-viewer');
+            } else {
+              setCurrentPage('code-input');
+            }
+          }}
           onOpenDrawer={handleOpenDrawer}
         />
         <AssetDrawer 
@@ -707,6 +741,16 @@ export default function App() {
   }
   if (currentPage === 'landing') {
     return <LandingPage onEnter={handleEnterAssetViewer} />;
+  }
+  
+  if (currentPage === 'code-input') {
+    return (
+      <CodeInput 
+        onCodeSubmit={handleCodeSubmit}
+        onBack={handleCodeInputBack}
+        userEmail={userEmail}
+      />
+    );
   }
 
   return (
@@ -754,7 +798,11 @@ export default function App() {
               setPreservedAIResponse(aiConfig); // Preserve the current AI response data
               setOriginalPdf(selectedPdf); // Store the current PDF as the original
               setSelectedPdf(file); 
-              setCurrentPage('asset-viewer'); 
+              if (isAuthenticated) {
+                setCurrentPage('asset-viewer'); 
+              } else {
+                setCurrentPage('code-input');
+              }
               setKeepAIResponseOpen(true); 
             }}
             onReturnToOriginal={handleReturnToOriginal}
@@ -771,9 +819,7 @@ export default function App() {
                   image={asset.image}
                   type={asset.type}
                   title={asset.title}
-                  onSummarise={() => alert("Summarise Newsroom Asset")}
                   onClick={() => handlePdfSelection(asset.file)}
-                  showSummarise={true}
                 />
               ))}
           </div>
@@ -798,9 +844,7 @@ export default function App() {
                 type={asset.type}
                 title={asset.title}
                 selected={selectedPdf === asset.file}
-                onSummarise={() => alert("Summarise Exchange Asset")}
                 onClick={() => handlePdfSelection(asset.file)}
-                showSummarise={false}
               />
             ))}
           </div>

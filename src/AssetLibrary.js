@@ -5,68 +5,38 @@ import AssetDrawer from './AssetDrawer';
 import CreateAssetDrawer from './CreateAssetDrawer';
 import './AssetLibrary.css';
 
-const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
+const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [isCreateDrawerOpen, setIsCreateDrawerOpen] = useState(false);
   const [drawerInitialMode, setDrawerInitialMode] = useState('analytics');
 
-  // Sample asset data organized by sections
-  const exchangeAssets = [
-    {
-      id: 1,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "Blackstone 2Q25 Earnings Press Release",
-      duration: "15 mins",
-      patterns: "2 Patterns",
-      isPinned: true
-    },
-    {
-      id: 2,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "BREIF II Fact Card",
-      duration: "5 mins",
-      patterns: "0 Patterns",
-      isPinned: false
-    },
-    {
-      id: 3,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "BX Digital Infrastructure Strategy",
-      duration: "17 mins",
-      patterns: "0 Patterns",
-      isPinned: true,
-      highlighted: true
-    }
-  ];
+  // Convert exchange assets to the format expected by AssetCardLibrary
+  const formattedExchangeAssets = exchangeAssets.map((asset, index) => ({
+    id: index + 1,
+    image: asset.image,
+    title: asset.title,
+    duration: "15 mins", // Default duration
+    patterns: "0 Patterns", // Default patterns
+    isPinned: false,
+    highlighted: index === 0, // Make the first asset highlighted with rainbow gradient
+    file: asset.file, // Keep the file reference for PDF viewing
+    type: asset.type
+  }));
 
-  const newsroomAssets = [
-    {
-      id: 4,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "Artificial Intelligence through Private Markets",
-      duration: "12 mins",
-      patterns: "3 Patterns",
-      isPinned: false
-    },
-    {
-      id: 5,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "$25bn in Pennsylvania Data Centers",
-      duration: "8 mins",
-      patterns: "1 Pattern",
-      isPinned: false
-    },
-    {
-      id: 6,
-      image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
-      title: "Long Term Case for Data Centers",
-      duration: "22 mins",
-      patterns: "4 Patterns",
-      isPinned: false
-    }
-  ];
+  // Convert newsroom assets to the format expected by AssetCardLibrary
+  const formattedNewsroomAssets = newsroomAssets.map((asset, index) => ({
+    id: index + 100, // Use different ID range to avoid conflicts
+    image: asset.image,
+    title: asset.title,
+    duration: "15 mins", // Default duration
+    patterns: "0 Patterns", // Default patterns
+    isPinned: false,
+    highlighted: false,
+    file: asset.file, // Keep the file reference for PDF viewing
+    type: asset.type
+  }));
 
   const handleNavItemClick = (itemId) => {
     setActiveNavItem(itemId);
@@ -91,9 +61,21 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
   };
 
   const handleAssetClick = (asset) => {
-    setSelectedAsset(asset);
-    setDrawerInitialMode('analytics');
-    setIsDrawerOpen(true);
+    // If asset is highlighted (rainbow gradient), open the analytics drawer
+    if (asset.highlighted) {
+      setSelectedAsset(asset);
+      setDrawerInitialMode('analytics');
+      setIsDrawerOpen(true);
+    }
+    // If asset has a file (PDF), open it in the PDF viewer
+    else if (asset.file && onOpenAsset) {
+      onOpenAsset(asset);
+    } else {
+      // Otherwise, open the asset drawer
+      setSelectedAsset(asset);
+      setDrawerInitialMode('analytics');
+      setIsDrawerOpen(true);
+    }
   };
 
   const handleCloseDrawer = () => {
@@ -205,7 +187,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
               <h2 className="asset-section-title">Exchange</h2>
             </div>
             <div className="asset-library-grid">
-              {exchangeAssets.map((asset) => (
+              {formattedExchangeAssets.map((asset) => (
                 <AssetCardLibrary
                   key={asset.id}
                   image={asset.image}
@@ -214,6 +196,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
                   patterns={asset.patterns}
                   isPinned={asset.isPinned}
                   highlighted={asset.highlighted}
+                  file={asset.file}
                   onPin={() => handlePinAsset(asset)}
                   onShare={() => handleShareAsset(asset)}
                   onClick={() => handleAssetClick(asset)}
@@ -228,7 +211,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
               <h2 className="asset-section-title">Newsroom</h2>
             </div>
             <div className="asset-library-grid">
-              {newsroomAssets.map((asset) => (
+              {formattedNewsroomAssets.map((asset) => (
                 <AssetCardLibrary
                   key={asset.id}
                   image={asset.image}
@@ -237,6 +220,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage }) => {
                   patterns={asset.patterns}
                   isPinned={asset.isPinned}
                   highlighted={asset.highlighted}
+                  file={asset.file}
                   onPin={() => handlePinAsset(asset)}
                   onShare={() => handleShareAsset(asset)}
                   onClick={() => handleAssetClick(asset)}

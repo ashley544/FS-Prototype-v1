@@ -52,7 +52,7 @@ const PrototypeTitle = ({ onSelectFlow }) => {
         </div>
 
         <div className="prototype-footer">
-          <p className="prototype-footer-text">Flagships Exchange Platform</p>
+          <p className="prototype-footer-text">Rockefeller Exchange Platform</p>
         </div>
       </div>
     </div>

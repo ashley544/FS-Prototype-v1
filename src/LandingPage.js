@@ -72,14 +72,13 @@ export default function LandingPage({ onEnter }) {
           </div>
         </div>
         <div className="locked-profile-logo">
-          <img src="/Logomark - White - New.svg" alt="Flagships Logo" style={{ maxWidth: 191, maxHeight: 80 }} />
+          <img src="/rockefeller-logo-light.webp" alt="Rockefeller Logo" style={{ maxWidth: 191, maxHeight: 80 }} />
         </div>
       </aside>
       <main className="locked-profile-main">
         <div className="locked-profile-content">
           <Carousel assets={carouselAssets} />
           <DottedRectangle>
-            <div className="animated-gradient-blob-summarise" />
             <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, padding: '40px 0', zIndex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +87,7 @@ export default function LandingPage({ onEnter }) {
                   <path d="M8 9V7a4 4 0 1 1 8 0" stroke="#222" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
                 </svg>
                 <div style={{ fontSize: 24, fontWeight: 500, color: '#111', fontFamily: 'Inter Variable, Inter, Arial, sans-serif', textAlign: 'center', lineHeight: 1.1 }}>
-                  Flagships Exchange
+                  Rockefeller Exchange
                 </div>
                 <div style={{ fontSize: 14, color: '#222', fontWeight: 400, textAlign: 'center', marginTop: 0, lineHeight: 1.4 }}>
                   Permission required to access<br />

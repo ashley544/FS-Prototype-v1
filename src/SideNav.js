@@ -24,9 +24,9 @@ const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
           style={{ cursor: 'pointer' }}
         >
           <img 
-            src="/Blackstone logo.png" 
-            alt="Blackstone Logo" 
-            className="blackstone-logo"
+            src="/rockefeller-logo-light.webp" 
+            alt="Rockefeller Logo" 
+            className="rockefeller-logo"
           />
         </div>
 

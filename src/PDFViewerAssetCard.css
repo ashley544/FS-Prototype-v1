@@ -65,47 +65,6 @@
   font-family: 'Inter', Arial, sans-serif;
   letter-spacing: -0.01em;
 }
-.pdf-viewer-asset-card-summarise {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  border-radius: 4px;
-  padding: 0;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-top: 0;
-  font-family: 'Inter', Arial, sans-serif;
-  text-align: left;
-}
-.pdf-viewer-asset-card-summarise:hover {
-  background: none;
-}
-.pdf-viewer-asset-card-summarise-icon {
-  margin-right: 4px;
-  width: 16px;
-  height: 16px;
-  min-width: 16px;
-  min-height: 16px;
-  max-width: 16px;
-  max-height: 16px;
-  display: inline-block;
-  vertical-align: middle;
-  object-fit: contain;
-  font-size: 16px;
-}
-.pdf-viewer-asset-card-summarise-text {
-  background: linear-gradient(90deg, #f59e42 0%, #e94b4b 40%, #a953c7 70%, #0e87ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  font-weight: 500;
-  font-size: 12px;
-  font-family: 'Inter', Arial, sans-serif;
-}
 
 .pdf-viewer-asset-card.selected {
   border: 1.5px solid #E8E8E8;

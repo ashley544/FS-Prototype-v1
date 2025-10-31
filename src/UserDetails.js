@@ -9,7 +9,7 @@ export default function UserDetails({ onUserNameClick, onLogoClick }) {
         onClick={onLogoClick}
         style={onLogoClick ? { cursor: 'pointer' } : {}}
       >
-        <img src="/Blackstone logo.png" alt="Blackstone Logo" />
+        <img src="/Rockefeller-logo.png" alt="Rockefeller Logo" />
       </div>
       <div className="user-details-user">
         <div className="user-details-actions">

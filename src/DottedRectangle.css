@@ -27,18 +27,3 @@
   position: relative;
   z-index: 1;
 }
-
-.animated-gradient-blob-summarise {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 180px;
-  height: 180px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle at 50% 50%, #F05524 0%, #EE454A 25%, #D5529D 50%, #926AAE 75%, #0e87ff 100%);
-  filter: blur(64px);
-  opacity: 0.65;
-  z-index: 0;
-  pointer-events: none;
-  animation: blobSummariseMove 18s ease-in-out infinite alternate;
-} 

@@ -1,0 +1,68 @@
+.interests {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(51, 51, 51, 0.08);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.interests-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.interests-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #18171A;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.interests-table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.interests-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.interests-row {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.interests-row:hover {
+  background: #f9fafb;
+}
+
+.interests-row:last-child {
+  border-bottom: none;
+}
+
+.interests-cell {
+  padding: 12px 0;
+  font-size: 14px;
+  color: #18171A;
+  vertical-align: top;
+}
+
+.asset-cell {
+  font-weight: 400;
+  color: #18171A;
+  width: 70%;
+}
+
+.page-cell {
+  font-weight: 500;
+  color: #6b7280;
+  text-align: right;
+  width: 30%;
+}

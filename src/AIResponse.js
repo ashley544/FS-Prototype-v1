@@ -16,7 +16,7 @@ export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDi
             <div className="ai-response-answer" dangerouslySetInnerHTML={{ __html: aiAnswer }}></div>
             {recommendedAsset && (
               <div className="ai-response-recommendation">
-                <PDFViewerAssetCard {...recommendedAsset} selected={false} onSummarise={() => {}} onClick={() => onOpenAsset(recommendedAsset.file)} />
+                <PDFViewerAssetCard {...recommendedAsset} selected={false} onClick={() => onOpenAsset(recommendedAsset.file)} />
               </div>
             )}
             <div className="ai-response-return-link">

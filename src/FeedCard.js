@@ -37,7 +37,7 @@ export default function FeedCard({ org, date, title, description, author, readTi
       >
         {!hideHeader && (
           <div className="exchange-card-header">
-            <img src="/Assets/Blackstone logo.png" alt="Org logo" className="exchange-card-org-logo" />
+            <img src="/Rockefeller-logo.png" alt="Org logo" className="exchange-card-org-logo" />
             <div className="exchange-card-contacts">
               <span className="exchange-card-contacts-count">5 contacts</span>
               <span className="exchange-card-contacts-avatars">
