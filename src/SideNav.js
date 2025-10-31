@@ -3,14 +3,13 @@ import './SideNav.css';
 
 const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
   const navItems = [
-    { id: 'assets', label: 'Assets', active: true },
+    { id: 'assets', label: 'Assets' },
     { id: 'contacts', label: 'Contacts' },
     { id: 'insights', label: 'Insights' },
     { id: 'settings', label: 'Settings' }
   ];
 
   const userActions = [
-    { id: 'my-account', label: 'My account' },
     { id: 'logout', label: 'Logout' }
   ];
 
@@ -35,7 +34,7 @@ const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
           {navItems.map((item) => (
             <div 
               key={item.id}
-              className={`nav-item ${item.active ? 'active' : ''}`}
+              className={`nav-item ${activeItem === item.id ? 'active' : ''}`}
               onClick={() => onNavItemClick && onNavItemClick(item.id)}
             >
               <div className="nav-item-content">
@@ -48,9 +47,6 @@ const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
 
         {/* User Actions */}
         <div className="side-nav-user-actions">
-          <div className="user-info">
-            <span className="user-name">Evelyn Waugh</span>
-          </div>
           {userActions.map((action) => (
             <div 
               key={action.id}

@@ -13,8 +13,10 @@ export default function Relationships() {
     { contact: 'James Wilson', asset: 'Compliance Report', topic: 'Regulatory' },
   ];
 
-  const visibleRelationships = showAll ? relationships : relationships.slice(0, 4);
-  const hasMore = relationships.length > 4;
+  // Hide "David Thompson" (4th row) - show 3 rows when collapsed, 4 when expanded (skipping David)
+  const filteredRelationships = relationships.filter((_, index) => index !== 3); // Remove David at index 3
+  const visibleRelationships = showAll ? filteredRelationships : filteredRelationships.slice(0, 3);
+  const hasMore = filteredRelationships.length > 3;
 
   return (
     <div className="relationships">
@@ -46,7 +48,7 @@ export default function Relationships() {
               className="relationships-scroll-btn"
               onClick={() => setShowAll(!showAll)}
             >
-              {showAll ? 'Show Less' : `Show ${relationships.length - 4} More`}
+              {showAll ? 'Show Less' : `Show ${filteredRelationships.length - 3} More`}
             </button>
           </div>
         )}

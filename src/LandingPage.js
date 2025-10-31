@@ -5,24 +5,20 @@ import DottedRectangle from './DottedRectangle';
 
 const carouselAssets = [
   {
-    image: "/Assets/The Scrolling Mind - White Paper.png",
+    image: "/Assets/Prototype/BX Digital Infrastructure Strategy.png",
     type: "PDF",
-    title: "The Scrolling Mind - White Paper"
+    title: "BX Digital Infrastructure Strategy",
+    file: "/pdfs/BX Digital Infrastructure Strategy.pdf"
   },
   {
-    image: "/Assets/Prove Your Marketing Team's Performance.png",
     type: "PDF",
-    title: "Prove Your Marketing Team's Performance"
+    title: "Artificial Intelligence through Private Markets",
+    file: "/pdfs/Artificial Intelligence through Private Markets.pdf"
   },
   {
-    image: "/Assets/The Goldman Standard.png",
     type: "PDF",
-    title: "The Goldman Standard"
-  },
-  {
-    image: "/Assets/Consider the viewer.png",
-    type: "PDF",
-    title: "Consider the Viewer"
+    title: "$25bn in Pennsylvania Data Centers",
+    file: "/pdfs/$25bn in Pennsylvania Data Centers.pdf"
   }
 ];
 

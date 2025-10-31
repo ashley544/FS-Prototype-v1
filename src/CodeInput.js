@@ -55,36 +55,21 @@ const CodeInput = ({ onCodeSubmit, onBack, userEmail }) => {
     <div className="code-input-container">
       <div className="animated-gradient-blob" />
       <div className="code-input-modal">
-        <div className="modal-header">
+        <div className="modal-content">
           <button className="back-button" onClick={onBack}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.33334 10L16.6667 10M3.33334 10L10 3.33333M3.33334 10L10 16.6667" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <span>Back</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.6667 10L3.33334 10M16.6667 10L10 3.33333M16.6667 10L10 16.6667" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
           </button>
-        </div>
-
-        <div className="modal-content">
           <div className="content-header">
             <h1 className="main-title">Enter Your Verification Code</h1>
             <p className="subtitle">
-              We've sent an email to {userEmail}. Enter the code or click the link in your email to continue.
+              We've sent you an email. Enter the code or click the link in your email to continue.
             </p>
           </div>
 
           <div className="code-input-section">
-            <div className="input-label">
-              <span>Code *</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="8" cy="8" r="7" stroke="#B8B8B8" strokeWidth="1.2"/>
-                <path d="M8 5.33333V8M8 10.6667H8.00667" stroke="#B8B8B8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="optional-text">Optional</span>
-            </div>
-
             <div className="code-inputs">
               {code.map((digit, index) => (
                 <div key={index} className="input-wrapper">

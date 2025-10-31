@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getAssetImageUrl } from './utils/assetImageHelper';
 import './Carousel.css';
 
 const Carousel = ({ assets }) => {
@@ -98,23 +99,34 @@ const Carousel = ({ assets }) => {
             gap: `${gap}px`
           }}
         >
-          {assets.map((asset, index) => (
-            <div
-              key={index}
-              className="carousel-slide"
-              style={{ width: `${cardWidth}px`, height: '200px', flex: '0 0 auto' }}
-            >
-              <div className="carousel-card">
-                <div className="carousel-card-header">
-                  <div className="carousel-card-type">{asset.type}</div>
-                  <div className="carousel-card-title">{asset.title}</div>
-                </div>
-                <div className="carousel-card-image">
-                  <img src={asset.image} alt={asset.title} />
+          {assets.map((asset, index) => {
+            const imageUrl = getAssetImageUrl(asset.title, asset.image, asset.file);
+            return (
+              <div
+                key={index}
+                className="carousel-slide"
+                style={{ width: `${cardWidth}px`, height: '200px', flex: '0 0 auto' }}
+              >
+                <div className="carousel-card">
+                  <div className="carousel-card-header">
+                    <div className="carousel-card-type">{asset.type}</div>
+                    <div className="carousel-card-title">{asset.title}</div>
+                  </div>
+                  <div className="carousel-card-image">
+                    {imageUrl ? (
+                      <img src={imageUrl} alt={asset.title} onError={(e) => { e.target.style.display = 'none'; }} />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                          <path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="rgba(0, 0, 0, 0.26)"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

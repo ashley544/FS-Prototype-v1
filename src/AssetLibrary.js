@@ -13,30 +13,45 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const [drawerInitialMode, setDrawerInitialMode] = useState('analytics');
 
   // Convert exchange assets to the format expected by AssetCardLibrary
-  const formattedExchangeAssets = exchangeAssets.map((asset, index) => ({
-    id: index + 1,
-    image: asset.image,
-    title: asset.title,
-    duration: "15 mins", // Default duration
-    patterns: "0 Patterns", // Default patterns
-    isPinned: false,
-    highlighted: index === 0, // Make the first asset highlighted with rainbow gradient
-    file: asset.file, // Keep the file reference for PDF viewing
-    type: asset.type
-  }));
+  const formattedExchangeAssets = exchangeAssets.map((asset, index) => {
+    const isHighlighted = index === 0; // Make the first asset highlighted with rainbow gradient
+    // Generate random number between 1-50 for exchange contacts (non-highlighted)
+    // Use a seed based on title to ensure consistent number per asset
+    const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const exchangeContacts = isHighlighted ? "3 Patterns" : `${(seed % 50) + 1} Contacts`;
+    
+    return {
+      id: index + 1,
+      image: asset.image,
+      title: asset.title,
+      duration: "15 mins", // Default duration
+      patterns: exchangeContacts,
+      isPinned: false,
+      highlighted: isHighlighted,
+      file: asset.file, // Keep the file reference for PDF viewing
+      type: asset.type
+    };
+  });
 
   // Convert newsroom assets to the format expected by AssetCardLibrary
-  const formattedNewsroomAssets = newsroomAssets.map((asset, index) => ({
-    id: index + 100, // Use different ID range to avoid conflicts
-    image: asset.image,
-    title: asset.title,
-    duration: "15 mins", // Default duration
-    patterns: "0 Patterns", // Default patterns
-    isPinned: false,
-    highlighted: false,
-    file: asset.file, // Keep the file reference for PDF viewing
-    type: asset.type
-  }));
+  const formattedNewsroomAssets = newsroomAssets.map((asset, index) => {
+    // Generate random number between 200-600 for newsroom contacts
+    // Use a seed based on title to ensure consistent number per asset
+    const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const newsroomContacts = `${(seed % 401) + 200} Contacts`; // 401 possible values (200-600)
+    
+    return {
+      id: index + 100, // Use different ID range to avoid conflicts
+      image: asset.image,
+      title: asset.title,
+      duration: "15 mins", // Default duration
+      patterns: newsroomContacts,
+      isPinned: false,
+      highlighted: false,
+      file: asset.file, // Keep the file reference for PDF viewing
+      type: asset.type
+    };
+  });
 
   const handleNavItemClick = (itemId) => {
     setActiveNavItem(itemId);

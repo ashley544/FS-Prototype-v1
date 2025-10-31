@@ -91,7 +91,7 @@ const AssetCardLibrary = ({
               {/* Separator */}
               <div className="asset-card-separator">·</div>
               
-              {/* Patterns Badge */}
+              {/* Patterns/Contacts Badge */}
               <div className="asset-card-badge">
                 <span>{patterns}</span>
               </div>

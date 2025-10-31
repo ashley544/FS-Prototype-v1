@@ -11,22 +11,11 @@ export default function UserDetails({ onUserNameClick, onLogoClick }) {
       >
         <img src="/Rockefeller-logo.png" alt="Rockefeller Logo" />
       </div>
-      <div className="user-details-user">
-        <div className="user-details-actions">
-          {/*
-          <button className="user-details-action">
-            <span className="user-details-action-text">Save contact</span>
-            <span className="user-details-action-icon">
-              <img src="/download.svg" alt="Download" width={16} height={16} />
-            </span>
-          </button>
-          <button className="user-details-action">
-            <span className="user-details-action-text">Share</span>
-            <span className="user-details-action-icon">
-              <img src="/arrow_forward.svg" alt="Forward" width={16} height={16} />
-            </span>
-          </button>
-          */}
+      
+      <div className="user-details-info">
+        <div className="user-details-name-section">
+          <div className="user-details-name">Georgina Matthews</div>
+          <div className="user-details-title">Vice President · North America</div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Fund.css';
 
-const Fund = () => {
+const Fund = ({ onClick }) => {
   // Pie chart data - using SVG to create a pie chart
   // Sizes: 50%, 20%, 30% (normalized to add up to 100%)
   // But the design shows 50%, 20%, 45% which suggests they might be relative to different totals
@@ -13,13 +13,6 @@ const Fund = () => {
     { label: 'Existing BX Investors', percentage: 30, color: '#000000' }, // Adjusted to fit
   ];
 
-  const exposureData = [
-    { fund: 'BX IV', value: 621 },
-    { fund: 'BX V', value: 405 },
-    { fund: 'BX VI', value: 112 },
-    { fund: 'Blackstone Alts ETF', value: 89 },
-    { fund: 'BPP', value: 70 },
-  ];
 
   // Calculate angles for pie chart based on the design
   // The design shows approximate segments that should add up visually
@@ -51,7 +44,7 @@ const Fund = () => {
   };
 
   return (
-    <div className="fund">
+    <div className={`fund ${onClick ? 'clickable' : ''}`} onClick={onClick}>
       <div className="fund-header">
         <h2 className="fund-title">Data center fund prospects</h2>
         <div className="fund-divider"></div>
@@ -95,19 +88,8 @@ const Fund = () => {
             </svg>
           </div>
 
-          <div className="fund-breakdown">
-            <div className="breakdown-header">
-              <div className="breakdown-indicator"></div>
-              <span className="breakdown-title">Existing BX Investors' Exposure</span>
-            </div>
-            <div className="breakdown-list">
-              {exposureData.map((item, index) => (
-                <div key={index} className="breakdown-item">
-                  <span className="breakdown-fund">{item.fund}</span>
-                  <span className="breakdown-value">{item.value}</span>
-                </div>
-              ))}
-            </div>
+          <div className="fund-prospects">
+            <p className="prospects-text">6218 prospects for the BX Evergreen data center opportunity</p>
           </div>
         </div>
       </div>

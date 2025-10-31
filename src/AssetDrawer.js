@@ -124,13 +124,14 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                 {/* Asset Preview Card */}
                 <div className="asset-drawer-preview">
                   <AssetCardLibrary
-                    image={asset?.image || "/Assets/Consider the viewer.png"}
+                    image={asset?.image || null} // Pass null instead of fallback to let helper resolve image
                     title={asset?.title || "Asset Title"}
                     duration={asset?.duration || "5 mins"}
                     patterns={asset?.patterns || "patterns"}
                     isPinned={asset?.isPinned || false}
                     highlighted={asset?.highlighted || false}
                     hideMetadata={true} // Hide mins/patterns labels and share button
+                    file={asset?.file} // Pass file prop for image resolution
                     onClick={() => {}} // Non-clickable - empty function
                     onPin={() => {}} // Non-clickable - empty function
                     onShare={() => {}} // Non-clickable - empty function
@@ -321,13 +322,14 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                 {/* Asset Preview Card */}
                 <div className="asset-drawer-preview">
                   <AssetCardLibrary
-                    image={asset?.image || "/Assets/Consider the viewer.png"}
+                    image={asset?.image || null} // Pass null instead of fallback to let helper resolve image
                     title={asset?.title || "Asset Title"}
                     duration={asset?.duration || "5 mins"}
                     patterns={asset?.patterns || "patterns"}
                     isPinned={asset?.isPinned || false}
                     highlighted={asset?.highlighted || false}
                     hideMetadata={true} // Hide mins/patterns labels and share button
+                    file={asset?.file} // Pass file prop for image resolution
                     onClick={() => {}} // Non-clickable - empty function
                     onPin={() => {}} // Non-clickable - empty function
                     onShare={() => {}} // Non-clickable - empty function

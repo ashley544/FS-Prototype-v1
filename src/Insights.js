@@ -4,10 +4,17 @@ import WhatWouldYouLikeToLearn from './WhatWouldYouLikeToLearn';
 import Relationships from './Relationships';
 import Interests from './Interests';
 import Fund from './Fund';
+import FundDetail from './FundDetail';
+import InterestedInvestors from './InterestedInvestors';
+import HighestIntentDetail from './HighestIntentDetail';
+import DetailHeader from './DetailHeader';
+import DetailAIResponse from './DetailAIResponse';
 import './Insights.css';
 
 const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
   const [activeNavItem, setActiveNavItem] = useState('insights');
+  const [isDetailView, setIsDetailView] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleNavItemClick = (itemId) => {
     setActiveNavItem(itemId);
@@ -29,6 +36,70 @@ const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
     }
   };
 
+  const handleFundClick = () => {
+    setIsDetailView(true);
+    setSearchQuery('');
+  };
+
+  const handleSearch = (searchTerm) => {
+    setSearchQuery(searchTerm);
+    setIsDetailView(true);
+  };
+
+  const handleBackToOverview = () => {
+    setIsDetailView(false);
+    setSearchQuery('');
+  };
+
+  // Detail view layout
+  if (isDetailView) {
+    return (
+      <div className="insights">
+        <SideNav 
+          onNavItemClick={handleNavItemClick}
+          activeItem={activeNavItem}
+          onLogoClick={onReturnToTitle}
+        />
+        
+        <div className="insights-main">
+          <DetailHeader onBack={handleBackToOverview} />
+          
+          <div className="insights-detail-content">
+            <div className="detail-layout">
+              <div className="detail-left-column">
+                <FundDetail />
+              </div>
+              <div className="detail-right-column">
+                <InterestedInvestors />
+                <HighestIntentDetail />
+              </div>
+            </div>
+            
+            {/* AI Response and Search Input */}
+            <div className="detail-search-section">
+              <DetailAIResponse response="There are 6,218 private wealth investors that are interested. I have categorized them by fund participation or general consideration. Shall I optimize the deck for each group for you to review?" />
+              <div className="detail-search-input-wrapper">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  readOnly
+                  className="detail-search-input"
+                  placeholder="Anything else?"
+                />
+                <button className="detail-search-arrow-btn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="#000000"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Overview view layout
   return (
     <div className="insights">
       <SideNav 
@@ -53,12 +124,12 @@ const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
               <Interests />
             </div>
             <div className="right-side-container">
-              <Fund />
+              <Fund onClick={handleFundClick} />
             </div>
           </div>
 
           {/* What would you like to learn Section */}
-          <WhatWouldYouLikeToLearn />
+          <WhatWouldYouLikeToLearn onSearch={handleSearch} />
         </div>
       </div>
     </div>

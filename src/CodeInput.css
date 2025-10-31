@@ -31,38 +31,39 @@
   z-index: 1;
 }
 
-.modal-header {
-  padding: 44px 44px 0 44px;
+.modal-content {
+  padding: 44px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  gap: 44px;
+  flex: 1;
 }
 
 .back-button {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: #222222;
-  color: white;
+  gap: 8px;
+  background: none;
+  color: #000000;
   border: none;
-  border-radius: 4px;
-  padding: 10px 16px;
+  padding: 0;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
+  align-self: flex-start;
+  margin-bottom: -20px;
 }
 
 .back-button:hover {
-  background: #333333;
+  opacity: 0.7;
 }
 
-.modal-content {
-  padding: 32px 44px 44px 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 44px;
-  flex: 1;
+.back-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .content-header {
@@ -188,13 +189,13 @@
     margin: 20px;
   }
 
-  .modal-header {
-    padding: 24px 24px 0 24px;
-  }
-
   .modal-content {
     padding: 24px;
     gap: 32px;
+  }
+  
+  .back-button {
+    margin-bottom: -20px;
   }
 
   .main-title {
@@ -224,13 +225,13 @@
     margin: 0;
   }
 
-  .modal-header {
-    padding: 20px 20px 0 20px;
-  }
-
   .modal-content {
     padding: 20px;
     gap: 24px;
+  }
+  
+  .back-button {
+    margin-bottom: -20px;
   }
 
   .main-title {
