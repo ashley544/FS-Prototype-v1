@@ -11,6 +11,7 @@ import PrototypeTitle from './PrototypeTitle';
 import AssetLibrary from './AssetLibrary';
 import Insights from './Insights';
 import Settings from './Settings';
+import Contacts from './Contacts';
 import AssetDrawer from './AssetDrawer';
 import CodeInput from './CodeInput';
 import "./App.css";
@@ -708,10 +709,12 @@ export default function App() {
     setFlow1Page(page);
   };
   
-  // Show Flow 1: Asset Library, Insights, or Settings
+  // Show Flow 1: Asset Library, Insights, Contacts, or Settings
   if (currentFlow === 1) {
     if (flow1Page === 'insights') {
       return <Insights onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+    } else if (flow1Page === 'contacts') {
+      return <Contacts onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
     } else if (flow1Page === 'settings') {
       return <Settings onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
     } else {
