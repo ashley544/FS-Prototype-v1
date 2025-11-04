@@ -3,6 +3,7 @@ import SideNav from './SideNav';
 import AssetCardLibrary from './AssetCardLibrary';
 import AssetDrawer from './AssetDrawer';
 import CreateAssetDrawer from './CreateAssetDrawer';
+import ManageFoldersDrawer from './ManageFoldersDrawer';
 import './AssetLibrary.css';
 
 const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset }) => {
@@ -14,15 +15,16 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const [drawerInitialMode, setDrawerInitialMode] = useState('analytics');
   const [selectedFolder, setSelectedFolder] = useState('All folders');
   const [isFolderDropdownOpen, setIsFolderDropdownOpen] = useState(false);
+  const [isManageFoldersDrawerOpen, setIsManageFoldersDrawerOpen] = useState(false);
   const folderDropdownRef = useRef(null);
 
   const folders = [
     'All folders',
-    'Marketing',
-    'Sales',
-    'Product',
-    'Engineering',
-    'Operations'
+    'KKR',
+    'Coatue',
+    'Blackstone',
+    'Private Equity All Funds',
+    'Infra All Funds'
   ];
 
   // Close dropdown when clicking outside
@@ -49,12 +51,15 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     // Use a seed based on title to ensure consistent number per asset
     const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const exchangeContacts = isHighlighted ? "3 Patterns" : `${(seed % 50) + 1} Contacts`;
+    // Generate duration between 45-90 minutes using seed for consistency
+    const durationMinutes = (seed % 46) + 45; // 46 possible values (45-90)
+    const duration = `${durationMinutes} mins`;
     
     return {
       id: index + 1,
       image: asset.image,
       title: asset.title,
-      duration: "15 mins", // Default duration
+      duration: duration,
       patterns: exchangeContacts,
       isPinned: false,
       highlighted: isHighlighted,
@@ -69,12 +74,16 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     // Use a seed based on title to ensure consistent number per asset
     const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const newsroomContacts = `${(seed % 401) + 200} Contacts`; // 401 possible values (200-600)
+    // Generate duration between 45-90 minutes using seed for consistency
+    // Use a different calculation to ensure variety from exchange assets
+    const durationMinutes = ((seed * 17) % 46) + 45; // 46 possible values (45-90), different pattern
+    const duration = `${durationMinutes} mins`;
     
     return {
       id: index + 100, // Use different ID range to avoid conflicts
       image: asset.image,
       title: asset.title,
-      duration: "15 mins", // Default duration
+      duration: duration,
       patterns: newsroomContacts,
       isPinned: false,
       highlighted: false,
@@ -119,12 +128,15 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const formattedInactiveExchangeAssets = inactiveExchangeAssets.map((asset, index) => {
     const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const exchangeContacts = `${(seed % 50) + 1} Contacts`;
+    // Generate duration between 45-90 minutes using seed for consistency
+    const durationMinutes = (seed % 46) + 45; // 46 possible values (45-90)
+    const duration = `${durationMinutes} mins`;
     
     return {
       id: index + 1000, // Use different ID range
       image: asset.image,
       title: asset.title,
-      duration: "15 mins",
+      duration: duration,
       patterns: exchangeContacts,
       isPinned: false,
       highlighted: false,
@@ -138,12 +150,15 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const formattedInactiveNewsroomAssets = inactiveNewsroomAssets.map((asset, index) => {
     const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const newsroomContacts = `${(seed % 401) + 200} Contacts`;
+    // Generate duration between 45-90 minutes using seed for consistency
+    const durationMinutes = ((seed * 17) % 46) + 45; // 46 possible values (45-90), different pattern
+    const duration = `${durationMinutes} mins`;
     
     return {
       id: index + 2000, // Use different ID range
       image: asset.image,
       title: asset.title,
-      duration: "15 mins",
+      duration: duration,
       patterns: newsroomContacts,
       isPinned: false,
       highlighted: false,
@@ -226,6 +241,14 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     setIsDrawerOpen(true);
   };
 
+  const handleOpenManageFoldersDrawer = () => {
+    setIsManageFoldersDrawerOpen(true);
+  };
+
+  const handleCloseManageFoldersDrawer = () => {
+    setIsManageFoldersDrawerOpen(false);
+  };
+
   return (
     <div className="asset-library">
       <SideNav 
@@ -277,7 +300,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
         
         <div className="asset-library-filter-bar">
           <div className="filter-bar-left">
-            <button className="filter-btn">
+            <button className="filter-btn" onClick={handleOpenManageFoldersDrawer}>
               <span>Manage folders</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="none" strokeWidth="0">
                 <path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z" fill="currentColor" stroke="none" strokeWidth="0"/>
@@ -464,6 +487,13 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
         isOpen={isCreateDrawerOpen}
         onClose={handleCloseCreateDrawer}
         onOpenShareDrawer={handleOpenShareDrawer}
+      />
+      
+      <ManageFoldersDrawer 
+        isOpen={isManageFoldersDrawerOpen}
+        onClose={handleCloseManageFoldersDrawer}
+        exchangeAssets={exchangeAssets}
+        newsroomAssets={newsroomAssets}
       />
     </div>
   );
