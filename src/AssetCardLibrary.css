@@ -39,6 +39,19 @@
     0 8px 30px rgba(51, 51, 51, 0.15);
 }
 
+/* Disabled state */
+.asset-card-library.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.asset-card-library.disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 20px rgba(51, 51, 51, 0.12);
+}
+
 /* Image Container */
 .asset-card-image-container {
   position: relative;

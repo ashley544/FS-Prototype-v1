@@ -10,6 +10,7 @@ const AssetCardLibrary = ({
   isPinned = false,
   highlighted = false,
   hideMetadata = false,
+  disabled = false,
   onPin,
   onShare,
   onClick,
@@ -33,7 +34,7 @@ const AssetCardLibrary = ({
   };
 
   return (
-    <div className={`asset-card-library ${highlighted ? 'highlighted' : ''}`} onClick={onClick}>
+    <div className={`asset-card-library ${highlighted ? 'highlighted' : ''} ${disabled ? 'disabled' : ''}`} onClick={disabled ? undefined : onClick}>
       {/* Image Container */}
       <div className="asset-card-image-container">
         {imageUrl ? (

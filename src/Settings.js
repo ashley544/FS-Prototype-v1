@@ -238,155 +238,77 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 {openAccordions.brandSuite && (
                   <div className="settings-section-content">
                     <div className="brand-suite-drawer">
-                      <div className="brand-suite-inner-content">
-                        {/* Admins Header Section */}
-                        <div className="brand-suite-header-section">
-                          <div className="brand-suite-header-left">
-                            <div className="brand-suite-header-top">
-                              <h2 className="brand-suite-title">Admins</h2>
-                              <div className="brand-suite-badge">
-                                <span className="brand-suite-badge-label">Active</span>
+                      <div className="brand-suite-form-container">
+                        {/* Left Image Preview */}
+                        <div className="brand-suite-image-preview">
+                          <img src="/Assets/Frame 1321315244.png" alt="Brand suite preview" />
+                        </div>
+
+                        {/* Right Form Column */}
+                        <div className="brand-suite-form-column">
+                          {/* Locked Profile Section */}
+                          <div className="brand-suite-form-section">
+                            <h3 className="brand-suite-form-section-title">Locked profile</h3>
+                            
+                            <div className="brand-suite-form-fields">
+                              {/* Logo Color Input */}
+                              <div className="brand-suite-form-field">
+                                <div className="brand-suite-field-label-row">
+                                  <div className="brand-suite-field-label-content">
+                                    <span className="brand-suite-field-label">Logo color</span>
+                                    <span className="brand-suite-field-required">*</span>
+                                  </div>
+                                </div>
+                                <div className="brand-suite-color-picker-input">
+                                  <div className="brand-suite-color-preview" style={{ backgroundColor: '#54e33c' }}></div>
+                                  <span className="brand-suite-color-value">#54e33c</span>
+                                  <CloseIcon />
+                                </div>
+                              </div>
+
+                              {/* Logo Input */}
+                              <div className="brand-suite-form-field">
+                                <div className="brand-suite-field-label-row">
+                                  <div className="brand-suite-field-label-content">
+                                    <span className="brand-suite-field-label">Logo</span>
+                                    <span className="brand-suite-field-required">*</span>
+                                  </div>
+                                </div>
+                                <div className="brand-suite-image-picker-input">
+                                  <div className="brand-suite-image-preview-small"></div>
+                                  <span className="brand-suite-image-filename">image.png</span>
+                                  <CloseIcon />
+                                </div>
                               </div>
                             </div>
-                            <p className="brand-suite-subtitle">Manage the admins in your organisation.</p>
                           </div>
-                          <button className="brand-suite-add-button">
-                            <TableIcon />
-                            <span>Add Admin</span>
-                            <ArrowRightIcon />
+
+                          {/* PDF Viewer Section */}
+                          <div className="brand-suite-form-section">
+                            <h3 className="brand-suite-form-section-title">PDF viewer</h3>
+                            
+                            <div className="brand-suite-form-fields">
+                              {/* Logo Input */}
+                              <div className="brand-suite-form-field">
+                                <div className="brand-suite-field-label-row">
+                                  <div className="brand-suite-field-label-content">
+                                    <span className="brand-suite-field-label">Logo</span>
+                                    <span className="brand-suite-field-required">*</span>
+                                  </div>
+                                </div>
+                                <div className="brand-suite-image-picker-input">
+                                  <div className="brand-suite-image-preview-small"></div>
+                                  <span className="brand-suite-image-filename">image.png</span>
+                                  <DeleteIcon />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Update Button */}
+                          <button className="brand-suite-primary-button">
+                            <span>Update</span>
                           </button>
-                        </div>
-
-                        {/* First Row of Permission Cards */}
-                        <div className="brand-suite-cards-row">
-                          <div className="brand-suite-permission-card">
-                            <div className="brand-suite-permission-card-content">
-                              <div className="brand-suite-permission-icon">
-                                <LockIcon />
-                              </div>
-                              <span className="brand-suite-permission-title">Cardholder Permissions</span>
-                            </div>
-                            <button className="brand-suite-permission-link-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                          </div>
-
-                          <div className="brand-suite-permission-card">
-                            <div className="brand-suite-permission-card-content">
-                              <div className="brand-suite-permission-icon">
-                                <LinkIcon />
-                              </div>
-                              <span className="brand-suite-permission-title">Cardholder Permissions</span>
-                            </div>
-                            <button className="brand-suite-permission-link-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                          </div>
-
-                          <div className="brand-suite-permission-card">
-                            <div className="brand-suite-permission-card-content">
-                              <div className="brand-suite-permission-icon">
-                                <StackIcon />
-                              </div>
-                              <span className="brand-suite-permission-title">Cardholder Permissions</span>
-                            </div>
-                            <button className="brand-suite-permission-link-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Second Row of Permission Cards */}
-                        <div className="brand-suite-cards-row">
-                          <div className="brand-suite-permission-card">
-                            <div className="brand-suite-permission-card-content">
-                              <div className="brand-suite-permission-icon">
-                                <MailSendIcon />
-                              </div>
-                              <span className="brand-suite-permission-title">Cardholder Permissions</span>
-                            </div>
-                            <button className="brand-suite-permission-link-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                          </div>
-
-                          <div className="brand-suite-scheduled-card"></div>
-                          <div className="brand-suite-scheduled-card"></div>
-                        </div>
-
-                        {/* Section Titles */}
-                        <div className="brand-suite-section-titles">
-                          <div className="brand-suite-section-title-item">
-                            <div className="brand-suite-section-title-left">
-                              <div className="brand-suite-section-title-content">
-                                <div className="brand-suite-section-title-icon">
-                                  <StackIcon />
-                                </div>
-                                <span className="brand-suite-section-title-text">Brand suite</span>
-                              </div>
-                              <p className="brand-suite-section-title-subtitle">Manage the Super Admins in your organisation.</p>
-                            </div>
-                            <button className="brand-suite-section-title-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                            <div className="brand-suite-arrow-forward">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="rgba(28, 27, 31, 1)"/>
-                              </svg>
-                            </div>
-                          </div>
-
-                          <div className="brand-suite-section-title-item">
-                            <div className="brand-suite-section-title-left">
-                              <div className="brand-suite-section-title-content">
-                                <div className="brand-suite-section-title-icon">
-                                  <SendIcon />
-                                </div>
-                                <span className="brand-suite-section-title-text">Invite team members</span>
-                              </div>
-                            </div>
-                            <button className="brand-suite-section-title-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                            <div className="brand-suite-arrow-forward">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="rgba(28, 27, 31, 1)"/>
-                              </svg>
-                            </div>
-                          </div>
-
-                          <div className="brand-suite-section-title-item">
-                            <div className="brand-suite-section-title-left">
-                              <div className="brand-suite-section-title-content">
-                                <div className="brand-suite-section-title-icon">
-                                  <ContactsIcon />
-                                </div>
-                                <span className="brand-suite-section-title-text">Contact management</span>
-                              </div>
-                            </div>
-                            <button className="brand-suite-section-title-button">
-                              <TableIcon />
-                              <span>View</span>
-                              <ArrowRightIcon />
-                            </button>
-                            <div className="brand-suite-arrow-forward">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="rgba(28, 27, 31, 1)"/>
-                              </svg>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -417,7 +339,43 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 </div>
                 {openAccordions.inviteTeam && (
                   <div className="settings-section-content">
-                    {/* Accordion content goes here */}
+                    <div className="invite-team-content">
+                      <p className="invite-team-subtitle">
+                        Invite users from your organization to join [organization's] workspace, enter their work emails followed by a comma. Or see existing members.
+                      </p>
+                      
+                      <div className="invite-team-form">
+                        <div className="invite-team-input-field">
+                          <div className="invite-team-label-row">
+                            <div className="invite-team-label-content">
+                              <span className="invite-team-label">email</span>
+                            </div>
+                            <LockIcon />
+                          </div>
+                          
+                          <div className="invite-team-input-container">
+                            <div className="invite-team-input-content">
+                              <div className="invite-team-email-tag">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-arrow">
+                                  <path d="M8.33 3.33L3.33 10L8.33 16.67" stroke="#22242C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-send">
+                                  <path d="M2.138 2.886L16.632 9.11L2.138 15.11V2.886Z" fill="#22242C"/>
+                                </svg>
+                                <span className="invite-team-tag-email">Chase@flagships.io</span>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-close">
+                                  <path d="M3.768 3.767L14.231 14.23M14.231 3.767L3.768 14.23" stroke="#22242C" strokeWidth="1.08" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <button className="invite-team-primary-button">
+                          <span>Invite</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -519,6 +477,49 @@ function ArrowForwardIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="#1C1B1F"/>
+    </svg>
+  );
+}
+
+function SearchIcon2() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9.5" cy="9.5" r="6.67" stroke="currentColor" strokeWidth="1"/>
+      <path d="m16.67 16.67-3.34-3.34" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function PaintIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.26 0.9L17.82 1.9L12.56 18.42L4.51 17.32L1.26 0.9Z" stroke="currentColor" strokeWidth="1" fill="none"/>
+      <path d="M2.05 3.52L10.1 2.42L15.36 16.84L8.82 16.18L2.05 3.52Z" fill="currentColor"/>
+      <circle cx="16.37" cy="3.95" r="1.84" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function DeleteIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4.17 4.17L15.83 15.83M15.83 4.17L4.17 15.83" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function AddLineIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 4.17V15.83M4.17 10H15.83" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
     </svg>
   );
 }

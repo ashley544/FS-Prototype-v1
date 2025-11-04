@@ -41,6 +41,51 @@
   line-height: 1.1;
 }
 
+.asset-library-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.asset-library-tab {
+  background: #ffffff;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 8px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(128, 133, 136, 1);
+  line-height: 20px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.asset-library-tab.active {
+  border-bottom: 1px solid #000000;
+  color: rgba(41, 40, 41, 1);
+  height: 40px;
+}
+
+.asset-library-tab:not(.active) {
+  height: 36px;
+  color: rgba(128, 133, 136, 1);
+}
+
+.asset-library-tab:hover {
+  opacity: 0.8;
+}
+
+.asset-library-tab span {
+  display: block;
+}
+
 .asset-library-subtitle {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.125rem;
@@ -148,7 +193,8 @@
   height: 36px;
   padding: 0 12px;
   background: none;
-  border: none;
+  border: none !important;
+  outline: none !important;
   border-radius: 6px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -157,6 +203,20 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filter-btn:focus,
+.filter-btn:active,
+.filter-btn:hover,
+.filter-btn:visited {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  text-decoration: none;
 }
 
 .filter-btn:hover {
@@ -172,6 +232,69 @@
   height: 20px;
   color: #000000;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.filter-btn svg {
+  stroke: none !important;
+  stroke-width: 0 !important;
+}
+
+.filter-btn svg path,
+.filter-btn svg circle,
+.filter-btn svg polyline,
+.filter-btn svg line,
+.filter-btn svg rect,
+.filter-btn svg polygon,
+.filter-btn svg g {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  fill: currentColor;
+}
+
+.filter-btn svg.dropdown-open {
+  transform: rotate(90deg);
+}
+
+.folder-dropdown-container {
+  position: relative;
+}
+
+.folder-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.folder-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.folder-dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.folder-dropdown-item.selected {
+  background-color: rgba(0, 0, 0, 0.08);
+  font-weight: 500;
 }
 
 .filter-divider {
