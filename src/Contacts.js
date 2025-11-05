@@ -45,12 +45,112 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage }) => {
   const [selectedContact, setSelectedContact] = useState(null);
 
   const contactsData = [
-    { id: 1, name: 'John Doe', company: 'Blackstone', lastActivity: 'Mon, Feb 24th', status: 'Active', statusColor: '#1ED761' },
-    { id: 2, name: 'Jane Smith', company: 'KKR', lastActivity: 'Tue, Mar 1st', status: 'Active', statusColor: '#1ED761' },
-    { id: 3, name: 'David Johnson', company: 'Coatue', lastActivity: 'Wed, Apr 10th', status: 'Pending', statusColor: '#F0C808' },
-    { id: 4, name: 'Emily White', company: 'Blackstone', lastActivity: 'Thu, May 15th', status: 'Active', statusColor: '#1ED761' },
-    { id: 5, name: 'Michael Brown', company: 'KKR', lastActivity: 'Fri, Jun 20th', status: 'Active', statusColor: '#1ED761' },
-    { id: 6, name: 'Sarah Davis', company: 'Coatue', lastActivity: 'Sat, Jul 25th', status: 'Pending', statusColor: '#F0C808' },
+    { 
+      id: 1, 
+      name: 'John Doe', 
+      company: 'Invesco', 
+      lastActivity: 'Mon, Feb 24th', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: 'John is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+      sharedAssets: [
+        {
+          id: 1,
+          type: 'PDF',
+          title: 'BX Digital Infrastructure Strategy',
+          thumbnail: '/Assets/BX Digital Infrastructure Strategy.png'
+        },
+        {
+          id: 2,
+          type: 'PDF',
+          title: '$25bn in Pennsylvania Data Centers',
+          thumbnail: '/Assets/$25bn in Pennsylvania Data Centers.jpg'
+        },
+        {
+          id: 3,
+          type: 'PDF',
+          title: 'Artificial Intelligence through Private Markets',
+          thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
+        }
+      ]
+    },
+    { 
+      id: 2, 
+      name: 'Jane Smith', 
+      company: 'KKR', 
+      lastActivity: 'Tue, Mar 1st', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: 'Jane is exploring infrastructure opportunities and has shown particular interest in data center investments. She has been reviewing quarterly performance reports and portfolio analytics.',
+      sharedAssets: [
+        {
+          id: 1,
+          type: 'PDF',
+          title: 'KKR Infrastructure - Presentation',
+          thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
+        }
+      ]
+    },
+    { 
+      id: 3, 
+      name: 'David Johnson', 
+      company: 'Coatue', 
+      lastActivity: 'Wed, Apr 10th', 
+      status: 'Pending', 
+      statusColor: '#F0C808',
+      aiSummary: 'David is evaluating technology-focused private market strategies. He has been analyzing AI-related investment opportunities and digital infrastructure assets.',
+      sharedAssets: [
+        {
+          id: 1,
+          type: 'PDF',
+          title: 'Coatue Innovative Strategies (CTEK)',
+          thumbnail: '/Assets/Coatue Innovative Strategies (CTEK).png'
+        },
+        {
+          id: 2,
+          type: 'PDF',
+          title: 'Artificial Intelligence through Private Markets',
+          thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
+        }
+      ]
+    },
+    { 
+      id: 4, 
+      name: 'Emily White', 
+      company: 'Blackstone', 
+      lastActivity: 'Thu, May 15th', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: 'Emily is interested in BX X and is now in a due diligence process. She has spent a majority of her time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+      sharedAssets: []
+    },
+    { 
+      id: 5, 
+      name: 'Michael Brown', 
+      company: 'KKR', 
+      lastActivity: 'Fri, Jun 20th', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: 'Michael is actively researching infrastructure investment strategies. He has been focusing on renewable energy assets and sustainable infrastructure projects.',
+      sharedAssets: [
+        {
+          id: 1,
+          type: 'PDF',
+          title: 'KKR Infrastructure - Presentation',
+          thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
+        }
+      ]
+    },
+    { 
+      id: 6, 
+      name: 'Sarah Davis', 
+      company: 'Coatue', 
+      lastActivity: 'Sat, Jul 25th', 
+      status: 'Pending', 
+      statusColor: '#F0C808',
+      aiSummary: 'Sarah is exploring innovative technology investments through private markets. She has shown interest in AI-driven strategies and digital transformation opportunities.',
+      sharedAssets: []
+    },
   ];
 
   const handleNavItemClick = (itemId) => {

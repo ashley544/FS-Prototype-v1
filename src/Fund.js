@@ -25,22 +25,32 @@ const Fund = ({ onClick }) => {
     { start: 252, end: 360, percentage: 30 }, // 30% (108 degrees)
   ];
 
-  const radius = 100;
+  const outerRadius = 100;
+  const innerRadius = 60; // Inner radius for ring shape
   const centerX = 150;
   const centerY = 150;
 
-  const createArc = (startAngle, endAngle) => {
-    const start = (startAngle - 90) * (Math.PI / 180);
-    const end = (endAngle - 90) * (Math.PI / 180);
+  const createRingArc = (startAngle, endAngle) => {
+    // Convert angles to radians, adjusting for SVG coordinate system (0° at top)
+    const startRad = (startAngle - 90) * (Math.PI / 180);
+    const endRad = (endAngle - 90) * (Math.PI / 180);
     
-    const x1 = centerX + radius * Math.cos(start);
-    const y1 = centerY + radius * Math.sin(start);
-    const x2 = centerX + radius * Math.cos(end);
-    const y2 = centerY + radius * Math.sin(end);
+    // Outer arc points
+    const outerX1 = centerX + outerRadius * Math.cos(startRad);
+    const outerY1 = centerY + outerRadius * Math.sin(startRad);
+    const outerX2 = centerX + outerRadius * Math.cos(endRad);
+    const outerY2 = centerY + outerRadius * Math.sin(endRad);
+    
+    // Inner arc points
+    const innerX1 = centerX + innerRadius * Math.cos(startRad);
+    const innerY1 = centerY + innerRadius * Math.sin(startRad);
+    const innerX2 = centerX + innerRadius * Math.cos(endRad);
+    const innerY2 = centerY + innerRadius * Math.sin(endRad);
     
     const largeArc = endAngle - startAngle > 180 ? 1 : 0;
     
-    return `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+    // Create ring path: outer arc -> line to inner arc -> inner arc -> close
+    return `M ${outerX1} ${outerY1} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerX2} ${outerY2} L ${innerX2} ${innerY2} A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerX1} ${innerY1} Z`;
   };
 
   return (
@@ -72,19 +82,12 @@ const Fund = ({ onClick }) => {
               {angles.map((angle, index) => (
                 <path
                   key={index}
-                  d={createArc(angle.start, angle.end)}
+                  d={createRingArc(angle.start, angle.end)}
                   fill={pieData[index].color}
                   stroke="#ffffff"
-                  strokeWidth="6"
+                  strokeWidth="2"
                 />
               ))}
-              {/* Percentage labels positioned approximately as in design */}
-              {/* Label for 50% segment (top, gray) */}
-              <text x="150" y="115" textAnchor="middle" className="pie-label" fill="#666666" fontSize="14" fontWeight="500">50%</text>
-              {/* Label for 20% segment (right side, black with opacity) */}
-              <text x="265" y="125" textAnchor="middle" className="pie-label" fill="#000000" fontSize="14" fontWeight="500">20%</text>
-              {/* Label for 45% segment (bottom, appears in design but may be relative) */}
-              <text x="155" y="325" textAnchor="middle" className="pie-label" fill="#666666" fontSize="14" fontWeight="500">45%</text>
             </svg>
           </div>
 
