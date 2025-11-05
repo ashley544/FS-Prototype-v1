@@ -11,7 +11,7 @@ import DetailHeader from './DetailHeader';
 import DetailAIResponse from './DetailAIResponse';
 import './Insights.css';
 
-const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
+const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], contactsData = [] }) => {
   const [activeNavItem, setActiveNavItem] = useState('insights');
   const [isDetailView, setIsDetailView] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -120,7 +120,7 @@ const Insights = ({ onReturnToTitle, onNavigateToPage }) => {
           {/* Left and Right Column */}
           <div className="chart-intent-container">
             <div className="left-stack-container">
-              <Relationships />
+              <Relationships exchangeAssets={exchangeAssets} contactsData={contactsData} onNavigateToPage={onNavigateToPage} />
               <Interests />
             </div>
             <div className="right-side-container">

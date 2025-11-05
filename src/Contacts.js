@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideNav from './SideNav';
 import ContactDrawer from './ContactDrawer';
 import './Contacts.css';
@@ -37,14 +37,15 @@ const ArrowRightLineIcon = () => (
   </svg>
 );
 
-const Contacts = ({ onReturnToTitle, onNavigateToPage }) => {
+const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContactsData, contactToOpen, onContactOpened }) => {
   const [activeNavItem, setActiveNavItem] = useState('contacts');
   const [selectAll, setSelectAll] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState(new Set());
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
-  const contactsData = [
+  // Use propContactsData if provided, otherwise fall back to local data
+  const contactsData = propContactsData || [
     { 
       id: 1, 
       name: 'John Doe', 
@@ -211,7 +212,27 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage }) => {
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
     setSelectedContact(null);
+    if (onContactOpened) {
+      onContactOpened();
+    }
   };
+
+  // Auto-open drawer when contactToOpen is provided
+  useEffect(() => {
+    if (contactToOpen && contactsData.length > 0) {
+      const contact = contactsData.find(c => c.name === contactToOpen);
+      if (contact) {
+        setSelectedContact(contact);
+        setIsDrawerOpen(true);
+        if (onContactOpened) {
+          // Clear the contactToOpen after opening
+          setTimeout(() => {
+            onContactOpened();
+          }, 100);
+        }
+      }
+    }
+  }, [contactToOpen, contactsData, onContactOpened]);
 
   return (
     <div className="contacts">

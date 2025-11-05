@@ -6,7 +6,7 @@ import CreateAssetDrawer from './CreateAssetDrawer';
 import ManageFoldersDrawer from './ManageFoldersDrawer';
 import './AssetLibrary.css';
 
-const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset }) => {
+const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset, assetToOpen, onAssetOpened }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
   const [activeTab, setActiveTab] = useState('active');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -145,8 +145,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const formattedInactiveNewsroomAssets = inactiveNewsroomAssets.map((asset, index) => {
     const seed = asset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const newsroomContacts = `${(seed % 401) + 200} Contacts`;
-    // Generate duration between 45-90 minutes using seed for consistency
-    const durationMinutes = ((seed * 17) % 46) + 45; // 46 possible values (45-90), different pattern
+    const durationMinutes = ((seed * 17) % 46) + 45;
     const duration = `${durationMinutes} mins`;
     
     return {
@@ -243,6 +242,97 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const handleCloseManageFoldersDrawer = () => {
     setIsManageFoldersDrawerOpen(false);
   };
+
+  // Also check for "BX Digital Infrastructure Strategy" which might be in newsroomAssets
+  const allFormattedAssets = [
+    ...formattedExchangeAssets,
+    ...formattedNewsroomAssets,
+    ...formattedInactiveExchangeAssets,
+    ...formattedInactiveNewsroomAssets
+  ];
+
+  // Auto-open drawer when assetToOpen is provided
+  useEffect(() => {
+    if (assetToOpen) {
+      // Search through all formatted assets
+      const asset = allFormattedAssets.find(a => a.title === assetToOpen);
+      
+      // If not found in formatted assets, check if it exists in newsroomAssets or exchangeAssets
+      if (!asset) {
+        // Check if it exists in newsroomAssets
+        const newsroomAsset = newsroomAssets.find(a => a.title === assetToOpen);
+        if (newsroomAsset) {
+          const seed = newsroomAsset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+          const newsroomContacts = `${(seed % 401) + 200} Contacts`;
+          const durationMinutes = ((seed * 17) % 46) + 45;
+          const duration = `${durationMinutes} mins`;
+          
+          const formattedAsset = {
+            id: 9999,
+            image: newsroomAsset.image,
+            title: newsroomAsset.title,
+            duration: duration,
+            patterns: newsroomContacts,
+            isPinned: false,
+            highlighted: false,
+            file: newsroomAsset.file,
+            type: newsroomAsset.type
+          };
+          
+          setSelectedAsset(formattedAsset);
+          setDrawerInitialMode('analytics');
+          setIsDrawerOpen(true);
+          if (onAssetOpened) {
+            setTimeout(() => {
+              onAssetOpened();
+            }, 100);
+          }
+          return;
+        }
+        
+        // Check if it exists in exchangeAssets
+        const exchangeAsset = exchangeAssets.find(a => a.title === assetToOpen);
+        if (exchangeAsset) {
+          const seed = exchangeAsset.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+          const exchangeContacts = `${(seed % 50) + 1} Contacts`;
+          const durationMinutes = (seed % 46) + 45;
+          const duration = `${durationMinutes} mins`;
+          
+          const formattedAsset = {
+            id: 9998,
+            image: exchangeAsset.image,
+            title: exchangeAsset.title,
+            duration: duration,
+            patterns: exchangeContacts,
+            isPinned: false,
+            highlighted: false,
+            file: exchangeAsset.file,
+            type: exchangeAsset.type
+          };
+          
+          setSelectedAsset(formattedAsset);
+          setDrawerInitialMode('analytics');
+          setIsDrawerOpen(true);
+          if (onAssetOpened) {
+            setTimeout(() => {
+              onAssetOpened();
+            }, 100);
+          }
+          return;
+        }
+      } else {
+        // Found in formatted assets
+        setSelectedAsset(asset);
+        setDrawerInitialMode('analytics');
+        setIsDrawerOpen(true);
+        if (onAssetOpened) {
+          setTimeout(() => {
+            onAssetOpened();
+          }, 100);
+        }
+      }
+    }
+  }, [assetToOpen, onAssetOpened, allFormattedAssets, newsroomAssets, exchangeAssets]);
 
   return (
     <div className="asset-library">

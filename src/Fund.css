@@ -29,6 +29,17 @@
   margin-bottom: 24px;
 }
 
+.fund-link {
+  color: #000000;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.fund-link:hover {
+  opacity: 0.7;
+}
+
 .fund-title {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -102,28 +113,118 @@
   white-space: nowrap;
 }
 
-.pie-chart-container {
+.bar-chart-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   position: relative;
+  margin: 39px 0 0 0;
+  min-height: 242px;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 
-.pie-chart-svg {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
+.y-axis-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 242px;
+  width: 15px;
+  margin-right: 8px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-.pie-label {
+.y-axis-labels span {
   font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(163, 163, 163, 1);
+  line-height: 1;
+  text-align: right;
 }
 
-.pie-chart-tooltip {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  pointer-events: none;
-  user-select: none;
+.chart-bars-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.chart-bars {
+  display: flex;
+  gap: clamp(12px, 2vw, 30px);
+  align-items: flex-end;
+  height: 242px;
+  width: 100%;
+  padding-left: 0;
+  justify-content: space-between;
+}
+
+.bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: flex-end;
+  height: 100%;
+  width: 18px;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.bar {
+  width: 6px;
+  border-radius: 32px;
+  transition: all 0.3s ease;
+}
+
+.bar-1 {
+  background: #D9D9D9;
+}
+
+.bar-2 {
+  background: rgba(0, 0, 0, 0.43);
+}
+
+.bar-3 {
+  background: linear-gradient(180deg, #F05E24 0%, #EE454A 12.5%, #D4539D 25%, #924FAE 50%, #0290FF 100%);
+}
+
+.x-axis-labels {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+  margin-left: 23px;
+  width: calc(100% - 23px);
+  justify-content: space-between;
+}
+
+.x-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(140, 140, 140, 1);
+  flex: 1;
+  text-align: center;
+  line-height: 1.2;
+  min-width: 0;
+  padding: 0 2px;
+}
+
+.legend-gradient {
+  background: linear-gradient(180deg, #F05E24 0%, #EE454A 12.5%, #D4539D 25%, #924FAE 50%, #0290FF 100%);
 }
 
 .fund-prospects {
@@ -132,6 +233,7 @@
   padding: 16px;
   display: flex;
   align-items: center;
+  margin-top: 0;
 }
 
 .prospects-text {
@@ -155,13 +257,58 @@
     gap: 8px;
   }
 
-  .pie-chart-svg {
-    max-width: 250px;
-  }
-
   .legend-items {
     flex-direction: column;
     gap: 8px;
+  }
+
+  .bar-chart-container {
+    margin: 20px 0 0 0;
+  }
+
+  .chart-bars {
+    gap: clamp(10px, 3vw, 30px);
+  }
+
+  .bar-group {
+    width: 30px;
+  }
+
+  .bar {
+    width: 6px;
+  }
+
+  .x-axis-labels {
+    margin-left: 15px;
+    width: calc(100% - 15px);
+  }
+
+  .x-label {
+    font-size: 9px;
+    padding: 0 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-bars {
+    gap: clamp(8px, 1.5vw, 15px);
+  }
+
+  .bar-group {
+    width: 30px;
+  }
+
+  .bar {
+    width: 6px;
+  }
+
+  .y-axis-labels {
+    width: 12px;
+    margin-right: 4px;
+  }
+
+  .y-axis-labels span {
+    font-size: 9px;
   }
 }
 

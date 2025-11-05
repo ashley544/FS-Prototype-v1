@@ -9,7 +9,7 @@
   margin-left: 173px; /* SideNav width */
   padding: 40px 80px;
   background: #ffffff;
-  max-width: 1600px;
+  width: calc(100% - 173px);
 }
 
 /* Header */
@@ -76,8 +76,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 50%;
+  flex: 0 0 50%;
   min-width: 0;
+  max-width: 50%;
 }
 
 /* Right side takes 50% width */
@@ -85,8 +86,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 50%;
+  flex: 0 0 50%;
   min-width: 0;
+  max-width: 50%;
   align-items: stretch;
 }
 
@@ -306,7 +308,8 @@
   
   .left-stack-container,
   .right-side-container {
-    width: 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
   }
   
   .insights-main {

@@ -12,9 +12,9 @@
 
 .interests-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .interests-title {
@@ -27,6 +27,13 @@
   line-height: 1.2;
 }
 
+.interests-divider {
+  width: 100%;
+  height: 0.5px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
 .interests-table-container {
   overflow-x: auto;
   width: 100%;
@@ -36,6 +43,21 @@
   width: 100%;
   border-collapse: collapse;
   font-family: 'Inter', Arial, sans-serif;
+}
+
+.interests-table-header {
+  text-align: left;
+  padding: 12px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8e8e93;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  background: transparent;
+}
+
+.interests-table-header:last-child {
+  text-align: right;
 }
 
 .interests-row {

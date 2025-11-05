@@ -418,6 +418,123 @@ function Feed({ onGoToAssetViewer, onOpenAsset, onOpenDrawer }) {
   );
 }
 
+// Contacts data - shared between Contacts and Relationships components
+const contactsData = [
+  { 
+    id: 1, 
+    name: 'John Doe', 
+    company: 'Invesco', 
+    lastActivity: 'Mon, Feb 24th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    email: 'j.lawson@invesco.com',
+    aiSummary: 'John is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+    sharedAssets: [
+      {
+        id: 1,
+        type: 'PDF',
+        title: 'BX Digital Infrastructure Strategy',
+        thumbnail: '/Assets/Prototype/BX Digital Infrastructure Strategy.png',
+        file: '/pdfs/BX Digital Infrastructure Strategy.pdf'
+      },
+      {
+        id: 2,
+        type: 'PDF',
+        title: '$25bn in Pennsylvania Data Centers',
+        thumbnail: '/Assets/$25bn in Pennsylvania Data Centers.jpg'
+      },
+      {
+        id: 3,
+        type: 'PDF',
+        title: 'Artificial Intelligence through Private Markets',
+        thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
+      }
+    ]
+  },
+  { 
+    id: 2, 
+    name: 'Jane Smith', 
+    company: 'KKR', 
+    lastActivity: 'Tue, Mar 1st', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    email: 'jane.smith@kkr.com',
+    aiSummary: 'Jane is exploring infrastructure opportunities and has shown particular interest in data center investments. She has been reviewing quarterly performance reports and portfolio analytics.',
+    sharedAssets: [
+      {
+        id: 1,
+        type: 'PDF',
+        title: 'KKR Infrastructure - Presentation',
+        thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
+      }
+    ]
+  },
+  { 
+    id: 3, 
+    name: 'David Johnson', 
+    company: 'Coatue', 
+    lastActivity: 'Wed, Apr 10th', 
+    status: 'Pending', 
+    statusColor: '#F0C808',
+    email: 'david.johnson@coatue.com',
+    aiSummary: 'David is evaluating technology-focused private market strategies. He has been analyzing AI-related investment opportunities and digital infrastructure assets.',
+    sharedAssets: [
+      {
+        id: 1,
+        type: 'PDF',
+        title: 'Coatue Innovative Strategies (CTEK)',
+        thumbnail: '/Assets/Coatue Innovative Strategies (CTEK).png'
+      },
+      {
+        id: 2,
+        type: 'PDF',
+        title: 'Artificial Intelligence through Private Markets',
+        thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
+      }
+    ]
+  },
+  { 
+    id: 4, 
+    name: 'Emily White', 
+    company: 'Blackstone', 
+    lastActivity: 'Thu, May 15th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    email: 'emily.white@blackstone.com',
+    aiSummary: 'Emily is interested in BX X and is now in a due diligence process. She has spent a majority of her time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+    sharedAssets: []
+  },
+  { 
+    id: 5, 
+    name: 'Michael Brown', 
+    company: 'KKR', 
+    lastActivity: 'Fri, Jun 20th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    email: 'michael.brown@kkr.com',
+    aiSummary: 'Michael is actively researching infrastructure investment strategies. He has been focusing on renewable energy assets and sustainable infrastructure projects.',
+    sharedAssets: [
+      {
+        id: 1,
+        type: 'PDF',
+        title: 'KKR Infrastructure - Presentation',
+        thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
+      }
+    ]
+  },
+  { 
+    id: 6, 
+    name: 'Sarah Davis', 
+    company: 'Coatue', 
+    lastActivity: 'Sat, Jul 25th', 
+    status: 'Pending', 
+    statusColor: '#F0C808',
+    email: 'sarah.davis@coatue.com',
+    aiSummary: 'Sarah is exploring innovative technology investments through private markets. She has shown interest in AI-driven strategies and digital transformation opportunities.',
+    sharedAssets: []
+  },
+];
+
 export default function App() {
   const [selectedPdf, setSelectedPdf] = useState("/pdfs/BX Digital Infrastructure Strategy.pdf");
   const [isExpanded, setIsExpanded] = useState(false);
@@ -427,6 +544,8 @@ export default function App() {
   const [lastTrigger, setLastTrigger] = useState("");
   const [keepAIResponseOpen, setKeepAIResponseOpen] = useState(false);
   const [preservedAIResponse, setPreservedAIResponse] = useState(null);
+  const [contactToOpen, setContactToOpen] = useState(null);
+  const [assetToOpen, setAssetToOpen] = useState(null);
   const [originalPdf, setOriginalPdf] = useState(null);
   const [modalImages, setModalImages] = useState([]);
   const [currentModalImageIndex, setCurrentModalImageIndex] = useState(0);
@@ -710,20 +829,26 @@ export default function App() {
   }
   
   // Handler for navigating between pages in Flow 1
-  const handleNavigateToPage = (page) => {
+  const handleNavigateToPage = (page, contactName = null, assetTitle = null) => {
     setFlow1Page(page);
+    if (contactName) {
+      setContactToOpen(contactName);
+    }
+    if (assetTitle) {
+      setAssetToOpen(assetTitle);
+    }
   };
   
   // Show Flow 1: Asset Library, Insights, Contacts, or Settings
   if (currentFlow === 1) {
     if (flow1Page === 'insights') {
-      return <Insights onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+      return <Insights onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} exchangeAssets={exchangeAssets} contactsData={contactsData} />;
     } else if (flow1Page === 'contacts') {
-      return <Contacts onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
+      return <Contacts onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} contactsData={contactsData} contactToOpen={contactToOpen} onContactOpened={() => setContactToOpen(null)} />;
     } else if (flow1Page === 'settings') {
       return <Settings onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} />;
     } else {
-      return <AssetLibrary onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} exchangeAssets={exchangeAssets} newsroomAssets={newsroomAssets} onOpenAsset={handleOpenAsset} />;
+      return <AssetLibrary onReturnToTitle={handleReturnToTitle} onNavigateToPage={handleNavigateToPage} exchangeAssets={exchangeAssets} newsroomAssets={newsroomAssets} onOpenAsset={handleOpenAsset} assetToOpen={assetToOpen} onAssetOpened={() => setAssetToOpen(null)} />;
     }
   }
   
