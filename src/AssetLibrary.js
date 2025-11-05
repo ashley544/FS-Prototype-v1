@@ -101,7 +101,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     },
     {
       type: "PDF",
-      title: "Doorway - Overview",
+      title: "Cross Border Capital Flows",
       file: "/pdfs/Doorway - Overview.pdf",
     },
   ];
@@ -114,7 +114,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     },
     {
       type: "PDF",
-      title: "When Relevance wins",
+      title: "Renewable Finance Monitor",
       file: "/pdfs/When Relevance wins.pdf",
     },
     {

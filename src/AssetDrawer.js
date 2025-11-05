@@ -140,15 +140,20 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
 
                 {/* Analytics Content */}
                 <div className="asset-drawer-analytics">
-                  <div className="asset-drawer-analytics-badge">
-                    <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
-                  </div>
-                  
-                  <div className="asset-drawer-analytics-content">
-                    <div className="asset-drawer-analytics-text">
-                      Q2 Logistics performance (p2, p5)<br />
-                      Increase in debt facility (p14)<br />
-                      Spanish hotel acquisition (p16)
+                  <div className="asset-drawer-analytics-section">
+                    <div className="asset-drawer-analytics-gradient-border"></div>
+                    <div className="asset-drawer-analytics-text-wrapper">
+                      <div className="asset-drawer-analytics-badge">
+                        <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
+                      </div>
+                      
+                      <div className="asset-drawer-analytics-content">
+                        <div className="asset-drawer-analytics-text">
+                          Q2 Logistics performance (p2, p5)<br />
+                          Increase in debt facility (p14)<br />
+                          Spanish hotel acquisition (p16)
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -156,8 +161,6 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
 
               {/* Shared With Section */}
               <div className="asset-drawer-section">
-                <h3 className="asset-drawer-section-title">Shared with</h3>
-                
                 <div className="asset-drawer-shared-table">
                   <div className="asset-drawer-table-header">
                     <div className="asset-drawer-table-cell">Shared with</div>
@@ -181,6 +184,18 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
+                          <span>Emily Johnson</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">3 days ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge high">High</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
                           <span>Sarah Chen</span>
                         </div>
                       </div>
@@ -193,10 +208,34 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
+                          <span>Robert Taylor</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">5 days ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge medium">Medium</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
                           <span>Michael Rodriguez</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 weeks ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge low">Low</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
+                          <span>Lisa Anderson</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">1 week ago</div>
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-intent-badge low">Low</div>
                       </div>
@@ -345,15 +384,20 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
 
                 {/* Analytics Content */}
                 <div className="asset-drawer-analytics">
-                  <div className="asset-drawer-analytics-badge">
-                    <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
-                  </div>
-                  
-                  <div className="asset-drawer-analytics-content">
-                    <div className="asset-drawer-analytics-text">
-                      Q2 Logistics performance (p2, p5)<br />
-                      Increase in debt facility (p14)<br />
-                      Spanish hotel acquisition (p16)
+                  <div className="asset-drawer-analytics-section">
+                    <div className="asset-drawer-analytics-gradient-border"></div>
+                    <div className="asset-drawer-analytics-text-wrapper">
+                      <div className="asset-drawer-analytics-badge">
+                        <span className="asset-drawer-badge-text">High Intent · AI Insight</span>
+                      </div>
+                      
+                      <div className="asset-drawer-analytics-content">
+                        <div className="asset-drawer-analytics-text">
+                          Q2 Logistics performance (p2, p5)<br />
+                          Increase in debt facility (p14)<br />
+                          Spanish hotel acquisition (p16)
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -361,8 +405,6 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
 
               {/* Shared With Section */}
               <div className="asset-drawer-section">
-                <h3 className="asset-drawer-section-title">Shared with</h3>
-                
                 <div className="asset-drawer-shared-table">
                   <div className="asset-drawer-table-header">
                     <div className="asset-drawer-table-cell">Shared with</div>
@@ -386,6 +428,18 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
+                          <span>Emily Johnson</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">3 days ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge high">High</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
                           <span>Sarah Chen</span>
                         </div>
                       </div>
@@ -398,10 +452,34 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
+                          <span>Robert Taylor</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">5 days ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge medium">Medium</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
                           <span>Michael Rodriguez</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 weeks ago</div>
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-intent-badge low">Low</div>
+                      </div>
+                    </div>
+                    
+                    <div className="asset-drawer-table-row">
+                      <div className="asset-drawer-table-cell">
+                        <div className="asset-drawer-contact">
+                          <span>Lisa Anderson</span>
+                        </div>
+                      </div>
+                      <div className="asset-drawer-table-cell">1 week ago</div>
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-intent-badge low">Low</div>
                       </div>

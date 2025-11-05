@@ -76,7 +76,7 @@ body.drawer-open {
   border: none;
   cursor: pointer;
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 4px;
   color: #000;
   transition: background-color 0.2s;
   display: flex;
@@ -99,7 +99,7 @@ body.drawer-open {
 /* Asset Preview Container - Grey background for AssetCardLibrary */
 .asset-drawer-preview {
   background: #f2f1f6;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 24px;
   display: flex;
   justify-content: center;
@@ -137,6 +137,32 @@ body.drawer-open {
   background: #fff;
   border-radius: 0;
   padding: 0;
+}
+
+.asset-drawer-analytics-section {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: auto;
+}
+
+.asset-drawer-analytics-gradient-border {
+  width: 2px;
+  background: linear-gradient(180deg, #0290FF 0%, #924FAE 50%, #D4539D 75%, #EE454A 87.5%, #F05E24 100%);
+  flex-shrink: 0;
+  border-radius: 0;
+  align-self: stretch;
+}
+
+.asset-drawer-analytics-text-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .asset-drawer-analytics-badge {
@@ -504,7 +530,7 @@ body.drawer-open {
   height: 60px;
   background: #fff;
   border: 1px solid #ececef;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 0 12px;
 }
 
@@ -567,7 +593,7 @@ body.drawer-open {
   gap: 6px;
   background: #fff;
   border: 1px solid #ececef;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 8px 16px;
   height: 36px;
   cursor: pointer;

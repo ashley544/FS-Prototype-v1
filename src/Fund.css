@@ -120,6 +120,12 @@
   font-family: 'Inter', Arial, sans-serif;
 }
 
+.pie-chart-tooltip {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
 .fund-prospects {
   background: rgba(242, 241, 246, 0.5);
   border-radius: 8px;

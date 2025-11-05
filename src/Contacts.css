@@ -48,7 +48,7 @@
   width: 280px;
   height: 40px;
   border: 1px solid #d1d1d6;
-  border-radius: 8px;
+  border-radius: 4px;
   background: #ffffff;
   transition: all 0.2s ease;
 }
@@ -108,7 +108,7 @@
   padding: 0 16px;
   background: #ffffff;
   border: 1px solid #d1d1d6;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -131,7 +131,7 @@
   padding: 0 16px;
   background: #000000;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -152,7 +152,7 @@
 .contacts-table-container {
   width: 100%;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   background: #ffffff;
 }

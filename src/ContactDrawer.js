@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ContactDrawer.css';
+import { getAssetImageUrl } from './utils/assetImageHelper';
 
 export default function ContactDrawer({ isOpen, onClose, contact }) {
   const [isClosing, setIsClosing] = useState(false);
@@ -132,7 +133,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
                       <div className="contact-drawer-asset-card-main">
                         <div className="contact-drawer-asset-thumbnail">
                           <img 
-                            src={asset.thumbnail || '/Assets/Blackstone logo.png'} 
+                            src={getAssetImageUrl(asset.title, asset.thumbnail, asset.file) || '/Assets/Blackstone logo.png'} 
                             alt={asset.title}
                             onError={(e) => {
                               e.target.style.display = 'none';
@@ -162,9 +163,8 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
                           </div>
                           <div className="contact-drawer-asset-badges">
                             <div className="contact-drawer-asset-badge">
-                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 3V8L11 11" stroke="#1C1E21" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <circle cx="8" cy="8" r="6" stroke="#D9D9D9" strokeWidth="1.2"/>
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="#1C1E21"/>
                               </svg>
                               <span>Engaged</span>
                             </div>

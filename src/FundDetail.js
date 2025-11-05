@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FundDetail.css';
 
 const FundDetail = () => {
+  const [hoveredSegment, setHoveredSegment] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const pieData = [
     { label: 'High interest in public material', percentage: 50, color: '#D9D9D9' },
     { label: 'Investors with no BX exposure', percentage: 20, color: 'rgba(0, 0, 0, 0.43)' },
@@ -22,22 +24,32 @@ const FundDetail = () => {
     { fund: 'BPP', value: 70 },
   ];
 
-  const radius = 100;
+  const outerRadius = 100;
+  const innerRadius = 60; // Inner radius for ring shape
   const centerX = 150;
   const centerY = 150;
 
-  const createArc = (startAngle, endAngle) => {
-    const start = (startAngle - 90) * (Math.PI / 180);
-    const end = (endAngle - 90) * (Math.PI / 180);
+  const createRingArc = (startAngle, endAngle) => {
+    // Convert angles to radians, adjusting for SVG coordinate system (0° at top)
+    const startRad = (startAngle - 90) * (Math.PI / 180);
+    const endRad = (endAngle - 90) * (Math.PI / 180);
     
-    const x1 = centerX + radius * Math.cos(start);
-    const y1 = centerY + radius * Math.sin(start);
-    const x2 = centerX + radius * Math.cos(end);
-    const y2 = centerY + radius * Math.sin(end);
+    // Outer arc points
+    const outerX1 = centerX + outerRadius * Math.cos(startRad);
+    const outerY1 = centerY + outerRadius * Math.sin(startRad);
+    const outerX2 = centerX + outerRadius * Math.cos(endRad);
+    const outerY2 = centerY + outerRadius * Math.sin(endRad);
+    
+    // Inner arc points
+    const innerX1 = centerX + innerRadius * Math.cos(startRad);
+    const innerY1 = centerY + innerRadius * Math.sin(startRad);
+    const innerX2 = centerX + innerRadius * Math.cos(endRad);
+    const innerY2 = centerY + innerRadius * Math.sin(endRad);
     
     const largeArc = endAngle - startAngle > 180 ? 1 : 0;
     
-    return `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+    // Create ring path: outer arc -> line to inner arc -> inner arc -> close
+    return `M ${outerX1} ${outerY1} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerX2} ${outerY2} L ${innerX2} ${innerY2} A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerX1} ${innerY1} Z`;
   };
 
   return (
@@ -65,18 +77,43 @@ const FundDetail = () => {
 
         <div className="pie-chart-container">
           <svg width="300" height="300" viewBox="0 0 300 300" className="pie-chart-svg">
-            {angles.map((angle, index) => (
-              <path
-                key={index}
-                d={createArc(angle.start, angle.end)}
-                fill={pieData[index].color}
-                stroke="#ffffff"
-                strokeWidth="6"
-              />
-            ))}
-            <text x="150" y="115" textAnchor="middle" className="pie-label" fill="#666666" fontSize="14" fontWeight="500">50%</text>
-            <text x="265" y="125" textAnchor="middle" className="pie-label" fill="#000000" fontSize="14" fontWeight="500">20%</text>
-            <text x="155" y="325" textAnchor="middle" className="pie-label" fill="#666666" fontSize="14" fontWeight="500">45%</text>
+            {angles.map((angle, index) => {
+              const midAngle = (angle.start + angle.end) / 2;
+              const midRad = (midAngle - 90) * (Math.PI / 180);
+              const tooltipRadius = (outerRadius + innerRadius) / 2;
+              const tooltipX = centerX + tooltipRadius * Math.cos(midRad);
+              const tooltipY = centerY + tooltipRadius * Math.sin(midRad);
+              
+              return (
+                <path
+                  key={index}
+                  d={createRingArc(angle.start, angle.end)}
+                  fill={pieData[index].color}
+                  stroke="#ffffff"
+                  strokeWidth="2"
+                  onMouseEnter={() => {
+                    setHoveredSegment(index);
+                    setTooltipPosition({ x: tooltipX, y: tooltipY });
+                  }}
+                  onMouseLeave={() => setHoveredSegment(null)}
+                  style={{ cursor: 'pointer' }}
+                />
+              );
+            })}
+            {hoveredSegment !== null && (
+              <text
+                x={tooltipPosition.x}
+                y={tooltipPosition.y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="pie-chart-tooltip"
+                fontSize="14"
+                fontWeight="500"
+                fill={pieData[hoveredSegment].color === '#000000' || pieData[hoveredSegment].color === 'rgba(0, 0, 0, 0.43)' ? '#ffffff' : '#1d1d1f'}
+              >
+                {angles[hoveredSegment].percentage}%
+              </text>
+            )}
           </svg>
         </div>
 

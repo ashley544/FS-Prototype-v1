@@ -106,7 +106,7 @@
   height: 40px;
   padding: 0 16px 0 16px;
   border: 1px solid #d1d1d6;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -152,7 +152,7 @@
   background: #000000;
   color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -266,7 +266,7 @@
   left: 0;
   background: #ffffff;
   border: 1px solid #dcdcdc;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   min-width: 160px;
   z-index: 1000;

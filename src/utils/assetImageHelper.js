@@ -16,6 +16,23 @@ const knownAssetImages = [
   'Coatue Innovative Strategies (CTEK).png',
   // Prototype subfolder
   'Prototype/BX Digital Infrastructure Strategy.png',
+  // Root Assets folder (also check for BX Digital Infrastructure Strategy)
+  'BX Digital Infrastructure Strategy.png',
+  // Additional assets with spelling/spacing differences
+  'Blackstone - Presentation.jpg',
+  'CrossBorder Capital Flows.jpg',
+];
+
+/**
+ * List of placeholder images to use when no match is found
+ * These are consistent placeholder images from the Assets folder
+ */
+const placeholderImages = [
+  'ricardo-gomez-angel-HXBP4Nud8PQ-unsplash.jpg',
+  'markus-winkler-IrRbSND5EUc-unsplash.jpg',
+  'pedro-lastra-Nyvq2juw4_o-unsplash.jpg',
+  'taylor-nicole-qH7nLsK_IjE-unsplash.jpg',
+  'mediensturmer-aWf7mjwwJJo-unsplash.jpg',
 ];
 
 /**
@@ -36,13 +53,16 @@ function getPdfFileName(filePath) {
 }
 
 /**
- * Normalizes a string for matching (remove special chars, lowercase)
+ * Normalizes a string for matching (remove special chars, lowercase, handle camelCase)
  */
 function normalizeForMatch(str) {
   if (!str) return '';
-  return str.toLowerCase()
+  // Split camelCase words (e.g., "CrossBorder" -> "Cross Border")
+  // Insert space before capital letters that follow lowercase letters or numbers
+  const camelCaseSplit = str.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
+  return camelCaseSplit.toLowerCase()
     .replace(/[^\w\s]/g, '') // Remove special characters
-    .replace(/\s+/g, ' ')     // Normalize whitespace
+    .replace(/\s+/g, ' ')     // Normalize whitespace (handles multiple spaces)
     .trim();
 }
 
@@ -58,7 +78,12 @@ function findMatchingImage(searchString) {
   
   // Try to find exact match in known images first
   for (const imageFile of knownAssetImages) {
-    const imageName = normalizeForMatch(imageFile.replace(/\.(png|jpg|jpeg)$/i, ''));
+    // Remove file extension and path separators, then normalize
+    // For "Prototype/BX Digital Infrastructure Strategy.png", we want to match "BX Digital Infrastructure Strategy"
+    const imageNameWithoutExt = imageFile.replace(/\.(png|jpg|jpeg)$/i, '');
+    // Remove "Prototype/" prefix if present before normalizing
+    const imageNameForMatch = imageNameWithoutExt.replace(/^Prototype\//, '');
+    const imageName = normalizeForMatch(imageNameForMatch);
     
     // Exact match (highest priority)
     if (normalizedSearch === imageName) {
@@ -83,15 +108,33 @@ function findMatchingImage(searchString) {
     }
   }
   
-  // Also try direct path match - for images with same name as PDFs
-  // Try PNG first (most common), then JPG
-  // The browser will try to load it, and if it fails, the component's error handler will show placeholder
-  const directPathPng = `/Assets/${searchString}.png`;
-  const directPathJpg = `/Assets/${searchString}.jpg`;
+  // Return null if no match found
+  // This allows the main function to use placeholder images instead
+  return null;
+}
+
+/**
+ * Gets a consistent placeholder image based on the title
+ * Uses a hash of the title to consistently assign the same placeholder to the same asset
+ * @param {string} title - The asset title
+ * @returns {string} - The placeholder image path
+ */
+function getPlaceholderImage(title) {
+  if (!title || placeholderImages.length === 0) {
+    return `/Assets/${placeholderImages[0]}`;
+  }
   
-  // Return PNG path first (most common format)
-  // If it doesn't exist and fails to load, component will show placeholder
-  return directPathPng;
+  // Create a simple hash from the title to consistently assign placeholders
+  let hash = 0;
+  for (let i = 0; i < title.length; i++) {
+    const char = title.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  
+  // Use absolute value and modulo to select a placeholder
+  const index = Math.abs(hash) % placeholderImages.length;
+  return `/Assets/${placeholderImages[index]}`;
 }
 
 /**
@@ -99,7 +142,7 @@ function findMatchingImage(searchString) {
  * @param {string} title - The asset title
  * @param {string} existingImage - Optional existing image URL that was provided
  * @param {string} filePath - Optional PDF file path to extract filename for matching
- * @returns {string|null} - The image URL to use, or null if no match found
+ * @returns {string|null} - The image URL to use, or a placeholder if no match found
  */
 export function getAssetImageUrl(title, existingImage = null, filePath = null) {
   // If an existing image is provided and it's a valid local path, use it
@@ -126,6 +169,7 @@ export function getAssetImageUrl(title, existingImage = null, filePath = null) {
     }
   }
   
-  // No match found - return null (component should handle this gracefully)
-  return null;
+  // No match found - return a placeholder image instead of null
+  // This ensures all assets have an image, even if it's a placeholder
+  return title ? getPlaceholderImage(title) : `/Assets/${placeholderImages[0]}`;
 }

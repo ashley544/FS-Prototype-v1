@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Fund.css';
 
 const Fund = ({ onClick }) => {
+  const [hoveredSegment, setHoveredSegment] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   // Pie chart data - using SVG to create a pie chart
   // Sizes: 50%, 20%, 30% (normalized to add up to 100%)
   // But the design shows 50%, 20%, 45% which suggests they might be relative to different totals
@@ -79,15 +81,43 @@ const Fund = ({ onClick }) => {
 
           <div className="pie-chart-container">
             <svg width="300" height="300" viewBox="0 0 300 300" className="pie-chart-svg">
-              {angles.map((angle, index) => (
-                <path
-                  key={index}
-                  d={createRingArc(angle.start, angle.end)}
-                  fill={pieData[index].color}
-                  stroke="#ffffff"
-                  strokeWidth="2"
-                />
-              ))}
+              {angles.map((angle, index) => {
+                const midAngle = (angle.start + angle.end) / 2;
+                const midRad = (midAngle - 90) * (Math.PI / 180);
+                const tooltipRadius = (outerRadius + innerRadius) / 2;
+                const tooltipX = centerX + tooltipRadius * Math.cos(midRad);
+                const tooltipY = centerY + tooltipRadius * Math.sin(midRad);
+                
+                return (
+                  <path
+                    key={index}
+                    d={createRingArc(angle.start, angle.end)}
+                    fill={pieData[index].color}
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                    onMouseEnter={() => {
+                      setHoveredSegment(index);
+                      setTooltipPosition({ x: tooltipX, y: tooltipY });
+                    }}
+                    onMouseLeave={() => setHoveredSegment(null)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                );
+              })}
+              {hoveredSegment !== null && (
+                <text
+                  x={tooltipPosition.x}
+                  y={tooltipPosition.y}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  className="pie-chart-tooltip"
+                  fontSize="14"
+                  fontWeight="500"
+                  fill={pieData[hoveredSegment].color === '#000000' || pieData[hoveredSegment].color === 'rgba(0, 0, 0, 0.43)' ? '#ffffff' : '#1d1d1f'}
+                >
+                  {angles[hoveredSegment].percentage}%
+                </text>
+              )}
             </svg>
           </div>
 
