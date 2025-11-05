@@ -235,9 +235,6 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage }) => {
                   placeholder="Start typing to search..." 
                   className="contacts-search-input"
                 />
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="contacts-search-dropdown-icon">
-                  <path d="M6.66667 8.33337L10 11.6667L13.3333 8.33337" stroke="#7A7A7A" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
               </div>
             </div>
             <div className="contacts-header-buttons">

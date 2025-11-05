@@ -48,6 +48,11 @@ const exchangeAssets = [
     title: "Coatue Innovative Strategies (CTEK)",
     file: "/pdfs/Coatue Innovative Strategies (CTEK).pdf",
   },
+  {
+    type: "PDF",
+    title: "Blackstone - Presentation",
+    file: "/pdfs/Blackstone - Presentation (1).pdf",
+  },
 ];
 
 // Modal configuration for specific PDF pages

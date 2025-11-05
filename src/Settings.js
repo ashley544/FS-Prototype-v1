@@ -14,16 +14,24 @@ function TableIcon() {
 
 function ArrowRightIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function ArrowBackIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
     </svg>
   );
 }
 
 function AddIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 4.17V15.83M4.17 10H15.83" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="currentColor"/>
     </svg>
   );
 }
@@ -113,7 +121,6 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 <div className="user-settings-title-row">
                   <h2 className="user-settings-title">User settings</h2>
                 </div>
-                <p className="user-settings-subtitle">Manage the admins in your organisation.</p>
               </div>
             </div>
 
@@ -125,7 +132,6 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                   <div className="field-label-row">
                     <div className="field-label-wrapper">
                       <span className="field-label">First name</span>
-                      <span className="field-required">*</span>
                     </div>
                   </div>
                   <div className="input-wrapper">
@@ -137,10 +143,7 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                   <div className="field-label-row">
                     <div className="field-label-wrapper">
                       <span className="field-label">Last name</span>
-                      <span className="field-required">*</span>
-                      <InfoIcon />
                     </div>
-                    <span className="field-optional">Optional</span>
                   </div>
                   <div className="input-wrapper">
                     <input type="text" className="form-input" placeholder="" />
@@ -154,10 +157,7 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                   <div className="field-label-row">
                     <div className="field-label-wrapper">
                       <span className="field-label">Role</span>
-                      <span className="field-required">*</span>
-                      <InfoIcon />
                     </div>
-                    <span className="field-optional">Optional</span>
                   </div>
                   <div className="input-wrapper">
                     <input type="text" className="form-input" placeholder="" />
@@ -182,10 +182,7 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                   <div className="field-label-row">
                     <div className="field-label-wrapper">
                       <span className="field-label">Organisation</span>
-                      <span className="field-required">*</span>
-                      <InfoIcon />
                     </div>
-                    <span className="field-optional">Optional</span>
                   </div>
                   <div className="input-wrapper">
                     <input type="text" className="form-input" placeholder="" />
@@ -223,7 +220,7 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 >
                   <div className="settings-section-title-content">
                     <div className="settings-section-icon">
-                      <StackIcon />
+                      <PaintbrushIcon />
                     </div>
                     <div className="settings-section-text">
                       <h3 className="settings-section-title">Brand suite</h3>
@@ -256,7 +253,6 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                                 <div className="brand-suite-field-label-row">
                                   <div className="brand-suite-field-label-content">
                                     <span className="brand-suite-field-label">Logo color</span>
-                                    <span className="brand-suite-field-required">*</span>
                                   </div>
                                 </div>
                                 <div className="brand-suite-color-picker-input">
@@ -271,7 +267,6 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                                 <div className="brand-suite-field-label-row">
                                   <div className="brand-suite-field-label-content">
                                     <span className="brand-suite-field-label">Logo</span>
-                                    <span className="brand-suite-field-required">*</span>
                                   </div>
                                 </div>
                                 <div className="brand-suite-image-picker-input">
@@ -293,7 +288,6 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                                 <div className="brand-suite-field-label-row">
                                   <div className="brand-suite-field-label-content">
                                     <span className="brand-suite-field-label">Logo</span>
-                                    <span className="brand-suite-field-required">*</span>
                                   </div>
                                 </div>
                                 <div className="brand-suite-image-picker-input">
@@ -348,25 +342,12 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                         <div className="invite-team-input-field">
                           <div className="invite-team-label-row">
                             <div className="invite-team-label-content">
-                              <span className="invite-team-label">email</span>
+                              <span className="invite-team-label">Work emails</span>
                             </div>
-                            <LockIcon />
                           </div>
                           
                           <div className="invite-team-input-container">
                             <div className="invite-team-input-content">
-                              <div className="invite-team-email-tag">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-arrow">
-                                  <path d="M8.33 3.33L3.33 10L8.33 16.67" stroke="#22242C" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-send">
-                                  <path d="M2.138 2.886L16.632 9.11L2.138 15.11V2.886Z" fill="#22242C"/>
-                                </svg>
-                                <span className="invite-team-tag-email">Chase@flagships.io</span>
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="invite-team-tag-close">
-                                  <path d="M3.768 3.767L14.231 14.23M14.231 3.767L3.768 14.23" stroke="#22242C" strokeWidth="1.08" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -380,7 +361,7 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 )}
               </div>
 
-              {/* Contact Management Section */}
+              {/* Integrations Section */}
               <div className="settings-section">
                 <div 
                   className="settings-section-header"
@@ -389,10 +370,10 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 >
                   <div className="settings-section-title-content">
                     <div className="settings-section-icon">
-                      <ContactsIcon />
+                      <IntegrationsIcon />
                     </div>
                     <div className="settings-section-text">
-                      <h3 className="settings-section-title">Contact management</h3>
+                      <h3 className="settings-section-title">Integrations</h3>
                     </div>
                   </div>
                   <div className={`accordion-chevron ${openAccordions.contactManagement ? 'open' : ''}`}>
@@ -403,7 +384,26 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                 </div>
                 {openAccordions.contactManagement && (
                   <div className="settings-section-content">
-                    {/* Accordion content goes here */}
+                    <div className="integrations-content">
+                      <div className="integrations-header">
+                        <h3 className="integrations-title">Import contacts</h3>
+                        <p className="integrations-description">Import contacts for your organization via Salesforce or DealCloud.</p>
+                      </div>
+                      
+                      <div className="integrations-buttons">
+                        <button className="integrations-button-primary">
+                          <span>Import Salesforce contacts</span>
+                        </button>
+                        
+                        <button className="integrations-button-secondary">
+                          <span>Import DealCloud contacts</span>
+                        </button>
+                        
+                        <a href="#" className="integrations-link" onClick={(e) => { e.preventDefault(); }}>
+                          Upload via CSV
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -446,6 +446,14 @@ function StackIcon() {
   );
 }
 
+function PaintbrushIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.71 4.63L19.37 3.29C19 2.9 18.35 2.9 17.96 3.29L9 12.25L11.75 15L20.71 6.04C21.1 5.65 21.1 5.02 20.71 4.63ZM7 14C5.34 14 4 15.34 4 17C4 18.31 2.84 19 2 19C2.92 20.22 4.5 21 6 21C8.21 21 10 19.21 10 17C10 15.34 8.66 14 7 14Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
 function MailSendIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -458,8 +466,8 @@ function MailSendIcon() {
 
 function SendIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2.38 3.21L16.1 9.58L2.38 16.79V9.58M2.38 9.58H16.1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
     </svg>
   );
 }
@@ -469,6 +477,14 @@ function ContactsIcon() {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="6.67" r="2.5" stroke="currentColor" strokeWidth="0.42"/>
       <path d="M5 18.33C5 15.24 7.24 12.67 10 12.67C12.76 12.67 15 15.24 15 18.33" stroke="currentColor" strokeWidth="0.42"/>
+    </svg>
+  );
+}
+
+function IntegrationsIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.5 11H19V7C19 5.89 18.1 5 17 5H13V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4C2.89 5 2 5.89 2 7V10.8H3.5C4.88 10.8 6 11.92 6 13.3S4.88 15.8 3.5 15.8H2V19C2 20.11 2.89 21 4 21H7.8V19.5C7.8 18.12 8.92 17 10.3 17S12.8 18.12 12.8 19.5V21H17C18.11 21 19 20.11 19 19V15H20.5C21.88 15 23 13.88 23 12.5S21.88 10 20.5 10H19V7H17V10H20.5C20.78 10 21 10.22 21 10.5S20.78 11 20.5 11Z" fill="currentColor"/>
     </svg>
   );
 }

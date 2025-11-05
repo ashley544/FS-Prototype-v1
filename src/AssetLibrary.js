@@ -96,11 +96,6 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const inactiveExchangeAssets = [
     {
       type: "PDF",
-      title: "Blackstone - Presentation",
-      file: "/pdfs/Blackstone - Presentation (1).pdf",
-    },
-    {
-      type: "PDF",
       title: "Cross Border Capital Flows",
       file: "/pdfs/Doorway - Overview.pdf",
     },
