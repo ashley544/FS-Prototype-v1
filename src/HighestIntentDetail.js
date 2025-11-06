@@ -14,15 +14,7 @@ const HighestIntentDetail = () => {
   return (
     <div className="highest-intent-detail">
       <div className="highest-intent-detail-header">
-        <div className="highest-intent-title-section">
-          <h2 className="highest-intent-title">Highest Intent</h2>
-          <p className="highest-intent-subtitle">Overall intent</p>
-        </div>
-        <button className="highest-intent-dropdown">
-          <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 8.29906L5.5 15.4581H16.5L11 8.29906Z" fill="#000000"/>
-          </svg>
-        </button>
+        <h2 className="highest-intent-title">Highest Intent</h2>
       </div>
       <div className="highest-intent-divider"></div>
       <div className="highest-intent-list">

@@ -3,9 +3,9 @@ import './Interests.css';
 
 export default function Interests() {
   const interests = [
-    { asset: 'Macro Infra Market Fundamentals', pageNumber: '12' },
-    { asset: 'BX Jupiter Industrial Investment', pageNumber: '8' },
-    { asset: 'KKR Digital Infra Strategy', pageNumber: '15' },
+    { asset: 'Macro Infra Market Fundamentals', pageNumber: '54' },
+    { asset: 'BX Jupiter Industrial Investment', pageNumber: '41' },
+    { asset: 'KKR Digital Infra Strategy', pageNumber: '38' },
   ];
 
   return (

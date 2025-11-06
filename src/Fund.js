@@ -5,17 +5,18 @@ const Fund = ({ onClick }) => {
   // Chart data - 4 columns with 2 bars each
   // Each column represents a fund with two metrics
   const chartData = [
-    { fund: 'BX RE Europe', bar1: 72, bar3: 26 },
-    { fund: 'KKR Infra X', bar1: 64, bar3: 46 },
-    { fund: 'Ares Global RE', bar1: 265, bar3: 230 },
-    { fund: 'BX Jupiter Acquisition', bar1: 101, bar3: 88 },
+    { fund: 'BX RE Europe', bar1: 90, bar3: 60 },
+    { fund: 'KKR Infra X', bar1: 120, bar3: 100 },
+    { fund: 'Ares Global RE', bar1: 295, bar3: 275 },
+    { fund: 'BX Jupiter Acquisition', bar1: 150, bar3: 130 },
   ];
 
-  const maxValue = 265; // Maximum value for scaling
-  const chartHeight = 242; // Chart height in pixels
+  const maxValue = 300; // Maximum value for scaling
 
-  const getBarHeight = (value) => {
-    return (value / maxValue) * chartHeight;
+  const getBarHeight = (value, containerHeight = 242) => {
+    // Use containerHeight if provided, otherwise default to 242px
+    // The height will be calculated dynamically based on available space
+    return (value / maxValue) * containerHeight;
   };
 
   return (
@@ -51,12 +52,12 @@ const Fund = ({ onClick }) => {
 
           <div className="bar-chart-container">
             <div className="y-axis-labels">
-              <span>120</span>
+              <span>300</span>
+              <span>250</span>
+              <span>200</span>
+              <span>150</span>
               <span>100</span>
-              <span>80</span>
-              <span>60</span>
-              <span>40</span>
-              <span>20</span>
+              <span>50</span>
               <span>0</span>
             </div>
             

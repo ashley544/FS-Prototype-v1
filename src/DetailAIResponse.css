@@ -1,7 +1,4 @@
 .detail-ai-response-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
   width: 100%;
   margin-bottom: 0;
 }

@@ -43,7 +43,26 @@ const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], cont
 
   const handleSearch = (searchTerm) => {
     setSearchQuery(searchTerm);
-    setIsDetailView(true);
+    
+    // Check if the search query matches the data center fund prospects question
+    // Allow for variations in the wording
+    const normalizedSearch = searchTerm.toLowerCase().trim();
+    const keywords = ['data center fund', 'prospects', 'most likely'];
+    
+    // Check if the search contains key phrases about data center fund prospects
+    const hasDataCenterFund = normalizedSearch.includes('data center fund') || 
+                               normalizedSearch.includes('datacenter fund') ||
+                               normalizedSearch.includes('data centre fund');
+    const hasProspects = normalizedSearch.includes('prospect') || 
+                        normalizedSearch.includes('likely');
+    
+    // If it matches the pattern, navigate to detail view (FundDetail page)
+    if (hasDataCenterFund && hasProspects) {
+      setIsDetailView(true);
+    } else {
+      // For other searches, also show detail view
+      setIsDetailView(true);
+    }
   };
 
   const handleBackToOverview = () => {
@@ -79,6 +98,20 @@ const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], cont
             <div className="detail-search-section">
               <DetailAIResponse response="There are 6,218 private wealth investors that are interested. I have categorized them by fund participation or general consideration. Shall I optimize the deck for each group for you to review?" />
               <div className="detail-search-input-wrapper">
+                <div className="search-icon">
+                  <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="flare-icon">
+                    <defs>
+                      <linearGradient id="flare-gradient-detail" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#F05E24" />
+                        <stop offset="12.5%" stopColor="#EE454A" />
+                        <stop offset="25%" stopColor="#D4539D" />
+                        <stop offset="50%" stopColor="#924FAE" />
+                        <stop offset="100%" stopColor="#0290FF" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M4.23708 8.00019C4.23708 8.16403 4.18168 8.30122 4.07087 8.41177C3.9602 8.52245 3.82301 8.57778 3.6593 8.57778H0.577784C0.414079 8.57778 0.276823 8.52238 0.166017 8.41157C0.0553388 8.30077 0 8.16351 0 7.99981C0 7.83597 0.0553388 7.69878 0.166017 7.58823C0.276823 7.47755 0.414079 7.42222 0.577784 7.42222H3.6593C3.82301 7.42222 3.9602 7.47762 4.07087 7.58842C4.18168 7.69923 4.23708 7.83649 4.23708 8.00019ZM5.32447 5.32447C5.2129 5.43605 5.07757 5.49184 4.91848 5.49184C4.75953 5.49184 4.6242 5.43605 4.51249 5.32447L3.82512 4.63691C3.71843 4.53034 3.66386 4.3963 3.66142 4.23477C3.65898 4.07325 3.71355 3.9367 3.82512 3.82512C3.9367 3.71355 4.07203 3.65776 4.23111 3.65776C4.39007 3.65776 4.52533 3.71355 4.63691 3.82512L5.32447 4.51249C5.43104 4.61919 5.48561 4.7533 5.48818 4.91482C5.49062 5.07635 5.43605 5.2129 5.32447 5.32447ZM7.42222 3.6593V0.577784C7.42222 0.414079 7.47762 0.276823 7.58842 0.166017C7.69923 0.0553388 7.83649 0 8.00019 0C8.16403 0 8.30122 0.0553388 8.41177 0.166017C8.52245 0.276823 8.57778 0.414079 8.57778 0.577784V3.6593C8.57778 3.82301 8.52238 3.9602 8.41157 4.07087C8.30077 4.18168 8.16351 4.23708 7.99981 4.23708C7.83597 4.23708 7.69878 4.18168 7.58823 4.07087C7.47755 3.9602 7.42222 3.82301 7.42222 3.6593ZM10.6755 5.32447C10.5639 5.2129 10.5082 5.07757 10.5082 4.91848C10.5082 4.75953 10.5639 4.6242 10.6755 4.51249L11.3631 3.82512C11.4697 3.71843 11.6037 3.66386 11.7652 3.66142C11.9267 3.65898 12.0633 3.71355 12.1749 3.82512C12.2865 3.9367 12.3422 4.07203 12.3422 4.23111C12.3422 4.39007 12.2865 4.52533 12.1749 4.63691L11.4875 5.32447C11.3808 5.43104 11.2467 5.48561 11.0852 5.48818C10.9237 5.49062 10.7871 5.43605 10.6755 5.32447ZM11.7629 7.99981C11.7629 7.83597 11.8183 7.69878 11.9291 7.58823C12.0398 7.47755 12.177 7.42222 12.3407 7.42222H15.4222C15.5859 7.42222 15.7232 7.47762 15.834 7.58842C15.9447 7.69923 16 7.83649 16 8.00019C16 8.16403 15.9447 8.30122 15.834 8.41177C15.7232 8.52245 15.5859 8.57778 15.4222 8.57778H12.3407C12.177 8.57778 12.0398 8.52238 11.9291 8.41157C11.8183 8.30077 11.7629 8.16351 11.7629 7.99981ZM8 9.92595C7.46176 9.92595 7.00621 9.73951 6.63335 9.36665C6.26048 8.99379 6.07405 8.53824 6.07405 8C6.07405 7.46176 6.26048 7.00621 6.63335 6.63335C7.00621 6.26048 7.46176 6.07405 8 6.07405C8.53824 6.07405 8.99379 6.26048 9.36665 6.63335C9.73952 7.00621 9.92595 7.46176 9.92595 8C9.92595 8.53824 9.73952 8.99379 9.36665 9.36665C8.99379 9.73951 8.53824 9.92595 8 9.92595ZM10.6755 10.6755C10.7871 10.5639 10.9224 10.5082 11.0815 10.5082C11.2405 10.5082 11.3758 10.5639 11.4875 10.6755L12.1749 11.3631C12.2816 11.4697 12.3361 11.6037 12.3386 11.7652C12.341 11.9267 12.2865 12.0633 12.1749 12.1749C12.0633 12.2865 11.928 12.3422 11.7689 12.3422C11.6099 12.3422 11.4747 12.2865 11.3631 12.1749L10.6755 11.4875C10.569 11.3808 10.5144 11.2467 10.5118 11.0852C10.5094 10.9237 10.5639 10.7871 10.6755 10.6755ZM5.32447 10.6755C5.43605 10.7871 5.49184 10.9224 5.49184 11.0815C5.49184 11.2405 5.43605 11.3758 5.32447 11.4875L4.63691 12.1749C4.53034 12.2816 4.3963 12.3361 4.23477 12.3386C4.07325 12.341 3.9367 12.2865 3.82512 12.1749C3.71355 12.0633 3.65776 11.928 3.65776 11.7689C3.65776 11.6099 3.71355 11.4747 3.82512 11.3631L4.51249 10.6755C4.61919 10.569 4.7533 10.5144 4.91482 10.5118C5.07635 10.5094 5.2129 10.5639 5.32447 10.6755ZM8.00019 11.7629C8.16403 11.7629 8.30122 11.8183 8.41177 11.9291C8.52245 12.0398 8.57778 12.177 8.57778 12.3407V15.4222C8.57778 15.5859 8.52238 15.7232 8.41157 15.834C8.30077 15.9447 8.16351 16 7.99981 16C7.83597 16 7.69878 15.9447 7.58823 15.834C7.47755 15.7232 7.42222 15.5859 7.42222 15.4222V12.3407C7.42222 12.177 7.47762 12.0398 7.58842 11.9291C7.69923 11.8183 7.83649 11.7629 8.00019 11.7629Z" fill="url(#flare-gradient-detail)"/>
+                  </svg>
+                </div>
                 <input
                   type="text"
                   value={searchQuery}
@@ -86,11 +119,6 @@ const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], cont
                   className="detail-search-input"
                   placeholder="Anything else?"
                 />
-                <button className="detail-search-arrow-btn">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="#000000"/>
-                  </svg>
-                </button>
               </div>
             </div>
           </div>

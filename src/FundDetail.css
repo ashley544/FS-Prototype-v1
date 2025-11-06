@@ -27,8 +27,8 @@
 
 .fund-detail-divider {
   width: 100%;
-  height: 1px;
-  background: #D9D9D9;
+  height: 0.5px;
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 4px;
 }
 
@@ -44,6 +44,22 @@
   align-items: flex-start;
   gap: 12px;
   width: 100%;
+}
+
+.fund-detail-main-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.fund-detail-chart-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .legend-label {
@@ -94,6 +110,20 @@
   width: 100%;
   max-width: 300px;
   height: auto;
+  overflow: visible;
+}
+
+.pie-segment {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pie-segment:hover {
+  filter: brightness(1.1);
+}
+
+.pie-chart-tooltip-label {
+  pointer-events: none;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .pie-label {
@@ -106,6 +136,48 @@
   user-select: none;
 }
 
+.fund-detail-right-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: flex-end;
+}
+
+.fund-detail-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.pie-chart-hover-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  background: rgba(242, 241, 246, 0.5);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.pie-chart-hover-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.pie-chart-hover-percentage {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.4;
+}
+
 .fund-breakdown {
   background: rgba(242, 241, 246, 0.5);
   border-radius: 8px;
@@ -113,18 +185,11 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
 }
 
 .breakdown-header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
   margin-bottom: 6px;
-}
-
-.breakdown-indicator {
-  width: 1px;
-  height: 1px;
 }
 
 .breakdown-title {

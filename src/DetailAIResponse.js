@@ -13,7 +13,6 @@ const DetailAIResponse = ({ response }) => {
           </div>
         </div>
       </div>
-      <button className="detail-ai-response-yes-btn">Yes</button>
     </div>
   );
 };

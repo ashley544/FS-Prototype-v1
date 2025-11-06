@@ -10,22 +10,7 @@ const DetailHeader = ({ onBack }) => {
       <div className="detail-header-controls">
         {showDateFilter && (
           <div className="date-filter">
-            <div className="date-filter-item">
-              <span className="date-label">From</span>
-              <span className="date-value">05/05/2025</span>
-            </div>
-            <div className="date-filter-item">
-              <span className="date-label">To</span>
-              <span className="date-value">12/05/2025</span>
-            </div>
-            <button 
-              className="date-filter-close"
-              onClick={() => setShowDateFilter(false)}
-            >
-              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.75 5.25L5.25 15.75M5.25 5.25L15.75 15.75" stroke="#000000" strokeWidth="0.88" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
+            <span className="date-value">September 1st 2025 - November 1st 2025</span>
           </div>
         )}
         <button className="filter-btn">
