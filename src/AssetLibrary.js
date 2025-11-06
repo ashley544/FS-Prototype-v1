@@ -64,7 +64,8 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
       isPinned: false,
       highlighted: isHighlighted,
       file: asset.file, // Keep the file reference for PDF viewing
-      type: asset.type
+      type: asset.type,
+      folder: asset.folder // Preserve folder property
     };
   });
 
@@ -88,7 +89,8 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
       isPinned: false,
       highlighted: false,
       file: asset.file, // Keep the file reference for PDF viewing
-      type: asset.type
+      type: asset.type,
+      folder: asset.folder // Preserve folder property
     };
   });
 
@@ -242,6 +244,19 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const handleCloseManageFoldersDrawer = () => {
     setIsManageFoldersDrawerOpen(false);
   };
+
+  // Filter assets by selected folder
+  const filterAssetsByFolder = (assets) => {
+    if (selectedFolder === 'All folders') {
+      return assets;
+    }
+    return assets.filter(asset => asset.folder === selectedFolder);
+  };
+
+  const filteredExchangeAssets = filterAssetsByFolder(formattedExchangeAssets);
+  const filteredNewsroomAssets = filterAssetsByFolder(formattedNewsroomAssets);
+  const filteredInactiveExchangeAssets = filterAssetsByFolder(formattedInactiveExchangeAssets);
+  const filteredInactiveNewsroomAssets = filterAssetsByFolder(formattedInactiveNewsroomAssets);
 
   // Also check for "BX Digital Infrastructure Strategy" which might be in newsroomAssets
   const allFormattedAssets = [
@@ -461,7 +476,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                   <h2 className="asset-section-title">Exchange</h2>
                 </div>
                 <div className="asset-library-grid">
-                  {formattedExchangeAssets.map((asset) => (
+                  {filteredExchangeAssets.map((asset) => (
                     <AssetCardLibrary
                       key={asset.id}
                       image={asset.image}
@@ -486,7 +501,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                   <h2 className="asset-section-title">Newsroom</h2>
                 </div>
                 <div className="asset-library-grid">
-                  {formattedNewsroomAssets.map((asset) => (
+                  {filteredNewsroomAssets.map((asset) => (
                     <AssetCardLibrary
                       key={asset.id}
                       image={asset.image}
@@ -513,7 +528,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                   <h2 className="asset-section-title">Exchange</h2>
                 </div>
                 <div className="asset-library-grid">
-                  {formattedInactiveExchangeAssets.map((asset) => (
+                  {filteredInactiveExchangeAssets.map((asset) => (
                     <AssetCardLibrary
                       key={asset.id}
                       image={asset.image}
@@ -538,7 +553,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                   <h2 className="asset-section-title">Newsroom</h2>
                 </div>
                 <div className="asset-library-grid">
-                  {formattedInactiveNewsroomAssets.map((asset) => (
+                  {filteredInactiveNewsroomAssets.map((asset) => (
                     <AssetCardLibrary
                       key={asset.id}
                       image={asset.image}

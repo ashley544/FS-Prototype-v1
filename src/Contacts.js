@@ -49,6 +49,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 1, 
       name: 'John Doe', 
+      email: 'j.doe@invesco.com',
       company: 'Invesco', 
       lastActivity: 'Mon, Feb 24th', 
       status: 'Active', 
@@ -79,6 +80,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 2, 
       name: 'Jane Smith', 
+      email: 'j.smith@kkr.com',
       company: 'KKR', 
       lastActivity: 'Tue, Mar 1st', 
       status: 'Active', 
@@ -96,6 +98,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 3, 
       name: 'David Johnson', 
+      email: 'd.johnson@coatue.com',
       company: 'Coatue', 
       lastActivity: 'Wed, Apr 10th', 
       status: 'Pending', 
@@ -119,6 +122,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 4, 
       name: 'Emily White', 
+      email: 'e.white@blackstone.com',
       company: 'Blackstone', 
       lastActivity: 'Thu, May 15th', 
       status: 'Active', 
@@ -129,6 +133,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 5, 
       name: 'Michael Brown', 
+      email: 'm.brown@kkr.com',
       company: 'KKR', 
       lastActivity: 'Fri, Jun 20th', 
       status: 'Active', 
@@ -146,6 +151,7 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
     { 
       id: 6, 
       name: 'Sarah Davis', 
+      email: 's.davis@coatue.com',
       company: 'Coatue', 
       lastActivity: 'Sat, Jul 25th', 
       status: 'Pending', 
@@ -286,15 +292,15 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
                 <SortIcon />
               </div>
               <div className="contacts-table-header-cell">
-                <span className="header-label">Company</span>
+                <span className="header-label">Email</span>
+                <SortIcon />
+              </div>
+              <div className="contacts-table-header-cell">
+                <span className="header-label">Assets</span>
                 <SortIcon />
               </div>
               <div className="contacts-table-header-cell">
                 <span className="header-label">Last Activity</span>
-                <SortIcon />
-              </div>
-              <div className="contacts-table-header-cell">
-                <span className="header-label">Status</span>
                 <SortIcon />
               </div>
               <div className="contacts-table-header-cell action-cell">
@@ -319,16 +325,19 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
                     <span className="cell-text">{contact.name}</span>
                   </div>
                   <div className="contacts-table-cell">
-                    <span className="cell-text">{contact.company}</span>
+                    <span className="cell-text">{contact.email || ''}</span>
+                  </div>
+                  <div className="contacts-table-cell">
+                    <span className="cell-text">
+                      {(() => {
+                        // Generate consistent number between 5-39 based on contact id
+                        const seed = contact.id || 0;
+                        return ((seed * 17) % 35) + 5; // 35 possible values (5-39)
+                      })()}
+                    </span>
                   </div>
                   <div className="contacts-table-cell">
                     <span className="cell-text">{contact.lastActivity}</span>
-                  </div>
-                  <div className="contacts-table-cell">
-                    <div className="status-badge">
-                      <DotIcon color={contact.statusColor} />
-                      <span className="status-label">{contact.status}</span>
-                    </div>
                   </div>
                   <div className="contacts-table-cell action-cell">
                     <button 

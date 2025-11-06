@@ -248,16 +248,16 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                             <h3 className="brand-suite-form-section-title">Locked profile</h3>
                             
                             <div className="brand-suite-form-fields">
-                              {/* Logo Color Input */}
+                              {/* Background Color Input */}
                               <div className="brand-suite-form-field">
                                 <div className="brand-suite-field-label-row">
                                   <div className="brand-suite-field-label-content">
-                                    <span className="brand-suite-field-label">Logo color</span>
+                                    <span className="brand-suite-field-label">Background color</span>
                                   </div>
                                 </div>
                                 <div className="brand-suite-color-picker-input">
-                                  <div className="brand-suite-color-preview" style={{ backgroundColor: '#54e33c' }}></div>
-                                  <span className="brand-suite-color-value">#54e33c</span>
+                                  <div className="brand-suite-color-preview" style={{ backgroundColor: '#000000' }}></div>
+                                  <span className="brand-suite-color-value">#000000</span>
                                   <CloseIcon />
                                 </div>
                               </div>
@@ -402,6 +402,20 @@ const Settings = ({ onReturnToTitle, onNavigateToPage }) => {
                         <a href="#" className="integrations-link" onClick={(e) => { e.preventDefault(); }}>
                           Upload via CSV
                         </a>
+                      </div>
+
+                      <div className="integrations-header" style={{ marginTop: '32px' }}>
+                        <h3 className="integrations-title">Import Assets</h3>
+                      </div>
+                      
+                      <div className="integrations-buttons">
+                        <button className="integrations-button-primary">
+                          <span>Onedrive</span>
+                        </button>
+                        
+                        <button className="integrations-button-secondary">
+                          <span>Sharepoint</span>
+                        </button>
                       </div>
                     </div>
                   </div>

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Fund.css';
 
 const Fund = ({ onClick }) => {
+  const chartContainerRef = useRef(null);
+  const [containerHeight, setContainerHeight] = useState(242);
+
   // Chart data - 4 columns with 2 bars each
   // Each column represents a fund with two metrics
   const chartData = [
@@ -13,9 +16,20 @@ const Fund = ({ onClick }) => {
 
   const maxValue = 300; // Maximum value for scaling
 
-  const getBarHeight = (value, containerHeight = 242) => {
-    // Use containerHeight if provided, otherwise default to 242px
-    // The height will be calculated dynamically based on available space
+  useEffect(() => {
+    const updateHeight = () => {
+      if (chartContainerRef.current) {
+        const height = chartContainerRef.current.clientHeight;
+        setContainerHeight(height);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
+
+  const getBarHeight = (value) => {
     return (value / maxValue) * containerHeight;
   };
 
@@ -50,7 +64,7 @@ const Fund = ({ onClick }) => {
             </div>
           </div>
 
-          <div className="bar-chart-container">
+          <div className="bar-chart-container" ref={chartContainerRef}>
             <div className="y-axis-labels">
               <span>300</span>
               <span>250</span>

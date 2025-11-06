@@ -13,11 +13,11 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
       id: 'kkr', 
       name: 'KKR', 
       assets: [
-        { id: 'mkt-1', title: 'Q4 Marketing Campaign Deck' },
-        { id: 'mkt-2', title: 'Brand Guidelines 2024' },
-        { id: 'mkt-3', title: 'Social Media Content Calendar' },
-        { id: 'mkt-4', title: 'Product Launch Press Release' },
-        { id: 'mkt-5', title: 'Email Marketing Templates' }
+        { id: 'kkr-1', title: 'KKR Infrastructure - Presentation' },
+        { id: 'kkr-2', title: 'KKR Innovative Strategies' },
+        { id: 'kkr-3', title: 'Real Estate Partners KRR' },
+        { id: 'kkr-4', title: 'Artificial Intelligence through Private Markets' },
+        { id: 'kkr-5', title: 'KKR Digital Infrastructure Strategy' }
       ]
     },
     { 

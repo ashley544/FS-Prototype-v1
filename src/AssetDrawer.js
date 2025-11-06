@@ -114,11 +114,11 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
               <div className="asset-drawer-section">
                 <div className="asset-drawer-section-header">
                   <button className="asset-drawer-back-btn" onClick={handleClose}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
                     </svg>
                   </button>
-                  <h3 className="asset-drawer-section-title">Asset-level analytics</h3>
+                  <h3 className="asset-drawer-section-title">{asset?.title || "Asset Title"}</h3>
                 </div>
 
                 {/* Asset Preview Card */}
