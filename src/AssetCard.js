@@ -48,35 +48,6 @@ export default function AssetCard({ image, type, title, selected, onClick, onOpe
             />
           </div>
         </div>
-        {onOpenDrawer && (
-          <button 
-            className="asset-card-drawer-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenDrawer();
-            }}
-            style={{
-              position: 'absolute',
-              top: 8,
-              right: 8,
-              width: 24,
-              height: 24,
-              borderRadius: '4px',
-              background: 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-              zIndex: 10
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M3 3L9 9M9 3L3 9" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        )}
       </div>
     );
   }

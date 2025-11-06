@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SideNav from './SideNav';
 import WhatWouldYouLikeToLearn from './WhatWouldYouLikeToLearn';
 import Relationships from './Relationships';
@@ -15,6 +15,7 @@ const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], cont
   const [activeNavItem, setActiveNavItem] = useState('insights');
   const [isDetailView, setIsDetailView] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const aiResponsesScrollRef = useRef(null);
 
   const handleNavItemClick = (itemId) => {
     setActiveNavItem(itemId);
@@ -96,7 +97,32 @@ const Insights = ({ onReturnToTitle, onNavigateToPage, exchangeAssets = [], cont
             
             {/* AI Response and Search Input */}
             <div className="detail-search-section">
-              <DetailAIResponse response="There are 6,218 private wealth investors that are interested. I have categorized them by fund participation or general consideration. Shall I optimize the deck for each group for you to review?" />
+              <div className="detail-ai-responses-container">
+                <div className="detail-ai-responses-scroll" ref={aiResponsesScrollRef}>
+                  <DetailAIResponse eyebrow="Flagships Insights" response="6,218 investors would be interested in BX Evergreen Infra Fund. Would you like me to break down their interests?" />
+                  <div className="detail-user-input-playback">
+                    <span className="detail-user-input-text">Yes</span>
+                  </div>
+                  <DetailAIResponse eyebrow="Flagships Insights" response="The majority of interest is coming from investors in BX IV. The 621 people I've identified are all focusing on the two acquisitions in data center projects. Would you like me to categorize all interest by existing fund participation?" />
+                  <div className="detail-user-input-playback">
+                    <span className="detail-user-input-text">Yes</span>
+                  </div>
+                  <DetailAIResponse eyebrow="Flagships Insights" response="Please see the chart above." />
+                </div>
+                <div className="detail-ai-responses-fade"></div>
+                <button 
+                  className="detail-ai-responses-scroll-btn"
+                  onClick={() => {
+                    if (aiResponsesScrollRef.current) {
+                      aiResponsesScrollRef.current.scrollBy({ top: 100, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="#000000"/>
+                  </svg>
+                </button>
+              </div>
               <div className="detail-search-input-wrapper">
                 <div className="search-icon">
                   <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="flare-icon">

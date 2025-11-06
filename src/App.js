@@ -50,7 +50,7 @@ const exchangeAssets = [
   },
   {
     type: "PDF",
-    title: "Blackstone - Presentation",
+    title: "BX Real Estate Partners X",
     file: "/pdfs/Blackstone - Presentation (1).pdf",
   },
 ];

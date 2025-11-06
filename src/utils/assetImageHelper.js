@@ -19,7 +19,7 @@ const knownAssetImages = [
   // Root Assets folder (also check for BX Digital Infrastructure Strategy)
   'BX Digital Infrastructure Strategy.png',
   // Additional assets with spelling/spacing differences
-  'Blackstone - Presentation.jpg',
+  'BX Real Estate Partners X.jpg',
   'CrossBorder Capital Flows.jpg',
 ];
 

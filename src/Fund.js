@@ -6,8 +6,8 @@ const Fund = ({ onClick }) => {
   // Each column represents a fund with two metrics
   const chartData = [
     { fund: 'BX RE Europe', bar1: 90, bar3: 60 },
-    { fund: 'KKR Infra X', bar1: 120, bar3: 100 },
-    { fund: 'Ares Global RE', bar1: 295, bar3: 275 },
+    { fund: 'KKR Infra X', bar1: 150, bar3: 130 },
+    { fund: 'Ares Global RE', bar1: 250, bar3: 230 },
     { fund: 'BX Jupiter Acquisition', bar1: 150, bar3: 130 },
   ];
 

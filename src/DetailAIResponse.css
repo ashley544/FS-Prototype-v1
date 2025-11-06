@@ -7,12 +7,12 @@
   display: flex;
   gap: 14px;
   flex: 1;
+  align-items: flex-start;
 }
 
 .detail-ai-response-gradient-bar {
   width: 2px;
-  height: 100%;
-  min-height: 71px;
+  align-self: stretch;
   border-radius: 1px;
   background: linear-gradient(
     180deg,
@@ -36,12 +36,13 @@
   font-family: 'Inter', Arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
-  background: linear-gradient(90deg, #f05e24 0%, #ee454a 29%, #d4539d 42%, #924fae 65%, #0290ff 100%);
+  background: linear-gradient(90deg, #0290ff 0%, #924fae 25%, #d4539d 50%, #ee454a 75%, #f05e24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
   line-height: 16px;
+  display: inline-block;
 }
 
 .detail-ai-response-text {
