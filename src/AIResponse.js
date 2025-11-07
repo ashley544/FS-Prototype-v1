@@ -20,7 +20,7 @@ export default function AIResponse({ userInput, aiAnswer, recommendedAsset, onDi
               </div>
             )}
             <div className="ai-response-return-link">
-              <a href="#" onClick={(e) => { e.preventDefault(); onReturnToOriginal ? onReturnToOriginal() : onDismiss(); }}>Return to section</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); onReturnToOriginal ? onReturnToOriginal() : onDismiss(); }}>Return to Blackstone's competitive advantage</a>
             </div>
           </div>
         </div>
