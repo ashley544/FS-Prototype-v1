@@ -428,8 +428,37 @@ const contactsData = [
     lastActivity: 'Mon, Feb 24th', 
     status: 'Active', 
     statusColor: '#1ED761',
-    aiSummary: '',
-    sharedAssets: []
+    aiSummary: "Ryan Stanford is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the 'Jupiter Industrial Portfolio' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.",
+    sharedAssets: [
+      {
+        id: 1,
+        type: 'PDF',
+        title: 'Blackstone Real Estate Partners X Quarterly Report',
+        thumbnail: '/Assets/BX Real Estate Partners X.jpg',
+        file: '/pdfs/Blackstone - Presentation (1).pdf'
+      },
+      {
+        id: 2,
+        type: 'PDF',
+        title: 'Blackstone Announces $8 billion Final Close for Latest Real Estate Debt Strategies Fund',
+        thumbnail: '/Assets/Blackstone - Presentation.jpg',
+        file: '/pdfs/Blackstone - Presentation (1).pdf'
+      },
+      {
+        id: 3,
+        type: 'PDF',
+        title: 'Investing in AI',
+        thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg',
+        file: '/pdfs/Artificial Intelligence through Private Markets.pdf'
+      },
+      {
+        id: 4,
+        type: 'PDF',
+        title: 'Market Views: Opportunity & Uncertainty',
+        thumbnail: '/Assets/$25bn in Pennsylvania Data Centers.jpg',
+        file: '/pdfs/$25bn in Pennsylvania Data Centers.pdf'
+      }
+    ]
   },
   { 
     id: 2, 
