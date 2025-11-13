@@ -258,7 +258,7 @@
   border: 1px solid #dcdcdc;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 160px;
+  width: 260px;
   z-index: 1000;
   overflow: hidden;
 }
@@ -333,7 +333,7 @@
 }
 
 .folder-dropdown-child {
-  padding-left: 32px;
+  padding-left: 24px;
   font-weight: 400;
 }
 
