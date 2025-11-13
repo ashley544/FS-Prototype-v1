@@ -422,115 +422,167 @@ function Feed({ onGoToAssetViewer, onOpenAsset, onOpenDrawer }) {
 const contactsData = [
   { 
     id: 1, 
-    name: 'John Doe', 
-    company: 'Invesco', 
+    name: 'Ryan Stanford', 
+    email: 'rystanford@yahoo.com',
+    company: '', 
     lastActivity: 'Mon, Feb 24th', 
     status: 'Active', 
     statusColor: '#1ED761',
-    email: 'j.lawson@invesco.com',
-    aiSummary: 'John is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
-    sharedAssets: [
-      {
-        id: 1,
-        type: 'PDF',
-        title: 'BX Digital Infrastructure Strategy',
-        thumbnail: '/Assets/Prototype/BX Digital Infrastructure Strategy.png',
-        file: '/pdfs/BX Digital Infrastructure Strategy.pdf'
-      },
-      {
-        id: 2,
-        type: 'PDF',
-        title: '$25bn in Pennsylvania Data Centers',
-        thumbnail: '/Assets/$25bn in Pennsylvania Data Centers.jpg'
-      },
-      {
-        id: 3,
-        type: 'PDF',
-        title: 'Artificial Intelligence through Private Markets',
-        thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
-      }
-    ]
+    aiSummary: '',
+    sharedAssets: []
   },
   { 
     id: 2, 
-    name: 'Jane Smith', 
-    company: 'KKR', 
+    name: 'Tom Slack', 
+    email: 'tslack@gmail.com',
+    company: '', 
     lastActivity: 'Tue, Mar 1st', 
     status: 'Active', 
     statusColor: '#1ED761',
-    email: 'jane.smith@kkr.com',
-    aiSummary: 'Jane is exploring infrastructure opportunities and has shown particular interest in data center investments. She has been reviewing quarterly performance reports and portfolio analytics.',
-    sharedAssets: [
-      {
-        id: 1,
-        type: 'PDF',
-        title: 'KKR Infrastructure - Presentation',
-        thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
-      }
-    ]
+    aiSummary: '',
+    sharedAssets: []
   },
   { 
     id: 3, 
-    name: 'David Johnson', 
-    company: 'Coatue', 
+    name: 'Olivia Chen', 
+    email: 'oliviachen27@outlook.com',
+    company: '', 
     lastActivity: 'Wed, Apr 10th', 
-    status: 'Pending', 
-    statusColor: '#F0C808',
-    email: 'david.johnson@coatue.com',
-    aiSummary: 'David is evaluating technology-focused private market strategies. He has been analyzing AI-related investment opportunities and digital infrastructure assets.',
-    sharedAssets: [
-      {
-        id: 1,
-        type: 'PDF',
-        title: 'Coatue Innovative Strategies (CTEK)',
-        thumbnail: '/Assets/Coatue Innovative Strategies (CTEK).png'
-      },
-      {
-        id: 2,
-        type: 'PDF',
-        title: 'Artificial Intelligence through Private Markets',
-        thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
-      }
-    ]
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
   },
   { 
     id: 4, 
-    name: 'Emily White', 
-    company: 'Blackstone', 
+    name: 'Marcus Patel', 
+    email: 'marcuspatel@gmail.com',
+    company: '', 
     lastActivity: 'Thu, May 15th', 
     status: 'Active', 
     statusColor: '#1ED761',
-    email: 'emily.white@blackstone.com',
-    aiSummary: 'Emily is interested in BX X and is now in a due diligence process. She has spent a majority of her time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+    aiSummary: '',
     sharedAssets: []
   },
   { 
     id: 5, 
-    name: 'Michael Brown', 
-    company: 'KKR', 
+    name: 'Hannah Keane', 
+    email: 'hannahk32@icloud.com',
+    company: '', 
     lastActivity: 'Fri, Jun 20th', 
     status: 'Active', 
     statusColor: '#1ED761',
-    email: 'michael.brown@kkr.com',
-    aiSummary: 'Michael is actively researching infrastructure investment strategies. He has been focusing on renewable energy assets and sustainable infrastructure projects.',
-    sharedAssets: [
-      {
-        id: 1,
-        type: 'PDF',
-        title: 'KKR Infrastructure - Presentation',
-        thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
-      }
-    ]
+    aiSummary: '',
+    sharedAssets: []
   },
   { 
     id: 6, 
-    name: 'Sarah Davis', 
-    company: 'Coatue', 
+    name: 'Alex Romero', 
+    email: 'alex.romero98@yahoo.com',
+    company: '', 
     lastActivity: 'Sat, Jul 25th', 
-    status: 'Pending', 
-    statusColor: '#F0C808',
-    email: 'sarah.davis@coatue.com',
-    aiSummary: 'Sarah is exploring innovative technology investments through private markets. She has shown interest in AI-driven strategies and digital transformation opportunities.',
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 7, 
+    name: 'Sophie Delaney', 
+    email: 'sophiedelaney@gmail.com',
+    company: '', 
+    lastActivity: 'Mon, Aug 5th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 8, 
+    name: 'Jack Morrison', 
+    email: 'jackmorri@hotmail.com',
+    company: '', 
+    lastActivity: 'Tue, Sep 10th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 9, 
+    name: 'Priya Nair', 
+    email: 'priya.nair86@gmail.com',
+    company: '', 
+    lastActivity: 'Wed, Oct 15th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 10, 
+    name: 'Daniel Hurst', 
+    email: 'danhurst13@icloud.com',
+    company: '', 
+    lastActivity: 'Thu, Nov 20th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 11, 
+    name: 'Laura Bishop', 
+    email: 'laurabish@yahoo.com',
+    company: '', 
+    lastActivity: 'Fri, Dec 5th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 12, 
+    name: 'Ben Keller', 
+    email: 'benkeller11@gmail.com',
+    company: '', 
+    lastActivity: 'Mon, Jan 8th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 13, 
+    name: 'Megan Duarte', 
+    email: 'megduarte@outlook.com',
+    company: '', 
+    lastActivity: 'Tue, Feb 12th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 14, 
+    name: 'Chris Nolan', 
+    email: 'chrisnolan88@gmail.com',
+    company: '', 
+    lastActivity: 'Wed, Mar 18th', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
+    sharedAssets: []
+  },
+  { 
+    id: 15, 
+    name: 'Zoe Hart', 
+    email: 'zoehart22@icloud.com',
+    company: '', 
+    lastActivity: 'Thu, Apr 22nd', 
+    status: 'Active', 
+    statusColor: '#1ED761',
+    aiSummary: '',
     sharedAssets: []
   },
 ];

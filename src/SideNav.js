@@ -2,10 +2,11 @@ import React from 'react';
 import './SideNav.css';
 
 const SideNav = ({ onNavItemClick, activeItem, onLogoClick }) => {
+  // Navigation items ordered with Insights first
   const navItems = [
+    { id: 'insights', label: 'Insights' },
     { id: 'assets', label: 'Assets' },
     { id: 'contacts', label: 'Contacts' },
-    { id: 'insights', label: 'Insights' },
     { id: 'settings', label: 'Settings' }
   ];
 

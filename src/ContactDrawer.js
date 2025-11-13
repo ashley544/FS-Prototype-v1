@@ -49,54 +49,19 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
       <div className={`contact-drawer ${isClosing ? 'closing' : ''}`}>
         {/* Content */}
         <div className="contact-drawer-content">
-          <button className="contact-drawer-back-button" onClick={handleClose}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div className="contact-drawer-edit-link">
-            <a href="#" onClick={(e) => { e.preventDefault(); }}>Edit contact</a>
-          </div>
-          <p 
-            className="contact-drawer-company-name"
-            style={{ 
-              display: 'block', 
-              visibility: 'visible', 
-              opacity: 1,
-              color: '#7A7A7A',
-              fontSize: '14px',
-              margin: '24px 0 8px 0',
-              padding: '0',
-              lineHeight: '20px',
-              width: '100%',
-              height: 'auto',
-              position: 'relative',
-              zIndex: 10
-            }}
-          >
-            <span style={{ color: '#1d1d1f' }}>{contact.company || 'Invesco'}</span> · {contact.email || 'j.lawson@invesco.com'}
-          </p>
-          <h3 
-            className="contact-drawer-name"
-            style={{ 
-              display: 'block', 
-              visibility: 'visible', 
-              opacity: 1,
-              color: '#1d1d1f',
-              fontSize: '24px',
-              margin: '0 0 12px 0',
-              padding: '0',
-              fontWeight: 500,
-              lineHeight: '1.2',
-              width: '100%',
-              height: 'auto',
-              position: 'relative',
-              zIndex: 10
-            }}
-          >
-            {contact.name || 'No name'}
-          </h3>
-          <div className="contact-drawer-ai-summary-section">
+          <div className="contact-drawer-section">
+            <div className="contact-drawer-section-header">
+              <button className="contact-drawer-back-button" onClick={handleClose}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+                </svg>
+              </button>
+              <div className="contact-drawer-edit-link">
+                <a href="#" onClick={(e) => { e.preventDefault(); }}>Edit contact</a>
+              </div>
+            </div>
+            <h2 className="contact-drawer-name">{contact.name || 'No name'}</h2>
+            <div className="contact-drawer-ai-summary-section">
             <div className="contact-drawer-ai-summary-gradient-border"></div>
             <p 
               className="contact-drawer-ai-summary"
@@ -232,6 +197,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
                 </div>
               )}
             </div>
+          </div>
           </div>
         </div>
       </div>

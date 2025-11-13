@@ -48,115 +48,168 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
   const contactsData = propContactsData || [
     { 
       id: 1, 
-      name: 'John Doe', 
-      email: 'j.doe@invesco.com',
-      company: 'Invesco', 
-      lastActivity: 'Mon, Feb 24th', 
+      name: 'Ryan Stanford', 
+      email: 'rystanford@yahoo.com',
+      company: '', 
+      lastActivity: '', 
       status: 'Active', 
       statusColor: '#1ED761',
-      aiSummary: 'John is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
-      sharedAssets: [
-        {
-          id: 1,
-          type: 'PDF',
-          title: 'BX Digital Infrastructure Strategy',
-          thumbnail: '/Assets/Prototype/BX Digital Infrastructure Strategy.png',
-          file: '/pdfs/BX Digital Infrastructure Strategy.pdf'
-        },
-        {
-          id: 2,
-          type: 'PDF',
-          title: '$25bn in Pennsylvania Data Centers',
-          thumbnail: '/Assets/$25bn in Pennsylvania Data Centers.jpg'
-        },
-        {
-          id: 3,
-          type: 'PDF',
-          title: 'Artificial Intelligence through Private Markets',
-          thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
-        }
-      ]
+      aiSummary: '',
+      sharedAssets: []
     },
     { 
       id: 2, 
-      name: 'Jane Smith', 
-      email: 'j.smith@kkr.com',
-      company: 'KKR', 
-      lastActivity: 'Tue, Mar 1st', 
+      name: 'Tom Slack', 
+      email: 'tslack@gmail.com',
+      company: '', 
+      lastActivity: '', 
       status: 'Active', 
       statusColor: '#1ED761',
-      aiSummary: 'Jane is exploring infrastructure opportunities and has shown particular interest in data center investments. She has been reviewing quarterly performance reports and portfolio analytics.',
-      sharedAssets: [
-        {
-          id: 1,
-          type: 'PDF',
-          title: 'KKR Infrastructure - Presentation',
-          thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
-        }
-      ]
+      aiSummary: '',
+      sharedAssets: []
     },
     { 
       id: 3, 
-      name: 'David Johnson', 
-      email: 'd.johnson@coatue.com',
-      company: 'Coatue', 
-      lastActivity: 'Wed, Apr 10th', 
-      status: 'Pending', 
-      statusColor: '#F0C808',
-      aiSummary: 'David is evaluating technology-focused private market strategies. He has been analyzing AI-related investment opportunities and digital infrastructure assets.',
-      sharedAssets: [
-        {
-          id: 1,
-          type: 'PDF',
-          title: 'Coatue Innovative Strategies (CTEK)',
-          thumbnail: '/Assets/Coatue Innovative Strategies (CTEK).png'
-        },
-        {
-          id: 2,
-          type: 'PDF',
-          title: 'Artificial Intelligence through Private Markets',
-          thumbnail: '/Assets/Artificial Intelligence through Private Markets.jpg'
-        }
-      ]
+      name: 'Olivia Chen', 
+      email: 'oliviachen27@outlook.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
     },
     { 
       id: 4, 
-      name: 'Emily White', 
-      email: 'e.white@blackstone.com',
-      company: 'Blackstone', 
-      lastActivity: 'Thu, May 15th', 
+      name: 'Marcus Patel', 
+      email: 'marcuspatel@gmail.com',
+      company: '', 
+      lastActivity: '', 
       status: 'Active', 
       statusColor: '#1ED761',
-      aiSummary: 'Emily is interested in BX X and is now in a due diligence process. She has spent a majority of her time on the \'Jupiter Industrial Portfolio\' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.',
+      aiSummary: '',
       sharedAssets: []
     },
     { 
       id: 5, 
-      name: 'Michael Brown', 
-      email: 'm.brown@kkr.com',
-      company: 'KKR', 
-      lastActivity: 'Fri, Jun 20th', 
+      name: 'Hannah Keane', 
+      email: 'hannahk32@icloud.com',
+      company: '', 
+      lastActivity: '', 
       status: 'Active', 
       statusColor: '#1ED761',
-      aiSummary: 'Michael is actively researching infrastructure investment strategies. He has been focusing on renewable energy assets and sustainable infrastructure projects.',
-      sharedAssets: [
-        {
-          id: 1,
-          type: 'PDF',
-          title: 'KKR Infrastructure - Presentation',
-          thumbnail: '/Assets/KKR Infrastructure - Presentation.png'
-        }
-      ]
+      aiSummary: '',
+      sharedAssets: []
     },
     { 
       id: 6, 
-      name: 'Sarah Davis', 
-      email: 's.davis@coatue.com',
-      company: 'Coatue', 
-      lastActivity: 'Sat, Jul 25th', 
-      status: 'Pending', 
-      statusColor: '#F0C808',
-      aiSummary: 'Sarah is exploring innovative technology investments through private markets. She has shown interest in AI-driven strategies and digital transformation opportunities.',
+      name: 'Alex Romero', 
+      email: 'alex.romero98@yahoo.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 7, 
+      name: 'Sophie Delaney', 
+      email: 'sophiedelaney@gmail.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 8, 
+      name: 'Jack Morrison', 
+      email: 'jackmorri@hotmail.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 9, 
+      name: 'Priya Nair', 
+      email: 'priya.nair86@gmail.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      hasSpellingError: true, // For red dotted underline
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 10, 
+      name: 'Daniel Hurst', 
+      email: 'danhurst13@icloud.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 11, 
+      name: 'Laura Bishop', 
+      email: 'laurabish@yahoo.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 12, 
+      name: 'Ben Keller', 
+      email: 'benkeller11@gmail.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 13, 
+      name: 'Megan Duarte', 
+      email: 'megduarte@outlook.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 14, 
+      name: 'Chris Nolan', 
+      email: 'chrisnolan88@gmail.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
+      sharedAssets: []
+    },
+    { 
+      id: 15, 
+      name: 'Zoe Hart', 
+      email: 'zoehart22@icloud.com',
+      company: '', 
+      lastActivity: '', 
+      status: 'Active', 
+      statusColor: '#1ED761',
+      aiSummary: '',
       sharedAssets: []
     },
   ];
@@ -325,7 +378,9 @@ const Contacts = ({ onReturnToTitle, onNavigateToPage, contactsData: propContact
                     <span className="cell-text">{contact.name}</span>
                   </div>
                   <div className="contacts-table-cell">
-                    <span className="cell-text">{contact.email || ''}</span>
+                    <span className="cell-text" style={{ textDecoration: 'underline' }}>
+                      {contact.email || ''}
+                    </span>
                   </div>
                   <div className="contacts-table-cell">
                     <span className="cell-text">
