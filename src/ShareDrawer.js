@@ -11,13 +11,13 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
   const [notifyContacts, setNotifyContacts] = useState(true);
   const [selectedSuggestedMaterials, setSelectedSuggestedMaterials] = useState(new Set([1, 2, 3, 4, 5])); // All selected by default
 
-  // Sample contacts data matching the image
+  // Sample contacts data - first 5 contacts from contacts page
   const allContacts = [
-    { id: 1, name: 'Tom Edwards', email: 'tedwards@kkr.com', tag: null },
-    { id: 2, name: 'Laura Kim', email: 'lkim@jpmorgan.com', tag: 'Salesforce' },
-    { id: 3, name: 'Michael Johnson', email: 'mjonson@bofa.com', tag: null },
-    { id: 4, name: 'Sara Patel', email: 'spatel@citi.com', tag: null },
-    { id: 5, name: 'Hannah Keana', email: 'hkeana@example.com', tag: null }
+    { id: 1, name: 'Ryan Stanford', email: 'rystanford@yahoo.com', tag: null },
+    { id: 2, name: 'Tom Slack', email: 'tslack@gmail.com', tag: null },
+    { id: 3, name: 'Olivia Chen', email: 'oliviachen27@outlook.com', tag: null },
+    { id: 4, name: 'Marcus Patel', email: 'marcuspatel@gmail.com', tag: null },
+    { id: 5, name: 'Hannah Keane', email: 'hannahk32@icloud.com', tag: null }
   ];
 
   useEffect(() => {
@@ -537,7 +537,7 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
 
                 {/* Additional Materials Link */}
                 <div className="share-confirmation-materials-section">
-                  <h4 className="share-confirmation-materials-title">See conventionally available materials</h4>
+                  <h4 className="share-confirmation-materials-title">See conditionally available materials</h4>
                   <div className="share-confirmation-share-link-container">
                     <svg className="share-confirmation-share-link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -702,17 +702,17 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                         className="asset-list-checkbox"
                       />
                     </th>
-                    <th className="asset-list-folder-col">
+                    <th className="asset-list-name-col">
                       <div className="asset-list-header-content">
-                        Folder(s)
+                        Asset Name
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M4 6L8 2L12 6M4 10L8 14L12 10" stroke="#1C1E21" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </div>
                     </th>
-                    <th className="asset-list-name-col">
+                    <th className="asset-list-folder-col">
                       <div className="asset-list-header-content">
-                        Asset Name
+                        Folder(s)
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M4 6L8 2L12 6M4 10L8 14L12 10" stroke="#1C1E21" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
@@ -767,11 +767,28 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                           className="asset-list-checkbox"
                         />
                       </td>
-                      <td className="asset-list-folder-col">
-                        <span className="asset-list-folder">{asset.folder || '—'}</span>
-                      </td>
                       <td className="asset-list-name-col">
                         <span className="asset-list-name">{asset.title || 'Untitled Asset'}</span>
+                      </td>
+                      <td className="asset-list-folder-col">
+                        {asset.folder ? (
+                          <div className="asset-list-folder-chips">
+                            {asset.folder.split(' / ').map((folderPart, index) => (
+                              <React.Fragment key={index}>
+                                {index > 0 && (
+                                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="asset-list-folder-separator">
+                                    <path d="M4.5 3L7.5 6L4.5 9" stroke="#808b8f" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                  </svg>
+                                )}
+                                <span className={`asset-list-folder-chip ${index === 0 ? 'level-1' : 'level-2'}`}>
+                                  {folderPart}
+                                </span>
+                              </React.Fragment>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="asset-list-folder">—</span>
+                        )}
                       </td>
                       <td className="asset-list-intent-col">
                         {asset.hasHighIntent ? (

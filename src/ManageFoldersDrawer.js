@@ -200,9 +200,13 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
       // Reset closing state when opening to ensure smooth transition
       setIsClosing(false);
       document.body.classList.add('drawer-open');
-      // Force a reflow to ensure transition triggers
+      // Force a reflow to ensure transition triggers for both backdrop and drawer
       requestAnimationFrame(() => {
-        // Transition will trigger automatically via CSS
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            // Transition will trigger automatically via CSS
+          }, 0);
+        });
       });
     } else if (!isClosing) {
       // Only remove body class if not closing (to allow animation to complete)

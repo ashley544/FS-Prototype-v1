@@ -559,6 +559,36 @@
   color: #1C1E21;
 }
 
+.asset-list-folder-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.asset-list-folder-separator {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.asset-list-folder-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.asset-list-folder-chip.level-1 {
+  color: #0066CC;
+  font-weight: 500;
+}
+
+.asset-list-folder-chip.level-2 {
+  color: #7E29D5;
+  font-weight: 400;
+}
+
 .asset-list-intent-col {
   width: 140px;
   text-align: left;

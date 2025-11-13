@@ -15,9 +15,13 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
       if (contact?.sharedAssets && contact.sharedAssets.length > 0) {
         setExpandedAssetId(contact.sharedAssets[0].id || 0);
       }
-      // Force a reflow to ensure transition triggers
+      // Force a reflow to ensure transition triggers for both backdrop and drawer
       requestAnimationFrame(() => {
-        // Transition will trigger automatically via CSS
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            // Transition will trigger automatically via CSS
+          }, 0);
+        });
       });
     } else if (!isClosing) {
       // Only remove body class if not closing (to allow animation to complete)
@@ -58,7 +62,10 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
       <div className={`contact-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
       
       {/* Drawer */}
-      <div className={`contact-drawer ${isClosing ? 'closing' : ''}`}>
+      <div 
+        className={`contact-drawer ${isClosing ? 'closing' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Content */}
         <div className="contact-drawer-content">
           <div className="contact-drawer-section">
@@ -236,7 +243,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
         </div>
         
         {/* Email Button - Fixed at bottom */}
-        <div className={`contact-drawer-bottom-bar ${isClosing ? 'closing' : ''}`}>
+        <div className="contact-drawer-bottom-bar">
           <button className="contact-drawer-email-button">
             Email {contact.name?.split(' ')[0] || 'Contact'}
           </button>
