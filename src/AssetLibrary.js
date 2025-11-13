@@ -4,6 +4,7 @@ import AssetCardLibrary from './AssetCardLibrary';
 import AssetDrawer from './AssetDrawer';
 import CreateAssetDrawer from './CreateAssetDrawer';
 import ManageFoldersDrawer from './ManageFoldersDrawer';
+import ShareDrawer from './ShareDrawer';
 import './AssetLibrary.css';
 
 const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset, assetToOpen, onAssetOpened }) => {
@@ -18,6 +19,8 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const [isFolderDropdownOpen, setIsFolderDropdownOpen] = useState(false);
   const [expandedParentFolders, setExpandedParentFolders] = useState({});
   const [isManageFoldersDrawerOpen, setIsManageFoldersDrawerOpen] = useState(false);
+  const [isShareDrawerOpen, setIsShareDrawerOpen] = useState(false);
+  const [assetToShare, setAssetToShare] = useState(null);
   const [selectedAssets, setSelectedAssets] = useState([]);
   const folderDropdownRef = useRef(null);
 
@@ -287,7 +290,13 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   };
 
   const handleShareAsset = (asset) => {
-    console.log('Share asset:', asset.title);
+    setAssetToShare(asset);
+    setIsShareDrawerOpen(true);
+  };
+
+  const handleCloseShareDrawer = () => {
+    setIsShareDrawerOpen(false);
+    setAssetToShare(null);
   };
 
   const handleOpenCreateDrawer = () => {
@@ -964,6 +973,12 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
         onClose={handleCloseManageFoldersDrawer}
         exchangeAssets={exchangeAssets}
         newsroomAssets={newsroomAssets}
+      />
+      
+      <ShareDrawer 
+        isOpen={isShareDrawerOpen}
+        onClose={handleCloseShareDrawer}
+        asset={assetToShare}
       />
     </div>
   );

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e624fd96.css",
+    "main.js": "/static/js/main.5e3b161e.js",
+    "static/media/Inter-Italic-VariableFont_opsz,wght.ttf": "/static/media/Inter-Italic-VariableFont_opsz,wght.831252f8ba7e1b5b2432.ttf",
+    "static/media/Inter-VariableFont_opsz,wght.ttf": "/static/media/Inter-VariableFont_opsz,wght.e05c5f3d1fa6a3893d84.ttf",
+    "index.html": "/index.html",
+    "main.e624fd96.css.map": "/static/css/main.e624fd96.css.map",
+    "main.5e3b161e.js.map": "/static/js/main.5e3b161e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e624fd96.css",
+    "static/js/main.5e3b161e.js"
+  ]
+}
