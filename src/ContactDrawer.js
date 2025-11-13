@@ -8,13 +8,19 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
 
   useEffect(() => {
     if (isOpen) {
+      // Reset closing state when opening to ensure smooth transition
       setIsClosing(false);
       document.body.classList.add('drawer-open');
       // Set first asset as expanded by default
       if (contact?.sharedAssets && contact.sharedAssets.length > 0) {
         setExpandedAssetId(contact.sharedAssets[0].id || 0);
       }
-    } else {
+      // Force a reflow to ensure transition triggers
+      requestAnimationFrame(() => {
+        // Transition will trigger automatically via CSS
+      });
+    } else if (!isClosing) {
+      // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
       setExpandedAssetId(null);
     }
@@ -22,17 +28,24 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen, contact]);
+  }, [isOpen, contact, isClosing]);
 
   const handleClose = () => {
+    if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-      setIsClosing(false);
+      // Small delay before resetting isClosing to ensure parent has updated
+      setTimeout(() => {
+        setIsClosing(false);
+        // Restore body scroll after closing
+        document.body.classList.remove('drawer-open');
+      }, 50);
     }, 300);
   };
 
-  if (!isOpen || !contact) return null;
+  // Keep component rendered during closing animation
+  if ((!isOpen || !contact) && !isClosing) return null;
 
   // Debug: Log contact data
   console.log('ContactDrawer - Contact data:', contact);

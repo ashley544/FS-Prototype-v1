@@ -13,33 +13,47 @@ body.drawer-open {
   bottom: 0;
   background: rgba(0, 0, 0, 0.12);
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
   pointer-events: auto;
   touch-action: none;
+  /* Smooth transition for opacity */
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: opacity;
 }
 
 .asset-drawer-backdrop.closing {
-  animation: fadeOut 0.3s ease-out;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .asset-drawer {
   position: fixed;
   top: 0;
   right: 0;
-  width: 473px;
+  width: 500px;
   height: 100vh;
   background: #fff;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.12);
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInRight 0.3s ease-out;
   overflow: visible;
   pointer-events: auto;
+  /* Start off-screen to the right */
+  transform: translateX(100%);
+  /* Smooth transition for transform */
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform;
 }
 
+/* Slide in from right when opening */
+.asset-drawer:not(.closing) {
+  transform: translateX(0);
+}
+
+/* Slide out to the right when closing */
 .asset-drawer.closing {
-  animation: slideOutRight 0.3s ease-out;
+  transform: translateX(100%);
 }
 
 
@@ -567,8 +581,9 @@ body.drawer-open {
 .asset-drawer-bottom-bar {
   position: absolute;
   bottom: 0;
+  left: 0;
   right: 0;
-  width: 473px;
+  width: 100%;
   height: 68px;
   background: #fff;
   border-top: 1px solid #ececef;
@@ -580,11 +595,7 @@ body.drawer-open {
   flex-shrink: 0;
   z-index: 1002;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-  animation: slideInRight 0.3s ease-out;
-}
-
-.asset-drawer-bottom-bar.closing {
-  animation: slideOutRight 0.3s ease-in;
+  /* Footer moves with drawer - inherits parent transform */
 }
 
 .asset-drawer-cancel-btn {

@@ -197,22 +197,34 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
 
   useEffect(() => {
     if (isOpen) {
+      // Reset closing state when opening to ensure smooth transition
       setIsClosing(false);
       document.body.classList.add('drawer-open');
-    } else {
+      // Force a reflow to ensure transition triggers
+      requestAnimationFrame(() => {
+        // Transition will trigger automatically via CSS
+      });
+    } else if (!isClosing) {
+      // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }
 
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen]);
+  }, [isOpen, isClosing]);
 
   const handleClose = () => {
+    if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-      setIsClosing(false);
+      // Small delay before resetting isClosing to ensure parent has updated
+      setTimeout(() => {
+        setIsClosing(false);
+        // Restore body scroll after closing
+        document.body.classList.remove('drawer-open');
+      }, 50);
     }, 300);
   };
 
@@ -268,7 +280,8 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
     );
   };
 
-  if (!isOpen) return null;
+  // Keep component rendered during closing animation
+  if (!isOpen && !isClosing) return null;
 
   return (
     <>
@@ -276,7 +289,10 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
       <div className={`manage-folders-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
       
       {/* Drawer */}
-      <div className={`manage-folders-drawer ${isClosing ? 'closing' : ''}`}>
+      <div 
+        className={`manage-folders-drawer ${isClosing ? 'closing' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="manage-folders-drawer-header">
           <h2 className="manage-folders-drawer-title">Manage folders</h2>

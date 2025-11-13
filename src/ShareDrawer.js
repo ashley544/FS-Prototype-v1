@@ -22,22 +22,30 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
 
   useEffect(() => {
     if (isOpen) {
+      // Reset closing state when opening to ensure smooth transition
       setIsClosing(false);
       document.body.classList.add('drawer-open');
-    } else {
+      // Force a reflow to ensure transition triggers
+      // Use double RAF to ensure initial state is set before transition
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          // Transition will trigger automatically via CSS
+        });
+      });
+    } else if (!isClosing) {
+      // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }
 
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen]);
+  }, [isOpen, isClosing]);
 
   const handleClose = () => {
+    if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
     setTimeout(() => {
-      onClose();
-      setIsClosing(false);
       // Reset state when closing
       setStep(1);
       setSearchTerm('');
@@ -45,6 +53,13 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
       setEmailInput('');
       setNotifyContacts(true);
       setSelectedSuggestedMaterials(new Set([1, 2, 3, 4, 5]));
+      onClose();
+      // Small delay before resetting isClosing to ensure parent has updated
+      setTimeout(() => {
+        setIsClosing(false);
+        // Restore body scroll after closing
+        document.body.classList.remove('drawer-open');
+      }, 50);
     }, 300);
   };
 
@@ -171,7 +186,8 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
 
   const canShare = selectedContacts.size > 0 || emailInput.trim().length > 0;
 
-  if (!isOpen) return null;
+  // Keep component rendered during closing animation
+  if (!isOpen && !isClosing) return null;
 
   return (
     <>
@@ -179,7 +195,10 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
       <div className={`share-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
       
       {/* Drawer */}
-      <div className={`share-drawer ${isClosing ? 'closing' : ''}`}>
+      <div 
+        className={`share-drawer ${isClosing ? 'closing' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="share-drawer-header">
           <button 
@@ -517,8 +536,17 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
                 </div>
 
                 {/* Additional Materials Link */}
-                <div className="share-confirmation-materials-link">
-                  <a href="#" onClick={(e) => { e.preventDefault(); }}>See conventionally available materials</a>
+                <div className="share-confirmation-materials-section">
+                  <h4 className="share-confirmation-materials-title">See conventionally available materials</h4>
+                  <div className="share-confirmation-share-link-container">
+                    <svg className="share-confirmation-share-link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M14 11C13.5705 10.4259 13.0226 9.95086 12.3934 9.60707C11.7643 9.26328 11.0685 9.05886 10.3533 9.00766C9.63816 8.95645 8.92037 9.05972 8.24864 9.31028C7.57691 9.56084 6.96688 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04519 15.6661 2.05659 16.977C2.06798 18.288 2.59382 19.5421 3.52086 20.4691C4.4479 21.3962 5.70197 21.922 7.01295 21.9334C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <a href="https://demo.kkr.com/shared/materials" target="_blank" rel="noopener noreferrer" className="share-confirmation-share-link-url">
+                      https://demo.kkr.com/shared/materials
+                    </a>
+                  </div>
                 </div>
               </div>
             </>

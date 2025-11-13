@@ -27,13 +27,23 @@
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInRight 0.3s ease-out;
   overflow: visible;
   pointer-events: auto;
+  /* Start off-screen to the right */
+  transform: translateX(100%);
+  /* Smooth transition for transform */
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform;
 }
 
+/* Slide in from right when opening */
+.manage-folders-drawer:not(.closing) {
+  transform: translateX(0);
+}
+
+/* Slide out to the right when closing */
 .manage-folders-drawer.closing {
-  animation: slideOutRight 0.3s ease-out;
+  transform: translateX(100%);
 }
 
 .manage-folders-drawer-content {

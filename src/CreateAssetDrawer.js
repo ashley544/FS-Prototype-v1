@@ -11,7 +11,8 @@ export default function CreateAssetDrawer({ isOpen, onClose, onOpenShareDrawer }
   const [publishOption, setPublishOption] = useState('share'); // 'publish' or 'share'
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isClosing) {
+      // Only reset state when opening (not during closing animation)
       setIsClosing(false);
       setDrawerMode('upload'); // Reset to upload mode when opening
       setAssetType('exchange'); // Reset asset type
@@ -19,20 +20,31 @@ export default function CreateAssetDrawer({ isOpen, onClose, onOpenShareDrawer }
       setIsPinned(false); // Reset pin state
       setPublishOption('share'); // Reset publish option
       document.body.classList.add('drawer-open');
-    } else {
+      // Force a reflow to ensure transition triggers
+      requestAnimationFrame(() => {
+        // Transition will trigger automatically via CSS
+      });
+    } else if (!isOpen && !isClosing) {
+      // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }
 
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen]);
+  }, [isOpen, isClosing]);
 
   const handleClose = () => {
+    if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
     setTimeout(() => {
       onClose();
-      setIsClosing(false);
+      // Small delay before resetting isClosing to ensure parent has updated
+      setTimeout(() => {
+        setIsClosing(false);
+        // Restore body scroll after closing
+        document.body.classList.remove('drawer-open');
+      }, 50);
     }, 300);
   };
 
@@ -87,7 +99,8 @@ export default function CreateAssetDrawer({ isOpen, onClose, onOpenShareDrawer }
     setDrawerMode('upload');
   };
 
-  if (!isOpen) return null;
+  // Keep component rendered during closing animation
+  if (!isOpen && !isClosing) return null;
 
   return (
     <>
@@ -95,7 +108,10 @@ export default function CreateAssetDrawer({ isOpen, onClose, onOpenShareDrawer }
       <div className={`create-asset-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
       
       {/* Drawer */}
-      <div className={`create-asset-drawer ${isClosing ? 'closing' : ''}`}>
+      <div 
+        className={`create-asset-drawer ${isClosing ? 'closing' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Content */}
         <div className="create-asset-drawer-content">
           {/* Top Navigation */}

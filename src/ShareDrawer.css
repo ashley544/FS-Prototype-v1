@@ -13,33 +13,47 @@ body.drawer-open {
   bottom: 0;
   background: rgba(0, 0, 0, 0.12);
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
   pointer-events: auto;
   touch-action: none;
+  /* Smooth transition for opacity */
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: opacity;
 }
 
 .share-drawer-backdrop.closing {
-  animation: fadeOut 0.3s ease-out;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .share-drawer {
   position: fixed;
   top: 0;
   right: 0;
-  width: 473px;
+  width: 500px;
   height: 100vh;
   background: #fff;
   box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.12);
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideInRight 0.3s ease-out;
   overflow: visible;
   pointer-events: auto;
+  /* Start off-screen to the right */
+  transform: translateX(100%);
+  /* Smooth transition for transform */
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  will-change: transform;
 }
 
+/* Slide in from right when opening (not closing) */
+.share-drawer:not(.closing) {
+  transform: translateX(0);
+}
+
+/* Slide out to the right when closing - higher specificity to ensure it overrides */
 .share-drawer.closing {
-  animation: slideOutRight 0.3s ease-out;
+  transform: translateX(100%) !important;
 }
 
 .share-drawer-header {
@@ -844,15 +858,14 @@ body.drawer-open {
   border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
-  width: 100%;
-  max-width: 320px;
+  width: 272px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .share-confirmation-asset-image {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 171px;
   overflow: hidden;
   background: #F2F1F6;
   display: flex;
@@ -878,21 +891,21 @@ body.drawer-open {
 
 
 .share-confirmation-asset-title-frame {
-  padding: 12px 16px;
-  background: #ffffff;
-  border-top: 1px solid #e5e5e7;
+  padding: 8px 12px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 48px;
 }
 
 .share-confirmation-asset-title {
   font-family: 'Inter', Arial, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
   color: #1d1d1f;
   margin: 0;
-  line-height: 24px;
+  line-height: 18px;
   text-align: center;
 }
 
@@ -907,24 +920,11 @@ body.drawer-open {
 
 .share-confirmation-interests {
   margin: 0;
-}
-
-.share-confirmation-interests-title {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0 0 12px 0;
-  padding-left: 12px;
-  line-height: 20px;
   position: relative;
-  background: linear-gradient(90deg, #F05524 0%, #EE454A 29%, #D5529D 42%, #926AAE 65%, #0287FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  padding-left: 12px;
 }
 
-.share-confirmation-interests-title::before {
+.share-confirmation-interests::before {
   content: '';
   position: absolute;
   left: 0;
@@ -933,6 +933,21 @@ body.drawer-open {
   width: 4px;
   background: linear-gradient(180deg, #F05524 0%, #EE454A 29%, #D5529D 42%, #926AAE 65%, #0287FF 100%);
   border-radius: 2px;
+}
+
+.share-confirmation-interests-title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  padding-left: 0;
+  line-height: 20px;
+  position: relative;
+  background: linear-gradient(90deg, #F05524 0%, #EE454A 29%, #D5529D 42%, #926AAE 65%, #0287FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .share-confirmation-interests-list {
@@ -950,15 +965,8 @@ body.drawer-open {
   font-weight: 400;
   color: #1d1d1f;
   line-height: 20px;
-  padding-left: 20px;
+  padding-left: 0;
   position: relative;
-}
-
-.share-confirmation-interests-list li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: #1d1d1f;
 }
 
 .share-confirmation-table-container {
@@ -1033,21 +1041,48 @@ body.drawer-open {
   color: transparent;
 }
 
-.share-confirmation-materials-link {
+.share-confirmation-materials-section {
   margin-top: 8px;
 }
 
-.share-confirmation-materials-link a {
+.share-confirmation-materials-title {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #1d1d1f;
-  text-decoration: none;
+  margin: 0 0 12px 0;
   line-height: 20px;
 }
 
-.share-confirmation-materials-link a:hover {
+.share-confirmation-share-link-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.share-confirmation-share-link-icon {
+  flex-shrink: 0;
+  color: #1d1d1f;
+  width: 20px;
+  height: 20px;
+}
+
+.share-confirmation-share-link-url {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #007aff;
   text-decoration: underline;
+  line-height: 20px;
+  word-break: break-all;
+}
+
+.share-confirmation-share-link-url:hover {
+  color: #0051d5;
 }
 
 .share-drawer-share-button:disabled {

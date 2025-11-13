@@ -31,15 +31,20 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
   });
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !isClosing) {
+      // Only reset state when opening (not during closing animation)
       setIsClosing(false);
       setDrawerMode(initialMode); // Use initialMode prop
       setSelectedContacts(new Set()); // Reset selected contacts when opening
       setSearchTerm(''); // Reset search term when opening
       // Prevent body scroll when drawer is open
       document.body.classList.add('drawer-open');
-    } else {
-      // Restore body scroll when drawer is closed
+      // Force a reflow to ensure transition triggers
+      requestAnimationFrame(() => {
+        // Transition will trigger automatically via CSS
+      });
+    } else if (!isOpen && !isClosing) {
+      // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }
 
@@ -47,14 +52,20 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
     return () => {
       document.body.classList.remove('drawer-open');
     };
-  }, [isOpen, initialMode]);
+  }, [isOpen, initialMode, isClosing]);
 
   const handleClose = () => {
+    if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
     // Wait for animation to complete before actually closing
     setTimeout(() => {
       onClose();
-      setIsClosing(false);
+      // Small delay before resetting isClosing to ensure parent has updated
+      setTimeout(() => {
+        setIsClosing(false);
+        // Restore body scroll after closing
+        document.body.classList.remove('drawer-open');
+      }, 50);
     }, 300); // Match the animation duration
   };
 
@@ -97,7 +108,8 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
     }
   };
 
-  if (!isOpen) return null;
+  // Keep component rendered during closing animation
+  if (!isOpen && !isClosing) return null;
 
   return (
     <>
@@ -105,7 +117,10 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
       <div className={`asset-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
       
       {/* Drawer */}
-      <div className={`asset-drawer ${isClosing ? 'closing' : ''}`}>
+      <div 
+        className={`asset-drawer ${isClosing ? 'closing' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Content */}
         <div className="asset-drawer-content">
           {drawerMode === 'analytics' ? (
@@ -490,30 +505,30 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
             </>
           )}
         </div>
-      </div>
 
-      {/* Sticky Bottom Bar */}
-      <div className={`asset-drawer-bottom-bar ${isClosing ? 'closing' : ''}`}>
-        <button className="asset-drawer-cancel-btn" onClick={handleClose}>
-          Cancel
-        </button>
-        {drawerMode === 'analytics' ? (
-          <button className="asset-drawer-share-btn" onClick={handleShareAsset}>
-            Share asset
+        {/* Sticky Bottom Bar */}
+        <div className="asset-drawer-bottom-bar">
+          <button className="asset-drawer-cancel-btn" onClick={handleClose}>
+            Cancel
           </button>
-        ) : drawerMode === 'share' ? (
-          <button 
-            className="asset-drawer-share-btn" 
-            onClick={handleShareAssetConfirm}
-            disabled={selectedContacts.size === 0}
-          >
-            Share asset
-          </button>
-        ) : (
-          <button className="asset-drawer-share-btn">
-            Share asset
-          </button>
-        )}
+          {drawerMode === 'analytics' ? (
+            <button className="asset-drawer-share-btn" onClick={handleShareAsset}>
+              Share asset
+            </button>
+          ) : drawerMode === 'share' ? (
+            <button 
+              className="asset-drawer-share-btn" 
+              onClick={handleShareAssetConfirm}
+              disabled={selectedContacts.size === 0}
+            >
+              Share asset
+            </button>
+          ) : (
+            <button className="asset-drawer-share-btn">
+              Share asset
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
