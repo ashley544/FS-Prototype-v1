@@ -790,7 +790,7 @@ body.drawer-open {
   gap: 16px;
   padding: 16px 24px;
   flex-shrink: 0;
-  z-index: 1002;
+  z-index: 10000; /* Ensure footer is above all elements when scrolling */
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   /* Footer moves with drawer - inherits parent transform */
 }
@@ -1428,7 +1428,7 @@ body.drawer-open {
 }
 
 .share-confirmation-share-link-container {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 16px;
@@ -1439,7 +1439,8 @@ body.drawer-open {
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Clip images to stay within container */
+  z-index: 1; /* Ensure container stays below footer */
 }
 
 .share-confirmation-share-link-url {
@@ -1459,16 +1460,76 @@ body.drawer-open {
   color: #0051d5;
 }
 
-/* Visual Preview */
-.share-confirmation-visual-preview {
+/* Visual Preview Card */
+.visual-preview-card {
   position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  cursor: pointer;
+  overflow: hidden; /* Clip images to stay within card bounds */
+  /* Ensure card position is fixed in grid */
+  will-change: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Ensure card stays below footer */
+}
+
+/* Visual Preview - stacked images inside each card */
+.visual-preview-card > .share-confirmation-visual-preview {
+  position: absolute;
   width: 88px;
   height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  background: #ffffff;
+  border-radius: 6px;
   pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  /* Center the images within the larger card frame */
+  top: 50%;
+  left: 50%;
+  margin-top: -44px; /* Half of image height (88px / 2) */
+  margin-left: -44px; /* Half of image width (88px / 2) */
+  /* Default: all images stacked at same position (centered) */
+  transform: translate(0, 0);
+  /* Subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Z-index layering: Image 1 (back/bottom), Image 2 (middle), Image 3 (top/front) */
+.visual-preview-card > .share-confirmation-visual-preview:nth-child(1) {
+  z-index: 1; /* Back/bottom layer */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); /* Lightest shadow for back layer */
+}
+
+.visual-preview-card > .share-confirmation-visual-preview:nth-child(2) {
+  z-index: 2; /* Middle layer */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Medium shadow for middle layer */
+}
+
+.visual-preview-card > .share-confirmation-visual-preview:nth-child(3) {
+  z-index: 3; /* Top/front layer - stays fixed */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Strongest shadow for top layer */
+}
+
+
+/* Hover animations - ONLY affect images inside the hovered card */
+/* Image 3 (top/front layer) stays fixed - this is the base image */
+.visual-preview-card:hover > .share-confirmation-visual-preview:nth-child(3) {
+  transform: translate(0, 0);
+}
+
+/* Image 2 (middle layer) moves left 10px and up 10px - shifts backwards */
+.visual-preview-card:hover > .share-confirmation-visual-preview:nth-child(2) {
+  transform: translate(-10px, -10px);
+}
+
+/* Image 1 (back/bottom layer) moves left 20px and up 20px - shifts furthest back */
+.visual-preview-card:hover > .share-confirmation-visual-preview:nth-child(1) {
+  transform: translate(-20px, -20px);
 }
 
 .visual-preview-image {

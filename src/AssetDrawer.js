@@ -728,16 +728,36 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
 
                     {/* Additional Materials Link */}
                     <div className="share-confirmation-materials-section">
-                      <h4 className="share-confirmation-materials-title">See conventionally available materials</h4>
+                      <h4 className="share-confirmation-materials-title">See conditionally available materials</h4>
                       <div className="share-confirmation-share-link-container">
-                        {/* Visual Preview */}
-                        <div className="share-confirmation-visual-preview">
-                          <div className="visual-preview-image">
-                            <img 
-                              src="/Assets/$25bn in Pennsylvania Data Centers.jpg" 
-                              alt="Data Center"
-                              className="visual-preview-content"
-                            />
+                        {/* Card 1 */}
+                        <div className="visual-preview-card" key="card-1">
+                          <div className="share-confirmation-visual-preview">
+                            <div className="visual-preview-image">
+                              <img 
+                                src="/Assets/$25bn in Pennsylvania Data Centers.jpg" 
+                                alt="Data Center"
+                                className="visual-preview-content"
+                              />
+                            </div>
+                          </div>
+                          <div className="share-confirmation-visual-preview">
+                            <div className="visual-preview-image">
+                              <img 
+                                src="/Assets/markus-winkler-IrRbSND5EUc-unsplash.jpg" 
+                                alt="Visual 1"
+                                className="visual-preview-content"
+                              />
+                            </div>
+                          </div>
+                          <div className="share-confirmation-visual-preview">
+                            <div className="visual-preview-image">
+                              <img 
+                                src="/Assets/ricardo-gomez-angel-HXBP4Nud8PQ-unsplash.jpg" 
+                                alt="Visual 2"
+                                className="visual-preview-content"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
