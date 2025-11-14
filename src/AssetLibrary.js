@@ -6,6 +6,7 @@ import CreateAssetDrawer from './CreateAssetDrawer';
 import ManageFoldersDrawer from './ManageFoldersDrawer';
 import ShareDrawer from './ShareDrawer';
 import './AssetLibrary.css';
+import './ManageFoldersDrawer.css';
 
 const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsroomAssets, onOpenAsset, assetToOpen, onAssetOpened }) => {
   const [activeNavItem, setActiveNavItem] = useState('assets');
@@ -15,10 +16,15 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [isCreateDrawerOpen, setIsCreateDrawerOpen] = useState(false);
   const [drawerInitialMode, setDrawerInitialMode] = useState('analytics');
-  const [selectedFolder, setSelectedFolder] = useState('All folders');
+  const [selectedFolder, setSelectedFolder] = useState(null); // null means show all folders
   const [isFolderDropdownOpen, setIsFolderDropdownOpen] = useState(false);
   const [expandedParentFolders, setExpandedParentFolders] = useState({});
   const [isManageFoldersDrawerOpen, setIsManageFoldersDrawerOpen] = useState(false);
+  const [isFoldersDrawerOpen, setIsFoldersDrawerOpen] = useState(false);
+  const [isFoldersDrawerClosing, setIsFoldersDrawerClosing] = useState(false);
+  const [isManageFoldersView, setIsManageFoldersView] = useState(false);
+  const [manageFoldersOpenAccordions, setManageFoldersOpenAccordions] = useState({});
+  const [manageFoldersSearchQueries, setManageFoldersSearchQueries] = useState({});
   const [isShareDrawerOpen, setIsShareDrawerOpen] = useState(false);
   const [assetToShare, setAssetToShare] = useState(null);
   const [selectedAssets, setSelectedAssets] = useState([]);
@@ -129,8 +135,246 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   ];
 
   // Flatten for dropdown (keeping full paths for filtering)
-  const allFolders = ['All folders', ...groupedFolders.flatMap(g => g.fullPaths)];
+  const allFolders = groupedFolders.flatMap(g => g.fullPaths);
   const folders = allFolders;
+
+  // Manage folders data structure with assets (for manage folders view)
+  const [manageFoldersGroupedData, setManageFoldersGroupedData] = useState([
+    {
+      parent: 'KKR',
+      children: [
+        { 
+          id: 'kkr-infrastructure', 
+          name: 'Infrastructure',
+          fullPath: 'KKR / Infrastructure',
+          assets: [{ id: 1, title: 'KKR Global Infrastructure Opportunities Fund III' }]
+        },
+        { 
+          id: 'kkr-private-markets', 
+          name: 'Private Markets',
+          fullPath: 'KKR / Private Markets',
+          assets: [{ id: 2, title: 'KKR Private Market Fund' }]
+        },
+        { 
+          id: 'kkr-energy-transition', 
+          name: 'Energy Transition',
+          fullPath: 'KKR / Energy Transition',
+          assets: [{ id: 3, title: 'KKR Clean Energy & Transition Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'Blackstone',
+      children: [
+        { 
+          id: 'blackstone-real-estate', 
+          name: 'Real Estate',
+          fullPath: 'Blackstone / Real Estate',
+          assets: [{ id: 4, title: 'Blackstone Real Estate Income Trust (BREIT) Q3 Update' }]
+        },
+        { 
+          id: 'blackstone-infrastructure', 
+          name: 'Infrastructure',
+          fullPath: 'Blackstone / Infrastructure',
+          assets: [{ id: 5, title: 'BX Infrastructure Outlook 2025' }]
+        }
+      ]
+    },
+    {
+      parent: 'Apollo',
+      children: [
+        { 
+          id: 'apollo-credit', 
+          name: 'Credit',
+          fullPath: 'Apollo / Credit',
+          assets: [{ id: 6, title: 'Apollo Direct Lending Platform Overview' }]
+        },
+        { 
+          id: 'apollo-alternatives', 
+          name: 'Alternatives',
+          fullPath: 'Apollo / Alternatives',
+          assets: [{ id: 7, title: 'Apollo Alternative Credit Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'Carlyle',
+      children: [
+        { 
+          id: 'carlyle-private-equity', 
+          name: 'Private Equity',
+          fullPath: 'Carlyle / Private Equity',
+          assets: [{ id: 8, title: 'Carlyle European Buyout Opportunities' }]
+        }
+      ]
+    },
+    {
+      parent: 'Ares',
+      children: [
+        { 
+          id: 'ares-private-credit', 
+          name: 'Private Credit',
+          fullPath: 'Ares / Private Credit',
+          assets: [{ id: 9, title: 'Ares Private Credit Income Fund (ARDC)' }]
+        },
+        { 
+          id: 'ares-real-assets', 
+          name: 'Real Assets',
+          fullPath: 'Ares / Real Assets',
+          assets: [{ id: 10, title: 'Ares Infrastructure Growth Report' }]
+        }
+      ]
+    },
+    {
+      parent: 'Partners Group',
+      children: [
+        { 
+          id: 'partners-group-real-estate', 
+          name: 'Real Estate',
+          fullPath: 'Partners Group / Real Estate',
+          assets: [{ id: 11, title: 'Partners Group Real Estate Capabilities' }]
+        },
+        { 
+          id: 'partners-group-private-markets', 
+          name: 'Private Markets',
+          fullPath: 'Partners Group / Private Markets',
+          assets: [{ id: 12, title: 'Partners Group Global Value 2025 Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'Brookfield',
+      children: [
+        { 
+          id: 'brookfield-renewables', 
+          name: 'Renewables',
+          fullPath: 'Brookfield / Renewables',
+          assets: [{ id: 13, title: 'Brookfield Renewable Partners Investor Deck' }]
+        },
+        { 
+          id: 'brookfield-infrastructure', 
+          name: 'Infrastructure',
+          fullPath: 'Brookfield / Infrastructure',
+          assets: [{ id: 14, title: 'Brookfield Global Infrastructure Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'Hamilton Lane',
+      children: [
+        { 
+          id: 'hamilton-lane-secondaries', 
+          name: 'Secondaries',
+          fullPath: 'Hamilton Lane / Secondaries',
+          assets: [{ id: 15, title: 'Hamilton Lane Secondary Opportunities VI' }]
+        }
+      ]
+    },
+    {
+      parent: 'StepStone',
+      children: [
+        { 
+          id: 'stepstone-private-wealth', 
+          name: 'Private Wealth',
+          fullPath: 'StepStone / Private Wealth',
+          assets: [{ id: 16, title: 'StepStone Private Wealth Access Platform' }]
+        }
+      ]
+    },
+    {
+      parent: 'Goldman Sachs',
+      children: [
+        { 
+          id: 'goldman-sachs-alternatives', 
+          name: 'Alternatives',
+          fullPath: 'Goldman Sachs / Alternatives',
+          assets: [{ id: 17, title: 'Goldman Sachs Multi-Strategy Alternatives Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'Morgan Stanley',
+      children: [
+        { 
+          id: 'morgan-stanley-outlook', 
+          name: 'Outlook',
+          fullPath: 'Morgan Stanley / Outlook',
+          assets: [{ id: 18, title: 'Morgan Stanley US Retail Outlook 2025' }]
+        }
+      ]
+    },
+    {
+      parent: 'JPMorgan',
+      children: [
+        { 
+          id: 'jpmorgan-diversified-alts', 
+          name: 'Diversified Alts',
+          fullPath: 'JPMorgan / Diversified Alts',
+          assets: [{ id: 19, title: 'JPMorgan Diversified Alternatives Access Fund' }]
+        }
+      ]
+    },
+    {
+      parent: 'UBS',
+      children: [
+        { 
+          id: 'ubs-market-insights', 
+          name: 'Market Insights',
+          fullPath: 'UBS / Market Insights',
+          assets: [{ id: 20, title: 'UBS Private Wealth Macro Insights – November 2025' }]
+        }
+      ]
+    }
+  ]);
+
+  // Helper functions for manage folders view
+  const toggleManageFoldersAccordion = (folderId) => {
+    setManageFoldersOpenAccordions(prev => ({
+      ...prev,
+      [folderId]: !prev[folderId]
+    }));
+  };
+
+  const handleManageFoldersSearchChange = (folderId, value) => {
+    setManageFoldersSearchQueries(prev => ({
+      ...prev,
+      [folderId]: value
+    }));
+  };
+
+  const handleRemoveAsset = (childFolderId, assetId) => {
+    setManageFoldersGroupedData(prevGroups => 
+      prevGroups.map(group => ({
+        ...group,
+        children: group.children.map(child => 
+          child.id === childFolderId
+            ? { ...child, assets: child.assets.filter(asset => asset.id !== assetId) }
+            : child
+        )
+      }))
+    );
+  };
+
+  const handleAddAssets = (childFolderId) => {
+    console.log('Add assets to folder:', childFolderId);
+  };
+
+  const handleDeleteFolder = (childFolderId) => {
+    setManageFoldersGroupedData(prevGroups => 
+      prevGroups.map(group => ({
+        ...group,
+        children: group.children.filter(child => child.id !== childFolderId)
+      })).filter(group => group.children.length > 0)
+    );
+  };
+
+  const getFilteredAssets = (childFolder) => {
+    const query = manageFoldersSearchQueries[childFolder.id]?.toLowerCase() || '';
+    if (!query) return childFolder.assets;
+    return childFolder.assets.filter(asset => 
+      asset.title.toLowerCase().includes(query)
+    );
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -148,6 +392,19 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isFolderDropdownOpen]);
+
+  // Handle body scroll when Folders drawer is open
+  useEffect(() => {
+    if (isFoldersDrawerOpen && !isFoldersDrawerClosing) {
+      document.body.classList.add('drawer-open');
+    } else if (!isFoldersDrawerOpen && !isFoldersDrawerClosing) {
+      document.body.classList.remove('drawer-open');
+    }
+
+    return () => {
+      document.body.classList.remove('drawer-open');
+    };
+  }, [isFoldersDrawerOpen, isFoldersDrawerClosing]);
 
   // Convert exchange assets to the format expected by AssetCardLibrary
   const formattedExchangeAssets = exchangeAssets.map((asset, index) => {
@@ -356,10 +613,28 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
     setIsManageFoldersDrawerOpen(false);
   };
 
+  const handleOpenFoldersDrawer = () => {
+    setIsFoldersDrawerOpen(true);
+    setIsFolderDropdownOpen(false);
+    setIsFoldersDrawerClosing(false);
+  };
+
+  const handleCloseFoldersDrawer = () => {
+    if (isFoldersDrawerClosing) return;
+    setIsFoldersDrawerClosing(true);
+    setIsManageFoldersView(false); // Reset to folders list view when closing
+    setTimeout(() => {
+      setIsFoldersDrawerOpen(false);
+      setTimeout(() => {
+        setIsFoldersDrawerClosing(false);
+      }, 50);
+    }, 300);
+  };
+
   // Filter assets by selected folder
   const filterAssetsByFolder = (assets) => {
-    if (selectedFolder === 'All folders') {
-      return assets;
+    if (!selectedFolder) {
+      return assets; // Show all when no folder selected
     }
     return assets.filter(asset => asset.folder === selectedFolder);
   };
@@ -436,7 +711,7 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
   const allListViewData = prepareListViewData(allAssetsForListView);
 
   // Filter list view data by selected folder
-  const listViewData = selectedFolder === 'All folders' 
+  const listViewData = !selectedFolder
     ? allListViewData 
     : allListViewData.filter(asset => asset.folder === selectedFolder);
 
@@ -597,92 +872,12 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
         
         <div className="asset-library-filter-bar">
           <div className="filter-bar-left">
-            <button className="filter-btn" onClick={handleOpenManageFoldersDrawer}>
-              <span>Manage folders</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="none" strokeWidth="0">
-                <path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z" fill="currentColor" stroke="none" strokeWidth="0"/>
+            <button className="filter-btn" onClick={handleOpenFoldersDrawer}>
+              <span>Folders</span>
+              <svg width="20" height="20" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="none" strokeWidth="0">
+                <path d="M26.9091 4H9.09091C6.27945 4 4 6.27945 4 9.09091V26.9091C4 29.7205 6.27945 32 9.09091 32H26.9091C29.7205 32 32 29.7205 32 26.9091V9.09091C32 6.27945 29.7205 4 26.9091 4ZM6.562 11.6376C6.562 10.2313 7.70109 9.09218 9.10745 9.09218H12.1276C13.1089 9.09218 13.6307 9.50073 14.0125 9.87618C14.3536 10.2173 14.5204 10.37 14.9098 10.37H26.6584C28.1958 10.37 29.4418 11.2596 29.4418 12.7971V14.1958H28.0507C28.0507 14.1958 28.0495 14.0367 27.9744 13.8827C27.5785 13.0885 26.6456 12.9091 25.9647 12.9091H10.0416C9.35945 12.9091 8.42782 13.0885 8.03073 13.8815C7.95818 14.0278 7.95436 14.1945 7.95436 14.1945H6.562V11.6376ZM29.4495 24.118C29.4495 25.6555 28.2035 26.9015 26.666 26.9015H9.33145C7.794 26.9015 6.548 25.6555 6.548 24.118V17.44C6.548 17.0556 6.85982 16.7438 7.24418 16.7438H28.7533C29.1376 16.7438 29.4495 17.0556 29.4495 17.44V24.118Z" fill="currentColor" stroke="none" strokeWidth="0"/>
               </svg>
             </button>
-          </div>
-          
-          <div className="filter-divider"></div>
-          
-          <div className="filter-bar-center">
-            <div className="folder-dropdown-container" ref={folderDropdownRef}>
-              <button 
-                className="filter-btn folder-dropdown-btn"
-                onClick={() => setIsFolderDropdownOpen(!isFolderDropdownOpen)}
-              >
-                <span>{selectedFolder}</span>
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={isFolderDropdownOpen ? 'dropdown-open' : ''}
-                  stroke="none"
-                  strokeWidth="0"
-                >
-                  <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor" stroke="none" strokeWidth="0"/>
-                </svg>
-              </button>
-              {isFolderDropdownOpen && (
-                <div className="folder-dropdown-menu">
-                  <button
-                    className={`folder-dropdown-item ${selectedFolder === 'All folders' ? 'selected' : ''}`}
-                    onClick={() => {
-                      setSelectedFolder('All folders');
-                      setIsFolderDropdownOpen(false);
-                    }}
-                  >
-                    All folders
-                  </button>
-                  {groupedFolders.map((group) => (
-                    <div key={group.parent} className="folder-dropdown-group">
-                      <button
-                        className="folder-dropdown-parent"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setExpandedParentFolders(prev => ({
-                            ...prev,
-                            [group.parent]: !prev[group.parent]
-                          }));
-                        }}
-                      >
-                        <span>{group.parent}</span>
-                        <svg 
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 16 16" 
-                          fill="none" 
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={expandedParentFolders[group.parent] ? 'expanded' : ''}
-                        >
-                          <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </button>
-                      {expandedParentFolders[group.parent] && (
-                        <div className="folder-dropdown-children">
-                          {group.fullPaths.map((fullPath) => (
-                            <button
-                              key={fullPath}
-                              className={`folder-dropdown-item folder-dropdown-child ${selectedFolder === fullPath ? 'selected' : ''}`}
-                              onClick={() => {
-                                setSelectedFolder(fullPath);
-                                setIsFolderDropdownOpen(false);
-                              }}
-                            >
-                              {fullPath.split(' / ')[1]}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
           
           <div className="filter-divider"></div>
@@ -1040,6 +1235,267 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
         exchangeAssets={exchangeAssets}
         newsroomAssets={newsroomAssets}
       />
+      
+      {/* Folders Drawer */}
+      {isFoldersDrawerOpen && (
+        <>
+          <div 
+            className={`manage-folders-drawer-backdrop ${isFoldersDrawerClosing ? 'closing' : ''}`} 
+            onClick={handleCloseFoldersDrawer} 
+          />
+          <div 
+            className={`manage-folders-drawer ${isFoldersDrawerClosing ? 'closing' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="manage-folders-drawer-header" style={{ padding: '16px 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                <button 
+                  className="asset-drawer-back-btn" 
+                  onClick={() => {
+                    if (isManageFoldersView) {
+                      setIsManageFoldersView(false);
+                    } else {
+                      handleCloseFoldersDrawer();
+                    }
+                  }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+                  </svg>
+                </button>
+                <h2 className="manage-folders-drawer-title" style={{ margin: 0 }}>
+                  {isManageFoldersView ? 'Manage folders' : 'All folders'}
+                </h2>
+              </div>
+              {!isManageFoldersView && (
+                <button 
+                  className="filter-btn" 
+                  onClick={() => {
+                    setIsManageFoldersView(true);
+                  }}
+                >
+                  <span>Manage folders</span>
+                  <svg width="20" height="20" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="none" strokeWidth="0">
+                    <path d="M6.8637 7C5.29694 7 4 8.25876 4 9.77941V25.2206C4 26.7412 5.29694 28 6.8637 28H7.34844H7.86549H26.7356C27.9113 28 28.9458 27.2037 29.214 26.094L31.9583 15.9607C32.0077 15.778 32.0133 15.5867 31.9746 15.4016C31.9359 15.2165 31.854 15.0424 31.7352 14.8928C31.6163 14.7432 31.4637 14.6221 31.2891 14.5387C31.1145 14.4553 30.9225 14.4119 30.7278 14.4118H29.3532L29.4551 12.25C29.4551 10.7294 28.1581 9.47059 26.5914 9.47059H14.9725C14.8033 9.47059 14.6422 9.40452 14.5226 9.28964L13.0957 7.90476C12.5001 7.32664 11.6899 7 10.846 7H6.8637ZM6.8637 9.47059H10.846C11.0153 9.47059 11.1763 9.53666 11.296 9.65154L12.7228 11.0364C13.3185 11.6158 14.1287 11.9412 14.9725 11.9412H26.5914C26.781 11.9412 26.9096 12.0659 26.9096 12.25V14.4118H10.3638C10.0823 14.412 9.80878 14.5029 9.58613 14.6701C9.36348 14.8373 9.20422 15.0714 9.13328 15.3358L6.54551 24.9721V9.77941C6.54551 9.59535 6.67406 9.47059 6.8637 9.47059ZM11.3482 16.8824H29.0772L26.743 25.498C26.7404 25.5085 26.7379 25.5189 26.7356 25.5294H9.02638L11.3482 16.8824Z" fill="currentColor" stroke="none" strokeWidth="0"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            {/* Content */}
+            <div className="manage-folders-drawer-content" style={{ padding: isManageFoldersView ? '24px 16px' : '0' }}>
+              {isManageFoldersView ? (
+                /* Manage Folders View */
+                <div className="manage-folders-accordions">
+                  {manageFoldersGroupedData.map((group) => (
+                    <div key={group.parent} className="manage-folders-accordion">
+                      {/* Parent Accordion Header */}
+                      <div 
+                        className="manage-folders-accordion-header"
+                        style={{ padding: '16px 16px' }}
+                        onClick={() => toggleManageFoldersAccordion(group.parent)}
+                      >
+                        <h3 className="manage-folders-accordion-title">{group.parent}</h3>
+                        <svg 
+                          className={`manage-folders-accordion-chevron ${manageFoldersOpenAccordions[group.parent] ? 'open' : ''}`}
+                          width="24" 
+                          height="24" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor"/>
+                        </svg>
+                      </div>
+
+                      {/* Parent Accordion Content - Child Folders */}
+                      {manageFoldersOpenAccordions[group.parent] && (
+                        <div className="manage-folders-accordion-content">
+                          {group.children.map((childFolder) => (
+                            <div key={childFolder.id} className="manage-folders-child-accordion" style={{ paddingLeft: '0' }}>
+                              {/* Child Folder Header */}
+                              <div 
+                                className="manage-folders-child-header"
+                                style={{ padding: '12px 16px' }}
+                                onClick={() => toggleManageFoldersAccordion(childFolder.id)}
+                              >
+                                <h4 className="manage-folders-child-title">{childFolder.name}</h4>
+                                <svg 
+                                  className={`manage-folders-accordion-chevron ${manageFoldersOpenAccordions[childFolder.id] ? 'open' : ''}`}
+                                  width="20" 
+                                  height="20" 
+                                  viewBox="0 0 24 24" 
+                                  fill="none" 
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor"/>
+                                </svg>
+                              </div>
+
+                              {/* Child Folder Content */}
+                              {manageFoldersOpenAccordions[childFolder.id] && (
+                                <div className="manage-folders-child-content">
+                                  {/* Search Bar */}
+                                  <div className="manage-folders-search-container">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M16.6667 16.6667L13.3334 13.3334M15.8334 9.16671C15.8334 12.8446 12.8446 15.8334 9.16671 15.8334C5.4888 15.8334 2.5 12.8446 2.5 9.16671C2.5 5.4888 5.4888 2.5 9.16671 2.5C12.8446 2.5 15.8334 5.4888 15.8334 9.16671Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                    <input 
+                                      type="text" 
+                                      placeholder="Search assets..." 
+                                      className="manage-folders-search-input"
+                                      value={manageFoldersSearchQueries[childFolder.id] || ''}
+                                      onChange={(e) => handleManageFoldersSearchChange(childFolder.id, e.target.value)}
+                                      onClick={(e) => e.stopPropagation()}
+                                    />
+                                  </div>
+
+                                  {/* Assets List */}
+                                  <div className="manage-folders-assets-list">
+                                    {getFilteredAssets(childFolder).length > 0 ? (
+                                      getFilteredAssets(childFolder).map((asset) => (
+                                        <div key={asset.id} className="manage-folders-asset-item">
+                                          <span className="manage-folders-asset-name">{asset.title}</span>
+                                          <button 
+                                            className="manage-folders-remove-link"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleRemoveAsset(childFolder.id, asset.id);
+                                            }}
+                                          >
+                                            Remove asset
+                                          </button>
+                                        </div>
+                                      ))
+                                    ) : (
+                                      <div className="manage-folders-empty-state">
+                                        {manageFoldersSearchQueries[childFolder.id] ? 'No assets found' : 'No assets in this folder'}
+                                      </div>
+                                    )}
+                                  </div>
+
+                                  {/* Action Buttons */}
+                                  <div className="manage-folders-accordion-actions">
+                                    <button 
+                                      className="manage-folders-add-assets-btn"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleAddAssets(childFolder.id);
+                                      }}
+                                    >
+                                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 4.16675V15.8334M4.16667 10H15.8333" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                      </svg>
+                                      <span>Add assets</span>
+                                    </button>
+                                    <button 
+                                      className="manage-folders-delete-folder-link"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteFolder(childFolder.id);
+                                      }}
+                                    >
+                                      Delete folder
+                                    </button>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                /* Folder Hierarchy View */
+                <div style={{ padding: '24px 16px' }}>
+                  {groupedFolders.map((group) => (
+                    <div key={group.parent} style={{ marginBottom: '24px' }}>
+                      <div 
+                        style={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'space-between',
+                          padding: '12px 16px',
+                          cursor: 'pointer',
+                          borderBottom: '1px solid #e5e5e7'
+                        }}
+                        onClick={() => {
+                          setExpandedParentFolders(prev => ({
+                            ...prev,
+                            [group.parent]: !prev[group.parent]
+                          }));
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <svg width="16" height="16" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+                            <path d="M26.9091 4H9.09091C6.27945 4 4 6.27945 4 9.09091V26.9091C4 29.7205 6.27945 32 9.09091 32H26.9091C29.7205 32 32 29.7205 32 26.9091V9.09091C32 6.27945 29.7205 4 26.9091 4ZM6.562 11.6376C6.562 10.2313 7.70109 9.09218 9.10745 9.09218H12.1276C13.1089 9.09218 13.6307 9.50073 14.0125 9.87618C14.3536 10.2173 14.5204 10.37 14.9098 10.37H26.6584C28.1958 10.37 29.4418 11.2596 29.4418 12.7971V14.1958H28.0507C28.0507 14.1958 28.0495 14.0367 27.9744 13.8827C27.5785 13.0885 26.6456 12.9091 25.9647 12.9091H10.0416C9.35945 12.9091 8.42782 13.0885 8.03073 13.8815C7.95818 14.0278 7.95436 14.1945 7.95436 14.1945H6.562V11.6376ZM29.4495 24.118C29.4495 25.6555 28.2035 26.9015 26.666 26.9015H9.33145C7.794 26.9015 6.548 25.6555 6.548 24.118V17.44C6.548 17.0556 6.85982 16.7438 7.24418 16.7438H28.7533C29.1376 16.7438 29.4495 17.0556 29.4495 17.44V24.118Z" fill={getFolderColor(group.parent)}/>
+                          </svg>
+                          <span style={{ 
+                            fontFamily: 'Inter, Arial, sans-serif',
+                            fontSize: '16px',
+                            fontWeight: '500',
+                            color: '#000000'
+                          }}>
+                            {group.parent}
+                          </span>
+                        </div>
+                        <svg 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 16 16" 
+                          fill="none" 
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ 
+                            transform: expandedParentFolders[group.parent] ? 'rotate(90deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s ease'
+                          }}
+                        >
+                          <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                      {expandedParentFolders[group.parent] && (
+                        <div style={{ paddingLeft: '16px', marginTop: '8px' }}>
+                          {group.children.map((child, index) => {
+                            const fullPath = group.fullPaths[index];
+                            const folderColor = getFolderColor(child);
+                            return (
+                              <div 
+                                key={child}
+                                style={{ 
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  padding: '8px 0',
+                                  cursor: 'pointer'
+                                }}
+                                onClick={() => {
+                                  setSelectedFolder(fullPath);
+                                  handleCloseFoldersDrawer();
+                                }}
+                              >
+                                <span style={{ 
+                                  fontFamily: 'Inter, Arial, sans-serif',
+                                  fontSize: '14px',
+                                  fontWeight: '400',
+                                  color: folderColor
+                                }}>
+                                  {child}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
       
       <ShareDrawer 
         isOpen={isShareDrawerOpen}

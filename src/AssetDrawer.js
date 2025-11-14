@@ -594,7 +594,17 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                             </div>
                             <div className="suggested-materials-item-info">
                               <div className="suggested-materials-item-title">{material.title}</div>
-                              <div className="suggested-materials-item-tag">{material.tag}</div>
+                              <div 
+                                className={`suggested-materials-item-tag ${
+                                  material.tag === 'Fund Series' 
+                                    ? 'suggested-materials-tag-fund-series'
+                                    : material.tag === 'Related Material'
+                                    ? 'suggested-materials-tag-related-material'
+                                    : ''
+                                }`}
+                              >
+                                {material.tag}
+                              </div>
                             </div>
                           </label>
                         </div>
