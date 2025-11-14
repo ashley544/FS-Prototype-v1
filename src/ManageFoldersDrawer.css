@@ -155,11 +155,12 @@
 }
 
 .manage-folders-accordion-chevron {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   color: #1d1d1f;
   transition: transform 0.3s ease;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .manage-folders-accordion-chevron.open {
@@ -175,8 +176,9 @@
 }
 
 .manage-folders-child-accordion {
-  border-bottom: 1px solid #f0f0f0;
-  padding-left: 16px;
+  border-bottom: none;
+  padding-left: 0;
+  margin-top: 0;
 }
 
 .manage-folders-child-accordion:last-child {
@@ -187,7 +189,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 8px 0;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

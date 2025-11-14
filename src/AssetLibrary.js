@@ -1293,43 +1293,46 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                       {/* Parent Accordion Header */}
                       <div 
                         className="manage-folders-accordion-header"
-                        style={{ padding: '16px 16px' }}
+                        style={{ padding: '12px 16px' }}
                         onClick={() => toggleManageFoldersAccordion(group.parent)}
                       >
                         <h3 className="manage-folders-accordion-title">{group.parent}</h3>
                         <svg 
                           className={`manage-folders-accordion-chevron ${manageFoldersOpenAccordions[group.parent] ? 'open' : ''}`}
-                          width="24" 
-                          height="24" 
-                          viewBox="0 0 24 24" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 16 16" 
                           fill="none" 
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor"/>
+                          <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </div>
 
                       {/* Parent Accordion Content - Child Folders */}
                       {manageFoldersOpenAccordions[group.parent] && (
                         <div className="manage-folders-accordion-content">
-                          {group.children.map((childFolder) => (
-                            <div key={childFolder.id} className="manage-folders-child-accordion" style={{ paddingLeft: '0' }}>
+                          {group.children.map((childFolder) => {
+                            const folderColor = getFolderColor(childFolder.name);
+                            return (
+                            <div key={childFolder.id} className="manage-folders-child-accordion" style={{ paddingLeft: '16px' }}>
                               {/* Child Folder Header */}
                               <div 
                                 className="manage-folders-child-header"
-                                style={{ padding: '12px 16px' }}
+                                style={{ padding: '8px 0' }}
                                 onClick={() => toggleManageFoldersAccordion(childFolder.id)}
                               >
-                                <h4 className="manage-folders-child-title">{childFolder.name}</h4>
+                                <h4 className="manage-folders-child-title" style={{ color: folderColor }}>{childFolder.name}</h4>
                                 <svg 
                                   className={`manage-folders-accordion-chevron ${manageFoldersOpenAccordions[childFolder.id] ? 'open' : ''}`}
-                                  width="20" 
-                                  height="20" 
-                                  viewBox="0 0 24 24" 
+                                  width="16" 
+                                  height="16" 
+                                  viewBox="0 0 16 16" 
                                   fill="none" 
                                   xmlns="http://www.w3.org/2000/svg"
+                                  style={{ marginLeft: 'auto' }}
                                 >
-                                  <path d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z" fill="currentColor"/>
+                                  <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                               </div>
 
@@ -1402,7 +1405,8 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                                 </div>
                               )}
                             </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </div>
@@ -1450,7 +1454,9 @@ const AssetLibrary = ({ onReturnToTitle, onNavigateToPage, exchangeAssets, newsr
                           xmlns="http://www.w3.org/2000/svg"
                           style={{ 
                             transform: expandedParentFolders[group.parent] ? 'rotate(90deg)' : 'rotate(0deg)',
-                            transition: 'transform 0.2s ease'
+                            transition: 'transform 0.2s ease',
+                            flexShrink: 0,
+                            marginLeft: 'auto'
                           }}
                         >
                           <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
