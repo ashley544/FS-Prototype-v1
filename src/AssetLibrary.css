@@ -571,6 +571,13 @@
   opacity: 0.6;
 }
 
+.asset-list-folder-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
 .asset-list-folder-chip {
   display: inline-flex;
   align-items: center;

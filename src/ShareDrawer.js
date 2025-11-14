@@ -125,26 +125,26 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
     image: '/Assets/BX Digital Infrastructure Strategy.png'
   };
 
-  // Mock data for shared contacts
+  // Mock data for shared contacts - aligned with first 3 contacts from contacts page
   const sharedContactsData = [
     {
       id: 1,
-      name: 'James Lawson',
-      email: 'j.lawson@invesco.com',
+      name: 'Ryan Stanford',
+      email: 'rystanford@yahoo.com',
       lastVisit: '30 mins ago',
       intent: 'High Intent'
     },
     {
       id: 2,
-      name: 'Lawrence Hooper',
-      email: 'l.hooper@stanhope.com',
+      name: 'Tom Slack',
+      email: 'tslack@gmail.com',
       lastVisit: '3 hours ago',
       intent: 'High Intent'
     },
     {
       id: 3,
-      name: 'John S',
-      email: 'johns@forbesfamily.com',
+      name: 'Olivia Chen',
+      email: 'oliviachen27@outlook.com',
       lastVisit: '7 days ago',
       intent: null
     }
@@ -448,9 +448,6 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
                 {/* Confirmation Message */}
                 <div className="share-confirmation-message">
                   <p className="share-confirmation-text">Your asset has been shared</p>
-                  <div className="share-confirmation-checkmark">
-                    <img src="/checkmark.svg" alt="Checkmark" />
-                  </div>
                 </div>
 
                 {/* Asset Preview Card */}
@@ -556,13 +553,16 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
                 <div className="share-confirmation-materials-section">
                   <h4 className="share-confirmation-materials-title">See conditionally available materials</h4>
                   <div className="share-confirmation-share-link-container">
-                    <svg className="share-confirmation-share-link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M14 11C13.5705 10.4259 13.0226 9.95086 12.3934 9.60707C11.7643 9.26328 11.0685 9.05886 10.3533 9.00766C9.63816 8.95645 8.92037 9.05972 8.24864 9.31028C7.57691 9.56084 6.96688 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04519 15.6661 2.05659 16.977C2.06798 18.288 2.59382 19.5421 3.52086 20.4691C4.4479 21.3962 5.70197 21.922 7.01295 21.9334C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <a href="https://demo.kkr.com/shared/materials" target="_blank" rel="noopener noreferrer" className="share-confirmation-share-link-url">
-                      https://demo.kkr.com/shared/materials
-                    </a>
+                    {/* Visual Preview */}
+                    <div className="share-confirmation-visual-preview">
+                      <div className="visual-preview-image">
+                        <img 
+                          src="/Assets/$25bn in Pennsylvania Data Centers.jpg" 
+                          alt="Data Center"
+                          className="visual-preview-content"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -12,6 +12,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
   const [emailInput, setEmailInput] = useState(''); // Track email input
   const [notifyContacts, setNotifyContacts] = useState(true); // Track notify contacts toggle
   const [selectedSuggestedMaterials, setSelectedSuggestedMaterials] = useState(new Set([1, 2, 3, 4, 5])); // All selected by default
+  const [showToast, setShowToast] = useState(false);
 
   // Sample contacts data - first 7 contacts from contacts page
   const allContacts = [
@@ -58,26 +59,26 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
     }
   ];
 
-  // Mock data for shared contacts
+  // Mock data for shared contacts - aligned with first 3 contacts from contacts page
   const sharedContactsData = [
     {
       id: 1,
-      name: 'James Lawson',
-      email: 'j.lawson@invesco.com',
+      name: 'Ryan Stanford',
+      email: 'rystanford@yahoo.com',
       lastVisit: '30 mins ago',
       intent: 'High Intent'
     },
     {
       id: 2,
-      name: 'Lawrence Hooper',
-      email: 'l.hooper@stanhope.com',
+      name: 'Tom Slack',
+      email: 'tslack@gmail.com',
       lastVisit: '3 hours ago',
       intent: 'High Intent'
     },
     {
       id: 3,
-      name: 'John S',
-      email: 'johns@forbesfamily.com',
+      name: 'Olivia Chen',
+      email: 'oliviachen27@outlook.com',
       lastVisit: '7 days ago',
       intent: null
     }
@@ -102,6 +103,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
       setEmailInput(''); // Reset email input when opening
       setNotifyContacts(true); // Reset notify contacts toggle when opening
       setSelectedSuggestedMaterials(new Set([1, 2, 3, 4, 5])); // Reset suggested materials
+      setShowToast(false); // Reset toast when opening
       // Prevent body scroll when drawer is open
       document.body.classList.add('drawer-open');
       // Force a reflow to ensure transition triggers
@@ -122,6 +124,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
   const handleClose = () => {
     if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
+    setShowToast(false); // Hide toast when closing
     // Wait for animation to complete before actually closing
     setTimeout(() => {
       onClose();
@@ -155,6 +158,12 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
   const handleProceed = () => {
     // Move to step 3: Confirmation page
     setStep(3);
+    // Show toast notification
+    setShowToast(true);
+    // Auto-dismiss after 4 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 4000);
   };
 
   const handleBackToDashboard = () => {
@@ -216,6 +225,18 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
     <>
       {/* Backdrop */}
       <div className={`asset-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
+      
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="asset-drawer-toast-notification">
+          <div className="asset-drawer-toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
+            </svg>
+          </div>
+          <p className="asset-drawer-toast-text">Your asset has been shared</p>
+        </div>
+      )}
       
       {/* Drawer */}
       <div 
@@ -305,7 +326,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>James Wilson</span>
+                          <span>Daniel Hurst</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 days ago</div>
@@ -317,7 +338,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Emily Johnson</span>
+                          <span>Laura Bishop</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">3 days ago</div>
@@ -329,7 +350,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Sarah Chen</span>
+                          <span>Ben Keller</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">1 week ago</div>
@@ -341,7 +362,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Robert Taylor</span>
+                          <span>Megan Duarte</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">5 days ago</div>
@@ -353,7 +374,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Michael Rodriguez</span>
+                          <span>Chris Nolan</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 weeks ago</div>
@@ -365,7 +386,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Lisa Anderson</span>
+                          <span>Zoe Hart</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">1 week ago</div>
@@ -594,9 +615,6 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     {/* Confirmation Message */}
                     <div className="share-confirmation-message">
                       <p className="share-confirmation-text">Your asset has been shared</p>
-                      <div className="share-confirmation-checkmark">
-                        <img src="/checkmark.svg" alt="Checkmark" />
-                      </div>
                     </div>
 
                     {/* Asset Preview Card */}
@@ -702,13 +720,16 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="share-confirmation-materials-section">
                       <h4 className="share-confirmation-materials-title">See conventionally available materials</h4>
                       <div className="share-confirmation-share-link-container">
-                        <svg className="share-confirmation-share-link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 13C10.4295 13.5741 10.9774 14.0491 11.6066 14.3929C12.2357 14.7367 12.9315 14.9411 13.6467 14.9923C14.3618 15.0435 15.0796 14.9403 15.7513 14.6897C16.4231 14.4392 17.0331 14.047 17.54 13.54L20.54 10.54C21.4508 9.59695 21.9548 8.33394 21.9434 7.02296C21.932 5.71198 21.4061 4.45791 20.4791 3.53087C19.5521 2.60383 18.298 2.07799 16.987 2.0666C15.676 2.0552 14.413 2.55918 13.47 3.46997L11.75 5.17997" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M14 11C13.5705 10.4259 13.0226 9.95086 12.3934 9.60707C11.7643 9.26328 11.0685 9.05886 10.3533 9.00766C9.63816 8.95645 8.92037 9.05972 8.24864 9.31028C7.57691 9.56084 6.96688 9.95301 6.46 10.46L3.46 13.46C2.54918 14.403 2.04519 15.6661 2.05659 16.977C2.06798 18.288 2.59382 19.5421 3.52086 20.4691C4.4479 21.3962 5.70197 21.922 7.01295 21.9334C8.32394 21.9448 9.58695 21.4408 10.53 20.53L12.24 18.82" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <a href="https://demo.kkr.com/shared/materials" target="_blank" rel="noopener noreferrer" className="share-confirmation-share-link-url">
-                          https://demo.kkr.com/shared/materials
-                        </a>
+                        {/* Visual Preview */}
+                        <div className="share-confirmation-visual-preview">
+                          <div className="visual-preview-image">
+                            <img 
+                              src="/Assets/$25bn in Pennsylvania Data Centers.jpg" 
+                              alt="Data Center"
+                              className="visual-preview-content"
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -786,7 +807,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>James Wilson</span>
+                          <span>Daniel Hurst</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 days ago</div>
@@ -798,7 +819,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Emily Johnson</span>
+                          <span>Laura Bishop</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">3 days ago</div>
@@ -810,7 +831,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Sarah Chen</span>
+                          <span>Ben Keller</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">1 week ago</div>
@@ -822,7 +843,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Robert Taylor</span>
+                          <span>Megan Duarte</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">5 days ago</div>
@@ -834,7 +855,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Michael Rodriguez</span>
+                          <span>Chris Nolan</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">2 weeks ago</div>
@@ -846,7 +867,7 @@ export default function AssetDrawer({ isOpen, onClose, asset, initialMode = 'ana
                     <div className="asset-drawer-table-row">
                       <div className="asset-drawer-table-cell">
                         <div className="asset-drawer-contact">
-                          <span>Lisa Anderson</span>
+                          <span>Zoe Hart</span>
                         </div>
                       </div>
                       <div className="asset-drawer-table-cell">1 week ago</div>
