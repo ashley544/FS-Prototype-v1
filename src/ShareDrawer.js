@@ -10,6 +10,7 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
   const [emailInput, setEmailInput] = useState('');
   const [notifyContacts, setNotifyContacts] = useState(true);
   const [selectedSuggestedMaterials, setSelectedSuggestedMaterials] = useState(new Set([1, 2, 3, 4, 5])); // All selected by default
+  const [showToast, setShowToast] = useState(false);
 
   // Sample contacts data - first 5 contacts from contacts page
   const allContacts = [
@@ -21,18 +22,15 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
   ];
 
   useEffect(() => {
-    if (isOpen) {
-      // Reset closing state when opening to ensure smooth transition
+    if (isOpen && !isClosing) {
+      // Only reset state when opening (not during closing animation)
       setIsClosing(false);
       document.body.classList.add('drawer-open');
       // Force a reflow to ensure transition triggers
-      // Use double RAF to ensure initial state is set before transition
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          // Transition will trigger automatically via CSS
-        });
+        // Transition will trigger automatically via CSS
       });
-    } else if (!isClosing) {
+    } else if (!isOpen && !isClosing) {
       // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }
@@ -45,6 +43,7 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
   const handleClose = () => {
     if (isClosing) return; // Prevent multiple close calls
     setIsClosing(true);
+    setShowToast(false); // Hide toast when closing
     setTimeout(() => {
       // Reset state when closing
       setStep(1);
@@ -107,6 +106,12 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
   const handleProceed = () => {
     // Move to step 3: Confirmation page
     setStep(3);
+    // Show toast notification
+    setShowToast(true);
+    // Auto-dismiss after 4 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 4000);
   };
 
   const handleBackToDashboard = () => {
@@ -193,6 +198,18 @@ export default function ShareDrawer({ isOpen, onClose, asset }) {
     <>
       {/* Backdrop */}
       <div className={`share-drawer-backdrop ${isClosing ? 'closing' : ''}`} onClick={handleClose} />
+      
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="share-toast-notification">
+          <div className="share-toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white"/>
+            </svg>
+          </div>
+          <p className="share-toast-text">Your asset has been shared</p>
+        </div>
+      )}
       
       {/* Drawer */}
       <div 

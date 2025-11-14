@@ -196,19 +196,15 @@ export default function ManageFoldersDrawer({ isOpen, onClose, exchangeAssets = 
   ]);
 
   useEffect(() => {
-    if (isOpen) {
-      // Reset closing state when opening to ensure smooth transition
+    if (isOpen && !isClosing) {
+      // Only reset state when opening (not during closing animation)
       setIsClosing(false);
       document.body.classList.add('drawer-open');
-      // Force a reflow to ensure transition triggers for both backdrop and drawer
+      // Force a reflow to ensure transition triggers
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            // Transition will trigger automatically via CSS
-          }, 0);
-        });
+        // Transition will trigger automatically via CSS
       });
-    } else if (!isClosing) {
+    } else if (!isOpen && !isClosing) {
       // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
     }

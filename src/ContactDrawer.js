@@ -7,23 +7,19 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
   const [expandedAssetId, setExpandedAssetId] = useState(null);
 
   useEffect(() => {
-    if (isOpen) {
-      // Reset closing state when opening to ensure smooth transition
+    if (isOpen && !isClosing) {
+      // Only reset state when opening (not during closing animation)
       setIsClosing(false);
       document.body.classList.add('drawer-open');
       // Set first asset as expanded by default
       if (contact?.sharedAssets && contact.sharedAssets.length > 0) {
         setExpandedAssetId(contact.sharedAssets[0].id || 0);
       }
-      // Force a reflow to ensure transition triggers for both backdrop and drawer
+      // Force a reflow to ensure transition triggers
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            // Transition will trigger automatically via CSS
-          }, 0);
-        });
+        // Transition will trigger automatically via CSS
       });
-    } else if (!isClosing) {
+    } else if (!isOpen && !isClosing) {
       // Only remove body class if not closing (to allow animation to complete)
       document.body.classList.remove('drawer-open');
       setExpandedAssetId(null);
@@ -79,7 +75,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
                 <a href="#" onClick={(e) => { e.preventDefault(); }}>Edit contact</a>
               </div>
             </div>
-            <h2 className="contact-drawer-name">{contact.name || 'No name'}</h2>
+            <h2 className="contact-drawer-name">{contact?.name || 'No name'}</h2>
             
             {/* Discovered Interests Section */}
             <div className="contact-drawer-interests-section">
@@ -89,7 +85,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
               <div className="contact-drawer-ai-summary-section">
                 <div className="contact-drawer-ai-summary-gradient-border"></div>
                 <p className="contact-drawer-ai-summary">
-                  {contact.aiSummary || `${contact.name || 'They'} is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the 'Jupiter Industrial Portfolio' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.`}
+                  {contact?.aiSummary || `${contact?.name || 'They'} is interested in BX X and is now in a due diligence process. He has spent a majority of his time on the 'Jupiter Industrial Portfolio' as a seed asset in BX X, also looking to industrial performance in the BX IX quarterly report.`}
                 </p>
               </div>
             </div>
@@ -97,7 +93,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
           {/* Assets Shared Section */}
           <div className="contact-drawer-assets-section">
             <div className="contact-drawer-assets-list">
-              {(contact.sharedAssets || []).map((asset, index) => {
+              {(contact?.sharedAssets || []).map((asset, index) => {
                 const assetId = asset.id || index;
                 const isExpanded = expandedAssetId === assetId;
                 
@@ -232,7 +228,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
                 </div>
               );
               })}
-              {(!contact.sharedAssets || contact.sharedAssets.length === 0) && (
+              {(!contact?.sharedAssets || contact?.sharedAssets?.length === 0) && (
                 <div className="contact-drawer-no-assets">
                   <p>No assets shared with this contact yet.</p>
                 </div>
@@ -245,7 +241,7 @@ export default function ContactDrawer({ isOpen, onClose, contact }) {
         {/* Email Button - Fixed at bottom */}
         <div className="contact-drawer-bottom-bar">
           <button className="contact-drawer-email-button">
-            Email {contact.name?.split(' ')[0] || 'Contact'}
+            Email {contact?.name?.split(' ')[0] || 'Contact'}
           </button>
         </div>
       </div>
